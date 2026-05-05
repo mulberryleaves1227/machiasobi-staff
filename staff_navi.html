@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>マチ★アソビ vol.30 スタッフナビ</title>
+<style>
+  :root {
+    --red: #FF5353;
+    --orange: #FFA61E;
+    --dark: #1A1A1A;
+    --gray: #555;
+    --light: #F5F5F5;
+    --border: #DDD;
+    --white: #FFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: #F8F8F8; color: var(--dark); font-size: 15px; }
+
+  /* ── Password Screen ── */
+  #pw-screen {
+    position: fixed; inset: 0; background: var(--red);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 1000; padding: 2rem;
+  }
+  #pw-screen h1 { color: #fff; font-size: 1.5rem; margin-bottom: 0.4rem; }
+  #pw-screen p { color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-bottom: 2rem; }
+  #pw-input {
+    width: 100%; max-width: 320px; padding: 0.9rem 1rem;
+    border: none; border-radius: 8px; font-size: 1.1rem;
+    text-align: center; outline: none; margin-bottom: 1rem;
+  }
+  #pw-btn {
+    width: 100%; max-width: 320px; padding: 0.9rem;
+    background: var(--orange); color: #fff; border: none;
+    border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer;
+  }
+  #pw-error { color: #FFE0E0; font-size: 0.85rem; margin-top: 0.5rem; min-height: 1.2em; }
+
+  /* ── Main ── */
+  #main { display: none; }
+
+  /* ── Header ── */
+  header {
+    background: var(--red); color: #fff; padding: 1rem 1rem 0.8rem;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  header h1 { font-size: 1rem; font-weight: bold; }
+  header p { font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem; }
+
+  /* ── Nav tabs ── */
+  nav {
+    background: #fff; border-bottom: 2px solid var(--orange);
+    overflow-x: auto; display: flex; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav button {
+    flex-shrink: 0; padding: 0.7rem 1rem; font-size: 0.82rem;
+    background: none; border: none; border-bottom: 3px solid transparent;
+    cursor: pointer; color: var(--gray); white-space: nowrap; font-weight: bold;
+    transition: all 0.2s;
+  }
+  nav button.active { color: var(--red); border-bottom-color: var(--red); }
+
+  /* ── Content ── */
+  .page { display: none; padding: 1rem; max-width: 680px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* ── Cards & Sections ── */
+  .card {
+    background: #fff; border-radius: 10px; margin-bottom: 1rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden;
+  }
+  .card-header {
+    background: var(--red); color: #fff; padding: 0.7rem 1rem;
+    font-weight: bold; font-size: 0.95rem; display: flex;
+    justify-content: space-between; align-items: center; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card-header.orange { background: var(--orange); }
+  .card-header.blue { background: #3366CC; }
+  .card-header.green { background: #33AA66; }
+  .card-header.dark { background: #444; }
+  .card-header .arrow { font-size: 0.7rem; transition: transform 0.2s; }
+  .card-header.open .arrow { transform: rotate(180deg); }
+  .card-body { padding: 0.9rem 1rem; display: none; }
+  .card-body.open { display: block; }
+
+  /* ── Info boxes ── */
+  .alert {
+    border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.8rem;
+    font-size: 0.9rem; line-height: 1.6;
+  }
+  .alert-red { background: #FFF0F0; border-left: 4px solid var(--red); }
+  .alert-orange { background: #FFF8EC; border-left: 4px solid var(--orange); }
+  .alert-blue { background: #EEF4FF; border-left: 4px solid #3366CC; }
+  .alert-green { background: #EAFAF1; border-left: 4px solid #33AA66; }
+  .alert-dark { background: #F0F0F0; border-left: 4px solid #555; }
+  .alert strong { display: block; margin-bottom: 0.3rem; }
+
+  /* ── List ── */
+  ul.list, ol.list { padding-left: 1.4rem; line-height: 1.9; font-size: 0.9rem; }
+  ul.list li, ol.list li { margin-bottom: 0.2rem; }
+
+  /* ── Steps ── */
+  .steps { list-style: none; padding: 0; }
+  .steps li {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    margin-bottom: 0.6rem; font-size: 0.9rem; line-height: 1.6;
+  }
+  .step-num {
+    flex-shrink: 0; width: 1.5rem; height: 1.5rem; border-radius: 50%;
+    background: var(--red); color: #fff; font-size: 0.75rem; font-weight: bold;
+    display: flex; align-items: center; justify-content: center; margin-top: 0.15rem;
+  }
+  .step-num.orange { background: var(--orange); }
+  .step-num.blue { background: #3366CC; }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    padding: 0.55rem 0; border-bottom: 1px solid #F0F0F0;
+    font-size: 0.88rem; line-height: 1.5; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    flex-shrink: 0; width: 1.3rem; height: 1.3rem; border-radius: 4px;
+    border: 2px solid var(--border); background: #fff; margin-top: 0.05rem;
+    display: flex; align-items: center; justify-content: center; font-size: 0.8rem;
+  }
+  .checklist li.done .check-box { background: var(--red); border-color: var(--red); color: #fff; }
+  .checklist li.done span { text-decoration: line-through; color: #999; }
+
+  /* ── Table ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .tbl th { background: var(--red); color: #fff; padding: 0.5rem; text-align: left; }
+  .tbl td { padding: 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .tbl tr:nth-child(even) td { background: var(--light); }
+
+  /* ── Template box ── */
+  .tmpl {
+    background: var(--light); border-radius: 8px; padding: 0.8rem 1rem;
+    font-family: monospace; font-size: 0.85rem; line-height: 1.8;
+    white-space: pre-wrap; margin-bottom: 0.8rem; position: relative;
+  }
+  .tmpl-label {
+    font-family: sans-serif; font-size: 0.75rem; font-weight: bold;
+    color: var(--red); margin-bottom: 0.4rem; display: block;
+  }
+  .copy-btn {
+    position: absolute; top: 0.5rem; right: 0.5rem;
+    background: var(--orange); color: #fff; border: none;
+    border-radius: 5px; padding: 0.25rem 0.6rem; font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  /* ── Badge ── */
+  .badge {
+    display: inline-block; padding: 0.2rem 0.6rem; border-radius: 20px;
+    font-size: 0.75rem; font-weight: bold; margin-right: 0.3rem;
+  }
+  .badge-red { background: #FFE0E0; color: var(--red); }
+  .badge-orange { background: #FFF0D0; color: #AA5500; }
+  .badge-blue { background: #E0EAFF; color: #3366CC; }
+
+  /* ── Section title ── */
+  .sec-title {
+    font-size: 0.8rem; font-weight: bold; color: var(--gray);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin: 1.2rem 0 0.5rem; padding-left: 0.2rem;
+  }
+
+  /* ── Bottom nav ── */
+  .bottom-space { height: 2rem; }
+
+  /* ── Contact cards ── */
+  .contact-card {
+    background: #fff; border-radius: 10px; padding: 1rem;
+    margin-bottom: 0.8rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--red);
+  }
+  .contact-card h3 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .contact-card p { font-size: 0.85rem; color: var(--gray); }
+  .contact-card .role { font-size: 0.75rem; color: var(--red); font-weight: bold; margin-bottom: 0.2rem; }
+</style>
+</head>
+<body>
+
+<!-- Password Screen -->
+<div id="pw-screen">
+  <h1>🌟 マチ★アソビ vol.30</h1>
+  <p>スタッフナビ　※スタッフ専用ページです</p>
+  <input type="password" id="pw-input" placeholder="パスワードを入力" autocomplete="off">
+  <button id="pw-btn" onclick="checkPassword()">入る</button>
+  <p id="pw-error"></p>
+</div>
+
+<!-- Main Content -->
+<div id="main">
+  <header>
+    <h1>🌟 マチ★アソビ vol.30　スタッフナビ</h1>
+    <p>2026年5月16日（土）・17日（日）　徳島市</p>
+  </header>
+
+  <nav id="nav">
+    <button class="active" onclick="showPage('home', this)">🏠 ホーム</button>
+    <button onclick="showPage('rules', this)">📋 基本ルール</button>
+    <button onclick="showPage('jobs', this)">🎤 業務内容</button>
+    <button onclick="showPage('areas', this)">📍 エリア</button>
+    <button onclick="showPage('trouble', this)">🚨 トラブル</button>
+    <button onclick="showPage('report', this)">📝 報告</button>
+    <button onclick="showPage('faq', this)">💬 FAQ</button>
+    <button onclick="showPage('check', this)">☑ チェック</button>
+    <button onclick="showPage('contact', this)">📞 連絡先</button>
+  </nav>
+
+  <!-- ══ HOME ══════════════════════════════════════════════════ -->
+  <div id="page-home" class="page active">
+    <div class="alert alert-red" style="margin-top:1rem">
+      <strong>🔑 今回の合言葉</strong>
+      ① わからないまま案内しない<br>
+      ② 困ったら早めに上げる<br>
+      ③ 無理しない
+    </div>
+
+    <div class="alert alert-orange">
+      <strong>📅 集合場所・時間</strong>
+      <b>東公園ボランティアテント</b><br><br>
+      1日目1部：8:30集合（9:00〜18:00）昼食予定<br>
+      1日目2部：11:30集合（12:00〜21:00）夕食予定<br>
+      2日目1部：8:30集合（9:00〜18:00）昼食予定<br>
+      2日目2部：11:30集合（12:00〜21:00）夕食予定<br>
+      翌日撤収：9:00集合（9:00〜12:00）
+    </div>
+
+    <div class="alert alert-blue">
+      <strong>👕 スタッフ識別</strong>
+      白ジャンパー → 一般ボランティアスタッフ（あなた）<br>
+      <b>黄色ジャンパー → リーダー・頼れる存在！</b><br>
+      困ったらまず黄色ジャンパーに声をかけて
+    </div>
+
+    <p class="sec-title">クイックアクセス</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem">
+      <button onclick="showPage('rules',document.querySelectorAll('nav button')[1])" style="background:var(--red);color:#fff;border:none;border-radius:8px;padding:1rem 0.5rem;font-size:0.9rem;font-weight:bold;cursor:pointer">📋<br>基本ルール</button>
+      <button onclick="showPage('trouble',document.querySelectorAll('nav button')[4])" style="background:#CC3333;color:#fff;border:none;border-radius:8px;padding:1rem 0.5rem;font-size:0.9rem;font-weight:bold;cursor:pointer">🚨<br>トラブル対応</button>
+      <button onclick="showPage('report',document.querySelectorAll('nav button')[5])" style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:1rem 0.5rem;font-size:0.9rem;font-weight:bold;cursor:pointer">📝<br>報告テンプレ</button>
+      <button onclick="showPage('check',document.querySelectorAll('nav button')[7])" style="background:#3366CC;color:#fff;border:none;border-radius:8px;padding:1rem 0.5rem;font-size:0.9rem;font-weight:bold;cursor:pointer">☑<br>チェックリスト</button>
+    </div>
+
+    <div class="alert alert-dark">
+      <strong>⚠ やってはいけないこと（超重要）</strong>
+      ❌ わからないことを推測で案内する<br>
+      ❌ 来場者と口論する<br>
+      ❌ 来場者のスマホ・カメラに触る<br>
+      ❌ 体調不良者を一人にする<br>
+      ❌ 落とし物を個人で預かる<br>
+      ❌ トラブルをSNSに投稿する
+    </div>
+  </div>
+
+  <!-- ══ RULES ══════════════════════════════════════════════════ -->
+  <div id="page-rules" class="page">
+    <div class="alert alert-orange" style="margin-top:1rem">
+      迷ったら「確認します」と伝えてからリーダーへ。その場で即答しなくていいです。
+    </div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggle(this)">✅ その場で対応してよいこと <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <ul class="list">
+          <li>会場・トイレ・案内所・ごみ捨て場所の案内（把握済みのもの）</li>
+          <li>列の最後尾や進行方向の案内</li>
+          <li>通路確保のお願い・立ち止まりへの声かけ</li>
+          <li>ごみの分別・回収場所の案内</li>
+          <li>公式に掲示されている情報の案内</li>
+          <li>体調不良者を日陰・安全な場所へ案内し、リーダーへ連絡</li>
+          <li>落とし物を拾った人に受付・本部・指定窓口を案内</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange open" onclick="toggle(this)">⚠ リーダー・本部に確認が必要なこと <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <ul class="list">
+          <li>入場可否・整理券・優先入場・再入場の判断</li>
+          <li>撮影可否が不明な場合・撮影トラブル</li>
+          <li>クレーム対応（強い口調・威圧的な来場者）</li>
+          <li>迷子・同行者不明の対応</li>
+          <li>怪我・体調不良・救急対応</li>
+          <li>落とし物の受領・保管・返却判断</li>
+          <li>不審物・不審者・ハラスメント対応</li>
+          <li>警察・消防・救急への連絡が必要な事案</li>
+          <li>SNSで拡散されそうなトラブル</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">📌 基本行動ルール6か条 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ol class="list">
+          <li>スタッフジャンパー・スタッフ証は必ず見えるように着用する</li>
+          <li>担当場所を勝手に離れない（離れる前にリーダーへ共有）</li>
+          <li>判断に迷ったら「確認します」と伝える</li>
+          <li>来場者対応を一人で抱え込まない</li>
+          <li>体調不良や疲労は早めに共有する</li>
+          <li>SNSに内部情報やトラブル情報を投稿しない</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">💬 使いやすい一言 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-blue">「確認しますので、少々お待ちください」</div>
+        <div class="alert alert-blue">「私の判断だけではお答えできないため、責任者に確認します」</div>
+        <div class="alert alert-blue">「最新情報を確認してからご案内します」</div>
+        <div class="alert alert-red" style="margin-bottom:0">
+          <strong>言わないこと</strong>
+          「知りません」「たぶん大丈夫です」「自分は担当じゃないです」「無理です」
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">🔄 相談ルート <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ol class="list">
+          <li><b>列整理・混雑で困った</b>→ 近くの経験者スタッフ → リーダー</li>
+          <li><b>イベントルール・判断が必要</b>→ リーダー・本部へ確認</li>
+          <li><b>緊急</b>→ すぐリーダー・本部、または八木・桑野へ直接（電話優先）</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ JOBS ════════════════════════════════════════════════════ -->
+  <div id="page-jobs" class="page">
+    <div class="card" style="margin-top:1rem">
+      <div class="card-header open" onclick="toggle(this)">🎤 ステージ会場整理誘導 <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <p class="sec-title">見るポイント</p>
+        <ul class="list">
+          <li>開演前：待機列整理・スペース案内を優先</li>
+          <li>開演中：撮影禁止ボードを持ち巡回・体調不良者確認</li>
+          <li>終演後：一斉退場で詰まりやすい。退場導線と次の待機列がぶつからないよう注意</li>
+          <li>ステージ後方・横導線で人が止まっていないか常に確認</li>
+        </ul>
+        <div class="alert alert-red" style="margin-top:0.8rem">
+          <strong>撮影禁止対応（ステージは基本すべて撮影禁止）</strong>
+          撮影禁止ボードを来場者から見える位置で持ちながら巡回。<br>
+          スマホを構えている人がいたら<b>落ち着いて一言声をかける</b>。<br>
+          演者が「撮影OK」と言ったらボードを下げて八木or桑野にLINE報告。
+        </div>
+        <div class="alert alert-dark">
+          <strong>❌ 絶対NG</strong>
+          来場者のスマホ・カメラに触る／データ削除を個人判断で求める／強い口調で注意する／口論する
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange" onclick="toggle(this)">📋 総合案内 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ul class="list">
+          <li>常にフライヤー（会場マップ付き）を携帯する</li>
+          <li>場所案内は把握している範囲で。詳細はフライヤーを案内</li>
+          <li>整理券・物販状況は各出展者のテント/公式SNSへ案内</li>
+          <li>コスプレ関連 → 「コミエス側へご確認ください」</li>
+        </ul>
+        <div class="alert alert-red" style="margin-top:0.8rem">
+          <strong>言わないこと（推測での案内はNG）</strong>
+          「たぶん買えます」「並べば大丈夫です」「まだありそうです」「整理券なしでいけると思います」
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange" onclick="toggle(this)">📊 アンケート調査 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-orange">目標は最低500件！積極的に声をかけてOK！</div>
+        <p class="sec-title">基本の流れ</p>
+        <ol class="steps">
+          <li><span class="step-num orange">1</span>QRコードのポスターを身につけて巡回</li>
+          <li><span class="step-num orange">2</span>来場者にアンケート協力をお願いする</li>
+          <li><span class="step-num orange">3</span>QRコードを読み取ってもらいその場で回答</li>
+          <li><span class="step-num orange">4</span>回答後、東公園or藍場浜テントで記念品を受け取るよう案内</li>
+        </ol>
+        <div class="alert alert-dark" style="margin-top:0.8rem">
+          <strong>注意</strong>
+          無理に引き止めない／回答を急かさない／来場者のスマホを勝手に操作しない／記念品の在庫を推測で案内しない
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">🗑 ごみ収集・美化 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <p class="sec-title">5分別（＋α）</p>
+        <table class="tbl">
+          <tr><th>区分</th><th>例</th></tr>
+          <tr><td>燃えるごみ</td><td>紙くず・食品容器</td></tr>
+          <tr><td>燃えないごみ</td><td>プラスチック・不燃物</td></tr>
+          <tr><td>缶</td><td>アルミ缶・スチール缶</td></tr>
+          <tr><td>瓶</td><td>飲料瓶</td></tr>
+          <tr><td>ペットボトル</td><td>本体のみ</td></tr>
+          <tr><td>割り箸・竹串</td><td>⚠ 怪我に注意！放置を見たら必ず回収</td></tr>
+        </table>
+        <div class="alert alert-blue" style="margin-top:0.8rem">
+          <strong>ごみ集積所</strong>
+          藍場浜公園遊具あたり ＆ 交通公園（コンテナあり）<br>
+          ごみ袋補充：ボランティアテントにあります
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header blue" onclick="toggle(this)">⛵ 橋の下美術館（乗船体験） <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ol class="steps">
+          <li><span class="step-num blue">1</span>来場者が乗船受付へ来る</li>
+          <li><span class="step-num blue">2</span>料金を支払う（<b>料金対応は担当団体のみ</b>）</li>
+          <li><span class="step-num blue">3</span>ライフジャケットを受け取り着用する</li>
+          <li><span class="step-num blue">4</span>乗船・体験</li>
+          <li><span class="step-num blue">5</span>戻ってきたらライフジャケット返却</li>
+          <li><span class="step-num blue">6</span><b>返却漏れを必ず確認する</b></li>
+        </ol>
+        <div class="alert alert-red" style="margin-top:0.8rem">
+          <strong>お金に関する対応NG</strong>
+          料金を受け取らない／金額を断言しない／返金可否を判断しない／領収書・支払方法を案内しない<br>
+          → 「料金については担当の方に確認します」
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">🚗 痛車展示エリア <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-orange">展示車両は所有者の大切な私物！</div>
+        <p class="sec-title">声かけ例</p>
+        <ul class="list">
+          <li>「展示車両にはお手を触れないようお願いします」</li>
+          <li>「車両に寄りかからないようお願いします」</li>
+          <li>「撮影後は通路確保のため移動にご協力ください」</li>
+          <li>「車両付近に荷物を置かないようお願いします」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ AREAS ════════════════════════════════════════════════════ -->
+  <div id="page-areas" class="page">
+    <div class="card" style="margin-top:1rem">
+      <div class="card-header open" onclick="toggle(this)">🎪 藍場浜エリア <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <div class="alert alert-red">本ステージがある中心エリア。ライブ前後は来場者が集中しやすい。</div>
+        <p class="sec-title">見るポイント</p>
+        <ul class="list">
+          <li>ステージ後方・横導線で人が止まっていないか</li>
+          <li>終演後に一斉退場で詰まっていないか</li>
+          <li>次のステージ待機列と退場導線がぶつかっていないか</li>
+          <li>ステージ上の撮影が行われていないか</li>
+          <li>体調が悪そうな人がいないか</li>
+        </ul>
+        <div class="alert alert-blue" style="margin-top:0.8rem"><strong>確認先</strong>藍場浜テント・リーダー</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header blue" onclick="toggle(this)">🏕 東公園エリア（集合場所） <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-blue">ボランティア集合場所！東公園ボランティアテントがある。</div>
+        <ul class="list">
+          <li>ボランティア集合時にテント周辺が混雑していないか</li>
+          <li>来場者とスタッフの動線がぶつかっていないか</li>
+          <li>担当がわからず困っているスタッフがいないか</li>
+          <li>体調不良のスタッフがいないか</li>
+        </ul>
+        <div class="alert alert-blue" style="margin-top:0.8rem"><strong>確認先</strong>東公園ボランティアテント</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header green" onclick="toggle(this)">🏟 アミコドームエリア <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-green">専用テントなし。判断が必要な場合は近くのリーダー・藍場浜テント・東公園テントへ。</div>
+        <ul class="list">
+          <li>ステージ周辺で人が止まっていないか</li>
+          <li>撮影禁止の表示が見えにくくなっていないか</li>
+          <li>終演後の一斉退場で詰まっていないか</li>
+          <li>体調が悪そうな人がいないか</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange" onclick="toggle(this)">🏪 東商店街エリア ⚠特に注意 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-red">
+          <strong>今回特に注意が必要なエリア！</strong>
+          ブース・展示・物販・飲食・通常通行が混在。店舗入口封鎖リスクあり。
+        </div>
+        <p class="sec-title">見るポイント</p>
+        <ul class="list">
+          <li>店舗入口をふさいでいないか（最優先で確認）</li>
+          <li>商店街の通路幅が確保されているか</li>
+          <li>ブース前に人がたまりすぎていないか</li>
+          <li>物販列・展示待ち・飲食列が混ざっていないか</li>
+          <li>最後尾がわかりにくくなっていないか</li>
+          <li>一般通行者が通りづらくなっていないか</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">🌿 西公園エリア <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-green">比較的落ち着いたエリア。</div>
+        <ul class="list">
+          <li>来場者への案内・西公園テント周辺の確認</li>
+          <li>周辺の美化・問い合わせ対応を中心に</li>
+          <li>問い合わせ集中・体調不良は早めに西公園テントへ</li>
+        </ul>
+        <div class="alert alert-blue" style="margin-top:0.8rem"><strong>確認先</strong>西公園テント・リーダー</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">⚠ 横断的に注意する場所 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ul class="list">
+          <li>橋・階段・交差点付近</li>
+          <li>店舗入口・施設入口</li>
+          <li>撮影スポット化しやすい場所</li>
+          <li>飲食販売・キッチンカー周辺</li>
+          <li>水辺や船の乗り降り周辺</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TROUBLE ══════════════════════════════════════════════════ -->
+  <div id="page-trouble" class="page">
+    <div class="alert alert-red" style="margin-top:1rem">
+      <strong>🚨 緊急時の基本</strong>
+      スタッフは医療・法的判断をしません。<b>安全確保してすぐリーダー・本部へ。</b>
+    </div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggle(this)">🩺 体調不良・怪我 <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <ol class="steps">
+          <li><span class="step-num">1</span>落ち着いた声で状況を確認する</li>
+          <li><span class="step-num">2</span>同行者がいるか確認する</li>
+          <li><span class="step-num">3</span>日陰・安全な場所へ案内する（無理に動かさない）</li>
+          <li><span class="step-num">4</span>リーダー・本部へ報告する</li>
+          <li><span class="step-num">5</span>リーダー・救護担当の指示を待つ（一人にしない）</li>
+        </ol>
+        <div class="alert alert-red" style="margin-top:0.8rem">
+          <strong>救急判断が必要な場合</strong>
+          八木・桑野へ直接エスカレーション。体調不良者を絶対に一人にしない。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange" onclick="toggle(this)">👦 迷子・同行者不明 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ol class="steps">
+          <li><span class="step-num orange">1</span>対象者を安全な場所へ案内する（動き回らせない）</li>
+          <li><span class="step-num orange">2</span>氏名・年齢・特徴・いつはぐれたかを確認</li>
+          <li><span class="step-num orange">3</span>藍場浜テントまたは東公園ボランティアテントへ連絡・引継ぎ</li>
+          <li><span class="step-num orange">4</span>対象者を一人にしない（テントまで一緒に移動）</li>
+        </ol>
+        <div class="alert alert-red" style="margin-top:0.8rem">個人のスマホで写真を撮ったりSNSで呼びかけたりしない</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange" onclick="toggle(this)">📦 落とし物 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ol class="steps">
+          <li><span class="step-num orange">1</span>拾った場所・時間・物の種類を確認する</li>
+          <li><span class="step-num orange">2</span>スタッフ個人で保管せず、藍場浜テントまたは東公園ボランティアテントへ引継ぐ</li>
+          <li><span class="step-num orange">3</span>本部が受け取ったことを確認してから持ち場に戻る</li>
+        </ol>
+        <div class="alert alert-dark" style="margin-top:0.8rem">落とし物の内容物を他人に話さない（プライバシー保護）</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">😠 クレーム対応 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ol class="steps">
+          <li><span class="step-num">1</span>話を遮らずに聞く（反論しない）</li>
+          <li><span class="step-num">2</span>「ご不便をおかけして申し訳ありません」と伝える</li>
+          <li><span class="step-num">3</span>「確認します」と伝えてリーダー・本部へ引き継ぐ</li>
+        </ol>
+        <div class="alert alert-red" style="margin-top:0.8rem">口論しない／一人で解決しようとしない／周囲に聞こえる声量に注意</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">⚠ 不審物・不審者・ハラスメント <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-red">
+          <strong>不審物</strong>
+          触らない・動かさない・開けない・近づきすぎない。場所と特徴をリーダー・本部へ即連絡。
+        </div>
+        <div class="alert alert-red">
+          <strong>不審者</strong>
+          単独で対応しない。複数で対応またはリーダーへ連絡。周囲をむやみに騒がせない。
+        </div>
+        <div class="alert alert-red">
+          <strong>ハラスメント</strong>
+          安全を確保し当事者を必要に応じて離す。被害を訴えている人を一人にしない。リーダー・本部へ即連絡。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ REPORT ════════════════════════════════════════════════════ -->
+  <div id="page-report" class="page">
+    <div class="alert alert-orange" style="margin-top:1rem">
+      <strong>報告は「短く・具体的に」</strong>
+      ① どこで　② 何が起きていて　③ 何人くらい　④ いま何をしているか　⑤ 判断してほしいこと
+    </div>
+
+    <div class="card">
+      <div class="card-header orange open" onclick="toggle(this)">📋 混雑報告 <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <div class="tmpl" id="tmpl1">
+<span class="tmpl-label">【混雑】</span>場所：
+状況：通路が詰まり始めています / 列が伸びています / 最後尾が不明瞭です
+人数感：
+対応中：声かけ中 / 最後尾案内中 / 通路確保中
+相談：追加スタッフが必要 / 導線変更の判断をお願いします</div>
+        <button class="copy-btn" onclick="copyText('tmpl1')">コピー</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggle(this)">🩺 体調不良・怪我報告 <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <div class="tmpl" id="tmpl2">
+<span class="tmpl-label">【体調不良・怪我】</span>場所：
+対象者：大人 / 子ども / 不明
+状況：座り込んでいる / めまい / 吐き気 / 熱中症疑い / 怪我
+同行者：あり / なし / 不明
+対応中：日陰へ案内 / 安全な場所で待機 / 救護待ち
+相談：救護担当の派遣をお願いします / 判断をお願いします</div>
+        <button class="copy-btn" onclick="copyText('tmpl2')">コピー</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">📸 撮影トラブル報告 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="tmpl" id="tmpl3">
+<span class="tmpl-label">【撮影トラブル】</span>場所：
+内容：撮影禁止エリアで撮影 / 無断撮影の相談 / 通路をふさぐ撮影 / SNS投稿に関する相談
+関係者：撮影者 / 被写体 / 周囲の来場者
+対応中：撮影停止のお願い / 場所移動のお願い / 確認中と案内済み
+相談：リーダー対応をお願いします</div>
+        <button class="copy-btn" onclick="copyText('tmpl3')">コピー</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">👦 迷子・落とし物報告 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="tmpl" id="tmpl4">
+<span class="tmpl-label">【迷子・同行者不明】</span>場所：
+対象者：年齢・特徴・性別
+状況：いつはぐれたか
+対応中：安全な場所に案内済み / テント誘導中
+相談：引継ぎをお願いします</div>
+        <button class="copy-btn" onclick="copyText('tmpl4')">コピー</button>
+        <div class="tmpl" id="tmpl5" style="margin-top:0.8rem">
+<span class="tmpl-label">【落とし物】</span>拾得場所：
+拾得時間：
+物の種類：
+対応中：本部テントへ引継ぎ中
+相談：</div>
+        <button class="copy-btn" onclick="copyText('tmpl5')">コピー</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">😠 クレーム報告 <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="tmpl" id="tmpl6">
+<span class="tmpl-label">【クレーム】</span>場所：
+内容：
+相手の様子：興奮している / 落ち着いている / 不明
+対応中：話を聞いている / 「確認します」と伝えた
+相談：リーダー対応をお願いします</div>
+        <button class="copy-btn" onclick="copyText('tmpl6')">コピー</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FAQ ═════════════════════════════════════════════════════ -->
+  <div id="page-faq" class="page">
+    <div class="card" style="margin-top:1rem">
+      <div class="card-header orange open" onclick="toggle(this)">💬 よくある問い合わせ <span class="arrow">▼</span></div>
+      <div class="card-body open">
+
+        <div class="alert alert-orange"><strong>Q：このあとどこに行けばいい？ / ○○のイベントはどこ？</strong>フライヤーのスケジュールを確認してもらう。場所は把握している範囲で案内し、詳細は本部テントへ。</div>
+
+        <div class="alert alert-orange"><strong>Q：整理券はまだありますか？ / 物販は買えますか？</strong>「各出展者のテントにご確認ください」「公式SNS・HPでご確認いただくか、本部テントへお問い合わせください」</div>
+
+        <div class="alert alert-orange"><strong>Q：ここで撮影してもいいですか？</strong>ステージ周辺は基本NG。場所によりルールが異なるので、不明な場合はリーダーへ確認してから案内。</div>
+
+        <div class="alert alert-orange"><strong>Q：ゴミはどこに捨てればいい？</strong>分別区分を案内しつつ、ごみ袋または集積所（藍場浜公園遊具周辺・交通公園）を案内。</div>
+
+        <div class="alert alert-orange"><strong>Q：コスプレの受付はどこですか？</strong>「あわぎんホール4・5階になります」と案内。詳細はコミエスへ。</div>
+
+        <div class="alert alert-orange"><strong>Q：コスプレして観覧してもいいですか？</strong>「もちろんOKですよ！」</div>
+
+        <div class="alert alert-orange"><strong>Q：今何のステージですか？ / 誰が出てるんですか？</strong>フライヤーのスケジュールを一緒に確認する。わからなければわからないでOK。</div>
+
+        <div class="alert alert-orange"><strong>Q：眉山ロープウェイはどこですか？</strong>会場マップ・フライヤーで案内。県外来場者に多い質問。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">📸 撮影禁止FAQ <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <div class="alert alert-blue"><strong>なぜ撮影禁止を知らずに撮影するの？</strong>①屋外だし撮影OKだと思っている ②通りすがりで記念撮影 → これが最多。掲示を見えるようにすることが大切。</div>
+        <div class="alert alert-blue"><strong>コスプレイヤーの撮影は？</strong>本人の許可を得て撮影可能（登録不要）。ステージとは別ルール。</div>
+        <div class="alert alert-blue"><strong>「取材許可証」をつけた人は？</strong>報道・関係者は撮影可。不明な場合はリーダーへ確認。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CHECK ════════════════════════════════════════════════════ -->
+  <div id="page-check" class="page">
+    <div class="alert alert-blue" style="margin-top:1rem">タップでチェック！（リロードするとリセットされます）</div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggle(this)">☑ 集合時チェック <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <ul class="checklist" id="check1">
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>東公園ボランティアテントに到着した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>出欠確認をした</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>スタッフジャンパー・スタッフ証を受け取った</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>担当エリアを確認した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>担当業務を確認した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>リーダーを確認した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>緊急連絡先を確認した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>休憩ルールを確認した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>食事の受け取り方法を確認した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>最新スケジュールを確認した</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>トイレ・救護・本部の場所を確認した</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header orange open" onclick="toggle(this)">☑ 業務中チェック <span class="arrow">▼</span></div>
+      <div class="card-body open">
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>通路が確保されている</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>列の最後尾が明確になっている</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>体調不良者がいないか確認している</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>判断が必要なことはリーダー・本部へ確認している</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>水分補給・休憩ができている</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>LINEを定期的に確認している</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>担当を離れる前にリーダーへ共有している</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header dark" onclick="toggle(this)">☑ 持ち物チェック <span class="arrow">▼</span></div>
+      <div class="card-body">
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>スマートフォン・モバイルバッテリー</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>飲み物（多めに）</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>帽子・タオル・雨具</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>筆記用具・メモ帳</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>常備薬・身分証</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>日焼け止め</span></li>
+          <li onclick="toggleCheck(this)"><span class="check-box">✓</span><span>両手が空くバッグ</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CONTACT ══════════════════════════════════════════════════ -->
+  <div id="page-contact" class="page">
+    <div class="alert alert-red" style="margin-top:1rem">
+      <strong>🚨 緊急時は電話優先！LINEより確実です。</strong>
+    </div>
+
+    <p class="sec-title">運営メンバー</p>
+
+    <div class="contact-card">
+      <div class="role">実働トップ</div>
+      <h3>八木 宏晃</h3>
+      <p>現場判断・緊急対応・関係者対応</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="role">ボランティア運営サブ</div>
+      <h3>桑野 優</h3>
+      <p>ボランティア配置・休憩・困りごとサポート</p>
+    </div>
+
+    <div class="contact-card" style="border-left-color: var(--orange)">
+      <div class="role" style="color:var(--orange)">統括</div>
+      <h3>新居さん</h3>
+      <p>案内・誘導・来場者対応など細やかな場面を支える</p>
+    </div>
+
+    <p class="sec-title">本部・テント</p>
+
+    <div class="alert alert-blue">
+      <strong>藍場浜テント</strong>
+      藍場浜エリアの確認・連絡・対応拠点<br>
+      迷子・落とし物・救護・アンケート記念品対応
+    </div>
+
+    <div class="alert alert-blue">
+      <strong>東公園ボランティアテント（集合場所）</strong>
+      ボランティア集合・東公園エリアの対応拠点<br>
+      迷子・落とし物・救護・アンケート記念品対応
+    </div>
+
+    <div class="alert alert-green">
+      <strong>西公園テント</strong>
+      西公園エリアの確認・連絡・対応拠点
+    </div>
+
+    <p class="sec-title">SNS・情報共有</p>
+    <div class="alert alert-dark">
+      最新情報はLINEグループで共有します。<br>
+      定期的にチェックしてください。
+    </div>
+
+    <div class="bottom-space"></div>
+  </div>
+</div>
+
+<script>
+// ── Password ──────────────────────────────────────────────────
+const CORRECT = 'machiasobi30';
+function checkPassword() {
+  const val = document.getElementById('pw-input').value;
+  if (val === CORRECT) {
+    document.getElementById('pw-screen').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  } else {
+    document.getElementById('pw-error').textContent = 'パスワードが違います。もう一度確認してください。';
+    document.getElementById('pw-input').value = '';
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// ── Navigation ─────────────────────────────────────────────────
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── Toggle cards ───────────────────────────────────────────────
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ── Checklist ──────────────────────────────────────────────────
+function toggleCheck(li) {
+  li.classList.toggle('done');
+}
+
+// ── Copy template ──────────────────────────────────────────────
+function copyText(id) {
+  const el = document.getElementById(id);
+  const text = el.innerText.replace(/^コピー$/m, '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = el.nextElementSibling;
+    const orig = btn.textContent;
+    btn.textContent = '✓ コピー済み';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+</script>
+</body>
+</html>
