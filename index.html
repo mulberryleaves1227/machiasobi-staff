@@ -3,1033 +3,939 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>スタッフナビ｜マチ★アソビ vol.30</title>
+<title>マチ★アソビ vol.30 スタッフナビ</title>
 <style>
-:root{--red:#FF5353;--orange:#FFA61E;--bg:#f8f8f8;--card:#fff;--text:#1a1a1a;--sub:#666;--border:#e5e5e5;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;}
-#pw-screen{position:fixed;inset:0;background:var(--red);display:flex;align-items:center;justify-content:center;z-index:9999;}
-.pw-box{background:#fff;border-radius:16px;padding:32px 24px;width:88%;max-width:340px;text-align:center;}
-.pw-logo{font-size:22px;font-weight:700;color:var(--red);margin-bottom:4px;}
-.pw-sub{font-size:13px;color:var(--sub);margin-bottom:20px;}
-#pw-input{width:100%;padding:12px;border:2px solid var(--border);border-radius:10px;font-size:16px;text-align:center;outline:none;letter-spacing:2px;}
-#pw-input:focus{border-color:var(--red);}
-#pw-btn{width:100%;margin-top:12px;padding:13px;background:var(--red);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;}
-#pw-err{color:var(--red);font-size:13px;margin-top:8px;min-height:18px;}
-#app{display:none;}
-.header{background:var(--red);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:100;}
-.header-title{font-size:17px;font-weight:700;}
-.header-sub{font-size:12px;opacity:.85;}
-.tab-bar{background:#fff;border-bottom:2px solid var(--red);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;position:sticky;top:52px;z-index:99;scrollbar-width:none;}
-.tab-bar::-webkit-scrollbar{display:none;}
-.tab-btn{display:inline-block;padding:10px 14px;font-size:13px;font-weight:600;color:var(--sub);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;}
-.tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
-.tab-content{display:none;padding:16px;}
-.tab-content.active{display:block;}
-.card{background:var(--card);border-radius:12px;margin-bottom:12px;overflow:hidden;border:1px solid var(--border);}
-.card-header{padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
-.card-title{font-size:15px;font-weight:700;}
-.card-icon{color:var(--sub);font-size:18px;transition:.2s;display:inline-block;}
-.card-body{padding:0 16px 14px;display:none;}
-.card.open .card-icon{transform:rotate(180deg);}
-.card.open .card-body{display:block;}
-.section-label{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.05em;margin:20px 0 8px;}
-.info-box{background:#fff8f8;border-left:4px solid var(--red);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:14px;}
-.warn-box{background:#fff9e6;border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:14px;}
-.ok-box{background:#f0faf0;border-left:4px solid #4caf50;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:14px;}
-.ng-box{background:#fff0f0;border-left:4px solid #e53935;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:14px;}
-.check-list{list-style:none;}
-.check-list li{padding:7px 0;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:flex-start;gap:8px;}
-.check-list li:last-child{border-bottom:none;}
-.check-list li::before{content:"▸";color:var(--red);flex-shrink:0;margin-top:1px;}
-.step-list{list-style:none;counter-reset:step;}
-.step-list li{counter-increment:step;padding:8px 0 8px 36px;position:relative;border-bottom:1px solid var(--border);font-size:14px;}
-.step-list li:last-child{border-bottom:none;}
-.step-list li::before{content:counter(step);position:absolute;left:0;top:9px;width:24px;height:24px;background:var(--red);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:24px;text-align:center;}
-.data-table{width:100%;border-collapse:collapse;font-size:13px;}
-.data-table th{background:var(--red);color:#fff;padding:8px 10px;text-align:left;font-weight:600;}
-.data-table td{padding:8px 10px;border-bottom:1px solid var(--border);}
-.data-table tr:last-child td{border-bottom:none;}
-.data-table tr:nth-child(even) td{background:#fafafa;}
-.contact-card{background:var(--red);color:#fff;border-radius:12px;padding:16px;margin-bottom:10px;text-align:center;}
-.contact-card .name{font-size:13px;opacity:.85;margin-bottom:2px;}
-.contact-card .role{font-size:16px;font-weight:700;margin-bottom:10px;}
-.contact-card a{display:block;background:rgba(255,255,255,.2);color:#fff;text-decoration:none;padding:11px;border-radius:8px;font-size:17px;font-weight:700;}
-.template-wrap{margin-bottom:16px;}
-.template-label{font-size:14px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-.template-box{background:#f5f5f5;border-radius:8px;padding:12px;font-size:13px;font-family:monospace;white-space:pre-wrap;line-height:1.7;border:1px solid var(--border);}
-.copy-btn{display:block;width:100%;margin-top:8px;padding:13px;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-.copy-btn:active{opacity:.75;}
-#toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(12px);background:#222;color:#fff;padding:11px 22px;border-radius:24px;font-size:14px;font-weight:700;opacity:0;transition:opacity .25s,transform .25s;z-index:9999;pointer-events:none;white-space:nowrap;}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.map-btn{display:inline-flex;align-items:center;gap:6px;background:var(--orange);color:#fff;text-decoration:none;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;margin-top:10px;}
-.area-card{background:var(--card);border-radius:12px;margin-bottom:14px;border:1px solid var(--border);overflow:hidden;}
-.area-card-hd{background:var(--red);color:#fff;padding:12px 16px;}
-.area-card-hd h3{font-size:15px;font-weight:700;}
-.area-card-hd p{font-size:12px;opacity:.85;margin-top:2px;}
-.area-card-bd{padding:12px 16px;}
-.tt-day{font-size:15px;font-weight:700;color:#fff;background:var(--red);padding:8px 14px;border-radius:8px;margin:16px 0 10px;}
-.tt-day:first-child{margin-top:0;}
-.tt-venue{font-size:13px;font-weight:700;color:var(--red);margin:12px 0 4px;padding-left:8px;border-left:3px solid var(--red);}
-.tt-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;align-items:flex-start;}
-.tt-item:last-of-type{border-bottom:none;}
-.tt-time{flex-shrink:0;color:var(--sub);min-width:86px;font-size:12px;padding-top:2px;}
-.tt-name{flex:1;line-height:1.5;}
-.tt-peak{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:4px;white-space:nowrap;}
-.tt-warn{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:4px;white-space:nowrap;}
-.tt-note{display:inline-block;background:#fff3d4;color:#8a5200;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:4px;white-space:nowrap;}
-.chk-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
-.chk-item:last-child{border-bottom:none;}
-.chk-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.15s;}
-.chk-item.checked .chk-box{background:var(--red);border-color:var(--red);color:#fff;}
-.chk-text{font-size:14px;line-height:1.5;}
-.chk-item.checked .chk-text{color:var(--sub);text-decoration:line-through;}
-.reset-btn{display:block;width:100%;margin-top:10px;padding:10px;background:#f0f0f0;color:var(--sub);border:none;border-radius:8px;font-size:13px;cursor:pointer;}
-.two-col{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
-.two-col > div{flex:1;min-width:130px;background:#f5f5f5;border-radius:8px;padding:10px 12px;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-size:14px;background:#f5f5f5;color:#222;overscroll-behavior:none}
+/* ── password ── */
+#pw-screen{position:fixed;inset:0;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px}
+#pw-screen h1{color:#fff;font-size:18px;text-align:center;line-height:1.5}
+#pw-screen .sub{color:#aaa;font-size:12px}
+#pw-input{padding:12px 16px;font-size:16px;border:2px solid #444;border-radius:8px;background:#2a2a3e;color:#fff;width:220px;text-align:center}
+#pw-input:focus{outline:none;border-color:#e94560}
+#pw-btn{padding:12px 32px;background:#e94560;color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-weight:bold}
+#pw-err{color:#e94560;font-size:12px;min-height:16px}
+/* ── app ── */
+#app{display:none;flex-direction:column;min-height:100vh}
+/* ── header ── */
+.header{background:#1a1a2e;color:#fff;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.header-title{font-size:14px;font-weight:bold;line-height:1.3}
+.header-sub{font-size:11px;color:#aaa}
+.header-date{font-size:11px;color:#ffd700;background:rgba(255,215,0,.15);padding:2px 8px;border-radius:10px}
+/* ── tabs content ── */
+.tab-content{display:none;padding:12px;padding-bottom:80px;flex:1}
+.tab-content.active{display:block}
+/* ── bottom nav ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;z-index:100;box-shadow:0 -2px 8px rgba(0,0,0,.1)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px;cursor:pointer;color:#888;font-size:10px;gap:2px;transition:color .2s;min-height:56px;border:none;background:none}
+.nav-item.active{color:#e94560}
+.nav-item .icon{font-size:20px}
+/* ── cards ── */
+.card{background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card-title{font-size:13px;font-weight:bold;color:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+/* ── alerts ── */
+.alert{border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;line-height:1.5}
+.alert-red{background:#fff0f0;border-left:4px solid #e94560}
+.alert-orange{background:#fff8f0;border-left:4px solid #ff8c00}
+.alert-yellow{background:#fffbf0;border-left:4px solid #ffd700}
+.alert-blue{background:#f0f4ff;border-left:4px solid #4a90d9}
+/* ── section headers ── */
+.sec-head{font-size:12px;font-weight:bold;color:#888;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px;padding-left:2px}
+/* ── news items ── */
+.news-item{background:#fff;border-radius:8px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:3px solid #e94560}
+.news-item .news-title{font-size:13px;font-weight:bold;margin-bottom:4px}
+.news-item .news-body{font-size:12px;color:#555;line-height:1.5}
+.news-item .news-time{font-size:11px;color:#aaa;margin-top:4px}
+/* ── timetable ── */
+.day-toggle{display:flex;background:#eee;border-radius:8px;padding:3px;margin-bottom:12px;gap:3px}
+.day-btn{flex:1;padding:8px;border:none;background:none;border-radius:6px;font-size:13px;font-weight:bold;cursor:pointer;color:#888;transition:all .2s}
+.day-btn.active{background:#fff;color:#e94560;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.venue-tabs{display:flex;overflow-x:auto;gap:6px;margin-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+.venue-tabs::-webkit-scrollbar{display:none}
+.venue-tab{white-space:nowrap;padding:6px 12px;border:1px solid #ddd;border-radius:20px;font-size:12px;cursor:pointer;background:#fff;color:#555;transition:all .2s;flex-shrink:0}
+.venue-tab.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+.tt-table{width:100%;border-collapse:collapse;font-size:12px}
+.tt-table th{background:#1a1a2e;color:#fff;padding:6px 8px;text-align:left;white-space:nowrap}
+.tt-table td{padding:7px 8px;border-bottom:1px solid #eee;vertical-align:top;line-height:1.4}
+.tt-table tr:last-child td{border-bottom:none}
+.badge-s{display:inline-block;background:#e94560;color:#fff;font-size:10px;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.badge-a{display:inline-block;background:#ff8c00;color:#fff;font-size:10px;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.badge-b{display:inline-block;background:#e6c200;color:#fff;font-size:10px;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.tt-warn{font-size:11px;color:#cc4400;background:#fff4ee;border-radius:6px;padding:6px 8px;margin-top:6px;line-height:1.5}
+/* ── duty selector ── */
+.duty-selector{width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-size:14px;background:#fff;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23888'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;margin-bottom:12px}
+.duty-selector:focus{outline:none;border-color:#e94560}
+.duty-panel{display:none}
+.duty-panel.active{display:block}
+/* ── accordion ── */
+.acc-item{background:#fff;border-radius:8px;margin-bottom:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.acc-head{padding:12px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:bold;user-select:none}
+.acc-head:active{background:#f5f5f5}
+.acc-body{display:none;padding:0 14px 12px;font-size:13px;line-height:1.6;color:#333}
+.acc-body.open{display:block}
+.acc-arrow{font-size:10px;color:#aaa;transition:transform .2s}
+.acc-arrow.open{transform:rotate(180deg)}
+/* ── report templates ── */
+.tmpl-box{background:#f8f8f8;border:1px solid #ddd;border-radius:6px;padding:10px;font-size:12px;line-height:1.6;font-family:monospace;white-space:pre-wrap;word-break:break-all}
+.copy-btn{margin-top:6px;padding:6px 14px;background:#1a1a2e;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.copy-btn.copied{background:#27ae60}
+/* ── parasol table ── */
+.area-toggle{display:flex;gap:6px;margin-bottom:10px}
+.area-btn{flex:1;padding:8px;border:2px solid #ddd;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;background:#fff;color:#888;text-align:center}
+.area-btn.active{border-color:#e94560;color:#e94560;background:#fff0f3}
+.para-table{width:100%;border-collapse:collapse;font-size:12px}
+.para-table th{background:#f0f0f0;padding:6px 8px;text-align:left;font-size:11px;color:#555}
+.para-table td{padding:6px 8px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.para-table tr:last-child td{border-bottom:none}
+.para-warn{font-size:11px;font-style:italic;color:#888}
+.warn-note{background:#fff8e1;border-left:3px solid #ffc107;padding:6px 10px;border-radius:0 6px 6px 0;font-size:12px;margin-bottom:8px;line-height:1.5}
+/* ── escalation steps ── */
+.step-list{counter-reset:step}
+.step-item{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.step-num{background:#1a1a2e;color:#fff;border-radius:50%;width:22px;height:22px;min-width:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold}
+.step-text{font-size:13px;line-height:1.5;padding-top:2px}
+/* ── ul/ol in acc bodies ── */
+.acc-body ul,.acc-body ol{padding-left:18px;margin:6px 0}
+.acc-body li{margin-bottom:3px}
+.acc-body strong{color:#1a1a2e}
+/* ── misc ── */
+.tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;margin-right:4px}
+.tag-blue{background:#e8f0ff;color:#2c5fc4}
+.tag-red{background:#fff0f3;color:#c0392b}
+.tag-green{background:#edfaf0;color:#1e8449}
+.faq-q{font-weight:bold;font-size:13px;margin-top:10px;margin-bottom:4px}
+.faq-a{font-size:13px;color:#555;line-height:1.5;padding-left:10px;border-left:2px solid #ddd}
+.divider{height:1px;background:#eee;margin:10px 0}
 </style>
 </head>
 <body>
 
+<!-- ========= PASSWORD ========= -->
 <div id="pw-screen">
-  <div class="pw-box">
-    <div class="pw-logo">マチ★アソビ vol.30</div>
-    <div class="pw-sub">スタッフ専用ページ</div>
-    <input id="pw-input" type="password" placeholder="パスワードを入力" autocomplete="off">
-    <button id="pw-btn">ログイン</button>
-    <div id="pw-err"></div>
-  </div>
+  <h1>🎌 マチ★アソビ vol.30<br>スタッフナビ</h1>
+  <div class="sub">スタッフ専用・取り扱い注意</div>
+  <input id="pw-input" type="password" placeholder="パスワード" autocomplete="off">
+  <button id="pw-btn">ログイン</button>
+  <div id="pw-err"></div>
 </div>
 
-<div id="toast">コピーしました！</div>
-
+<!-- ========= APP ========= -->
 <div id="app">
   <div class="header">
-    <div class="header-title">🌟 マチ★アソビ vol.30 スタッフナビ</div>
-    <div class="header-sub">2026年5月16日（土）・17日（日）｜徳島市</div>
-  </div>
-  <div class="tab-bar" id="tabBar">
-    <span class="tab-btn active" onclick="showTab(0)">ホーム</span>
-    <span class="tab-btn" onclick="showTab(1)">タイムライン</span>
-    <span class="tab-btn" onclick="showTab(2)">ステージ整理</span>
-    <span class="tab-btn" onclick="showTab(3)">総合案内</span>
-    <span class="tab-btn" onclick="showTab(4)">アンケート</span>
-    <span class="tab-btn" onclick="showTab(5)">ごみ収集</span>
-    <span class="tab-btn" onclick="showTab(6)">橋の下</span>
-    <span class="tab-btn" onclick="showTab(7)">痛車展示</span>
-    <span class="tab-btn" onclick="showTab(8)">エリア別</span>
-    <span class="tab-btn" onclick="showTab(9)">トラブル・報告</span>
+    <div>
+      <div class="header-title">🎌 マチ★アソビ vol.30</div>
+      <div class="header-sub">2026年5月16日(土)・17日(日) 徳島</div>
+    </div>
+    <div class="header-date" id="header-date">読込中…</div>
   </div>
 
-  <!-- TAB 0: ホーム -->
-  <div class="tab-content active" id="tab0">
-    <div class="section-label">🚨 緊急連絡先</div>
-    <div class="contact-card">
-      <div class="name">実働トップ</div>
-      <div class="role">八木</div>
-      <a href="tel:XXXXXXXXXX">📞 番号は後で追記</a>
-    </div>
-    <div class="contact-card">
-      <div class="name">サブ</div>
-      <div class="role">桑野</div>
-      <a href="tel:XXXXXXXXXX">📞 番号は後で追記</a>
+  <!-- ===== TAB 1: ホーム ===== -->
+  <div id="tab-home" class="tab-content active">
+    <div class="sec-head">📢 お知らせ</div>
+    <div id="news-container">
+      <div class="card"><div style="color:#aaa;font-size:12px;text-align:center;padding:8px">読み込み中…</div></div>
     </div>
 
-    <div class="section-label">📋 集合情報</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">集合場所・時間帯</span>
-        <span class="card-icon">▾</span>
+    <div class="sec-head">📌 イベント概要</div>
+    <div class="card">
+      <table style="width:100%;font-size:13px;border-collapse:collapse">
+        <tr><td style="padding:5px 0;color:#888;width:80px">日程</td><td style="padding:5px 0;font-weight:bold">5/16(土)・5/17(日)</td></tr>
+        <tr><td style="padding:5px 0;color:#888">場所</td><td style="padding:5px 0">徳島市内各所</td></tr>
+        <tr><td style="padding:5px 0;color:#888">集合</td><td style="padding:5px 0">東公園ボランティアテント</td></tr>
+        <tr><td style="padding:5px 0;color:#888">1部</td><td style="padding:5px 0">8:30集合 → 9:00〜18:00</td></tr>
+        <tr><td style="padding:5px 0;color:#888">2部</td><td style="padding:5px 0">11:30集合 → 12:00〜21:00</td></tr>
+      </table>
+    </div>
+
+    <div class="sec-head">🏕️ テント・本部</div>
+    <div class="card">
+      <div style="font-size:13px;line-height:1.8">
+        <div>📍 <strong>藍場浜テント</strong> — 藍場浜エリア拠点・迷子・救護</div>
+        <div>📍 <strong>東公園ボランティアテント</strong> — 集合・東公園拠点</div>
+        <div>📍 <strong>西公園テント</strong> — 西公園エリア拠点</div>
       </div>
-      <div class="card-body">
-        <div class="info-box">📍 <strong>集合場所：東公園ボランティアテント</strong></div>
-        <table class="data-table">
-          <tr><th>区分</th><th>集合時間</th><th>活動時間</th><th>食事</th></tr>
-          <tr><td>1部</td><td><strong>8:30</strong></td><td>9:00〜18:00</td><td>昼食あり</td></tr>
-          <tr><td>2部</td><td><strong>11:30</strong></td><td>12:00〜21:00</td><td>夕食あり</td></tr>
-          <tr><td>翌日撤収（5/18）</td><td><strong>9:00</strong></td><td>9:00〜12:00</td><td>要確認</td></tr>
+    </div>
+
+    <div class="sec-head">🆘 相談・エスカレーション</div>
+    <div class="alert alert-red">
+      <strong>緊急時</strong>：すぐリーダー・八木・桑野へ
+    </div>
+    <div class="card">
+      <div style="font-size:13px;line-height:1.9">
+        <div>🔵 <strong>混雑・列・導線</strong> → 近くの混雑対応部、リーダー</div>
+        <div>🔵 <strong>イベントルール・判断</strong> → リーダー・本部</div>
+        <div>🔵 <strong>パス・関係者対応</strong> → 必ず混雑対応部へ（いなければ八木・桑野）</div>
+        <div>🔵 <strong>サウナ関連</strong> → サウナスタッフ → 混雑対応部 → 八木・桑野</div>
+      </div>
+      <div class="divider"></div>
+      <div style="font-size:12px;color:#888">判断に迷ったら「確認します」と伝えてリーダーへ</div>
+    </div>
+
+    <div class="sec-head">📋 運営体制</div>
+    <div class="card">
+      <table style="width:100%;font-size:13px;border-collapse:collapse">
+        <tr><td style="padding:4px 0;color:#888;width:90px">統括</td><td style="padding:4px 0">新居さん</td></tr>
+        <tr><td style="padding:4px 0;color:#888">実働トップ</td><td style="padding:4px 0"><strong>八木</strong></td></tr>
+        <tr><td style="padding:4px 0;color:#888">サブ</td><td style="padding:4px 0"><strong>桑野</strong></td></tr>
+        <tr><td style="padding:4px 0;color:#888">事務・調整</td><td style="padding:4px 0">立花さん</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== TAB 2: タイムテーブル ===== -->
+  <div id="tab-tt" class="tab-content">
+    <div class="alert alert-red" style="font-size:12px">⚠️ ステージは<strong>基本すべて撮影禁止</strong>　🔴最警戒 🟠要注意 🟡注意</div>
+    <div class="day-toggle">
+      <button class="day-btn active" onclick="switchDay(0)">5/16（土）</button>
+      <button class="day-btn" onclick="switchDay(1)">5/17（日）</button>
+    </div>
+
+    <!-- DAY 1 -->
+    <div id="day-0">
+      <div class="venue-tabs" id="vtabs-0">
+        <div class="venue-tab active" onclick="switchVenue(0,0)">藍場浜</div>
+        <div class="venue-tab" onclick="switchVenue(0,1)">東公園</div>
+        <div class="venue-tab" onclick="switchVenue(0,2)">西公園</div>
+        <div class="venue-tab" onclick="switchVenue(0,3)">ufo T1</div>
+        <div class="venue-tab" onclick="switchVenue(0,4)">ufo T2</div>
+        <div class="venue-tab" onclick="switchVenue(0,5)">ufo 1F</div>
+        <div class="venue-tab" onclick="switchVenue(0,6)">アミコ</div>
+        <div class="venue-tab" onclick="switchVenue(0,7)">あわぎん</div>
+      </div>
+      <div id="d0v0" class="venue-panel">
+        <div class="tt-warn">⚠️ 16日警戒：12:30 機械じかけのマリー開始から鬼滅待機勢と重なる。<strong>12:00時点で最後尾札・待機列を整備すること</strong></div>
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-10:30</td><td>開会式</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>10:30-11:30</td><td>なのはEXCEEDS スペシャルステージ</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>11:30-12:30</td><td>「メダリスト」スペシャルステージ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:30-13:30</td><td>「機械じかけのマリー」スペシャルステージ</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>13:30-14:15</td><td>アニメ「鬼滅の刃」ステージ</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>15:00-16:00</td><td>鬼滅の刃 劇伴&挿入歌スペシャルライブ</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>16:30-17:30</td><td>夢限大みゅーたいぷ 劇場型ライブ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>18:00-19:00</td><td>SPECIAL LIVE - スピラ・スピカ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:00-20:00</td><td>SPECIAL LIVE - オーイシマサヨシ</td><td><span class="badge-s">S🔴</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v1" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td>GATE SEASON2 トークステージ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>11:00-12:00</td><td>櫻坂46×ビルディバイド 感謝祭</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>12:00-13:00</td><td>アズールレーン スペシャルトークショー</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>13:00-14:00</td><td>SPトークステージ</td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td>FGOゲストトーク</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>15:00-16:00</td><td>ゲームクリエイタートークライブ</td><td>—</td></tr>
+        <tr><td>16:00-17:00</td><td>和田丈嗣のおちゃんねんやん</td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td>おしゃべりCityがYATTEKURU</td><td>—</td></tr>
+        <tr><td>18:00-19:00</td><td>Project LEAP! SPステージ</td><td>—</td></tr>
+        <tr><td>19:00-20:00</td><td>「Summer Pockets」劇場版記念ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v2" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td>ガールズバンドFullMooN, Empressライブ</td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td>SPECIAL LIVE - 二ノ宮ゆい</td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td>Project LEAP! SPステージ</td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td>メタストらいぶ Vol.30</td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td>SPECIAL LIVE - nonoc</td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td>相良茉優 SPステージ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:00-17:00</td><td>SPECIAL LIVE - 前橋ウィッチーズ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>17:00-18:00</td><td>サイバーコネクトツー×KaKa Creationトーク</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>18:00-19:00</td><td>夕炎フラクタルLIVE!!</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:00-20:00</td><td>幽閉サテライトLIVE!!</td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v3" class="venue-panel" style="display:none">
+        <div class="tt-warn">⚠️ キャパ注意。入場動線の混在に警戒</div>
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>11:00-12:00</td><td>Summer Pockets スタッフSPトーク</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:30-13:30</td><td>プリズム補習部 上映会＆トーク</td><td>—</td></tr>
+        <tr><td>14:00-17:00</td><td>MAPPA×CloverWorks 上映会＆トーク</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:30-18:30</td><td>「さよならララ」試写会＆トーク</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:00-22:00</td><td>劇場版「鬼滅の刃」無限城編 上映会</td><td><span class="badge-s">S🔴キャパ満了注意</span></td></tr>
+        <tr><td>22:30-</td><td>衛宮さんちの今日のごはん 上映会</td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v4" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>11:00-12:00</td><td>ダークサモナー・彼女の友達 プロデューサートーク</td></tr>
+        <tr><td>12:30-13:30</td><td>井口雅紀監督トークショー</td></tr>
+        <tr><td>14:00-15:00</td><td>機動戦艦ナデシコ20周年 上映会</td></tr>
+        <tr><td>15:30-16:30</td><td>業界トーク</td></tr>
+        <tr><td>17:00-18:00</td><td>狂炎血晶アニメ映画化プロジェクト近況</td></tr>
+        <tr><td>18:30-19:30</td><td>アニメビジネスの変遷トーク</td></tr>
+        <tr><td>20:00-21:30</td><td>「マリッジトキシン」セレクション上映会</td></tr>
+        <tr><td>22:00-23:00</td><td>業界女子会 vol.17</td></tr>
+        </table>
+      </div>
+      <div id="d0v5" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>10:30-11:00</td><td>新たなサブカルの祭典紹介</td></tr>
+        <tr><td>12:00-13:00</td><td>「カワイイ制作界隈」トークショー</td></tr>
+        <tr><td>13:00-14:00</td><td>アニメアーカイブの四方山話</td></tr>
+        <tr><td>14:00-15:00</td><td>TROYCA「設定制作」トーク</td></tr>
+        <tr><td>15:00-16:00</td><td>ShoProプロデューサーステージ</td></tr>
+        <tr><td>16:00-17:00</td><td>漫画家こしみん×編集者トーク</td></tr>
+        <tr><td>17:00-18:00</td><td>Seven Arcs × EXCEEDS スタッフトーク</td></tr>
+        <tr><td>18:00-19:00</td><td>世界人ガール ミーシガー舞台挨拶</td></tr>
+        </table>
+      </div>
+      <div id="d0v6" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>11:00-12:00</td><td>競技ポーカーLIVE 2026</td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td>「うっちゃり2」ライブ＆トーク</td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td>Kyoka Live</td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td>鈴谷綾美 SPECIAL LIVE</td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td>「ブレイド＆バスタード」トーク</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:00-17:00</td><td>みんなで踊ろうステージ</td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td>フレーズギャラリー座談会＆サイン会</td><td>—</td></tr>
+        </table>
+      </div>
+      <div id="d0v7" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>14:00-15:00</td><td>マチ★アソビサウナができるまで</td></tr>
         </table>
       </div>
     </div>
 
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">✅ 集合時チェックリスト</span>
-        <span class="card-icon">▾</span>
+    <!-- DAY 2 -->
+    <div id="day-1" style="display:none">
+      <div class="venue-tabs" id="vtabs-1">
+        <div class="venue-tab active" onclick="switchVenue(1,0)">藍場浜</div>
+        <div class="venue-tab" onclick="switchVenue(1,1)">東公園</div>
+        <div class="venue-tab" onclick="switchVenue(1,2)">西公園</div>
+        <div class="venue-tab" onclick="switchVenue(1,3)">ufo T1</div>
+        <div class="venue-tab" onclick="switchVenue(1,4)">ufo T2</div>
+        <div class="venue-tab" onclick="switchVenue(1,5)">ufo 1F</div>
+        <div class="venue-tab" onclick="switchVenue(1,6)">アミコ</div>
+        <div class="venue-tab" onclick="switchVenue(1,7)">あわぎん</div>
       </div>
-      <div class="card-body">
-        <div id="chk-gather"></div>
-        <button class="reset-btn" onclick="resetChk('gather')">↺ リセット</button>
+      <div id="d1v0" class="venue-panel">
+        <div class="tt-warn">⚠️ 17日警戒：プリキュア→忍たま→ようこそ実力主義と客層が変わる。視覚的な案内を重視。終演後の退場と閉会式混雑に注意</div>
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:20-11:00</td><td>SPECIAL LIVE - プリキュアシンガーズ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>11:00-12:00</td><td>「忍たま乱太郎」スペシャルステージ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:00-13:00</td><td>「ようこそ実力至上主義の教室へ」ステージ</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>13:30-14:30</td><td>SPECIAL LIVE - fhána</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>15:00-16:00</td><td>SPECIAL LIVE - 栗林みな実</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:30-17:30</td><td>SPECIAL LIVE - FLOW</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:30-19:30</td><td>テイルズ30周年 劇伴コンサート＆ライブ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>19:30-</td><td>閉会式</td><td><span class="badge-b">B🟡終演後混雑</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v1" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td>わたべトークセッション ライブドローイング</td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td>スタッフトークショー</td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td>TVアニメ関連トークショー</td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td>Dr.STONE マチ★アソビ出張版</td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td>ポンステージ（仮）</td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td>テイルズ マチ★アソビ30thトーク</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>16:00-17:00</td><td>Summer Pockets 放送終了記念ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:00-18:00</td><td>「死亡遊戯で飯を食う。」SPステージ</td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v2" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td>ガールズバンドFullMooN, Empressライブ</td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td>Kyoka Live</td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td>マチ★アソビ×VTuberたみー 野外ライブ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>13:00-14:00</td><td>大島はるなSPライブ</td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td>西尾夕香とマチアソビであそぼう！</td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td>アズールレーン びそくぜんしんっ! ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>16:00-17:00</td><td>Suara うたわれるもの SPECIAL LIVE</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:00-18:00</td><td>HAPPY BIRTHDAY温泉アイドル ステージ</td><td>—</td></tr>
+        <tr><td>18:00-19:00</td><td>線野ましろ Special Stage!!</td><td>—</td></tr>
+        <tr><td>19:00-20:00</td><td>時空のHydrangeaスペシャルライブ</td><td>—</td></tr>
+        </table>
+      </div>
+      <div id="d1v3" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:30</td><td>背景美術実況＋SPトーク</td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td>「死亡遊戯で飯を食う。」上映会</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>14:15-14:45</td><td>NEEDY GIRL OVERDOSE ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>15:30-16:30</td><td>コミックス・ウェーブ・フィルムの新たな挑戦</td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td>「ようこそ実力至上主義の教室へ」上映会</td><td><span class="badge-s">S🔴キャパ注意</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v4" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>10:30-11:30</td><td>TROYCAまったりトーク</td></tr>
+        <tr><td>12:00-13:00</td><td>「エリスの聖杯」上映会＆トーク</td></tr>
+        <tr><td>13:30-14:30</td><td>「瑠璃のアリア」セレクト上映会</td></tr>
+        <tr><td>15:00-16:15</td><td>楽園追放 心のレゾナンス テクニカル</td></tr>
+        <tr><td>16:45-17:45</td><td>変わるアニメ作りの形とは？</td></tr>
+        </table>
+      </div>
+      <div id="d1v5" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>11:00-12:00</td><td>出張・アニメ雑事務局 本部開会議</td></tr>
+        <tr><td>14:00-15:00</td><td>アニメゲーム・マンガの育成四方山話</td></tr>
+        <tr><td>15:00-16:00</td><td>LV999の村人ステージ</td></tr>
+        <tr><td>16:00-17:00</td><td>THEアニメトーク 第0回 by MBS</td></tr>
+        <tr><td>17:00-18:00</td><td>ハコネクト SPトークショー</td></tr>
+        <tr><td>20:00-21:00</td><td>マチ★アソビ備忘録 vol.8</td></tr>
+        </table>
+      </div>
+      <div id="d1v6" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:30-12:00</td><td>スーパーさぐるみファイト！</td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td>VISUAL ARTS×ShoProステージ</td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td>緑宮しょーごLIVE</td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td>井上正大アソビ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>15:00-16:00</td><td>綾野ましろ「ゆるっとトーク＆ハイタッチ会」</td><td>—</td></tr>
+        <tr><td>16:00-17:00</td><td>SUMMER ROCKET ライブ＆トーク</td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td>「黒猫と魔女の教室」SPステージ</td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v7" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>11:00-12:00</td><td>犬飼劇団トゥナイト ～神風勘吾 VS CC2～</td></tr>
+        </table>
       </div>
     </div>
+  </div>
 
-    <div class="section-label">👥 運営体制・スタッフ識別</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">体制・ベストの色</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <table class="data-table" style="margin-bottom:12px;">
-          <tr><th>役割</th><th>担当者</th></tr>
-          <tr><td>統括</td><td>新居さん</td></tr>
-          <tr><td>実働トップ</td><td>八木</td></tr>
-          <tr><td>サブ</td><td>桑野</td></tr>
-          <tr><td>事務・調整</td><td>立花さん</td></tr>
-          <tr><td>各エリアリーダー</td><td>調整中</td></tr>
-        </table>
-        <div class="two-col">
-          <div>
-            <div style="font-size:12px;color:var(--sub);">一般ボランティア</div>
-            <div style="font-weight:700;margin-top:4px;">⬜ 白いスタッフベスト</div>
-          </div>
-          <div style="background:#fffbe6;">
-            <div style="font-size:12px;color:var(--sub);">リーダー・混雑対応部</div>
-            <div style="font-weight:700;margin-top:4px;">🟨 黄色のスタッフベスト</div>
-          </div>
+  <!-- ===== TAB 3: シフト別マニュアル ===== -->
+  <div id="tab-shift" class="tab-content">
+    <div class="card" style="margin-bottom:10px">
+      <div style="font-size:12px;color:#888;margin-bottom:6px">シフトの担当業務を選んでください</div>
+      <select class="duty-selector" id="duty-select" onchange="showDuty(this.value)">
+        <option value="">── 担当を選ぶ ──</option>
+        <optgroup label="撮影禁止対応">
+          <option value="satsukin-aiba">藍場浜 撮禁A / 撮禁B</option>
+          <option value="satsukin-higashi">東公園 撮禁A / 撮禁B</option>
+          <option value="satsukin-nishi">西公園 撮禁A / 撮禁B</option>
+        </optgroup>
+        <optgroup label="ステージ">
+          <option value="tachiaге">立ち上げ・撤収</option>
+          <option value="kaijoseiridounyuu">会場整理誘導</option>
+          <option value="uketsuke">受付（藍場浜 / 東公園 / 西公園）</option>
+        </optgroup>
+        <optgroup label="巡回・応援">
+          <option value="yuugeki">遊撃 / BW（ボードウォーク）</option>
+          <option value="chusharinjou">自転車置場〜東新町 / コルネの泉 巡回</option>
+          <option value="ufo">ufotable CINEMA 周辺補助</option>
+          <option value="sauna">サウナ企画補助</option>
+          <option value="hashi">橋の下美術館ヘルプ</option>
+        </optgroup>
+        <optgroup label="その他">
+          <option value="enquete">アンケート調査</option>
+          <option value="gomi">ごみ収集・美化</option>
+          <option value="parasol">パラソル・ブース補助</option>
+          <option value="hikitsugi">引継ぎ手順</option>
+          <option value="taiki">待機中にできること</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div id="duty-placeholder" style="text-align:center;color:#aaa;font-size:13px;padding:30px 0">
+      ↑ 担当業務を選ぶと<br>マニュアルが表示されます
+    </div>
+
+    <!-- DUTY PANELS -->
+    <div id="dp-satsukin-aiba" class="duty-panel">
+      <div class="alert alert-red"><strong>藍場浜 撮禁A / 撮禁B</strong><br>AとBの2名1組で交代制</div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔁 A/B交代制のルール</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は待機・休憩</li><li><strong>撮禁Bの番</strong>：B が担当、A は待機・休憩</li><li>交代タイミングはシフト表またはリーダーの指示に従う</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 撮影禁止対応の手順</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>撮禁札・表示を来場者から見える位置に出す（観覧者の視界をふさがない高さ・位置に注意）</li><li>ステージ正面だけでなく<strong>横・後方・橋の上・対岸・歩道側</strong>も確認する</li><li>スマホ・カメラを構えている人に落ち着いて声をかける</li><li>注意しても続ける場合は<strong>リーダー・八木・桑野へ共有</strong></li><li>30分以上立ち続けることがある — 体調に注意</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🚫 やってはいけないこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>来場者のスマホ・カメラに触れる</li><li>撮影データの削除を個人判断で求める</li><li>SNS投稿の削除を個人判断で求める</li><li>強い口調で注意する・口論する</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 藍場浜エリア 見るポイント</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>ステージ後方・横導線で人が止まっていないか</li><li>通路がふさがっていないか</li><li>終演後に一斉退場で詰まっていないか</li><li>次のステージ待機列と退場導線がぶつかっていないか</li><li>ステージ上・出演者の撮影が行われていないか</li><li>体調が悪そうな人がいないか</li></ul></div></div>
+    </div>
+
+    <div id="dp-satsukin-higashi" class="duty-panel">
+      <div class="alert alert-orange"><strong>東公園 撮禁A / 撮禁B</strong><br>AとBの2名1組で交代制</div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔁 A/B交代制のルール</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は待機・休憩</li><li><strong>撮禁Bの番</strong>：B が担当、A は待機・休憩</li><li>交代タイミングはシフト表またはリーダーの指示に従う</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 撮影禁止対応の手順</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>撮禁札を来場者から見える位置に出す</li><li>ステージ正面だけでなく横・後方・橋の上からの撮影も確認</li><li>スマホ・カメラを構えている人に落ち着いて声をかける</li><li>注意しても続ける場合は<strong>リーダー・八木・桑野へ共有</strong></li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 東公園エリア 見るポイント</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>ボランティア集合時にテント周辺が混雑していないか</li><li>来場者とスタッフの動線がぶつかっていないか</li><li>担当がわからず困っているスタッフがいないか</li><li>体調不良のスタッフがいないか</li></ul></div></div>
+    </div>
+
+    <div id="dp-satsukin-nishi" class="duty-panel">
+      <div class="alert alert-yellow"><strong>西公園 撮禁A / 撮禁B</strong><br>AとBの2名1組で交代制</div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔁 A/B交代制のルール</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は待機・休憩</li><li><strong>撮禁Bの番</strong>：B が担当、A は待機・休憩</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 撮影禁止対応の手順</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>撮禁札を来場者から見える位置に出す</li><li>ステージ正面・横・後方から撮影する人を確認</li><li>注意しても続ける場合はリーダー・八木・桑野へ共有</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 西公園エリア 見るポイント</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>西公園テント周辺の案内・確認に対応</li><li>比較的落ち着いたエリアだが、周辺エリアへの誘導も行う</li></ul></div></div>
+    </div>
+
+    <div id="dp-tachiaге" class="duty-panel">
+      <div class="alert alert-blue"><strong>立ち上げ・撤収</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔧 立ち上げでやること</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>ステージ周辺の三角コーン・バーの展開</li><li>撮影禁止札・案内表示などの設置</li><li>パラソル各ブースへの看板・配布物の配布</li><li>出展者・ブース担当者への<strong>挨拶（当日の連携づくり）</strong></li><li>ブース位置、導線、問い合わせが起きそうな場所の確認</li><li>ごみ捨て場所、パス受け取り場所、本部テントの案内</li><li>不明点は本部・混雑対応部・八木・桑野へ確認</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📦 撤収でやること</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>三角コーン・バー・案内表示の回収</li><li>撮影禁止札・備品の回収</li><li>パラソル周辺の<strong>忘れ物・ごみ確認</strong></li><li>ブース担当者への終了確認・挨拶</li><li>残置物や破損物の確認</li><li>余った配布物・看板等の回収先確認</li><li>本部への完了報告</li></ul></div></div>
+    </div>
+
+    <div id="dp-kaijoseiridounyuu" class="duty-panel">
+      <div class="alert alert-red"><strong>ステージイベント 会場整理誘導</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 主な業務</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>来場者の安全を確保する</li><li>観覧エリア・通路・待機列を整理する</li><li>撮影禁止や観覧ルールを守ってもらう</li><li>終演後の混雑を防ぐ</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>👥 2人1組での行動</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">片方が来場者対応をしている間、もう片方は周囲の安全確認・通路確保・リーダーへの連絡を担当。2人とも目の前の対応に入り込みすぎない。<br><br><strong>すぐ共有するケース：</strong><ul><li>強い口調で詰められている</li><li>列が伸びて通路をふさぎそう</li><li>撮影禁止への注意に応じてもらえない</li><li>体調不良者・迷子・クレームが発生した</li></ul></div></div>
+    </div>
+
+    <div id="dp-uketsuke" class="duty-panel">
+      <div class="alert alert-blue"><strong>受付（藍場浜 / 東公園 / 西公園）</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 テントで受ける可能性がある対応</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>会場・イベント場所の案内</li><li>落とし物・迷子・同行者不明の一次受付</li><li>体調不良・怪我の初動共有</li><li>アンケート記念品の案内・受け渡し</li><li>スタッフやリーダーへの連絡・呼び戻し</li><li>関係者・出展者からの問い合わせの一次受け</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ パス類・関係者対応は単独判断NG</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">スタッフパス・関係者パス・取材証・出展者証などの問い合わせは、<strong>必ず混雑対応部へエスカレーション</strong>。近くにいない場合は八木・桑野へ。<br><br>使いやすい一言：<br>「パスや関係者受付に関する内容は確認が必要です。少々お待ちください」</div></div>
+    </div>
+
+    <div id="dp-yuugeki" class="duty-panel">
+      <div class="alert alert-orange"><strong>遊撃 / BW（ボードウォーク）</strong><br>会場内の「困った」に素早く対応するフリーポジション</div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 主な役割</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>急に伸びた列の列形成支援・最後尾案内</li><li>通路確保、立ち止まり・滞留への声かけ</li><li>ステージ終了後や物販開始前後の誘導補助</li><li>駐輪場・コルネの泉周辺の巡回・通行確保</li><li>本部・テント・現場間の連絡補助</li><li>備品・ごみ袋・記念品などの運搬補助</li><li>迷子・体調不良・落とし物の初動共有</li><li>「なんか詰まりそう」という違和感を拾って共有する</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>💬 共有例</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><div class="tmpl-box">【遊撃】ポッポ街商店街、ブース前の列が通路中央にはみ出しています。最後尾がわかりにくく、通行と混ざり始めています。列位置の判断と追加スタッフが必要です。</div>
+      <br><div class="tmpl-box">【遊撃】藍場浜、終演後の退場者と次イベント待機が交差しそうです。後方通路の確保に入っています。導線判断をお願いします。</div></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ 安全を最優先に</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">慌てて走らない。車道・水辺・階段付近での無理な移動をしない。指示が重なった・シフト時間を超えそうな場合は、<strong>必ずリーダー・八木・桑野へ確認</strong>。</div></div>
+    </div>
+
+    <div id="dp-chusharinjou" class="duty-panel">
+      <div class="alert alert-orange"><strong>自転車置場〜東新町 / コルネの泉 巡回</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 主な役割</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>駐輪場周辺・東新町・コルネの泉周辺を巡回する</li><li>通路や店舗入口をふさぐ滞留がないか確認する</li><li>サイン会エリア等で待機列ができそうな場合、<strong>早めに共有</strong></li><li>最後尾・列名がわかりにくい場合、一時的な声かけを行う</li><li>体調不良者・落とし物・ごみ・危険な滞留がないか確認する</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>✅ 対応してよいこと / ❌ 確認が必要なこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><strong>対応OK：</strong><ul><li>通路確保のための声かけ</li><li>「何の列か」を確認するための一次案内</li><li>混雑状況・最後尾不明・通行支障の共有</li></ul><strong>要確認：</strong><ul><li>自転車の移動・撤去・駐輪可否</li><li>サイン会の参加可否、整列開始、列打ち切り</li><li>整理券・参加条件・本人確認</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>💬 使いやすい一言</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><div class="tmpl-box">「通路確保のため、こちら側を空けてお待ちください」</div><br><div class="tmpl-box">「詳しい整列方法は確認しますので、少々お待ちください」</div></div></div>
+    </div>
+
+    <div id="dp-ufo" class="duty-panel">
+      <div class="alert alert-blue"><strong>ufotable CINEMA 周辺補助</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 主な役割</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">シネマスタッフが基本対応。ボランティアはロビー内外の人員整理、列の分離、撮影禁止対応、通路確保を補助。<br><br><strong>特に混ざりやすい動線：</strong><ul><li>物販列（グッズ）</li><li>物販列（飲食）</li><li>映画を見に行く人の入場動線</li><li>シネマ前イベントの観覧・撮影導線</li><li>1Fアニメイト前通路の通常通行</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🚫 言わないこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>「こちらに並べば入れます」</li><li>「まだ買えます」「この列で大丈夫です」</li><li>「ここは撮影して大丈夫です」</li><li>「映画の入場はこの時間です」</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>💬 声かけ例</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><div class="tmpl-box">「通路確保のため、列を詰めずにこちら側でお待ちください」</div><br><div class="tmpl-box">「こちらは物販列です。映画をご覧になる方の動線を確認しますので、少々お待ちください」</div></div></div>
+    </div>
+
+    <div id="dp-sauna" class="duty-panel">
+      <div class="alert alert-blue"><strong>サウナ企画補助</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 役割</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">サウナスタッフの指示に従って動く。ボランティアはサウナ運営を代行しない。<br><br><strong>対応OK：</strong><ul><li>サウナスタッフの指示に沿った誘導</li><li>待機場所・通行導線の案内</li><li>足元の水濡れ・段差・荷物確認</li><li>気分が悪そうな人・ふらついている人を確認する</li></ul><br><strong>要確認：</strong><ul><li>受付・予約・利用可否・料金</li><li>更衣場所・荷物置き場</li><li>安全管理上の判断</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ 注意点</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>脱水やのぼせが疑われる人がいたら、<strong>すぐにサウナスタッフ・八木・桑野へ共有</strong></li><li>医療判断はしない</li><li>濡れた床・水辺では走らない</li></ul></div></div>
+    </div>
+
+    <div id="dp-hashi" class="duty-panel">
+      <div class="alert alert-blue"><strong>橋の下美術館ヘルプ</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 場所・内容</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">新町川水際公園ボートハウス前（両国橋北詰め）。乗船体験・ライフジャケット受け渡し・返却・安全確認が主な業務。<br><br><ul><li>乗船の受付・利用ルール・安全管理は<strong>担当団体スタッフへ確認</strong></li><li>ライフジャケットの受け渡し・返却を補助する</li><li>水辺での安全に特に注意する</li><li>体調不良・転倒・水辺への接近は即座に共有する</li></ul></div></div>
+    </div>
+
+    <div id="dp-enquete" class="duty-panel">
+      <div class="alert alert-blue"><strong>アンケート調査</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 基本の流れ</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ol><li>QRコードが載ったポスター等を身につけて巡回</li><li>来場者にアンケート協力をお願いする</li><li>QRコードを読み取ってもらう</li><li>スマートフォンで回答してもらう</li><li>回答後、記念品の受け取り場所を案内する</li><li>記念品は<strong>東公園ボランティアテントまたは藍場浜テント</strong></li></ol></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ 注意点</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>無理に引き止めない・急かさない</li><li>来場者のスマホを勝手に操作しない</li><li>回答内容をのぞき込まない</li><li>記念品の在庫・配布条件を<strong>推測で案内しない</strong></li><li>回答者が特定の場所・時間帯に偏りすぎないよう複数エリアを巡回する</li></ul></div></div>
+    </div>
+
+    <div id="dp-gomi" class="duty-panel">
+      <div class="alert alert-blue"><strong>ごみ収集・美化</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🗑️ 分別区分</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><table style="width:100%;font-size:12px;border-collapse:collapse"><tr><th style="text-align:left;padding:4px 0;border-bottom:1px solid #eee">区分</th><th style="text-align:left;padding:4px 0;border-bottom:1px solid #eee">例</th></tr>
+      <tr><td style="padding:4px 0">燃えるごみ</td><td style="padding:4px 0">紙くず、食品容器</td></tr>
+      <tr><td style="padding:4px 0">燃えないごみ</td><td style="padding:4px 0">プラスチック類</td></tr>
+      <tr><td style="padding:4px 0">缶</td><td style="padding:4px 0">アルミ缶・スチール缶</td></tr>
+      <tr><td style="padding:4px 0">瓶</td><td style="padding:4px 0">飲料瓶</td></tr>
+      <tr><td style="padding:4px 0">ペットボトル</td><td style="padding:4px 0">ペットボトル本体</td></tr>
+      <tr><td style="padding:4px 0">割り箸・竹串</td><td style="padding:4px 0">⚠️ 竹串は怪我リスクあり</td></tr>
+      </table></div></div>
+    </div>
+
+    <div id="dp-parasol" class="duty-panel">
+      <div class="alert alert-blue"><strong>パラソル・ブース補助</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>✅ 対応してよいこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>本部テント、トイレ、ごみ捨て場所の場所案内</li><li>看板・配布物を渡す、置き場所を確認する</li><li>パラソル設営の簡単な補助</li><li>ブース前の滞留への声かけ</li><li>地元の飲食店・休憩場所をわかる範囲で案内</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>❌ 確認が必要なこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>パスの発行・受け渡し・再発行</li><li>販売可否・方法・価格・購入制限</li><li>電源・設備・備品の不足</li><li>パラソル破損・風で危ない場合</li><li>出展者同士・来場者とのトラブル</li></ul></div></div>
+    </div>
+
+    <div id="dp-hikitsugi" class="duty-panel">
+      <div class="alert alert-blue"><strong>引継ぎ手順（SBAR形式）</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 引継ぎで伝えること</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><table style="width:100%;font-size:12px;border-collapse:collapse">
+      <tr style="background:#f5f5f5"><td style="padding:5px;font-weight:bold;width:40px">S</td><td style="padding:5px"><strong>状況</strong>：今の場所・担当・何が起きているか</td></tr>
+      <tr><td style="padding:5px">B</td><td style="padding:5px"><strong>経緯</strong>：さっきまで何をしていたか・特記事項</td></tr>
+      <tr style="background:#f5f5f5"><td style="padding:5px">A</td><td style="padding:5px"><strong>対応中</strong>：今対応していること・しかけの案内</td></tr>
+      <tr><td style="padding:5px">R</td><td style="padding:5px"><strong>依頼</strong>：次の担当者に引き続き対応してほしいこと</td></tr>
+      </table></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>💬 引継ぎ例</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><div class="tmpl-box">「藍場浜東側で撮禁Aを担当していました。今は特に問題なし。14時のステージ前から来場者が増えはじめていて、後方の通路が少し詰まりはじめています。引き続き後方を意識してください」</div></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ 引継ぎで注意すること</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>「あとはよろしく」だけで終わらない</li><li>担当が重なる時間を数分作る（並走でOK）</li><li>持ち物の受け渡しを忘れない（撮禁札・ごみ袋等）</li><li>休憩から戻ったらまず状況確認</li></ul></div></div>
+    </div>
+
+    <div id="dp-taiki" class="duty-panel">
+      <div class="alert alert-blue"><strong>待機中にできること</strong></div>
+      <div class="card">
+        <div style="font-size:13px;line-height:1.8">
+          <div>👁 担当エリアを見渡す（滞留・詰まり・困っている人）</div>
+          <div>📍 最後尾・列状況の把握</div>
+          <div>💬 来場者からの問い合わせに答える準備</div>
+          <div>📋 引継ぎメモを整理する</div>
+          <div>🔋 体調・水分補給を確認する</div>
+          <div>📡 リーダーへ現状報告</div>
         </div>
       </div>
+      <div class="alert alert-yellow">担当場所を無言で離れない。離れる場合は近くのスタッフまたはリーダーへ共有する。</div>
+    </div>
+  </div>
+
+  <!-- ===== TAB 4: 地図・パラソル ===== -->
+  <div id="tab-map" class="tab-content">
+    <div class="area-toggle">
+      <button class="area-btn active" onclick="switchArea('east')">東公園側 (25〜49番)</button>
+      <button class="area-btn" onclick="switchArea('west')">西公園側 (01〜24番)</button>
     </div>
 
-    <div class="section-label">🎒 持ち物・服装</div>
+    <div id="area-east">
+      <div class="warn-note">⚠️ 伊月健診クリニック（駐車場）通抜けNG。ボードウォーク面の営業店舗前での滞留注意。</div>
+      <div class="warn-note">ufotable(31・32番)周辺 ─ 1Fカフェ前に滞留を作らないよう重点警戒。32番角の駐車場は個人宅・<strong>立入注意</strong></div>
+      <table class="para-table">
+        <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
+        <tr><td>25D</td><td>ハヤブサフィルム×パッショーネ</td><td>CUELAMP</td></tr>
+        <tr><td>25C</td><td>ハヤブサフィルム×パッショーネ</td><td>物販+トーク等</td></tr>
+        <tr><td>25</td><td>スタジオコロリド・クロマト</td><td>お渡し会など</td></tr>
+        <tr><td>26</td><td>Production I.G・WIT STUDIO</td><td>お渡し会など</td></tr>
+        <tr><td>27</td><td>Production +h</td><td>お渡し会など</td></tr>
+        <tr><td>28</td><td>EMT</td><td>お渡し会など</td></tr>
+        <tr><td>29</td><td>コミックス・ウェーブ・フィルム</td><td>—</td></tr>
+        <tr><td>30</td><td>CloverWorks</td><td>—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">31</td><td>ufotable</td><td style="font-size:11px">サイン会など。1Fカフェ前滞留⚠️</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">32</td><td>ufotable</td><td style="font-size:11px">角の駐車場は個人宅⚠️立入注意</td></tr>
+        <tr><td>33</td><td>Feel</td><td>—</td></tr>
+        <tr><td>34</td><td>小学館集英社プロダクション</td><td>お渡し会など</td></tr>
+        <tr><td>35</td><td>オリミナート</td><td>—</td></tr>
+        <tr><td>36</td><td>ナンバーナイン</td><td>—</td></tr>
+        <tr><td>37</td><td>ISARIBI</td><td>—</td></tr>
+        <tr><td>38</td><td>リアルアキバ</td><td>—</td></tr>
+        <tr><td>39</td><td>ジェンコ</td><td>—</td></tr>
+        <tr><td>40</td><td>アニメイト</td><td>—</td></tr>
+        <tr><td>41</td><td>博報堂DYMaP</td><td>—</td></tr>
+        <tr><td>42</td><td>ドリコム</td><td>—</td></tr>
+        <tr><td>43</td><td>MBS（毎日放送）</td><td>—</td></tr>
+        <tr><td>44</td><td>KADOKAWA</td><td>—</td></tr>
+        <tr><td>45</td><td>AnimeJapan</td><td>—</td></tr>
+        <tr><td>46</td><td>ANIPLEX</td><td>—</td></tr>
+        <tr><td>47</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
+        <tr><td>48</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
+        <tr><td>49</td><td colspan="2" style="color:#aaa">—</td></tr>
+      </table>
+    </div>
+
+    <div id="area-west" style="display:none">
+      <div class="warn-note">⚠️ ufotable徳島スタジオ（搬入出拠点）隣接。阿波銀行あり。道路での停留・無断駐輪に注意。</div>
+      <table class="para-table">
+        <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
+        <tr><td>01</td><td>共有パラソル</td><td>—</td></tr>
+        <tr><td>02</td><td>ジリオンモード</td><td>ミニサイン会など</td></tr>
+        <tr><td>03</td><td>つるぎ町</td><td>—</td></tr>
+        <tr><td>04</td><td>A-ICライツ</td><td>お渡し会など</td></tr>
+        <tr><td>05</td><td>ロケット・ベース</td><td>お渡し会など</td></tr>
+        <tr><td>06</td><td>幻影・いろは咲</td><td>サイン会など</td></tr>
+        <tr><td>07</td><td>民安ともえ（Vtuberたみー）</td><td>サイン会など</td></tr>
+        <tr><td>08</td><td>大島はるな</td><td>サイン会など</td></tr>
+        <tr><td>09</td><td>スナックあゆ（藤崎弓乃）</td><td>など</td></tr>
+        <tr><td>10</td><td>白滝製麺（飲食）</td><td>—</td></tr>
+        <tr><td>11</td><td>ufotable</td><td>—</td></tr>
+        <tr><td>12</td><td>飲食パラソル</td><td>—</td></tr>
+        <tr><td>13</td><td>NewType新宿</td><td>サイン会</td></tr>
+        <tr><td>14</td><td>フロントウィングラボ</td><td>サイン会</td></tr>
+        <tr><td>15</td><td>零号室（グリザイアシリーズ）</td><td>など</td></tr>
+        <tr><td>16</td><td>oriminary</td><td>—</td></tr>
+        <tr><td>17</td><td>きゃらめる（きゃらみる）</td><td>お話し会</td></tr>
+        <tr><td>18</td><td>ドリコム</td><td>お話し会</td></tr>
+        <tr><td>19</td><td>GiantStep</td><td>—</td></tr>
+        <tr><td>20</td><td>M-IX</td><td>—</td></tr>
+        <tr><td>21</td><td>Giant Step</td><td>特典会など</td></tr>
+        <tr><td>22</td><td>共有パラソル</td><td>—</td></tr>
+        <tr><td>23</td><td>共有パラソル</td><td>—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">24</td><td>スタジオオマウス/ダイス</td><td style="font-size:11px">サイン会・注意するイベントあり⚠️</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== TAB 5: 基本知識 ===== -->
+  <div id="tab-basic" class="tab-content">
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>❓ 来場者FAQ</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="faq-q">Q. ステージはどこですか？</div>
+      <div class="faq-a">「藍場浜公園ステージ、新町橋東公園ステージ、両国橋西公園ステージ、アミコドームがあります。お目当てはどちらですか？」</div>
+      <div class="faq-q">Q. ufotable CINEMAはどこですか？</div>
+      <div class="faq-a">「東新町商店街の中にあります。こちら（方向）に進むと見えてきます」（詳細はシネマスタッフへ）</div>
+      <div class="faq-q">Q. パラソル〇〇番はどこですか？</div>
+      <div class="faq-a">01〜24番＝西公園側、25〜49番＝東公園側（番号表で確認して案内）</div>
+      <div class="faq-q">Q. コスプレ受付・更衣室はどこですか？</div>
+      <div class="faq-a">「メインはポッポ街商店街南側2階です。受付条件・当日受付可否はコミエス公式案内でご確認ください」</div>
+      <div class="faq-q">Q. アンケート記念品はどこで？</div>
+      <div class="faq-a">「東公園ボランティアテントまたは藍場浜テントでお受け取りいただけます」</div>
+      <div class="faq-q">Q. 整理券はもらえますか？</div>
+      <div class="faq-a">「各ブース担当者または本部にご確認ください。私の判断ではお答えできません」</div>
+      <div class="faq-q">Q. 気分が悪いのですが</div>
+      <div class="faq-a">「すぐにご案内します」→ 安全な場所へ誘導し、藍場浜テントまたは東公園ボランティアテントへ共有</div>
+      <div class="faq-q">Q. 子どもとはぐれてしまいました</div>
+      <div class="faq-a">「藍場浜テントまたは東公園テントにご案内します。一緒に参りましょう」→ すぐテントへ誘導してリーダーへ共有</div>
+    </div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🆘 困ったときの相談ルート</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="step-item"><div class="step-num">1</div><div class="step-text">近くの<strong>混雑対応部</strong></div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-text">近くの<strong>リーダー・本部テント</strong></div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-text"><strong>八木・桑野</strong></div></div>
+      <div class="divider"></div>
+      <div style="font-size:12px;color:#555;line-height:1.7">
+        <div>🔑 <strong>黄色ベスト≠必ずリーダー</strong>。相手の担当を確認してからつなぐ。</div>
+        <div>🔑 パス・関係者対応は<strong>必ず混雑対応部へ</strong></div>
+        <div>🔑 何もしないのではなく、「確認します」と伝えて安全のための初動は行う</div>
+      </div>
+    </div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🎒 持ち物・服装</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <ul><li>スタッフベスト・スタッフ証（集合時に受け取り）</li><li>動きやすい服装・靴</li><li>雨具（カッパ）</li><li>飲み物・軽食（自分で用意）</li><li>スマートフォン・充電器</li><li>日焼け止め・帽子（屋外対応）</li></ul>
+    </div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 当日チェックリスト</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <strong>集合時：</strong><ul><li>□ 出欠確認</li><li>□ スタッフベスト・スタッフ証の受け取り</li><li>□ 担当業務・担当エリア・リーダーの確認</li><li>□ 休憩場所・本部・救護・トイレの場所確認</li><li>□ 緊急連絡先の確認</li><li>□ 最新スケジュールの確認</li></ul>
+      <strong style="display:block;margin-top:8px">業務中：</strong><ul><li>□ スタッフベスト・スタッフ証は見えるように着用</li><li>□ 担当場所を勝手に離れない</li><li>□ 判断に迷ったら「確認します」と伝える</li><li>□ 体調不良・疲労は早めに共有する</li><li>□ SNSに内部情報・トラブル情報を投稿しない</li></ul>
+    </div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🚫 やってはいけないこと</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul>
+      <li>来場者のスマホ・カメラに触れる</li>
+      <li>撮影データ・SNS投稿の削除を求める</li>
+      <li>来場者と口論する</li>
+      <li>担当場所を無言で離れる</li>
+      <li>来場者対応を一人で抱え込む</li>
+      <li>SNSに内部情報・トラブル情報を投稿する</li>
+      <li>推測で案内する（「多分大丈夫です」はNG）</li>
+    </ul></div></div>
+  </div>
+
+  <!-- ===== TAB 6: 報告・緊急 ===== -->
+  <div id="tab-report" class="tab-content">
+    <div class="sec-head">🆘 トラブル初動</div>
     <div class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">必須アイテム</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>スマートフォン</li>
-          <li>モバイルバッテリー</li>
-          <li>飲み物（多めに）</li>
-          <li>タオル</li>
-          <li>筆記用具・メモ帳</li>
-          <li>雨具</li>
-          <li>常備薬</li>
-          <li>スタッフベスト・スタッフ証など指定されたもの</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">あるとよいもの</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>日焼け止め・帽子</li>
-          <li>汗拭きシート・絆創膏</li>
-          <li>小さめのごみ袋</li>
-          <li>軽食</li>
-          <li>クリップボード</li>
-          <li>サコッシュ・ウエストポーチ（両手が空くバッグ）</li>
-        </ul>
+      <div style="font-size:13px;line-height:1.9">
+        <div>👦 <strong>迷子・同行者不明</strong>：安全な場所へ案内 → 藍場浜/東公園テントへ共有</div>
+        <div>🎒 <strong>落とし物</strong>：拾った場所・時間確認 → テントへ引き継ぎ</div>
+        <div>😠 <strong>クレーム</strong>：話を遮らず聞く、反論せず「確認します」→ リーダー・八木・桑野へ</div>
+        <div>❓ <strong>不審物・不審者</strong>：触らない・動かさない・近づかない → 場所と特徴を共有</div>
       </div>
     </div>
 
-    <div class="section-label">💡 迷ったときの判断基準</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">この順番で考える</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ol class="step-list">
-          <li>安全が守られているか</li>
-          <li>人の流れが止まっていないか</li>
-          <li>来場者が不安になっていないか</li>
-          <li>スタッフだけで抱え込んでいないか</li>
-        </ol>
-        <div class="info-box" style="margin-top:12px;">💬 わからなければ必ずこう言う：<br><strong>「確認しますので、少々お待ちください」</strong></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 1: タイムライン -->
-  <div class="tab-content" id="tab1">
-    <div class="warn-box">⚠️ ステージは<strong>基本すべて撮影禁止</strong>。混雑度：<span class="tt-peak">🔴最警戒（SSS）</span> <span class="tt-warn">🟠要注意（SS）</span> <span class="tt-note">🟡注意（S）</span></div>
-
-    <div class="tt-day">📅 5月16日（土）</div>
-    <div class="ng-box" style="font-size:13px;margin:6px 0 10px;">⚠️ 藍場浜は<strong>12:30から最警戒</strong>。魔法使いの夜（SSS）→ 鬼滅ステージ（SSS）→ 鬼滅ライブ（SSS）が連続。13:30の鬼滅だけを警戒しても遅い。<strong>12:00時点で最後尾札・待機列を整備すること</strong>。</div>
-
-    <div class="tt-venue">■ 藍場浜ステージ</div>
-    <div class="tt-item"><span class="tt-time">10:00〜10:30</span><span class="tt-name">開会式<span class="tt-peak">🔴最警戒</span></span></div>
-    <div class="tt-item"><span class="tt-time">10:00〜11:30</span><span class="tt-name">魔法少女リリカルなのは EXCEEDS スペシャルステージ<span class="tt-note">🟡注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">11:30〜12:30</span><span class="tt-name">「メダリスト」スペシャルステージ<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">12:30〜13:30</span><span class="tt-name">劇場アニメーション「魔法使いの夜」スペシャルステージ<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">13:30〜14:15</span><span class="tt-name">アニメ「鬼滅の刃」ステージ<span class="tt-peak">🔴最警戒</span></span></div>
-    <div class="tt-item"><span class="tt-time">15:00〜16:00</span><span class="tt-name">「鬼滅の刃」副将&amp;挿入歌スペシャルライブ<span class="tt-peak">🔴最警戒</span></span></div>
-    <div class="tt-item"><span class="tt-time">16:30〜17:30</span><span class="tt-name">バンドリ！ライブステージ @徳島<span class="tt-note">🟡注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">18:00〜19:00</span><span class="tt-name">SPECIAL LIVE - スピラ・スピカ<span class="tt-note">🟡注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">19:00〜20:00</span><span class="tt-name">SPECIAL LIVE - オーイシマサヨシ<span class="tt-note">🟡注意</span></span></div>
-
-    <div class="tt-venue">■ 新町橋東公園ステージ</div>
-    <div class="tt-item"><span class="tt-time">10:00〜11:00</span><span class="tt-name">TVアニメ「GATE SEASON2」スペシャルトークステージ</span></div>
-    <div class="tt-item"><span class="tt-time">11:00〜12:00</span><span class="tt-name">「欅坂46×ビルディバイド・プライト」マチアソビ感謝祭ステージ</span></div>
-    <div class="tt-item"><span class="tt-time">12:00〜13:00</span><span class="tt-name">アズールレーン SPECIAL LIVE<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">13:00〜14:00</span><span class="tt-name">「運命の魔術士」SPトークステージ</span></div>
-    <div class="tt-item"><span class="tt-time">14:00〜15:00</span><span class="tt-name">FGO ゲストトーク in マチ★アソビ vol.30<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">15:00〜16:00</span><span class="tt-name">ゲームクリエイタートーク</span></div>
-    <div class="tt-item"><span class="tt-time">17:00〜18:00</span><span class="tt-name">ああある City が マチ★アソビ に YATTEKURU</span></div>
-    <div class="tt-item"><span class="tt-time">18:00〜19:00</span><span class="tt-name">Project LEAP! マチ★アソビ SP ステージ</span></div>
-    <div class="tt-item"><span class="tt-time">19:00〜20:20</span><span class="tt-name">「Summer Pockets」劇場編集版配信記念ステージ<span class="tt-note">🟡注意</span></span></div>
-
-    <div class="tt-venue">■ 両国橋西公園ステージ</div>
-    <div class="tt-item"><span class="tt-time">11:00〜12:00</span><span class="tt-name">ガールズバンド FullMooN, Empress スペシャルライブ</span></div>
-    <div class="tt-item"><span class="tt-time">11:00〜12:00</span><span class="tt-name">SPECIAL LIVE - 二ノ宮ゆい</span></div>
-    <div class="tt-item"><span class="tt-time">13:00〜14:00</span><span class="tt-name">Project LEAP! マチ★アソビ SP ステージ</span></div>
-    <div class="tt-item"><span class="tt-time">14:00〜15:00</span><span class="tt-name">SPECIAL LIVE - nonoc</span></div>
-    <div class="tt-item"><span class="tt-time">16:00〜17:00</span><span class="tt-name">相葉京優 マチ★アソビ SP ステージ</span></div>
-    <div class="tt-item"><span class="tt-time">17:00〜18:00</span><span class="tt-name">SPECIAL LIVE - 前橋ウィッチーズ</span></div>
-    <div class="tt-item"><span class="tt-time">18:00〜19:00</span><span class="tt-name">サイバーコネクトツー×船山 ほか コラボステージ</span></div>
-    <div class="tt-item"><span class="tt-time">19:30〜20:00</span><span class="tt-name">少女フラクタルLIVE!!</span></div>
-    <div class="tt-item"><span class="tt-time">20:00〜21:00</span><span class="tt-name">瞬間サテライトLIVE!!</span></div>
-
-    <div class="tt-venue">■ アミコドーム</div>
-    <div class="tt-item"><span class="tt-time">11:00〜12:00</span><span class="tt-name">m HOLD'EM presents 競技ポーカーLIVE 2026</span></div>
-    <div class="tt-item"><span class="tt-time">13:00〜14:00</span><span class="tt-name">KyoKa Live in マチ★アソビ</span></div>
-    <div class="tt-item"><span class="tt-time">15:00〜16:00</span><span class="tt-name">蓄谷共美 マチ★アソビ SPECIAL LIVE</span></div>
-    <div class="tt-item"><span class="tt-time">15:00〜17:00</span><span class="tt-name">「ブレイド&amp;バスタード」トークショー feat.麻布くも</span></div>
-
-    <div class="tt-venue">■ ufotable CINEMA（Theater 1）</div>
-    <div class="tt-item"><span class="tt-time">11:00〜12:00</span><span class="tt-name">feel.×「Summer Pockets」スタッフSPトーク第2回</span></div>
-    <div class="tt-item"><span class="tt-time">14:00〜17:00</span><span class="tt-name">MAPPA×CloversWorks セレクト上映会&amp;プロデューサートークショー<span class="tt-note">🟡注意（キャパ注意）</span></span></div>
-    <div class="tt-item"><span class="tt-time">19:00〜22:00</span><span class="tt-name">「劇場版 鬼滅の刃 無限城篇」上映会<span class="tt-peak">🔴最警戒（キャパ満了注意）</span></span></div>
-
-    <div class="tt-day">📅 5月17日（日）</div>
-    <div class="ng-box" style="font-size:13px;margin:6px 0 10px;">⚠️ 午前〜昼の藍場浜は<strong>客層が広く読みづらい</strong>日。プリキュア（親子連れ）→ Re:ゼロ（アニメ層）→ ようこそ実力至上主義（ラノベ層）と混在。オタク慣れしていない層も来るため<strong>視覚的な案内が重要</strong>。</div>
-
-    <div class="tt-venue">■ 藍場浜ステージ</div>
-    <div class="tt-item"><span class="tt-time">10:20〜11:00</span><span class="tt-name">SPECIAL LIVE - プリキュアシンガーズ<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">11:00〜12:00</span><span class="tt-name">TVアニメ「Re:ゼロ」4th season スペシャルステージ<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">12:00〜13:00</span><span class="tt-name">「ようこそ実力至上主義の教室へ」4th Season スペシャルステージ<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">13:00〜14:00</span><span class="tt-name">SPECIAL LIVE - thana</span></div>
-    <div class="tt-item"><span class="tt-time">14:00〜15:00</span><span class="tt-name">マチ★アソビ SPECIAL LIVE 30th スペシャルトーク</span></div>
-    <div class="tt-item"><span class="tt-time">16:30〜17:30</span><span class="tt-name">SPECIAL LIVE - FLOW<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">17:30〜19:30</span><span class="tt-name">「テイルズ オブ」30周年 Premium Stage ／ 劇伴コンサート&amp;10周年ライブ<span class="tt-warn">🟠要注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">19:30〜</span><span class="tt-name">閉会式<span class="tt-note">🟡注意（終演後混雑）</span></span></div>
-
-    <div class="tt-venue">■ 新町橋東公園ステージ</div>
-    <div class="tt-item"><span class="tt-time">10:00〜11:00</span><span class="tt-name">わたべペケッション！×苗川来先生 ライブドローイング</span></div>
-    <div class="tt-item"><span class="tt-time">12:00〜13:00</span><span class="tt-name">TVアニメ「運命魔術士」キャスト&amp;スタッフトークショー</span></div>
-    <div class="tt-item"><span class="tt-time">13:00〜14:00</span><span class="tt-name">TVアニメ「Dr.STONE」〜マチ★アソビ出張版〜</span></div>
-    <div class="tt-item"><span class="tt-time">14:00〜15:00</span><span class="tt-name">「テイルズ OF」30th スペシャルトーク<span class="tt-note">🟡注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">15:00〜16:00</span><span class="tt-name">「Summer Pockets」放送終了記念ステージ<span class="tt-note">🟡注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">16:00〜17:00</span><span class="tt-name">TVアニメ「死亡遊戯で熊を食う。」スペシャルステージ</span></div>
-
-    <div class="tt-venue">■ 両国橋西公園ステージ</div>
-    <div class="tt-item"><span class="tt-time">10:00〜11:00</span><span class="tt-name">ガールズバンド FullMooN, Empress スペシャルライブ</span></div>
-    <div class="tt-item"><span class="tt-time">11:00〜12:00</span><span class="tt-name">マチ★アソビ Vtuberライブ 〜スペシャル野外ライブ!!2026</span></div>
-    <div class="tt-item"><span class="tt-time">12:00〜13:00</span><span class="tt-name">大黒はるなSPライブ</span></div>
-    <div class="tt-item"><span class="tt-time">13:00〜14:00</span><span class="tt-name">KyoKa Live In マチ★アソビ</span></div>
-    <div class="tt-item"><span class="tt-time">15:00〜16:00</span><span class="tt-name">AQUAPLUS presents「Suara」SPECIAL LIVE<span class="tt-note">🟡注意</span></span></div>
-    <div class="tt-item"><span class="tt-time">16:00〜18:00</span><span class="tt-name">「最盛期の Hydrangea」スペシャルステージ</span></div>
-    <div class="tt-item"><span class="tt-time">17:00〜19:00</span><span class="tt-name">崎野のHydrangea スペシャルライブ</span></div>
-
-    <div class="tt-venue">■ ufotable CINEMA（Theater 1）</div>
-    <div class="tt-item"><span class="tt-time">10:00〜11:30</span><span class="tt-name">「背景美術実況」アニメのコンセプトアートを1時間で描く!?+SPトーク</span></div>
-    <div class="tt-item"><span class="tt-time">12:00〜13:00</span><span class="tt-name">TVアニメ「死亡遊戯で熊を食う。」セレクション上映会</span></div>
-    <div class="tt-item"><span class="tt-time">14:15〜14:45</span><span class="tt-name">TVアニメ「NEEDY GIRL OVERDOSE」マチ★アソビステージ</span></div>
-    <div class="tt-item"><span class="tt-time">17:00〜18:00</span><span class="tt-name">「ようこそ実力主義の教室へ」4th Season 上映会</span></div>
-  </div>
-
-  <!-- TAB 2: ステージ整理 -->
-  <div class="tab-content" id="tab2">
-    <div class="info-box">🎯 目的：来場者の安全確保・観覧エリア整理・撮影禁止徹底・終演後混雑防止</div>
-
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">開演前の動き</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>観覧エリア・通路の確認</li>
-          <li>最後尾がわかりやすいか確認</li>
-          <li>撮影禁止の札・表示の設置場所を確認</li>
-          <li>車道・交差点・階段付近に列が伸びていないか確認</li>
-          <li>体調が悪そうな人がいないか確認</li>
-          <li>日なたに長時間並んでいる人がいないか確認</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">開演中の動き</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>通路がふさがっていないか巡回</li>
-          <li>撮影禁止の札を持ちながらステージ周辺を巡回</li>
-          <li>ステージ上・出演者の撮影が行われていないか確認</li>
-          <li>スマホ・カメラを構えている人には落ち着いて声かけ</li>
-          <li>体調が悪そうな人がいないか確認</li>
-          <li>立ち止まりや滞留への声かけ</li>
-        </ul>
-        <div class="warn-box" style="margin-top:8px;">⚠️ 30分以上同じ場所に立ち続けることがある。自分の体調にも注意！</div>
-      </div>
-    </div>
-
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">終演後の動き</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>一斉退場で出口が詰まっていないか確認</li>
-          <li>次のステージ待機列と退場導線がぶつかっていないか確認</li>
-          <li>出口・通路への誘導</li>
-          <li>体調不良者がいないか確認</li>
-        </ul>
-        <div class="warn-box" style="margin-top:8px;">⚠️ 終演直後が最も混雑しやすい。早めにリーダーへ状況共有！</div>
-      </div>
-    </div>
-
-    <div class="section-label">📷 撮影禁止対応</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">声のかけ方</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <div class="info-box">ステージイベントは<strong>基本すべて撮影禁止</strong>として対応する。</div>
-        <div style="background:#f5f5f5;border-radius:8px;padding:12px;font-size:14px;margin-bottom:8px;">「大変恐れ入りますが、こちらのエリアでは撮影はご遠慮いただいております」</div>
-        <div style="background:#f5f5f5;border-radius:8px;padding:12px;font-size:14px;margin-bottom:8px;">「撮影禁止となっておりますので、カメラのご使用はお控えください」</div>
-        <p style="font-size:13px;color:var(--sub);">注意しても続ける場合は、すぐにリーダー・本部へ共有。</p>
-      </div>
-    </div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">❌ やってはいけないこと</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>来場者のスマートフォンやカメラに触る</li>
-          <li>撮影データの削除を個人判断で求める</li>
-          <li>SNS投稿の削除を個人判断で求める</li>
-          <li>強い口調で注意する</li>
-          <li>来場者と口論する</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 3: 総合案内 -->
-  <div class="tab-content" id="tab3">
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">✅ その場で対応してよいこと</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>会場・トイレ・案内所・ごみ捨て場所など把握済みの場所案内</li>
-          <li>列の最後尾や進行方向の案内</li>
-          <li>通路確保のお願い</li>
-          <li>立ち止まりや滞留への声かけ</li>
-          <li>ごみの分別・回収場所の案内</li>
-          <li>公式に掲示されている情報の案内</li>
-          <li>体調不良者を日陰・安全な場所へ案内し、リーダーへ連絡</li>
-          <li>落とし物を拾った人に受付・本部を案内</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">🔴 リーダー・本部に確認が必要なこと</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>入場可否の判断</li>
-          <li>整理券・優先入場・再入場・待機列ルールの判断</li>
-          <li>物販ルールや購入制限の判断</li>
-          <li>ステージ開始・終了・変更情報の案内</li>
-          <li>撮影可否が不明な場合の判断</li>
-          <li>撮影禁止エリアでのトラブル対応</li>
-          <li>クレーム対応</li>
-          <li>迷子・同行者不明の対応</li>
-          <li>怪我・体調不良・救急対応</li>
-          <li>落とし物の受領・保管・返却判断</li>
-          <li>不審物・不審者への対応</li>
-          <li>ハラスメント・迷惑行為への対応</li>
-          <li>メディア・取材・関係者対応</li>
-          <li>警察・消防・救急への連絡が必要な事案</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">💬 使いやすい一言</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <div class="info-box">「確認しますので、少々お待ちください」</div>
-        <div class="info-box">「私の判断だけではお答えできないため、責任者に確認します」</div>
-        <div class="info-box">「最新情報を確認してからご案内します」</div>
-        <div class="info-box">「安全確認のため、少しお待ちください」</div>
-      </div>
-    </div>
+    <div class="sec-head">📋 報告テンプレート（コピーして使う）</div>
 
     <div class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">物販・整理券の問い合わせ</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <div class="warn-box">ボランティアスタッフ側では詳細を把握していません。</div>
-        <div style="background:#f5f5f5;border-radius:8px;padding:12px;font-size:14px;margin-bottom:8px;">「各物販・出展メーカーの公式SNS、公式HP、現地掲示をご確認ください」</div>
-        <div class="ng-box"><strong>絶対に言わない：</strong><br>「たぶん買えます」「並べば大丈夫です」「まだありそうです」「整理券なしでもいけると思います」</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">コスプレ関連の問い合わせ</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <div class="info-box">コスプレ関連はすべて<strong>コミエス</strong>へ案内する。</div>
-        <div style="background:#f5f5f5;border-radius:8px;padding:12px;font-size:14px;margin-bottom:8px;">「コスプレに関する内容は、コミエス側へご確認ください」</div>
-        <p style="font-size:13px;color:var(--sub);">コミエス担当者がすぐに見つからない場合も、ボランティアスタッフが独自にルール判断しないこと。困ったらリーダー・八木・桑野へ。</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 4: アンケート -->
-  <div class="tab-content" id="tab4">
-    <div class="info-box">📊 来場者にQRコードを読み取ってもらいアンケートに回答してもらう。回答後に記念品を受け取れる。</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">基本の流れ</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ol class="step-list">
-          <li>アンケートQRコードが載ったポスター等を身につけて巡回する</li>
-          <li>来場者にアンケート協力をお願いする</li>
-          <li>QRコードを読み取ってもらう</li>
-          <li>スマートフォンでアンケートに回答してもらう</li>
-          <li>回答後、記念品の受け取り場所を案内する</li>
-          <li>記念品は<strong>東公園ボランティアテント</strong>または<strong>藍場浜テント</strong>で受け取り</li>
-        </ol>
-      </div>
-    </div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">注意点</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>無理に引き止めない</li>
-          <li>回答を急かさない</li>
-          <li>来場者のスマートフォンを勝手に操作しない</li>
-          <li>回答内容をのぞき込まない</li>
-          <li>記念品の在庫や配布条件を推測で案内しない</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 5: ごみ収集 -->
-  <div class="tab-content" id="tab5">
-    <div class="info-box">🧹 会場の清潔を保ち、転倒防止・地域への配慮・イベント印象向上につなげる。</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">分別区分</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <table class="data-table">
-          <tr><th>区分</th><th>例</th></tr>
-          <tr><td>燃えるごみ</td><td>紙くず、食品容器など</td></tr>
-          <tr><td>燃えないごみ</td><td>プラスチック類、不燃物など</td></tr>
-          <tr><td>缶</td><td>アルミ缶、スチール缶</td></tr>
-          <tr><td>瓶</td><td>飲料瓶など</td></tr>
-          <tr><td>ペットボトル</td><td>ペットボトル本体</td></tr>
-          <tr><td>割り箸・竹串</td><td>割り箸、竹串</td></tr>
-        </table>
-        <div class="warn-box" style="margin-top:10px;">⚠️ <strong>竹串は怪我につながる！</strong>放置を見つけたら必ず回収してください。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 6: 橋の下 -->
-  <div class="tab-content" id="tab6">
-    <div class="info-box">🚢 来場者が船に乗る体験。<strong>料金対応は担当団体の方が行う</strong>ためボランティアは絶対に関わらない。</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">基本の流れ</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ol class="step-list">
-          <li>来場者が乗船受付へ来る</li>
-          <li>料金を支払う（※担当団体が対応）</li>
-          <li>ライフジャケットを受け取る</li>
-          <li>ライフジャケットを着用して船に乗る</li>
-          <li>体験終了後、戻ってくる</li>
-          <li>ライフジャケットを返却する</li>
-        </ol>
-      </div>
-    </div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">ボランティアの主な業務</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>乗船希望者への案内</li>
-          <li>受付列・待機列の整理</li>
-          <li>ライフジャケットの受け渡し補助</li>
-          <li>戻ってきた来場者からのライフジャケット回収</li>
-          <li>ライフジャケットの数・返却漏れ確認</li>
-          <li>船の乗り降り周辺の安全確認</li>
-          <li>水辺付近での滞留防止</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">❌ お金に関してやってはいけないこと</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>料金を受け取らない</li>
-          <li>金額を断言しない</li>
-          <li>返金可否を判断しない</li>
-          <li>領収書や支払い方法について案内しない</li>
-        </ul>
-        <div style="background:#f5f5f5;border-radius:8px;padding:12px;font-size:14px;margin-top:10px;">料金について聞かれたら：<br>「料金については担当の方に確認します」</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">❌ 安全面でやってはいけないこと</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>ライフジャケット未着用のまま乗船させる</li>
-          <li>水辺や乗船場所で走っている人を放置する</li>
-          <li>ライフジャケットの返却漏れを見逃す</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 7: 痛車展示 -->
-  <div class="tab-content" id="tab7">
-    <div class="info-box">🚗 展示車両は所有者の大切な私物。接触・滞留・無理な撮影が起きないよう注意してください。</div>
-    <div class="warn-box">⚠️ 展示エリアの場所は当日確認してください（現在未確定）</div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">見るポイント</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>車両に触れようとしている人がいないか</li>
-          <li>車両に寄りかかっている人がいないか</li>
-          <li>車両付近に荷物が置かれていないか</li>
-          <li>撮影滞留で通路がふさがれていないか</li>
-          <li>通路が封鎖されていないか</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">声かけ例</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <div class="info-box">「展示車両にはお手を触れないようお願いします」</div>
-        <div class="info-box">「車両に寄りかからないようお願いします」</div>
-        <div class="info-box">「撮影後は通路確保のため、移動にご協力ください」</div>
-        <div class="info-box">「車両付近に荷物を置かないようお願いします」</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">トラブル発生時</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>車両接触・破損疑いは即座に展示関係者・リーダー・本部へ報告</li>
-          <li>撮影トラブルはリーダー・本部へ</li>
-          <li>通路封鎖はまず声かけ、改善しなければリーダーへ</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 8: エリア別 -->
-  <div class="tab-content" id="tab8">
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>藍場浜エリア</h3>
-        <p>本ステージ。人気ステージ前後に来場者が集中しやすい</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="section-label" style="margin-top:0;">見るポイント</div>
-        <ul class="check-list">
-          <li>ステージ後方・横導線で人が止まっていないか</li>
-          <li>通路がふさがっていないか</li>
-          <li>終演後に一斉退場で詰まっていないか</li>
-          <li>次のステージ待機列と退場導線がぶつかっていないか</li>
-          <li>ステージ上・出演者の撮影が行われていないか</li>
-          <li>体調が悪そうな人がいないか</li>
-        </ul>
-        <div class="section-label">早めに共有する状況</div>
-        <div class="ng-box">終演後の詰まり、撮影トラブル、体調不良</div>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">藍場浜テント・リーダー</div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=藍場浜公園+徳島市" target="_blank">📍 Googleマップで開く</a>
-      </div>
-    </div>
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>東公園エリア</h3>
-        <p>ボランティア集合場所・テントあり。スタッフ間の連絡も重要</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="section-label" style="margin-top:0;">見るポイント</div>
-        <ul class="check-list">
-          <li>ボランティア集合時にテント周辺が混雑していないか</li>
-          <li>来場者とスタッフの動線がぶつかっていないか</li>
-          <li>担当がわからず困っているスタッフがいないか</li>
-          <li>体調不良のスタッフがいないか</li>
-        </ul>
-        <div class="section-label">早めに共有する状況</div>
-        <div class="ng-box">スタッフ不足、担当不明、体調不良スタッフ</div>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">東公園ボランティアテント</div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=新町橋東公園+徳島市" target="_blank">📍 Googleマップで開く</a>
-      </div>
-    </div>
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>アミコドームエリア</h3>
-        <p>専用ボランティアテントなし。判断はリーダー・本部へ</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="section-label" style="margin-top:0;">見るポイント</div>
-        <ul class="check-list">
-          <li>ステージ周辺で人が止まっていないか</li>
-          <li>通路がふさがっていないか</li>
-          <li>終演後に一斉退場で詰まっていないか</li>
-          <li>撮影禁止の表示が見えにくくなっていないか</li>
-          <li>体調が悪そうな人がいないか</li>
-        </ul>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">近くのリーダー、藍場浜テント、東公園ボランティアテント</div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=アミコドーム+徳島" target="_blank">📍 Googleマップで開く</a>
-      </div>
-    </div>
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>東商店街エリア ⚠️特に注意</h3>
-        <p>ブース・物販・飲食・通常通行が混在する最注意エリア</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="ng-box">店舗入口をふさぐリスクあり。整理券・数量限定販売があると列が急伸する可能性あり。</div>
-        <div class="section-label" style="margin-top:8px;">見るポイント</div>
-        <ul class="check-list">
-          <li>既存店舗入口をふさいでいないか</li>
-          <li>商店街の通路幅が確保されているか</li>
-          <li>ブース前に人がたまりすぎていないか</li>
-          <li>物販列・展示待ち・飲食列が混ざっていないか</li>
-          <li>最後尾がわかりにくくなっていないか</li>
-          <li>一般通行者が通りづらくなっていないか</li>
-        </ul>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">近くのリーダー、東公園ボランティアテント</div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=東新町商店街+徳島市" target="_blank">📍 Googleマップで開く</a>
-      </div>
-    </div>
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>パラソルエリア</h3>
-        <p>出展ブース・展示・物販・体験企画など</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="section-label" style="margin-top:0;">見るポイント</div>
-        <ul class="check-list">
-          <li>ブース前の滞留・列の最後尾がわかるか</li>
-          <li>通路が確保されているか</li>
-          <li>撮影・物販の問い合わせが集中していないか</li>
-        </ul>
-        <p style="font-size:13px;color:var(--sub);margin-top:6px;">ブースごとに内容が異なる。不明点はブース担当者・リーダー・本部へ確認。</p>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">ブース担当、リーダー、本部</div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=パラソル広場+徳島市" target="_blank">📍 Googleマップで開く</a>
-      </div>
-    </div>
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>西公園エリア</h3>
-        <p>比較的落ち着いたエリア。案内・美化・問い合わせ対応が中心</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="section-label" style="margin-top:0;">見るポイント</div>
-        <ul class="check-list">
-          <li>テント周辺の案内・確認</li>
-          <li>問い合わせが集中していないか</li>
-          <li>落とし物・ごみの確認</li>
-          <li>体調不良者がいないか</li>
-        </ul>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">西公園テント、リーダー</div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=徳島西公園" target="_blank">📍 Googleマップで開く</a>
-      </div>
-    </div>
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>橋の下美術館</h3>
-        <p>乗船体験エリア。水辺の安全確認が最重要</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="section-label" style="margin-top:0;">見るポイント</div>
-        <ul class="check-list">
-          <li>乗船待機列の状況</li>
-          <li>ライフジャケット受け渡し・返却の確認</li>
-          <li>水辺周辺の安全確認（走っている人がいないか）</li>
-          <li>転倒・怪我がないか</li>
-        </ul>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">担当団体、近くのリーダー、本部</div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=橋の下美術館+徳島" target="_blank">📍 Googleマップで開く</a>
-      </div>
-    </div>
-
-    <div class="area-card">
-      <div class="area-card-hd">
-        <h3>痛車展示エリア</h3>
-        <p>展示車両の安全確保・撮影・接触防止（場所は当日確認）</p>
-      </div>
-      <div class="area-card-bd">
-        <div class="section-label" style="margin-top:0;">見るポイント</div>
-        <ul class="check-list">
-          <li>車両に触れようとしている人がいないか</li>
-          <li>通路が封鎖されていないか</li>
-          <li>撮影滞留がひどくなっていないか</li>
-        </ul>
-        <div class="section-label">確認先</div>
-        <div class="warn-box">展示関係者、リーダー、本部</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- TAB 9: トラブル・報告 -->
-  <div class="tab-content" id="tab9">
-
-    <div class="card open">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">困ったときの相談ルート</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <div class="info-box"><strong>列整理・導線・混雑：</strong><br>近くの黄色ベスト（混雑対応部）→ リーダー</div>
-        <div class="info-box"><strong>ルール判断・問い合わせ：</strong><br>リーダー → 本部（八木・桑野）</div>
-        <div class="ng-box"><strong>緊急（怪我・体調不良・迷子・不審物・ハラスメント等）：</strong><br>すぐに リーダー または 八木・桑野 へ</div>
-      </div>
-    </div>
-
-    <div class="section-label">📋 報告テンプレート（ボタンでコピー）</div>
-
-    <div class="template-wrap">
-      <div class="template-label">🔴 混雑</div>
-      <div class="template-box" id="tpl0">【混雑】
+      <div class="card-title">🔴 混雑報告</div>
+      <div class="tmpl-box" id="tmpl-congestion">【混雑】
 場所：
 状況：通路が詰まり始めています / 列が伸びています / 最後尾が不明瞭です
 人数感：
 対応中：声かけ中 / 最後尾案内中 / 通路確保中
 相談：追加スタッフが必要です / 導線変更の判断をお願いします</div>
-      <button class="copy-btn" onclick="copyTpl('tpl0')">📋 コピーする</button>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-congestion', this)">📋 コピー</button>
     </div>
 
-    <div class="template-wrap">
-      <div class="template-label">🚑 体調不良・怪我</div>
-      <div class="template-box" id="tpl1">【体調不良・怪我】
+    <div class="card">
+      <div class="card-title">🟠 体調不良・怪我報告</div>
+      <div class="tmpl-box" id="tmpl-medical">【体調不良・怪我】
 場所：
 対象者：大人 / 子ども / 不明
 状況：座り込んでいる / めまい / 吐き気 / 熱中症疑い / 怪我
 同行者：あり / なし / 不明
 対応中：日陰へ案内 / 安全な場所で待機 / 救護待ち
-相談：救護担当の派遣をお願いします / 判断をお願いします</div>
-      <button class="copy-btn" onclick="copyTpl('tpl1')">📋 コピーする</button>
+相談：救護担当の派遣をお願いします</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-medical', this)">📋 コピー</button>
     </div>
 
-    <div class="template-wrap">
-      <div class="template-label">📷 撮影トラブル</div>
-      <div class="template-box" id="tpl2">【撮影トラブル】
+    <div class="card">
+      <div class="card-title">📷 撮影トラブル報告</div>
+      <div class="tmpl-box" id="tmpl-photo">【撮影トラブル】
 場所：
 内容：撮影禁止エリアで撮影 / 無断撮影の相談 / 通路をふさぐ撮影
 関係者：撮影者 / 被写体 / 周囲の来場者
 対応中：撮影停止のお願い / 場所移動のお願い / 確認中と案内
 相談：リーダー対応をお願いします</div>
-      <button class="copy-btn" onclick="copyTpl('tpl2')">📋 コピーする</button>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-photo', this)">📋 コピー</button>
     </div>
 
-    <div class="template-wrap">
-      <div class="template-label">👶 迷子・同行者不明</div>
-      <div class="template-box" id="tpl3">【迷子・同行者不明】
+    <div class="card">
+      <div class="card-title">👦 迷子・同行者不明報告</div>
+      <div class="tmpl-box" id="tmpl-lost-person">【迷子・同行者不明】
 場所：
 対象者：子ども / 大人 / 不明
-状況：
-対応中：安全な場所へ案内 / 本部へ連絡中
-相談：対応の判断をお願いします</div>
-      <button class="copy-btn" onclick="copyTpl('tpl3')">📋 コピーする</button>
+状況：泣いている / 困っている様子 / 探している来場者あり
+特徴（わかる範囲）：服装・年齢・名前等
+対応中：安全な場所で待機 / 確認中と案内
+相談：テントへの誘導・放送対応の判断をお願いします</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-lost-person', this)">📋 コピー</button>
     </div>
 
-    <div class="template-wrap">
-      <div class="template-label">🎒 落とし物</div>
-      <div class="template-box" id="tpl4">【落とし物】
-拾得場所：
-拾得時間：
-物の種類：
-状況：
-対応中：本部テントへ引き継ぎ中
-相談：受け取り・保管の確認をお願いします</div>
-      <button class="copy-btn" onclick="copyTpl('tpl4')">📋 コピーする</button>
+    <div class="card">
+      <div class="card-title">🎒 落とし物報告</div>
+      <div class="tmpl-box" id="tmpl-lost-item">【落とし物】
+場所（拾った場所・時間）：
+物品（わかる範囲で）：
+持ち主：あり（いる）/ なし / 不明
+対応中：本人待機 / テントへ案内中 / 預かり中
+相談：テントへの引き渡し確認をお願いします</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-lost-item', this)">📋 コピー</button>
     </div>
 
-    <div class="template-wrap">
-      <div class="template-label">😤 クレーム</div>
-      <div class="template-box" id="tpl5">【クレーム】
+    <div class="card">
+      <div class="card-title">😠 クレーム・強い申し出報告</div>
+      <div class="tmpl-box" id="tmpl-claim">【クレーム】
 場所：
-内容：
-相手の様子：落ち着いている / 興奮している / 激しい
-対応中：話を聞いている / 確認中と案内 / リーダーに引き継ぎ中
-相談：リーダー対応をお願いします</div>
-      <button class="copy-btn" onclick="copyTpl('tpl5')">📋 コピーする</button>
+内容（聞いた内容の要点）：
+相手の様子：落ち着いている / 強い口調 / 長時間対応中
+対応中：話を聞いている / 確認すると伝えて保留中
+相談：リーダー対応をお願いします / 対応方針を教えてください</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-claim', this)">📋 コピー</button>
     </div>
-
-    <div class="card" style="margin-top:8px;">
-      <div class="card-header" onclick="toggleCard(this)">
-        <span class="card-title">❌ やってはいけないこと（全員共通）</span>
-        <span class="card-icon">▾</span>
-      </div>
-      <div class="card-body">
-        <ul class="check-list">
-          <li>わからないことを推測で案内する</li>
-          <li>「たぶん大丈夫です」と言う</li>
-          <li>来場者と口論する</li>
-          <li>個人判断で撮影可否・入場可否を決める</li>
-          <li>来場者のスマホやカメラに触る</li>
-          <li>体調不良者を一人にする</li>
-          <li>落とし物を個人で預かる</li>
-          <li>トラブルをSNSに投稿する</li>
-          <li>乗船料金の受け取り・返金・金額案内を個人判断で行う</li>
-        </ul>
-      </div>
-    </div>
-
   </div>
-</div><!-- /app -->
+
+  <!-- ========= BOTTOM NAV ========= -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="switchTab('home', this)"><span class="icon">🏠</span>ホーム</button>
+    <button class="nav-item" onclick="switchTab('tt', this)"><span class="icon">📅</span>タイムテーブル</button>
+    <button class="nav-item" onclick="switchTab('shift', this)"><span class="icon">📋</span>シフト別</button>
+    <button class="nav-item" onclick="switchTab('map', this)"><span class="icon">🪭</span>パラソル</button>
+    <button class="nav-item" onclick="switchTab('basic', this)"><span class="icon">📖</span>基本知識</button>
+    <button class="nav-item" onclick="switchTab('report', this)"><span class="icon">🆘</span>報告</button>
+  </nav>
+</div>
 
 <script>
-const PW='machiasobi30';
-document.getElementById('pw-btn').addEventListener('click',checkPw);
-document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
+// ── Password ──
+document.getElementById('pw-btn').onclick = checkPw;
+document.getElementById('pw-input').onkeydown = e => { if(e.key==='Enter') checkPw(); };
 function checkPw(){
-  if(document.getElementById('pw-input').value===PW){
+  if(document.getElementById('pw-input').value==='machiasobi30'){
     document.getElementById('pw-screen').style.display='none';
-    document.getElementById('app').style.display='block';
-  }else{
+    document.getElementById('app').style.display='flex';
+    initApp();
+  } else {
     document.getElementById('pw-err').textContent='パスワードが違います';
     document.getElementById('pw-input').value='';
   }
 }
 
-function showTab(n){
-  document.querySelectorAll('.tab-content').forEach((el,i)=>el.classList.toggle('active',i===n));
-  document.querySelectorAll('.tab-btn').forEach((el,i)=>el.classList.toggle('active',i===n));
-  const btns=document.querySelectorAll('.tab-btn');
-  if(btns[n]) btns[n].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+// ── Init ──
+function initApp(){
+  updateDate();
+  setInterval(updateDate, 60000);
+  loadNews();
+}
+
+function updateDate(){
+  const d = new Date();
+  const days = ['日','月','火','水','木','金','土'];
+  document.getElementById('header-date').textContent =
+    (d.getMonth()+1)+'/'+(d.getDate())+'('+days[d.getDay()]+') '+
+    String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+
+// ── News (GitHub Issues API) ──
+async function loadNews(){
+  const el = document.getElementById('news-container');
+  try {
+    const r = await fetch('https://api.github.com/repos/mulberryleaves1227/machiasobi-staff/issues?labels=news&state=open&per_page=10');
+    if(!r.ok) throw new Error(r.status);
+    const issues = await r.json();
+    if(!issues.length){
+      el.innerHTML = '<div class="card"><div style="color:#aaa;font-size:12px;text-align:center;padding:8px">現在お知らせはありません</div></div>';
+      return;
+    }
+    el.innerHTML = issues.map(i => {
+      const d = new Date(i.created_at);
+      const ts = (d.getMonth()+1)+'/'+(d.getDate())+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+      const body = (i.body||'').slice(0,200).replace(/\n/g,'<br>');
+      return '<div class="news-item"><div class="news-title">'+escHtml(i.title)+'</div>'+(body ? '<div class="news-body">'+escHtml(i.body||'').slice(0,200)+'</div>' : '')+'<div class="news-time">'+ts+'</div></div>';
+    }).join('');
+  } catch(e){
+    el.innerHTML = '<div class="card"><div style="color:#aaa;font-size:12px;text-align:center;padding:8px">お知らせを取得できませんでした</div></div>';
+  }
+}
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── Tab switch ──
+function switchTab(name, btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
   window.scrollTo(0,0);
 }
 
-function toggleCard(hd){hd.parentElement.classList.toggle('open');}
-
-let toastTimer;
-function showToast(){
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
+// ── Timetable day/venue switch ──
+let currentDay = 0;
+let currentVenue = [0, 0];
+function switchDay(d){
+  document.querySelectorAll('.day-btn').forEach((b,i)=>b.classList.toggle('active',i===d));
+  document.getElementById('day-0').style.display = d===0?'':'none';
+  document.getElementById('day-1').style.display = d===1?'':'none';
+  currentDay = d;
+}
+function switchVenue(day, v){
+  const tabs = document.querySelectorAll('#vtabs-'+day+' .venue-tab');
+  tabs.forEach((t,i)=>t.classList.toggle('active',i===v));
+  const panels = document.querySelectorAll('#day-'+day+' .venue-panel');
+  panels.forEach((p,i)=>p.style.display=i===v?'':'none');
+  currentVenue[day]=v;
 }
 
-function copyTpl(id){
-  const text=document.getElementById(id).textContent;
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(showToast).catch(()=>fallbackCopy(text));
-  }else{fallbackCopy(text);}
-}
-function fallbackCopy(text){
-  const ta=document.createElement('textarea');
-  ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
-  document.body.appendChild(ta);ta.focus();ta.select();
-  try{document.execCommand('copy');showToast();}catch(e){}
-  document.body.removeChild(ta);
+// ── Duty selector ──
+function showDuty(val){
+  document.getElementById('duty-placeholder').style.display = val ? 'none' : 'block';
+  document.querySelectorAll('.duty-panel').forEach(p=>p.classList.remove('active'));
+  if(val) {
+    const el = document.getElementById('dp-'+val);
+    if(el) el.classList.add('active');
+  }
 }
 
-const gatherItems=[
-  '東公園ボランティアテントに到着した',
-  '出欠確認をした',
-  'スタッフベスト・スタッフ証等を受け取った',
-  '担当エリアを確認した',
-  '担当業務を確認した',
-  'リーダーを確認した',
-  '緊急連絡先を確認した',
-  '休憩ルールを確認した',
-  '食事の受け取り方法を確認した',
-  '最新スケジュールを確認した',
-  'トイレ・救護・本部の場所を確認した'
-];
+// ── Accordion ──
+function toggleAcc(head){
+  const body = head.nextElementSibling;
+  const arrow = head.querySelector('.acc-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
 
-function buildChk(containerId,items,key){
-  const c=document.getElementById(containerId);
-  let s=[];
-  try{s=JSON.parse(localStorage.getItem(key)||'[]');}catch(e){}
-  if(s.length!==items.length)s=new Array(items.length).fill(false);
-  c.innerHTML='';
-  items.forEach((item,i)=>{
-    const d=document.createElement('div');
-    d.className='chk-item'+(s[i]?' checked':'');
-    d.innerHTML=`<div class="chk-box">${s[i]?'✓':''}</div><div class="chk-text">${item}</div>`;
-    d.addEventListener('click',()=>{
-      s[i]=!s[i];
-      d.classList.toggle('checked',s[i]);
-      d.querySelector('.chk-box').textContent=s[i]?'✓':'';
-      try{localStorage.setItem(key,JSON.stringify(s));}catch(e){}
+// ── Parasol area toggle ──
+function switchArea(area){
+  document.querySelectorAll('.area-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('area-east').style.display = area==='east'?'':'none';
+  document.getElementById('area-west').style.display = area==='west'?'':'none';
+}
+
+// ── Copy template ──
+function copyTmpl(id, btn){
+  const text = document.getElementById(id).textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.textContent='✅ コピーしました';
+      btn.classList.add('copied');
+      setTimeout(()=>{ btn.innerHTML='📋 コピー'; btn.classList.remove('copied'); }, 2000);
     });
-    c.appendChild(d);
-  });
+  }
 }
-function resetChk(key){
-  try{localStorage.removeItem('chk-'+key);}catch(e){}
-  buildChk('chk-'+key,key==='gather'?gatherItems:[],`chk-${key}`);
-}
-buildChk('chk-gather',gatherItems,'chk-gather');
 </script>
 </body>
 </html>
