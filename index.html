@@ -2,11 +2,15 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>マチ★アソビ vol.30 スタッフナビ</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-size:14px;background:#f5f5f5;color:#222;overscroll-behavior:none}
+#app.font-sm{zoom:0.86}
+#app.font-lg{zoom:1.21}
+.fsize-btn{background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:4px;padding:3px 7px;font-size:11px;cursor:pointer;margin-left:2px;font-weight:bold}
+.fsize-btn.active{background:#e94560}
 /* ── password ── */
 #pw-screen{position:fixed;inset:0;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px}
 #pw-screen h1{color:#fff;font-size:18px;text-align:center;line-height:1.5}
@@ -106,6 +110,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 .faq-q{font-weight:bold;font-size:13px;margin-top:10px;margin-bottom:4px}
 .faq-a{font-size:13px;color:#555;line-height:1.5;padding-left:10px;border-left:2px solid #ddd}
 .divider{height:1px;background:#eee;margin:10px 0}
+/* ── search ── */
+#search-overlay{position:fixed;inset:0;background:#f5f5f5;z-index:200;flex-direction:column;display:none}
+#search-overlay.open{display:flex}
+.search-header{background:#1a1a2e;padding:10px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+#search-input{flex:1;padding:9px 12px;border-radius:8px;border:none;font-size:15px;outline:none;background:#fff}
+.search-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:2px 6px;line-height:1;flex-shrink:0}
+.search-results{overflow-y:auto;flex:1;padding:10px 12px 30px}
+.search-result{background:#fff;border-radius:8px;padding:12px 14px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;border:1px solid #efefef;-webkit-tap-highlight-color:transparent}
+.search-result:active{background:#f5f5f5}
+.sr-breadcrumb{font-size:11px;color:#999;margin-bottom:3px}
+.sr-title{font-size:14px;font-weight:bold;color:#1a1a2e}
+.sr-snippet{font-size:12px;color:#555;margin-top:4px;line-height:1.6}
+.search-empty{color:#aaa;text-align:center;padding:40px 16px;font-size:13px;line-height:1.8}
+mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
+.tt-table a{color:inherit;text-decoration:none;border-bottom:1px dotted #aaa;-webkit-tap-highlight-color:transparent}
+.tt-table a:active{opacity:.65}
+#search-btn{background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:6px;padding:5px 8px;font-size:17px;cursor:pointer;line-height:1}
 </style>
 </head>
 <body>
@@ -126,7 +147,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
       <div class="header-title">🎌 マチ★アソビ vol.30</div>
       <div class="header-sub">2026年5月16日(土)・17日(日) 徳島</div>
     </div>
-    <div class="header-date" id="header-date">読込中…</div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button id="search-btn" onclick="openSearch()">🔍</button>
+      <div>
+        <button class="fsize-btn" id="fsz-sm" onclick="setFontSize('sm')">小</button><button class="fsize-btn" id="fsz-md" onclick="setFontSize('md')">中</button><button class="fsize-btn" id="fsz-lg" onclick="setFontSize('lg')">大</button>
+      </div>
+      <div class="header-date" id="header-date">読込中…</div>
+    </div>
   </div>
 
   <!-- ===== TAB 1: ホーム ===== -->
@@ -203,55 +230,55 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
         <div class="venue-tab" onclick="switchVenue(0,7)">あわぎん</div>
       </div>
       <div id="d0v0" class="venue-panel">
-        <div class="tt-warn">⚠️ 16日警戒：12:30 機械じかけのマリー開始から鬼滅待機勢と重なる。<strong>12:00時点で最後尾札・待機列を整備すること</strong></div>
+        <div class="tt-warn">⚠️ 16日警戒：12:30 魔法使いの夜開始から鬼滅待機勢と重なる。<strong>12:00時点で最後尾札・待機列を整備すること</strong></div>
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
         <tr><td>10:00-10:30</td><td>開会式</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>10:30-11:30</td><td>なのはEXCEEDS スペシャルステージ</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>11:30-12:30</td><td>「メダリスト」スペシャルステージ</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>12:30-13:30</td><td>「機械じかけのマリー」スペシャルステージ</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>13:30-14:15</td><td>アニメ「鬼滅の刃」ステージ</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>15:00-16:00</td><td>鬼滅の刃 劇伴&挿入歌スペシャルライブ</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>16:30-17:30</td><td>夢限大みゅーたいぷ 劇場型ライブ</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>18:00-19:00</td><td>SPECIAL LIVE - スピラ・スピカ</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>19:00-20:00</td><td>SPECIAL LIVE - オーイシマサヨシ</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>10:30-11:30</td><td><a href="https://www.machiasobi.com/event/189" target="_blank" rel="noopener">「魔法少女リリカルなのは EXCEEDS Gun Blaze Vengeance」スペシャルステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>11:30-12:30</td><td><a href="https://www.machiasobi.com/event/209" target="_blank" rel="noopener">『メダリスト』スペシャルステージ in マチ★アソビ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:30-13:30</td><td><a href="https://www.machiasobi.com/event/274" target="_blank" rel="noopener">劇場アニメーション「魔法使いの夜」スペシャルステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>13:30-14:15</td><td><a href="https://www.machiasobi.com/event/276" target="_blank" rel="noopener">アニメ「鬼滅の刃」ステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/278" target="_blank" rel="noopener">アニメ「鬼滅の刃」劇伴&amp;挿入歌スペシャルライブ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>16:30-17:30</td><td><a href="https://www.machiasobi.com/event/139" target="_blank" rel="noopener">夢限大みゅーたいぷ「スーパーポジション ～夢限大編～」＠徳島</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/135" target="_blank" rel="noopener">SPECIAL LIVE – スピラ・スピカ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:10-20:00</td><td><a href="https://www.machiasobi.com/event/207" target="_blank" rel="noopener">SPECIAL LIVE – オーイシマサヨシ</a></td><td><span class="badge-s">S🔴</span></td></tr>
         </table>
       </div>
       <div id="d0v1" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>10:00-11:00</td><td>GATE SEASON2 トークステージ</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>11:00-12:00</td><td>櫻坂46×ビルディバイド 感謝祭</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>12:00-13:00</td><td>アズールレーン スペシャルトークショー</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>13:00-14:00</td><td>SPトークステージ</td><td>—</td></tr>
-        <tr><td>14:00-15:00</td><td>FGOゲストトーク</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>15:00-16:00</td><td>ゲームクリエイタートークライブ</td><td>—</td></tr>
-        <tr><td>16:00-17:00</td><td>和田丈嗣のおちゃんねんやん</td><td>—</td></tr>
-        <tr><td>17:00-18:00</td><td>おしゃべりCityがYATTEKURU</td><td>—</td></tr>
-        <tr><td>18:00-19:00</td><td>Project LEAP! SPステージ</td><td>—</td></tr>
-        <tr><td>19:00-20:00</td><td>「Summer Pockets」劇場版記念ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>10:00-11:00</td><td>GATE SEASON2 トークステージ<small>（※公式未掲載）</small></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/465" target="_blank" rel="noopener">帰ってきた！『櫻坂46×ビルディバイド -ブライト-』マチアソビ感謝祭ステージ！</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/329" target="_blank" rel="noopener">アズールレーンスペシャルトーク</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/187" target="_blank" rel="noopener">『運命の巻戻士』SPトークステージ in マチ★アソビ</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/280" target="_blank" rel="noopener">FGOゲストトーク in マチ★アソビvol.30</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/302" target="_blank" rel="noopener">ゲームクリエイタートークライブ</a></td><td>—</td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/288" target="_blank" rel="noopener">和田丈嗣のむっちゃええやん！</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/472" target="_blank" rel="noopener">あるあるCityがマチ★アソビにYATTEKURU</a></td><td>—</td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/160" target="_blank" rel="noopener">Project LEAP! マチ★アソビ SP ステージ</a></td><td>—</td></tr>
+        <tr><td>19:00-20:00</td><td><a href="https://www.machiasobi.com/event/517" target="_blank" rel="noopener">『Summer Pockets』劇場編集版配信記念ステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
         </table>
       </div>
       <div id="d0v2" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>10:00-11:00</td><td>ガールズバンドFullMooN, Empressライブ</td><td>—</td></tr>
-        <tr><td>11:00-12:00</td><td>SPECIAL LIVE - 二ノ宮ゆい</td><td>—</td></tr>
-        <tr><td>12:00-13:00</td><td>Project LEAP! SPステージ</td><td>—</td></tr>
-        <tr><td>13:00-14:00</td><td>メタストらいぶ Vol.30</td><td>—</td></tr>
-        <tr><td>14:00-15:00</td><td>SPECIAL LIVE - nonoc</td><td>—</td></tr>
-        <tr><td>15:00-16:00</td><td>相良茉優 SPステージ</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>16:00-17:00</td><td>SPECIAL LIVE - 前橋ウィッチーズ</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>17:00-18:00</td><td>サイバーコネクトツー×KaKa Creationトーク</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>18:00-19:00</td><td>夕炎フラクタルLIVE!!</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>19:00-20:00</td><td>幽閉サテライトLIVE!!</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/352" target="_blank" rel="noopener">ガールズバンドFullMooN、Empressスペシャルライブ</a></td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/137" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – 二ノ宮ゆい</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/158" target="_blank" rel="noopener">Project LEAP! マチ★アソビ SP ステージ</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/327" target="_blank" rel="noopener">メタストらいぶ in マチ★アソビVol.30</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/156" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – nonoc</a></td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/191" target="_blank" rel="noopener">相良茉優マチ★アソビSPステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/162" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – 前橋ウィッチーズ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/319" target="_blank" rel="noopener">CC2×フロンティアワークス×KaKa Creation×ナンバーナイントーク</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/348" target="_blank" rel="noopener">少女フラクタルLIVE!! inマチアソビ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:00-20:00</td><td><a href="https://www.machiasobi.com/event/346" target="_blank" rel="noopener">幽閉サテライトLIVE!! inマチアソビ</a></td><td><span class="badge-b">B🟡</span></td></tr>
         </table>
       </div>
       <div id="d0v3" class="venue-panel" style="display:none">
         <div class="tt-warn">⚠️ キャパ注意。入場動線の混在に警戒</div>
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>11:00-12:00</td><td>Summer Pockets スタッフSPトーク</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>12:30-13:30</td><td>プリズム補習部 上映会＆トーク</td><td>—</td></tr>
-        <tr><td>14:00-17:00</td><td>MAPPA×CloverWorks 上映会＆トーク</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>17:30-18:30</td><td>「さよならララ」試写会＆トーク</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>19:00-22:00</td><td>劇場版「鬼滅の刃」無限城編 上映会</td><td><span class="badge-s">S🔴キャパ満了注意</span></td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/512" target="_blank" rel="noopener">feel.×TVアニメ『Summer Pockets』スタッフSPトーク 第2回</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:30-13:30</td><td><a href="https://www.machiasobi.com/event/290" target="_blank" rel="noopener">プリズム輪舞曲 特別上映会＆スタッフトークショー</a></td><td>—</td></tr>
+        <tr><td>14:00-17:00</td><td><a href="https://www.machiasobi.com/event/368" target="_blank" rel="noopener">MAPPA×CloverWorks 上映会＆スタッフトーク</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:30-18:30</td><td><a href="https://www.machiasobi.com/event/213" target="_blank" rel="noopener">TVアニメ『さよならララ』特別試写会＆トークステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:00-22:00</td><td><a href="https://www.machiasobi.com/event/470" target="_blank" rel="noopener">劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来 上映会</a></td><td><span class="badge-s">S🔴キャパ満了注意</span></td></tr>
         <tr><td>22:30-</td><td>衛宮さんちの今日のごはん 上映会</td><td><span class="badge-b">B🟡</span></td></tr>
         </table>
       </div>
@@ -261,33 +288,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
         <tr><td>12:30-13:30</td><td>井口雅紀監督トークショー</td></tr>
         <tr><td>14:00-15:00</td><td>機動戦艦ナデシコ20周年 上映会</td></tr>
         <tr><td>15:30-16:30</td><td>業界トーク</td></tr>
-        <tr><td>17:00-18:00</td><td>狂炎血晶アニメ映画化プロジェクト近況</td></tr>
-        <tr><td>18:30-19:30</td><td>アニメビジネスの変遷トーク</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/182" target="_blank" rel="noopener">狂気山脈アニメ映画化プロジェクト、今どうなってるの？</a></td></tr>
+        <tr><td>18:30-19:30</td><td><a href="https://www.machiasobi.com/event/292" target="_blank" rel="noopener">ここでしか話せない!? アニメビジネスの変遷トーク</a></td></tr>
         <tr><td>20:00-21:30</td><td>「マリッジトキシン」セレクション上映会</td></tr>
-        <tr><td>22:00-23:00</td><td>業界女子会 vol.17</td></tr>
+        <tr><td>22:00-23:00</td><td><a href="https://www.machiasobi.com/event/148" target="_blank" rel="noopener">業界関係者女子会 vol.17</a></td></tr>
         </table>
       </div>
       <div id="d0v5" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
         <tr><td>10:30-11:00</td><td>新たなサブカルの祭典紹介</td></tr>
-        <tr><td>12:00-13:00</td><td>「カワイイ制作界隈」トークショー</td></tr>
-        <tr><td>13:00-14:00</td><td>アニメアーカイブの四方山話</td></tr>
-        <tr><td>14:00-15:00</td><td>TROYCA「設定制作」トーク</td></tr>
-        <tr><td>15:00-16:00</td><td>ShoProプロデューサーステージ</td></tr>
-        <tr><td>16:00-17:00</td><td>漫画家こしみん×編集者トーク</td></tr>
-        <tr><td>17:00-18:00</td><td>Seven Arcs × EXCEEDS スタッフトーク</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/307" target="_blank" rel="noopener">アメリカザリガニ平井×CC2松山洋「スーパーピコピコクラブ」</a></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/323" target="_blank" rel="noopener">カワイイ・創作界隈トークショー</a></td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/539" target="_blank" rel="noopener">アニメアーカイブの四方山話</a></td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/317" target="_blank" rel="noopener">TROYCA設定制作トークショー</a></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/519" target="_blank" rel="noopener">ShoProプロデューサーステージ</a></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/272" target="_blank" rel="noopener">漫画家こしのりょう×吉田尚記のマンガの描き方トークライブ！</a></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/321" target="_blank" rel="noopener">Seven Arcs ×「魔法少女リリカルなのは EXCEEDS」スタッフSPトーク</a></td></tr>
         <tr><td>18:00-19:00</td><td>世界人ガール ミーシガー舞台挨拶</td></tr>
         </table>
       </div>
       <div id="d0v6" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>11:00-12:00</td><td>競技ポーカーLIVE 2026</td><td>—</td></tr>
-        <tr><td>12:00-13:00</td><td>「うっちゃり2」ライブ＆トーク</td><td>—</td></tr>
-        <tr><td>13:00-14:00</td><td>Kyoka Live</td><td>—</td></tr>
-        <tr><td>14:00-15:00</td><td>鈴谷綾美 SPECIAL LIVE</td><td>—</td></tr>
-        <tr><td>15:00-16:00</td><td>「ブレイド＆バスタード」トーク</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>16:00-17:00</td><td>みんなで踊ろうステージ</td><td>—</td></tr>
-        <tr><td>17:00-18:00</td><td>フレーズギャラリー座談会＆サイン会</td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/358" target="_blank" rel="noopener">競技ポーカーLIVE 2026 in マチアソビ</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/195" target="_blank" rel="noopener">「うっちゃり！」ライブ＆トーク</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/333" target="_blank" rel="noopener">KyoKa Live in マチ★アソビ</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/362" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE 皆谷尚美 ～遠いこの街で～</a></td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/201" target="_blank" rel="noopener">「ブレイド&バスタード」トークショー feat.蝸牛くも</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/549" target="_blank" rel="noopener">みんなで踊ろうほっぺちゃんステージ</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/528" target="_blank" rel="noopener">フレーズギャラリー座談会＆壇上サイン会</a></td><td>—</td></tr>
         </table>
       </div>
       <div id="d0v7" class="venue-panel" style="display:none">
@@ -312,79 +340,79 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
       <div id="d1v0" class="venue-panel">
         <div class="tt-warn">⚠️ 17日警戒：プリキュア→Re:ゼロ→ようこそ実力主義と客層が変わる。視覚的な案内を重視。終演後の退場と閉会式混雑に注意</div>
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>10:20-11:00</td><td>SPECIAL LIVE - プリキュアシンガーズ</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>11:00-12:00</td><td>「Re:ゼロから始める異世界生活」スペシャルステージ</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>12:00-13:00</td><td>「ようこそ実力至上主義の教室へ」ステージ</td><td><span class="badge-s">S🔴</span></td></tr>
-        <tr><td>13:30-14:30</td><td>SPECIAL LIVE - fhána</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>15:00-16:00</td><td>SPECIAL LIVE - 栗林みな実</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>16:30-17:30</td><td>SPECIAL LIVE - FLOW</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>17:30-19:30</td><td>テイルズ30周年 劇伴コンサート＆ライブ</td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/154" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – プリキュアシンガーズ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/221" target="_blank" rel="noopener">TVアニメ「Re:ゼロから始める異世界生活」4th season スペシャルステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/141" target="_blank" rel="noopener">「ようこそ実力至上主義の教室へ 4th Season 2年生編1学期」スペシャルステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>13:30-14:30</td><td><a href="https://www.machiasobi.com/event/152" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – fhána</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/133" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – 栗林みな実</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:30-17:30</td><td><a href="https://www.machiasobi.com/event/150" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – FLOW</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>18:00-19:30</td><td><a href="https://www.machiasobi.com/event/164" target="_blank" rel="noopener">『テイルズ オブ』シリーズ30周年記念 マチ★アソビ Premium Stage（※17:30頃から待機列警戒）</a></td><td><span class="badge-a">A🟠</span></td></tr>
         <tr><td>19:30-</td><td>閉会式</td><td><span class="badge-b">B🟡終演後混雑</span></td></tr>
         </table>
       </div>
       <div id="d1v1" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>10:00-11:00</td><td>わたべトークセッション ライブドローイング</td><td>—</td></tr>
-        <tr><td>11:00-12:00</td><td>スタッフトークショー</td><td>—</td></tr>
-        <tr><td>12:00-13:00</td><td>TVアニメ関連トークショー</td><td>—</td></tr>
-        <tr><td>13:00-14:00</td><td>Dr.STONE マチ★アソビ出張版</td><td>—</td></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/285" target="_blank" rel="noopener">わたたべトークセッション！×苗川采先生ライブドローイング</a></td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/444" target="_blank" rel="noopener">超かぐや姫！スタッフトークショー ～私は、「かぐや」のここが好き。～</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/199" target="_blank" rel="noopener">TVアニメ「魔都精兵のスレイブ2」放送終了記念 キャスト&スタッフトークショー</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/219" target="_blank" rel="noopener">TVアニメ「Dr.STONE」ジーマーでゴイスーラジオ・マチ★アソビ出張版！</a></td><td>—</td></tr>
         <tr><td>14:00-15:00</td><td>ポンステージ（仮）</td><td>—</td></tr>
-        <tr><td>15:00-16:00</td><td>テイルズ マチ★アソビ30thトーク</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>16:00-17:00</td><td>Summer Pockets 放送終了記念ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>17:00-18:00</td><td>「死亡遊戯で飯を食う。」SPステージ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/325" target="_blank" rel="noopener">『テイルズ オブ』×マチ★アソビ 30th スペシャルトーク</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/523" target="_blank" rel="noopener">『Summer Pockets』放送終了記念ステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/211" target="_blank" rel="noopener">TVアニメ『死亡遊戯で飯を食う。』スペシャルステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
         </table>
       </div>
       <div id="d1v2" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>10:00-11:00</td><td>ガールズバンドFullMooN, Empressライブ</td><td>—</td></tr>
-        <tr><td>11:00-12:00</td><td>Kyoka Live</td><td>—</td></tr>
-        <tr><td>12:00-13:00</td><td>マチ★アソビ×VTuberたみー 野外ライブ</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>13:00-14:00</td><td>大島はるなSPライブ</td><td>—</td></tr>
-        <tr><td>14:00-15:00</td><td>西尾夕香とマチアソビであそぼう！</td><td>—</td></tr>
-        <tr><td>15:00-16:00</td><td>アズールレーン びそくぜんしんっ! ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>16:00-17:00</td><td>Suara うたわれるもの SPECIAL LIVE</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>17:00-18:00</td><td>HAPPY BIRTHDAY温泉アイドル ステージ</td><td>—</td></tr>
-        <tr><td>18:00-19:00</td><td>線野ましろ Special Stage!!</td><td>—</td></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/354" target="_blank" rel="noopener">ガールズバンドFullMooN、Empressスペシャルライブ</a></td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/335" target="_blank" rel="noopener">KyoKa Live in マチ★アソビ</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/364" target="_blank" rel="noopener">マチ★アソビ×Vtuberたみースペシャル野外ライブ!! 2026</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/360" target="_blank" rel="noopener">大島はるなSPライブ</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/366" target="_blank" rel="noopener">西尾夕香とマチアソビであそぼう！</a></td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/331" target="_blank" rel="noopener">アニメ『アズールレーン びそくぜんしんっ！にっ！！』スペシャルステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/184" target="_blank" rel="noopener">AQUAPLUS presents「Suara」うたわれるもの SPECIAL LIVE</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/144" target="_blank" rel="noopener">HAPPY BIRTHDAY 逢瀬アキラ!!! マチ★アソビSpecial stage!!!</a></td><td>—</td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/337" target="_blank" rel="noopener">綾野ましろ Special Stage!! I'm home！！マチ★アソビ！</a></td><td>—</td></tr>
         <tr><td>19:00-20:00</td><td>時空のHydrangeaスペシャルライブ</td><td>—</td></tr>
         </table>
       </div>
       <div id="d1v3" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>10:00-11:30</td><td>背景美術実況＋SPトーク</td><td>—</td></tr>
-        <tr><td>12:00-13:00</td><td>「死亡遊戯で飯を食う。」上映会</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>14:15-14:45</td><td>NEEDY GIRL OVERDOSE ステージ</td><td><span class="badge-a">A🟠</span></td></tr>
-        <tr><td>15:30-16:30</td><td>コミックス・ウェーブ・フィルムの新たな挑戦</td><td>—</td></tr>
-        <tr><td>17:00-18:00</td><td>「ようこそ実力至上主義の教室へ」上映会</td><td><span class="badge-s">S🔴キャパ注意</span></td></tr>
+        <tr><td>10:00-11:30</td><td><a href="https://www.machiasobi.com/event/298" target="_blank" rel="noopener">【背景美術実演】アニメのコンセプトアートを1時間で描く！？＋SPトーク</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/215" target="_blank" rel="noopener">TVアニメ『死亡遊戯で飯を食う。』セレクション上映会</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>14:00-14:45</td><td><a href="https://www.machiasobi.com/event/282" target="_blank" rel="noopener">TVアニメ『NEEDY GIRL OVERDOSE』マチ★アソビステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>15:30-16:30</td><td><a href="https://www.machiasobi.com/event/300" target="_blank" rel="noopener">コミックス・ウェーブ・フィルムの新たな挑戦</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/294" target="_blank" rel="noopener">「ようこそ実力至上主義の教室へ 4th Season 2年生編1学期」上映会</a></td><td><span class="badge-s">S🔴キャパ注意</span></td></tr>
         </table>
       </div>
       <div id="d1v4" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
-        <tr><td>10:30-11:30</td><td>TROYCAまったりトーク</td></tr>
-        <tr><td>12:00-13:00</td><td>「エリスの聖杯」上映会＆トーク</td></tr>
-        <tr><td>13:30-14:30</td><td>「瑠璃のアリア」セレクト上映会</td></tr>
-        <tr><td>15:00-16:15</td><td>楽園追放 心のレゾナンス テクニカル</td></tr>
-        <tr><td>16:45-17:45</td><td>変わるアニメ作りの形とは？</td></tr>
+        <tr><td>10:30-11:30</td><td><a href="https://www.machiasobi.com/event/315" target="_blank" rel="noopener">TROYCA3人まったりトーク</a></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/313" target="_blank" rel="noopener">TVアニメ「エリスの聖杯」第1話上映会&原作編集・プロデューサートークショー</a></td></tr>
+        <tr><td>13:30-14:30</td><td><a href="https://www.machiasobi.com/event/217" target="_blank" rel="noopener">TVアニメ「緋弾のアリア」セレクト上映会</a></td></tr>
+        <tr><td>15:00-16:15</td><td><a href="https://www.machiasobi.com/event/283" target="_blank" rel="noopener">『楽園追放 心のレゾナンス』テクニカルミーティング</a></td></tr>
+        <tr><td>16:45-17:45</td><td><a href="https://www.machiasobi.com/event/344" target="_blank" rel="noopener">変わるアニメ作りの形とは？〜製作委員会モデル・AI・人材確保の最前線〜</a></td></tr>
         </table>
       </div>
       <div id="d1v5" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
-        <tr><td>11:00-12:00</td><td>出張・アニメ雑事務局 本部開会議</td></tr>
-        <tr><td>14:00-15:00</td><td>アニメゲーム・マンガの育成四方山話</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/203" target="_blank" rel="noopener">第2回ドリコム 出版・アニメ事業本部説明会 in マチ★アソビ</a></td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/342" target="_blank" rel="noopener">アニメ・ゲーム・マンガの世界展開四方山話 vol.3</a></td></tr>
         <tr><td>15:00-16:00</td><td>LV999の村人ステージ</td></tr>
-        <tr><td>16:00-17:00</td><td>THEアニメトーク 第0回 by MBS</td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/530" target="_blank" rel="noopener">THEアニメトーク 第0回 by MBS</a></td></tr>
         <tr><td>17:00-18:00</td><td>ハコネクト SPトークショー</td></tr>
-        <tr><td>20:00-21:00</td><td>マチ★アソビ備忘録 vol.8</td></tr>
+        <tr><td>20:00-21:00</td><td><a href="https://www.machiasobi.com/event/146" target="_blank" rel="noopener">マチ★アソビ後夜祭 vol.8</a></td></tr>
         </table>
       </div>
       <div id="d1v6" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
-        <tr><td>10:30-12:00</td><td>スーパーさぐるみファイト！</td><td>—</td></tr>
-        <tr><td>12:00-13:00</td><td>VISUAL ARTS×ShoProステージ</td><td>—</td></tr>
-        <tr><td>13:00-14:00</td><td>緑宮しょーごLIVE</td><td>—</td></tr>
-        <tr><td>14:00-15:00</td><td>井上正大アソビ</td><td><span class="badge-b">B🟡</span></td></tr>
-        <tr><td>15:00-16:00</td><td>綾野ましろ「ゆるっとトーク＆ハイタッチ会」</td><td>—</td></tr>
-        <tr><td>16:00-17:00</td><td>SUMMER ROCKET ライブ＆トーク</td><td>—</td></tr>
-        <tr><td>17:00-18:00</td><td>「黒猫と魔女の教室」SPステージ</td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>10:30-12:00</td><td><a href="https://www.machiasobi.com/event/551" target="_blank" rel="noopener">スーパーきぐるみファイト！</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/521" target="_blank" rel="noopener">VISUAL ARTS×ShoProステージ ～ゲーム原作のメディア化～</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/356" target="_blank" rel="noopener">知多娘。LIVE</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/350" target="_blank" rel="noopener">井上正大アソビ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/340" target="_blank" rel="noopener">綾野ましろの『ゆるっとトークショー&ハイタッチ会！！』</a></td><td>—</td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/197" target="_blank" rel="noopener">「SUMMER ROCKET in 宇宙少女漂流記」ライブ＆トーク</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/296" target="_blank" rel="noopener">TVアニメ『黒猫と魔女の教室』スペシャルステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
         </table>
       </div>
       <div id="d1v7" class="venue-panel" style="display:none">
@@ -496,6 +524,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>💬 共有例</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><div class="tmpl-box">【遊撃】ポッポ街商店街、ブース前の列が通路中央にはみ出しています。最後尾がわかりにくく、通行と混ざり始めています。列位置の判断と追加スタッフが必要です。</div>
       <br><div class="tmpl-box">【遊撃】藍場浜、終演後の退場者と次イベント待機が交差しそうです。後方通路の確保に入っています。導線判断をお願いします。</div></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🎒 移動時の持ち物</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>軍手</li><li>ゴミ袋</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🪧 最後尾札の扱い</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">最後尾札はブースで使用中のものを継続使用。新たに列ができている場合は本部テントに在庫があるかもしれないので、<strong>八木または桑野に確認</strong>すること。</div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ 安全を最優先に</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body">慌てて走らない。車道・水辺・階段付近での無理な移動をしない。指示が重なった・シフト時間を超えそうな場合は、<strong>必ずリーダー・八木・桑野へ確認</strong>。</div></div>
     </div>
@@ -553,6 +585,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
       <tr><td style="padding:4px 0">ペットボトル</td><td style="padding:4px 0">ペットボトル本体</td></tr>
       <tr><td style="padding:4px 0">割り箸・竹串</td><td style="padding:4px 0">⚠️ 竹串は怪我リスクあり</td></tr>
       </table></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🎒 移動時の持ち物</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>軍手</li><li>ゴミ袋</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🪧 最後尾札の扱い</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">最後尾札はブースで使用中のものを継続使用。新たに列ができている場合は本部テントに在庫があるかもしれないので、<strong>八木または桑野に確認</strong>すること。</div></div>
     </div>
 
     <div id="dp-parasol" class="duty-panel">
@@ -597,8 +633,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
   <!-- ===== TAB 4: 地図・パラソル ===== -->
   <div id="tab-map" class="tab-content">
     <div class="area-toggle">
-      <button class="area-btn active" onclick="switchArea('east')">東公園側 (25〜49番)</button>
-      <button class="area-btn" onclick="switchArea('west')">西公園側 (01〜24番)</button>
+      <button class="area-btn active" onclick="switchArea('east', this)">東公園側 (25〜49番)</button>
+      <button class="area-btn" onclick="switchArea('west', this)">西公園側 (01〜24番)</button>
     </div>
 
     <div id="area-east">
@@ -809,14 +845,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
     </div>
   </div>
 
+  <!-- ========= SEARCH OVERLAY ========= -->
+  <div id="search-overlay">
+    <div class="search-header">
+      <input id="search-input" type="search" placeholder="キーワードで検索…" oninput="doSearch(this.value)" autocomplete="off">
+      <button class="search-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div id="search-results" class="search-results">
+      <div class="search-empty">🔍 キーワードを入力してください<br><span style="font-size:11px">例：軍手、撮禁、最後尾、竹串…</span></div>
+    </div>
+  </div>
+
   <!-- ========= BOTTOM NAV ========= -->
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="switchTab('home', this)"><span class="icon">🏠</span>ホーム</button>
-    <button class="nav-item" onclick="switchTab('tt', this)"><span class="icon">📅</span>タイムテーブル</button>
+    <button class="nav-item" onclick="switchTab('report', this)"><span class="icon">🆘</span>報告</button>
     <button class="nav-item" onclick="switchTab('shift', this)"><span class="icon">📋</span>シフト別</button>
+    <button class="nav-item" onclick="switchTab('tt', this)"><span class="icon">📅</span>タイムライン</button>
     <button class="nav-item" onclick="switchTab('map', this)"><span class="icon">🪭</span>パラソル</button>
     <button class="nav-item" onclick="switchTab('basic', this)"><span class="icon">📖</span>基本知識</button>
-    <button class="nav-item" onclick="switchTab('report', this)"><span class="icon">🆘</span>報告</button>
   </nav>
 </div>
 
@@ -864,8 +911,8 @@ async function loadNews(){
     el.innerHTML = issues.map(i => {
       const d = new Date(i.created_at);
       const ts = (d.getMonth()+1)+'/'+(d.getDate())+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-      const body = (i.body||'').slice(0,200).replace(/\n/g,'<br>');
-      return '<div class="news-item"><div class="news-title">'+escHtml(i.title)+'</div>'+(body ? '<div class="news-body">'+escHtml(i.body||'').slice(0,200)+'</div>' : '')+'<div class="news-time">'+ts+'</div></div>';
+      const body = escHtml(i.body||'').slice(0,200).replace(/\n/g,'<br>');
+      return '<div class="news-item"><div class="news-title">'+escHtml(i.title)+'</div>'+(body ? '<div class="news-body">'+body+'</div>' : '')+'<div class="news-time">'+ts+'</div></div>';
     }).join('');
   } catch(e){
     el.innerHTML = '<div class="card"><div style="color:#aaa;font-size:12px;text-align:center;padding:8px">お知らせを取得できませんでした</div></div>';
@@ -918,9 +965,9 @@ function toggleAcc(head){
 }
 
 // ── Parasol area toggle ──
-function switchArea(area){
+function switchArea(area, btn){
   document.querySelectorAll('.area-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   document.getElementById('area-east').style.display = area==='east'?'':'none';
   document.getElementById('area-west').style.display = area==='west'?'':'none';
 }
@@ -928,14 +975,212 @@ function switchArea(area){
 // ── Copy template ──
 function copyTmpl(id, btn){
   const text = document.getElementById(id).textContent;
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=>{
-      btn.textContent='✅ コピーしました';
-      btn.classList.add('copied');
-      setTimeout(()=>{ btn.innerHTML='📋 コピー'; btn.classList.remove('copied'); }, 2000);
-    });
+  const done = ()=>{
+    btn.textContent='✅ コピーしました';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.innerHTML='📋 コピー'; btn.classList.remove('copied'); }, 2000);
+  };
+  const fail = ()=>{
+    btn.textContent='コピー失敗';
+    setTimeout(()=>{ btn.innerHTML='📋 コピー'; }, 2000);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(fail);
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy') ? done() : fail(); }
+    catch(e){ fail(); }
+    document.body.removeChild(ta);
   }
 }
+
+// ── Search ──
+let searchIndex = [];
+let currentHits = [];
+
+function buildSearchIndex(){
+  const tabNames = {home:'ホーム',tt:'タイムライン',shift:'シフト別',map:'パラソル',basic:'基本知識',report:'報告'};
+  const venueNames = ['藍場浜','東公園','西公園','ufo T1','ufo T2','ufo 1F','アミコ','あわぎん'];
+  const dayNames = ['5/16(土)','5/17(日)'];
+  const idx = [];
+
+  // ── タイムテーブル行をインデックス ──
+  [0,1].forEach(day => {
+    venueNames.forEach((venue, vi) => {
+      const panel = document.getElementById('d'+day+'v'+vi);
+      if(!panel) return;
+      panel.querySelectorAll('tr').forEach(tr => {
+        const tds = tr.querySelectorAll('td');
+        if(tds.length < 2) return; // ヘッダー行スキップ
+        const time = tds[0].textContent.trim();
+        const name = tds[1].textContent.trim();
+        const crowd = tds[2] ? tds[2].textContent.trim() : '';
+        idx.push({
+          tabId:'tt', tabName:'タイムライン',
+          dpId:null, dutyName:null, accHead:null,
+          ttDay:day, ttVenueIdx:vi, ttRow:tr,
+          title: name,
+          breadcrumb: 'タイムライン › '+dayNames[day]+' '+venue+' › '+time,
+          body: time+' '+name+' '+crowd
+        });
+      });
+    });
+  });
+
+  // ── アコーディオン系タブ ──
+  document.querySelectorAll('.tab-content').forEach(tab => {
+    const tabId = tab.id.replace('tab-','');
+    const tabName = tabNames[tabId] || tabId;
+    const panels = tab.querySelectorAll('.duty-panel');
+    if(panels.length){
+      panels.forEach(panel => {
+        const dpId = panel.id.replace('dp-','');
+        const alertEl = panel.querySelector('.alert strong') || panel.querySelector('.alert');
+        const dutyName = alertEl ? alertEl.textContent.split('\n')[0].trim() : dpId;
+        panel.querySelectorAll('.acc-item').forEach(acc => {
+          const headSpan = acc.querySelector('.acc-head span:first-child');
+          const bodyEl = acc.querySelector('.acc-body');
+          if(!headSpan) return;
+          idx.push({
+            tabId, tabName, dpId, dutyName,
+            title: headSpan.textContent.trim(),
+            breadcrumb: tabName+' › '+dutyName+' › '+headSpan.textContent.trim(),
+            body: bodyEl ? bodyEl.textContent.trim() : '',
+            accHead: acc.querySelector('.acc-head'),
+            ttRow:null
+          });
+        });
+      });
+    } else {
+      tab.querySelectorAll('.acc-item').forEach(acc => {
+        const headSpan = acc.querySelector('.acc-head span:first-child');
+        const bodyEl = acc.querySelector('.acc-body');
+        if(!headSpan) return;
+        idx.push({
+          tabId, tabName, dpId: null, dutyName: null,
+          title: headSpan.textContent.trim(),
+          breadcrumb: tabName+' › '+headSpan.textContent.trim(),
+          body: bodyEl ? bodyEl.textContent.trim() : '',
+          accHead: acc.querySelector('.acc-head'),
+          ttRow:null
+        });
+      });
+    }
+  });
+  return idx;
+}
+
+function openSearch(){
+  if(!searchIndex.length) searchIndex = buildSearchIndex();
+  document.getElementById('search-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('search-input').focus(), 80);
+}
+
+function closeSearch(){
+  document.getElementById('search-overlay').classList.remove('open');
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-results').innerHTML =
+    '<div class="search-empty">🔍 キーワードを入力してください<br><span style="font-size:11px">例：軍手、撮禁、最後尾、竹串…</span></div>';
+  currentHits = [];
+}
+
+function hl(text, q){
+  if(!q) return escHtml(text);
+  const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return escHtml(text).replace(re,'<mark class="sh">$1</mark>');
+}
+
+function doSearch(q){
+  const res = document.getElementById('search-results');
+  const qt = q.trim();
+  if(!qt){
+    res.innerHTML = '<div class="search-empty">🔍 キーワードを入力してください<br><span style="font-size:11px">例：軍手、撮禁、最後尾、竹串…</span></div>';
+    currentHits = [];
+    return;
+  }
+  const lower = qt.toLowerCase();
+  const hits = searchIndex.filter(r =>
+    r.breadcrumb.toLowerCase().includes(lower) || r.body.toLowerCase().includes(lower)
+  );
+  currentHits = hits;
+  if(!hits.length){
+    res.innerHTML = '<div class="search-empty">「'+escHtml(qt)+'」に一致する項目はありませんでした</div>';
+    return;
+  }
+  res.innerHTML = '<div style="font-size:11px;color:#aaa;padding:0 2px 8px">'+hits.length+'件ヒット</div>'+
+    hits.map((r,i)=>{
+      let snippet = '';
+      const bl = r.body.toLowerCase();
+      const bi = bl.indexOf(lower);
+      if(bi !== -1){
+        const s = Math.max(0, bi-20), e = Math.min(r.body.length, bi+lower.length+50);
+        snippet = (s>0?'…':'')+r.body.slice(s,e)+(e<r.body.length?'…':'');
+      }
+      return '<div class="search-result" onclick="goToResult('+i+')">'+
+        '<div class="sr-breadcrumb">'+hl(r.breadcrumb,qt)+'</div>'+
+        '<div class="sr-title">'+hl(r.title,qt)+'</div>'+
+        (snippet ? '<div class="sr-snippet">'+hl(snippet,qt)+'</div>' : '')+
+      '</div>';
+    }).join('');
+}
+
+function goToResult(i){
+  const r = currentHits[i];
+  closeSearch();
+  // タブ切替
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+r.tabId).classList.add('active');
+  const navBtn = document.querySelector('.nav-item[onclick*="\''+r.tabId+'\'"]');
+  if(navBtn) navBtn.classList.add('active');
+  window.scrollTo(0,0);
+  // タイムテーブル行へジャンプ
+  if(r.ttRow){
+    switchDay(r.ttDay);
+    switchVenue(r.ttDay, r.ttVenueIdx);
+    setTimeout(()=>{
+      r.ttRow.scrollIntoView({behavior:'smooth', block:'center'});
+      r.ttRow.style.transition='background .3s';
+      r.ttRow.style.background='#fff9c4';
+      setTimeout(()=>r.ttRow.style.background='', 1500);
+    }, 150);
+    return;
+  }
+  // シフト別の duty パネル表示
+  if(r.dpId){
+    const sel = document.getElementById('duty-select');
+    if(sel) sel.value = r.dpId;
+    showDuty(r.dpId);
+  }
+  // アコーディオンを開いてスクロール
+  if(r.accHead){
+    const body = r.accHead.nextElementSibling;
+    if(body && !body.classList.contains('open')){
+      body.classList.add('open');
+      const arrow = r.accHead.querySelector('.acc-arrow');
+      if(arrow) arrow.classList.add('open');
+    }
+    setTimeout(()=>r.accHead.scrollIntoView({behavior:'smooth',block:'start'}), 150);
+  }
+}
+
+// ── Font size ──
+function setFontSize(s){
+  const app = document.getElementById('app');
+  app.classList.remove('font-sm','font-lg');
+  if(s==='sm') app.classList.add('font-sm');
+  if(s==='lg') app.classList.add('font-lg');
+  ['sm','md','lg'].forEach(k=>{
+    document.getElementById('fsz-'+k).classList.toggle('active', k===s);
+  });
+  localStorage.setItem('fontSize', s);
+}
+(function(){
+  setFontSize(localStorage.getItem('fontSize')||'md');
+})();
 </script>
 </body>
 </html>
