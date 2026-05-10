@@ -31,7 +31,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 .tab-content.active{display:block}
 /* ── bottom nav ── */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;z-index:100;box-shadow:0 -2px 8px rgba(0,0,0,.1)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px;cursor:pointer;color:#888;font-size:10px;gap:2px;transition:color .2s;min-height:56px;border:none;background:none}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px;cursor:pointer;color:#888;font-size:10px;gap:2px;transition:color .2s;min-height:56px;border:none;background:none;text-decoration:none}
 .nav-item.active{color:#e94560}
 .nav-item .icon{font-size:20px}
 /* ── cards ── */
@@ -486,9 +486,11 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     <div id="dp-satsukin-nishi" class="duty-panel">
       <div class="alert alert-yellow"><strong>西公園 撮禁A / 撮禁B</strong><br>AとBの2名1組で交代制</div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔁 A/B交代制のルール</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は待機・休憩</li><li><strong>撮禁Bの番</strong>：B が担当、A は待機・休憩</li></ul></div></div>
+      <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は西公園受付テントで待機（受付兼務）</li><li><strong>撮禁Bの番</strong>：B が担当、A は西公園受付テントで待機（受付兼務）</li><li>交代タイミングはシフト表またはリーダーの指示に従う</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 撮影禁止対応の手順</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li>撮禁札を来場者から見える位置に出す</li><li>ステージ正面・横・後方から撮影する人を確認</li><li>注意しても続ける場合はリーダー・八木・桑野へ共有</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🏕️ 受付待機中にやること</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>会場・イベント場所の案内</li><li>落とし物の一次受付</li><li>体調不良・怪我の初動共有</li><li>スタッフやリーダーへの連絡・呼び戻し</li><li>関係者・出展者からの問い合わせの一次受け</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 西公園エリア 見るポイント</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li>西公園テント周辺の案内・確認に対応</li><li>比較的落ち着いたエリアだが、周辺エリアへの誘導も行う</li></ul></div></div>
     </div>
@@ -863,6 +865,7 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     <button class="nav-item" onclick="switchTab('shift', this)"><span class="icon">📋</span>シフト別</button>
     <button class="nav-item" onclick="switchTab('tt', this)"><span class="icon">📅</span>タイムライン</button>
     <button class="nav-item" onclick="switchTab('map', this)"><span class="icon">🪭</span>パラソル</button>
+    <a class="nav-item" href="contents.html"><span class="icon">🎭</span>コンテンツ</a>
     <button class="nav-item" onclick="switchTab('basic', this)"><span class="icon">📖</span>基本知識</button>
   </nav>
 </div>
