@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "マチ★アソビ vol.30 検索アプリ用データ",
-    "version": "0.6-json",
+    "title": "マチ★アソビ vol.30 検索アプリ用データ（v07 + 公式X統合）",
+    "version": "0.8-json",
     "source_md": "machiasobi_vol30_search_data_v05.md",
-    "record_count": 127,
-    "description": "v0.5 TSVをJSON化し、口頭問い合わせ向けの表記揺れ・かな揺れ・略称を追加したもの。",
+    "record_count": 164,
+    "description": "v0.7 JSONを土台に、マチ★アソビ公式X直近1週間取得データを統合。明確重複は除外し、既存コンテンツへの公式X追記は source.official_x_posts と notes に反映。別催事・別ロケーションの追加情報は新規レコード化。",
     "normalization_policy": {
       "unicode": "NFKC",
       "case": "lowercase",
@@ -30,6 +30,204 @@
         "unresolved_reference"
       ],
       "multiple_results": "sort by date, start_time, source priority, then area"
+    },
+    "integrated_from": {
+      "base_version": "0.7-json",
+      "patch_version": "0.7-patch",
+      "base_record_count": 127,
+      "patch_add_record_count_declared": 27,
+      "patch_update_operation_count_declared": 4,
+      "semantic_deduplication_count": 1,
+      "final_record_count": 164,
+      "official_x_post_count": 27,
+      "official_x_merged_to_existing_count": 13,
+      "official_x_new_record_count": 12,
+      "removed_duplicate_count": 1
+    },
+    "integration_notes": [
+      "玲瓏のHydrangeaスペシャルライブは、v0.6既存の『時空のHydrangea』補正対象と同一イベント枠のため、重複追加せず既存IDへ統合。",
+      "Summer Pockets への検索語追加は、同名の5/16・5/17ステージ2件の双方へ反映。",
+      "machiasobi_official_x_posts_2026-05-06_to_2026-05-13_best_effort の posts を統合。",
+      "フライヤー解禁/再告知は検索対象イベントではないため個別レコード追加なし。",
+      "既存レコードと同一催事と判断できる公式X投稿は、source.official_x_posts と appearance.notes に追記。",
+      "同じ作品・コンテンツでも、別日時・別場所・別催事として案内に必要なもの（例: 魔法使いの夜 JR徳島駅一日駅長、鬼滅の刃 アミコビルスタンディーロード）は新規レコードとして追加。",
+      "投稿本文だけでは日時・会場が確定できない新規レコードは date を 2026-05-16/2026-05-17 とし、notes に追加確認推奨を明記。"
+    ],
+    "official_x_integration": {
+      "merged_to_existing": [
+        {
+          "post_id": "2052312493922345208",
+          "topic": "ほっぺちゃんステージ",
+          "merged_to": "machiasobi30_0120"
+        },
+        {
+          "post_id": "2052312732914045164",
+          "topic": "ドリコム パラソル出店",
+          "merged_to": "machiasobi30_v07_0014"
+        },
+        {
+          "post_id": "2052312732985331780",
+          "topic": "コミックス・ウェーブ・フィルム パラソル出店",
+          "merged_to": "machiasobi30_0055"
+        },
+        {
+          "post_id": "2052312733052219781",
+          "topic": "きゃらめる-CharaMerci- パラソル出店",
+          "merged_to": "machiasobi30_0030"
+        },
+        {
+          "post_id": "2052327582067036334",
+          "topic": "スーパーきぐるみファイト",
+          "merged_to": "machiasobi30_v07_0026"
+        },
+        {
+          "post_id": "2052671093773910092",
+          "topic": "超かぐや姫！先行販売・サイン会",
+          "merged_to": "machiasobi30_0033"
+        },
+        {
+          "post_id": "2052675120930418876",
+          "topic": "北海道北広島市 サブカルの祭典紹介",
+          "merged_to": "machiasobi30_0072"
+        },
+        {
+          "post_id": "2052675624385290368",
+          "topic": "KADOKAWA GOODS SHOP",
+          "merged_to": "machiasobi30_0084"
+        },
+        {
+          "post_id": "2052675876031201632",
+          "topic": "業界人ガールミーツガール時事放談",
+          "merged_to": "machiasobi30_v07_0025"
+        },
+        {
+          "post_id": "2053037258891022791",
+          "topic": "衛宮さんちの今日のごはん TAa先生セレクト上映会",
+          "merged_to": "machiasobi30_v07_0017"
+        },
+        {
+          "post_id": "2053037261319704929",
+          "topic": "玲瓏のHydrangea スペシャルライブ",
+          "merged_to": "machiasobi30_0102"
+        },
+        {
+          "post_id": "2053037262578037220",
+          "topic": "GATE SEASON2 スペシャルトークステージ",
+          "merged_to": "machiasobi30_v07_0015"
+        },
+        {
+          "post_id": "2053037508590817437",
+          "topic": "非作画系監督はどう演出するのかトークショー",
+          "merged_to": "machiasobi30_v07_0024"
+        }
+      ],
+      "added_new_records": [
+        {
+          "id": "machiasobi30_v08_0001",
+          "topic": "LV999の村人 スペシャルステージ",
+          "display_name": "TVアニメ「LV999の村人」スペシャルステージ in マチ★アソビ"
+        },
+        {
+          "id": "machiasobi30_v08_0002",
+          "topic": "ダークサモナーとデキている／彼女の友達 トーク",
+          "display_name": "「ダークサモナーとデキている」「彼女の友達」プロデューサートーク"
+        },
+        {
+          "id": "machiasobi30_v08_0003",
+          "topic": "マリッジトキシン セレクション上映会",
+          "display_name": "TVアニメ『マリッジトキシン』セレクション話数上映会"
+        },
+        {
+          "id": "machiasobi30_v08_0004",
+          "topic": "整理券配布・整列方法案内",
+          "display_name": "ufotable CINEMA他 各種イベント整理券配布及び整列方法のご案内"
+        },
+        {
+          "id": "machiasobi30_v08_0005",
+          "topic": "マチ★アソビ前夜サウナ",
+          "display_name": "マチ★アソビ前夜サウナ"
+        },
+        {
+          "id": "machiasobi30_v08_0006",
+          "topic": "痛車グランプリ 告知",
+          "display_name": "マチ★アソビ 痛車グランプリ"
+        },
+        {
+          "id": "machiasobi30_v08_0007",
+          "topic": "痛車グランプリ アワード授賞式",
+          "display_name": "マチ★アソビ 痛車グランプリ アワード授賞式"
+        },
+        {
+          "id": "machiasobi30_v08_0008",
+          "topic": "ボンズ×プロダクション・アイジー 周年って何？",
+          "display_name": "ボンズ×プロダクション・アイジー「周年って何？」"
+        },
+        {
+          "id": "machiasobi30_v08_0009",
+          "topic": "桜蘭高校ホスト部 上映会",
+          "display_name": "20周年記念 TVアニメ「桜蘭高校ホスト部」1話・13話上映会"
+        },
+        {
+          "id": "machiasobi30_v08_0010",
+          "topic": "世界はクズで回ってる",
+          "display_name": "世界はクズで回ってる"
+        },
+        {
+          "id": "machiasobi30_v08_0011",
+          "topic": "鬼滅の刃 アミコビルスタンディーロード",
+          "display_name": "アニメ「鬼滅の刃」シリーズ全編再放送記念 アミコビルスタンディーロード"
+        },
+        {
+          "id": "machiasobi30_v08_0012",
+          "topic": "魔法使いの夜 JR徳島駅一日駅長",
+          "display_name": "劇場アニメーション「魔法使いの夜」JR徳島駅一日駅長"
+        }
+      ],
+      "removed_duplicates": [
+        {
+          "id": "machiasobi30_0024",
+          "reason": "超かぐや姫！スタッフトークショーと同一日時・同一会場の明確重複。machiasobi30_0105へ寄せる運用。"
+        }
+      ],
+      "source_meta": {
+        "title": "マチ★アソビ公式X @machiasobi 直近1週間ポスト取得データ",
+        "account_requested_by_user": "https://x.com/machiasob",
+        "account_resolved": {
+          "handle": "machiasobi",
+          "display_name": "マチ★アソビ",
+          "url": "https://x.com/machiasobi"
+        },
+        "period_jst": {
+          "from": "2026-05-06T00:00:00+09:00",
+          "to": "2026-05-13T23:59:59+09:00"
+        },
+        "generated_at_jst": "2026-05-13",
+        "post_count_included": 27,
+        "counts_by_date_jst": {
+          "2026-05-06": 1,
+          "2026-05-07": 5,
+          "2026-05-08": 8,
+          "2026-05-09": 4,
+          "2026-05-10": 0,
+          "2026-05-11": 1,
+          "2026-05-12": 8,
+          "2026-05-13": 0
+        },
+        "coverage": {
+          "original_posts": "取得可能な公開インデックス・Yahoo!リアルタイム検索詳細ページを突合して収集",
+          "reposts": "未ログイン公開面ではRPの全件網羅を確実に検証できず。本JSONには、確認できた@machiasobi名義の投稿を格納。RPは全件取得保証なし。",
+          "may_13_posts": "2026-05-13 JSTの@machiasobi投稿は今回の取得面では確認できず"
+        },
+        "text_capture_policy": {
+          "full_or_near_full_visible": "検索詳細ページ等で本文がまとまって確認できたもの",
+          "search_excerpt": "検索結果スニペット等で確認できた範囲を格納。原文の後半が省略されている可能性あり"
+        },
+        "notes": [
+          "Xの未ログイン公開面および検索インデックスを用いたベストエフォート取得。",
+          "投稿IDからX Snowflakeを復号し、created_at_jstを算出。",
+          "タイムライン完全クロールではないため、特にRP網羅性は要注意。"
+        ]
+      }
     }
   },
   "records": [
@@ -1886,7 +2084,10 @@
           "鍵っ子",
           "高森さん",
           "高森奈津美",
-          "魁"
+          "魁",
+          "さまぽけ原画展",
+          "夏の余韻",
+          "summerpocketsinまちあそび"
         ]
       },
       "content": "Summer Pockets",
@@ -1966,7 +2167,10 @@
           "しろは",
           "高森さん",
           "空門蒼",
-          "蒼"
+          "蒼",
+          "サマポケ原画展",
+          "夏の余韻",
+          "Summer Pockets in マチ★アソビ"
         ],
         "normalized_search_terms": [
           "key",
@@ -1994,7 +2198,10 @@
           "鍵っ子",
           "高森さん",
           "高森奈津美",
-          "魁"
+          "魁",
+          "さまぽけ原画展",
+          "夏の余韻",
+          "summerpocketsinまちあそび"
         ]
       },
       "content": "Summer Pockets",
@@ -2021,111 +2228,6 @@
       },
       "response_templates": {
         "stage": "16:00から新町橋東公園ステージの「Summer Pockets」ですね。",
-        "booth": ""
-      }
-    },
-    {
-      "id": "machiasobi30_0024",
-      "kind": "content",
-      "display_name": "超かぐや姫！",
-      "search": {
-        "aliases": [
-          "超かぐや"
-        ],
-        "aliases_kana": [
-          "ちょうかぐや",
-          "ころりど",
-          "くろまと",
-          "やました",
-          "へちま",
-          "ながえ"
-        ],
-        "search_terms": [
-          "超かぐや姫!",
-          "超かぐや姫！",
-          "超かぐや姫",
-          "すたじおころりど / すたじおくろまと",
-          "すたじおころりどすたじおくろまと",
-          "スタジオコロリド / スタジオクロマト",
-          "新町橋東公園",
-          "新町橋東公園ステージ",
-          "新町橋東公園すてーじ",
-          "超かぐや",
-          "ちょうかぐや",
-          "ころりど",
-          "くろまと",
-          "やました",
-          "へちま",
-          "ながえ",
-          "すたじおころりど",
-          "スタジオコロリド",
-          "すたじおくろまと",
-          "スタジオクロマト",
-          "山下清悟",
-          "永江彰浩",
-          "桃原一真",
-          "太田祥暉",
-          "スタッフトークショー",
-          "すたっふとーくしょー",
-          "コロリド",
-          "クロマト",
-          "山下さん",
-          "やましたしんご",
-          "山下監督",
-          "へちまさん",
-          "永江さん"
-        ],
-        "normalized_search_terms": [
-          "くろまと",
-          "ころりど",
-          "すたじおくろまと",
-          "すたじおころりど",
-          "すたじおころりどすたじおくろまと",
-          "すたっふとーくしょー",
-          "ちょうかぐや",
-          "ながえ",
-          "へちま",
-          "へちまさん",
-          "やました",
-          "やましたしんご",
-          "太田祥暉",
-          "山下さん",
-          "山下清悟",
-          "山下監督",
-          "新町橋東公園",
-          "新町橋東公園すてーじ",
-          "桃原一真",
-          "永江さん",
-          "永江彰浩",
-          "超かぐや",
-          "超かぐや姫"
-        ]
-      },
-      "content": "超かぐや姫！",
-      "organization": "スタジオコロリド / スタジオクロマト",
-      "appearance": {
-        "kind": "stage",
-        "date": "2026-05-17",
-        "start_time": "11:00",
-        "end_time": "",
-        "area": "新町橋東公園",
-        "venue": "新町橋東公園ステージ",
-        "action": "スタッフトークショー",
-        "people": [
-          "山下清悟",
-          "へちま",
-          "永江彰浩",
-          "桃原一真",
-          "太田祥暉"
-        ],
-        "notes": "公式個別ページで確認。山下清悟、へちま、永江彰浩、桃原一真、太田祥暉。"
-      },
-      "source": {
-        "url": "https://www.machiasobi.com/event/444/",
-        "status": "official_individual"
-      },
-      "response_templates": {
-        "stage": "11:00から新町橋東公園ステージの「超かぐや姫！」ですね。",
         "booth": ""
       }
     },
@@ -2558,7 +2660,8 @@
           "からめる",
           "いーえむてぃー",
           "ぐっず販売",
-          "グッズ販売"
+          "グッズ販売",
+          "きゃらめる-CharaMerci- パラソル出店"
         ],
         "normalized_search_terms": [
           "charamerci",
@@ -2568,7 +2671,8 @@
           "きゃらめるcharamerci",
           "ぐっず販売",
           "しんまちぼーどうぉーく",
-          "株式会社emtすくえあーど"
+          "株式会社emtすくえあーど",
+          "きゃらめるcharamerciパラソル出店"
         ]
       },
       "content": "CharaMerci",
@@ -2582,11 +2686,20 @@
         "venue": "しんまちボードウォーク",
         "action": "グッズ販売",
         "people": [],
-        "notes": "アクスタ・マグカップ・タペストリー等"
+        "notes": "アクスタ・マグカップ・タペストリー等 / 公式X追記: きゃらめる-CharaMerci- パラソル出店（2026-05-07投稿）"
       },
       "source": {
         "url": "https://www.machiasobi.com/booth/261/",
-        "status": "official_individual"
+        "status": "official_individual",
+        "official_x_posts": [
+          {
+            "id": "2052312733052219781",
+            "created_at_jst": "2026-05-07T18:01:00.343+09:00",
+            "topic": "きゃらめる-CharaMerci- パラソル出店",
+            "url": "https://x.com/machiasobi/status/2052312733052219781",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "",
@@ -2778,7 +2891,8 @@
           "やましたしんご",
           "山下監督",
           "へちまさん",
-          "永江さん"
+          "永江さん",
+          "超かぐや姫！先行販売・サイン会"
         ],
         "normalized_search_terms": [
           "くろまと",
@@ -2800,7 +2914,8 @@
           "永江さん",
           "永江彰浩",
           "超かぐや",
-          "超かぐや姫"
+          "超かぐや姫",
+          "超かぐや姫先行販売サイン会"
         ]
       },
       "content": "超かぐや姫！",
@@ -2818,11 +2933,20 @@
           "へちま",
           "永江彰浩"
         ],
-        "notes": "5/16 15:30サイン会。整理券制"
+        "notes": "5/16 15:30サイン会。整理券制 / 公式X追記: 超かぐや姫！先行販売・サイン会（2026-05-08投稿）"
       },
       "source": {
         "url": "https://www.machiasobi.com/booth/534/",
-        "status": "official_individual"
+        "status": "official_individual",
+        "official_x_posts": [
+          {
+            "id": "2052671093773910092",
+            "created_at_jst": "2026-05-08T17:45:00.197+09:00",
+            "topic": "超かぐや姫！先行販売・サイン会",
+            "url": "https://x.com/machiasobi/status/2052671093773910092",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "",
@@ -3254,6 +3378,76 @@
       "response_templates": {
         "stage": "",
         "booth": "ポッポ街商店街エリアのブースで「マチ★アソビ vol.30 ブシロードブース」をやっています。"
+      }
+    },
+    {
+      "id": "machiasobi30_0040",
+      "kind": "booth",
+      "display_name": "マチ★アソビvol.30 献血",
+      "search": {
+        "aliases": [
+          "献血"
+        ],
+        "aliases_kana": [
+          "けんけつ",
+          "なのは"
+        ],
+        "search_terms": [
+          "まちあそびvol30献血",
+          "まち★あそびvol.30 献血",
+          "マチ★アソビvol.30 献血",
+          "魔法少女りりかるなのはexceedsgunblazevengeance",
+          "魔法少女りりかるなのは EXCEEDS Gun Blaze Vengeance",
+          "魔法少女リリカルなのは EXCEEDS Gun Blaze Vengeance",
+          "マチ★アソビ",
+          "まちあそび",
+          "まち★あそび",
+          "その他",
+          "献血",
+          "けんけつ",
+          "なのは",
+          "献血こらぼ",
+          "献血コラボ",
+          "りりかるなのは",
+          "リリカルなのは",
+          "りりなの",
+          "リリなの",
+          "nanoha"
+        ],
+        "normalized_search_terms": [
+          "nanoha",
+          "けんけつ",
+          "その他",
+          "なのは",
+          "まちあそび",
+          "まちあそびvol30献血",
+          "りりかるなのは",
+          "りりなの",
+          "献血",
+          "献血こらぼ",
+          "魔法少女りりかるなのはexceedsgunblazevengeance"
+        ]
+      },
+      "content": "魔法少女リリカルなのは EXCEEDS Gun Blaze Vengeance",
+      "organization": "マチ★アソビ",
+      "appearance": {
+        "kind": "booth",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "その他",
+        "venue": "その他",
+        "action": "献血コラボ",
+        "people": [],
+        "notes": "藍場浜公園 ご成婚広場内献血バス / 献血ルームアミコ"
+      },
+      "source": {
+        "url": "https://www.machiasobi.com/booth/587/",
+        "status": "official_individual"
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": "その他エリアのブースで「マチ★アソビvol.30 献血」をやっています。"
       }
     },
     {
@@ -4217,7 +4411,8 @@
           "しらぬひ",
           "ぐっず販売",
           "グッズ販売",
-          "映像上映"
+          "映像上映",
+          "コミックス・ウェーブ・フィルム パラソル出店"
         ],
         "normalized_search_terms": [
           "cwf",
@@ -4232,7 +4427,8 @@
           "君の名は",
           "君の名はすずめの戸締まりしらぬひ",
           "映像上映",
-          "株式会社こみっくすうぇーぶふぃるむ"
+          "株式会社こみっくすうぇーぶふぃるむ",
+          "コミックスウェーブフィルムパラソル出店"
         ]
       },
       "content": "君の名は。 / すずめの戸締まり / しらぬひ",
@@ -4246,11 +4442,20 @@
         "venue": "しんまちボードウォーク",
         "action": "グッズ販売 / 映像上映",
         "people": [],
-        "notes": "CWFのねこ限定缶バッジあり"
+        "notes": "CWFのねこ限定缶バッジあり / 公式X追記: コミックス・ウェーブ・フィルム パラソル出店（2026-05-07投稿）"
       },
       "source": {
         "url": "https://www.machiasobi.com/booth/259/",
-        "status": "official_individual"
+        "status": "official_individual",
+        "official_x_posts": [
+          {
+            "id": "2052312732985331780",
+            "created_at_jst": "2026-05-07T18:01:00.327+09:00",
+            "topic": "コミックス・ウェーブ・フィルム パラソル出店",
+            "url": "https://x.com/machiasobi/status/2052312732985331780",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "",
@@ -5528,7 +5733,8 @@
           "イベント紹介",
           "SNSふぉろー特典",
           "snsふぉろー特典",
-          "SNSフォロー特典"
+          "SNSフォロー特典",
+          "北海道北広島市 サブカルの祭典紹介"
         ],
         "normalized_search_terms": [
           "snsふぉろー特典",
@@ -5537,7 +5743,8 @@
           "きたひろしま",
           "しろいこいびと",
           "しんまちぼーどうぉーく",
-          "北海道北広島市からやってきました新たなさぶかるの祭典開催をご紹介"
+          "北海道北広島市からやってきました新たなさぶかるの祭典開催をご紹介",
+          "北海道北広島市サブカルの祭典紹介"
         ]
       },
       "content": "きたコン",
@@ -5551,11 +5758,20 @@
         "venue": "しんまちボードウォーク",
         "action": "イベント紹介 / SNSフォロー特典",
         "people": [],
-        "notes": "白い恋人プレゼントあり"
+        "notes": "白い恋人プレゼントあり / 公式X追記: 北海道北広島市 サブカルの祭典紹介（2026-05-08投稿）"
       },
       "source": {
         "url": "https://www.machiasobi.com/booth/543/",
-        "status": "official_individual"
+        "status": "official_individual",
+        "official_x_posts": [
+          {
+            "id": "2052675120930418876",
+            "created_at_jst": "2026-05-08T18:01:00.346+09:00",
+            "topic": "北海道北広島市 サブカルの祭典紹介",
+            "url": "https://x.com/machiasobi/status/2052675120930418876",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
       },
       "response_templates": {
         "stage": "",
@@ -6116,7 +6332,10 @@
           "しんまちぼーどうぉーく",
           "すあら",
           "にゅーたいぷしんじゅく",
-          "にゅーたいぷ新宿"
+          "にゅーたいぷ新宿",
+          "白への道標",
+          "suaraさいん会参加券",
+          "ぷりんとみに色紙"
         ]
       },
       "content": "うたわれるもの 白への道標",
@@ -6132,7 +6351,7 @@
         "people": [
           "Suara"
         ],
-        "notes": "5/17 14:00 Suaraサイン会 『うたわれるもの 白への道標』限定コラボドリンク。5,000円以上購入でSuaraサイン会参加券配布の情報を追記。"
+        "notes": "5/17 14:00 Suaraサイン会 / 『うたわれるもの 白への道標』限定コラボドリンク。5,000円以上購入でSuaraサイン会参加券配布の情報を追記。"
       },
       "source": {
         "url": "https://www.machiasobi.com/booth/269/",
@@ -6418,11 +6637,20 @@
         "people": [
           "エミリア着ぐるみ"
         ],
-        "notes": ""
+        "notes": "公式X追記: KADOKAWA GOODS SHOP（2026-05-08投稿）"
       },
       "source": {
         "url": "https://www.machiasobi.com/booth/568/",
-        "status": "official_individual"
+        "status": "official_individual",
+        "official_x_posts": [
+          {
+            "id": "2052675624385290368",
+            "created_at_jst": "2026-05-08T18:03:00.379+09:00",
+            "topic": "KADOKAWA GOODS SHOP",
+            "url": "https://x.com/machiasobi/status/2052675624385290368",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "",
@@ -6946,7 +7174,9 @@
           "有限会社feel",
           "穂積彩夏",
           "鍵",
-          "鍵っ子"
+          "鍵っ子",
+          "さまぽけ原画展",
+          "夏の余韻"
         ]
       },
       "content": "Summer Pockets",
@@ -7706,16 +7936,21 @@
     },
     {
       "id": "machiasobi30_0102",
-      "kind": "artist",
+      "kind": "content",
       "display_name": "玲瓏のHydrangeaスペシャルライブ",
       "search": {
         "aliases": [
-          "時空のHydrangea"
+          "時空のHydrangea",
+          "玲瓏のHydrangea",
+          "Hydrangea",
+          "ハイドランジア",
+          "東方"
         ],
         "aliases_kana": [
           "じくうのはいどらんじあ",
           "はいどらんじあ",
-          "あじさい"
+          "あじさい",
+          "れいろうのはいどらんじあ"
         ],
         "search_terms": [
           "時空のhydrangea",
@@ -7730,7 +7965,20 @@
           "はいどらんじあ",
           "あじさい",
           "ライブ",
-          "らいぶ"
+          "らいぶ",
+          "玲瓏のHydrangeaすぺしゃるらいぶ",
+          "玲瓏のhydrangeaすぺしゃるらいぶ",
+          "玲瓏のHydrangeaスペシャルライブ",
+          "玲瓏のHydrangea",
+          "玲瓏のhydrangea",
+          "スペシャルライブ",
+          "すぺしゃるらいぶ",
+          "hydrangea",
+          "Hydrangea",
+          "ハイドランジア",
+          "東方",
+          "れいろうのはいどらんじあ",
+          "玲瓏のHydrangea スペシャルライブ"
         ],
         "normalized_search_terms": [
           "あじさい",
@@ -7740,11 +7988,18 @@
           "両国橋西公園",
           "両国橋西公園すてーじ",
           "時空のhydrangea",
-          "時空のhydrangeaすぺしゃるらいぶ"
+          "時空のhydrangeaすぺしゃるらいぶ",
+          "hydrangea",
+          "すぺしゃるらいぶ",
+          "れいろうのはいどらんじあ",
+          "東方",
+          "玲瓏のhydrangea",
+          "玲瓏のhydrangeaすぺしゃるらいぶ",
+          "玲瓏のhydrangeaスペシャルライブ"
         ]
       },
-      "content": "時空のHydrangeaスペシャルライブ",
-      "organization": "",
+      "content": "玲瓏のHydrangea",
+      "organization": "玲瓏のHydrangea",
       "appearance": {
         "kind": "stage",
         "date": "2026-05-17",
@@ -7752,18 +8007,27 @@
         "end_time": "20:00",
         "area": "両国橋西公園",
         "venue": "両国橋西公園ステージ",
-        "action": "ライブ",
+        "action": "スペシャルライブ",
         "people": [
-          "時空のHydrangea"
+          "玲瓏のHydrangea"
         ],
-        "notes": "表記を『玲瓏のHydrangea』に補正。旧『時空のHydrangea』は検索語として残す。"
+        "notes": "公式Xでは『玲瓏のHydrangea』。v0.6旧表記『時空のHydrangea』は検索語として残す。 / 公式X追記: 玲瓏のHydrangea スペシャルライブ（2026-05-09投稿）"
       },
       "source": {
         "url": "https://twitter.com/machiasobi/status/2053037261319704929",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2053037261319704929",
+            "created_at_jst": "2026-05-09T18:00:01.343+09:00",
+            "topic": "玲瓏のHydrangea スペシャルライブ",
+            "url": "https://x.com/machiasobi/status/2053037261319704929",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
       },
       "response_templates": {
-        "stage": "19:00から両国橋西公園ステージの「時空のHydrangea」ですね。",
+        "stage": "19:00から両国橋西公園ステージの「玲瓏のHydrangeaスペシャルライブ」ですね。",
         "booth": ""
       }
     },
@@ -9379,7 +9643,8 @@
           "アンネル",
           "倉持京子ほか",
           "ステージ",
-          "すてーじ"
+          "すてーじ",
+          "ほっぺちゃんステージ"
         ],
         "normalized_search_terms": [
           "あみこ",
@@ -9393,7 +9658,8 @@
           "ほっぺちゃん",
           "みんなでおどろう",
           "みんなで踊ろうほっぺちゃんだんす♪すぺしゃるすてーじ",
-          "倉持京子ほか"
+          "倉持京子ほか",
+          "ほっぺちゃんステージ"
         ]
       },
       "content": "ほっぺちゃん",
@@ -9409,11 +9675,20 @@
         "people": [
           "倉持京子ほか"
         ],
-        "notes": "マチ★アソビ公式Xおよび出演者側告知で5/16 16:00 アミコドームステージを確認。"
+        "notes": "マチ★アソビ公式Xおよび出演者側告知で5/16 16:00 アミコドームステージを確認。 / 公式X追記: ほっぺちゃんステージ（2026-05-07投稿）"
       },
       "source": {
         "url": "https://x.com/machiasobi/status/2052312493922345208",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2052312493922345208",
+            "created_at_jst": "2026-05-07T18:00:03.330+09:00",
+            "topic": "ほっぺちゃんステージ",
+            "url": "https://x.com/machiasobi/status/2052312493922345208",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
       },
       "response_templates": {
         "stage": "16:00からアミコドームステージの「みんなで踊ろうほっぺちゃんダンス♪スペシャルステージ」ですね。",
@@ -9490,7 +9765,7 @@
         "venue": "献血ルーム アミコ / 献血バス（あわぎんホール東側 ご成婚広場）",
         "action": "献血コラボ",
         "people": [],
-        "notes": "献血ルーム アミコ 9:30-13:00/14:00-17:00、献血バス 9:30-12:00/13:30-16:30。400mL献血のみ受付。記念品：リリカルなのは作品A3ポスター。"
+        "notes": "献血ルーム アミコ 9:30-13:00/14:00-17:00、献血バス 9:30-12:00/13:30-16:30。400mL献血のみ受付。"
       },
       "source": {
         "url": "https://www.bs.jrc.or.jp/csk/tokushima/2026/05/vol30.html",
@@ -11170,7 +11445,8 @@
           "ぐっず販売",
           "試し読み",
           "PV上映",
-          "pv上映"
+          "pv上映",
+          "ドリコム パラソル出店"
         ],
         "normalized_search_terms": [
           "pv上映",
@@ -11188,7 +11464,8 @@
           "仕事猫",
           "株式会社どりこむ",
           "株式会社どりこむぱらそる出店",
-          "試し読み"
+          "試し読み",
+          "ドリコムパラソル出店"
         ]
       },
       "content": "Wizardry×仕事猫 / Wizardry作品",
@@ -11202,11 +11479,20 @@
         "venue": "パラソル出店",
         "action": "グッズ販売 / 試し読み / PV上映",
         "people": [],
-        "notes": "公式XでWizardry×仕事猫を中心とした出店を確認。"
+        "notes": "公式XでWizardry×仕事猫を中心とした出店を確認。 / 公式X追記: ドリコム パラソル出店（2026-05-07投稿）"
       },
       "source": {
         "url": "https://twitter.com/machiasobi/status/2052312732914045164",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2052312732914045164",
+            "created_at_jst": "2026-05-07T18:01:00.310+09:00",
+            "topic": "ドリコム パラソル出店",
+            "url": "https://x.com/machiasobi/status/2052312732914045164",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "",
@@ -11260,7 +11546,8 @@
           "斯く戦えり」スペシャルトークステージ",
           "gateseason2自衛隊彼の海にて",
           "GATE SEASON2 自衛隊 彼の海にて",
-          "斯く戦えり"
+          "斯く戦えり",
+          "GATE SEASON2 スペシャルトークステージ"
         ],
         "normalized_search_terms": [
           "gate",
@@ -11278,7 +11565,8 @@
           "斯く戦えりすぺしゃるとーくすてーじ",
           "新町橋東公園",
           "新町橋東公園すてーじ",
-          "自衛隊彼の海にて斯く戦えり"
+          "自衛隊彼の海にて斯く戦えり",
+          "gateseason2スペシャルトークステージ"
         ]
       },
       "content": "GATE SEASON2 自衛隊 彼の海にて、斯く戦えり",
@@ -11294,11 +11582,20 @@
         "people": [
           "MC: フリーアナウンサー ほか"
         ],
-        "notes": "公式Xで開催決定。タイムテーブルでは5/16 10:00-11:00 新町橋東公園。"
+        "notes": "公式Xで開催決定。タイムテーブルでは5/16 10:00-11:00 新町橋東公園。 / 公式X追記: GATE SEASON2 スペシャルトークステージ（2026-05-09投稿）"
       },
       "source": {
         "url": "https://twitter.com/machiasobi/status/2053037262578037220",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2053037262578037220",
+            "created_at_jst": "2026-05-09T18:00:01.643+09:00",
+            "topic": "GATE SEASON2 スペシャルトークステージ",
+            "url": "https://x.com/machiasobi/status/2053037262578037220",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "10:00から新町橋東公園ステージの「TVアニメ「GATE SEASON2 自衛隊 彼の海にて、斯く戦えり」スペシャルトークステージ」ですね。",
@@ -11428,7 +11725,8 @@
           "たあ",
           "TYPE-MOON",
           "typemoon",
-          "ufotable"
+          "ufotable",
+          "衛宮さんちの今日のごはん TAa先生セレクト上映会"
         ],
         "normalized_search_terms": [
           "taa",
@@ -11443,7 +11741,8 @@
           "たあ",
           "衛宮ごはん",
           "衛宮さんちの今日のごはん",
-          "衛宮さんちの今日のごはんtaa先生せれくと上映会inまちあそび"
+          "衛宮さんちの今日のごはんtaa先生せれくと上映会inまちあそび",
+          "衛宮さんちの今日のごはんtaa先生セレクト上映会"
         ]
       },
       "content": "衛宮さんちの今日のごはん",
@@ -11459,11 +11758,20 @@
         "people": [
           "TAa"
         ],
-        "notes": "公式Xで開催決定。タイムテーブルでは5/16 22:30〜 Theater 1。"
+        "notes": "公式Xで開催決定。タイムテーブルでは5/16 22:30〜 Theater 1。 / 公式X追記: 衛宮さんちの今日のごはん TAa先生セレクト上映会（2026-05-09投稿）"
       },
       "source": {
         "url": "https://twitter.com/machiasobi/status/2053037258891022791",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2053037258891022791",
+            "created_at_jst": "2026-05-09T18:00:00.764+09:00",
+            "topic": "衛宮さんちの今日のごはん TAa先生セレクト上映会",
+            "url": "https://x.com/machiasobi/status/2053037258891022791",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "22:30からufotable CINEMA Theater 1の「『衛宮さんちの今日のごはん』TAa先生セレクト上映会 in マチ★アソビ」ですね。",
@@ -11967,7 +12275,8 @@
           "ぷらすえいち",
           "ひさくがけいかんとく",
           "みずしませいじ",
-          "くろかわともゆき"
+          "くろかわともゆき",
+          "非作画系監督はどう演出するのかトークショー"
         ],
         "normalized_search_terms": [
           "くろかわともゆき",
@@ -11980,7 +12289,8 @@
           "非作画系監督",
           "非作画系監督はどう演出するのか",
           "非作画系監督はどう演出するのかとーくしょー水島精二×黒川智之",
-          "黒川智之"
+          "黒川智之",
+          "非作画系監督はどう演出するのかトークショー"
         ]
       },
       "content": "非作画系監督はどう演出するのか",
@@ -11997,11 +12307,20 @@
           "水島精二",
           "黒川智之"
         ],
-        "notes": "公式Xで開催決定。時間・会場は画像/公式ページ照合推奨。"
+        "notes": "公式Xで開催決定。時間・会場は画像/公式ページ照合推奨。 / 公式X追記: 非作画系監督はどう演出するのかトークショー（2026-05-09投稿）"
       },
       "source": {
         "url": "https://twitter.com/machiasobi/status/2053037508590817437",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2053037508590817437",
+            "created_at_jst": "2026-05-09T18:01:00.297+09:00",
+            "topic": "非作画系監督はどう演出するのかトークショー",
+            "url": "https://x.com/machiasobi/status/2053037508590817437",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "",
@@ -12053,7 +12372,8 @@
           "業界とーく女子会",
           "業界人がーるみーつがーる",
           "業界人がーるみーつがーる時事放談",
-          "業界女子会"
+          "業界女子会",
+          "業界人ガールミーツガール時事放談"
         ]
       },
       "content": "業界人ガールミーツガール時事放談",
@@ -12067,11 +12387,20 @@
         "venue": "ufotable CINEMA Theater 2",
         "action": "業界トーク / 女子会",
         "people": [],
-        "notes": "公式Xで開催決定。タイムテーブルの「業界女子会 vol.17」枠と対応する可能性あり。"
+        "notes": "公式Xで開催決定。タイムテーブルの「業界女子会 vol.17」枠と対応する可能性あり。 / 公式X追記: 業界人ガールミーツガール時事放談（2026-05-08投稿）"
       },
       "source": {
         "url": "https://twitter.com/machiasobi/status/2052675876031201632",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2052675876031201632",
+            "created_at_jst": "2026-05-08T18:04:00.376+09:00",
+            "topic": "業界人ガールミーツガール時事放談",
+            "url": "https://x.com/machiasobi/status/2052675876031201632",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "22:00からufotable CINEMA Theater 2の「業界人ガールミーツガール時事放談」ですね。",
@@ -12120,7 +12449,8 @@
           "すーぱーきぐるみふぁいと",
           "仕事猫",
           "仕事猫ほか",
-          "着ぐるみ"
+          "着ぐるみ",
+          "スーパーきぐるみファイト"
         ]
       },
       "content": "スーパーきぐるみファイト",
@@ -12136,14 +12466,857 @@
         "people": [
           "仕事猫 ほか"
         ],
-        "notes": "公式Xと仕事猫側Xで開催確認。タイムテーブルで5/17 10:30-12:00 アミコドーム。"
+        "notes": "公式Xと仕事猫側Xで開催確認。タイムテーブルで5/17 10:30-12:00 アミコドーム。 / 公式X追記: スーパーきぐるみファイト（2026-05-07投稿）"
       },
       "source": {
         "url": "https://twitter.com/machiasobi/status/2052327582067036334",
-        "status": "official_social"
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2052327582067036334",
+            "created_at_jst": "2026-05-07T19:00:00.624+09:00",
+            "topic": "スーパーきぐるみファイト",
+            "url": "https://x.com/machiasobi/status/2052327582067036334",
+            "text_capture": "search_excerpt"
+          }
+        ]
       },
       "response_templates": {
         "stage": "10:30からアミコドームステージの「スーパーきぐるみファイト」ですね。",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0001",
+      "kind": "content",
+      "display_name": "TVアニメ「LV999の村人」スペシャルステージ in マチ★アソビ",
+      "search": {
+        "aliases": [
+          "LV999の村人"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "TVアニメ「LV999の村人」スペシャルステージ in マチ★アソビ",
+          "LV999の村人",
+          "スペシャルステージ",
+          "LV999の村人 スペシャルステージ",
+          "猪股慧士",
+          "マチ★アソビvol.30",
+          "ステージ情報解禁",
+          "アニメ",
+          "in",
+          "マチ★アソビ",
+          "開催決定",
+          "TVアニメ",
+          "より",
+          "主演の猪股慧士さんが登場",
+          "作品の魅力について語り…"
+        ],
+        "normalized_search_terms": [
+          "tvアニメlv999の村人スペシャルステージinマチ★アソビ",
+          "lv999の村人",
+          "スペシャルステージ",
+          "lv999の村人スペシャルステージ",
+          "猪股慧士",
+          "マチ★アソビvol30",
+          "ステージ情報解禁",
+          "アニメ",
+          "in",
+          "マチ★アソビ",
+          "開催決定",
+          "tvアニメ",
+          "より",
+          "主演の猪股慧士さんが登場",
+          "作品の魅力について語り"
+        ]
+      },
+      "content": "LV999の村人",
+      "organization": "",
+      "appearance": {
+        "kind": "stage",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "",
+        "venue": "",
+        "action": "スペシャルステージ",
+        "people": [
+          "猪股慧士"
+        ],
+        "notes": "公式Xで開催決定。主演の猪股慧士さんが登場。日時・会場は追加確認推奨。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2052675372580569541",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2052675372580569541",
+            "created_at_jst": "2026-05-08T18:02:00.344+09:00",
+            "topic": "LV999の村人 スペシャルステージ",
+            "url": "https://x.com/machiasobi/status/2052675372580569541",
+            "text_capture": "search_excerpt"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0002",
+      "kind": "content",
+      "display_name": "「ダークサモナーとデキている」「彼女の友達」プロデューサートーク",
+      "search": {
+        "aliases": [
+          "ダークサモナーとデキている / 彼女の友達"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "「ダークサモナーとデキている」「彼女の友達」プロデューサートーク",
+          "ダークサモナーとデキている / 彼女の友達",
+          "株式会社ウェイブ",
+          "プロデューサートーク",
+          "ダークサモナーとデキている／彼女の友達 トーク",
+          "後藤礼雅",
+          "吉田尚記",
+          "マチ★アソビvol.30",
+          "ステージ情報解禁",
+          "ダークサモナーとデキている",
+          "彼女の友達",
+          "開催決定",
+          "株式会社ウェイブのアニメーション部統括",
+          "後藤礼雅が登場",
+          "アナウンサーの吉田尚記と共に",
+          "現在制作進行中の2作品について語る内容"
+        ],
+        "normalized_search_terms": [
+          "ダークサモナーとデキている彼女の友達プロデューサートーク",
+          "ダークサモナーとデキている彼女の友達",
+          "株式会社ウェイブ",
+          "プロデューサートーク",
+          "ダークサモナーとデキている彼女の友達トーク",
+          "後藤礼雅",
+          "吉田尚記",
+          "マチ★アソビvol30",
+          "ステージ情報解禁",
+          "ダークサモナーとデキている",
+          "彼女の友達",
+          "開催決定",
+          "株式会社ウェイブのアニメーション部統括",
+          "後藤礼雅が登場",
+          "アナウンサーの吉田尚記と共に",
+          "現在制作進行中の2作品について語る内容"
+        ]
+      },
+      "content": "ダークサモナーとデキている / 彼女の友達",
+      "organization": "株式会社ウェイブ",
+      "appearance": {
+        "kind": "talk",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "",
+        "venue": "",
+        "action": "プロデューサートーク",
+        "people": [
+          "後藤礼雅",
+          "吉田尚記"
+        ],
+        "notes": "公式Xで開催決定。株式会社ウェイブのアニメーション部統括 後藤礼雅とアナウンサー吉田尚記が、制作進行中の2作品について語る内容。日時・会場は追加確認推奨。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2052675372794175844",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2052675372794175844",
+            "created_at_jst": "2026-05-08T18:02:00.395+09:00",
+            "topic": "ダークサモナーとデキている／彼女の友達 トーク",
+            "url": "https://x.com/machiasobi/status/2052675372794175844",
+            "text_capture": "search_excerpt"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0003",
+      "kind": "content",
+      "display_name": "TVアニメ『マリッジトキシン』セレクション話数上映会",
+      "search": {
+        "aliases": [
+          "マリッジトキシン"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "TVアニメ『マリッジトキシン』セレクション話数上映会",
+          "マリッジトキシン",
+          "セレクション話数上映会",
+          "マリッジトキシン セレクション上映会",
+          "マチ★アソビvol.30",
+          "ステージ情報解禁",
+          "TVアニメ",
+          "開催決定"
+        ],
+        "normalized_search_terms": [
+          "tvアニメマリッジトキシンセレクション話数上映会",
+          "マリッジトキシン",
+          "セレクション話数上映会",
+          "マリッジトキシンセレクション上映会",
+          "マチ★アソビvol30",
+          "ステージ情報解禁",
+          "tvアニメ",
+          "開催決定"
+        ]
+      },
+      "content": "マリッジトキシン",
+      "organization": "",
+      "appearance": {
+        "kind": "screening",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "",
+        "venue": "",
+        "action": "セレクション話数上映会",
+        "people": [],
+        "notes": "公式Xで開催決定。日時・会場は追加確認推奨。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2052682418637717845",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2052682418637717845",
+            "created_at_jst": "2026-05-08T18:30:00.255+09:00",
+            "topic": "マリッジトキシン セレクション上映会",
+            "url": "https://x.com/machiasobi/status/2052682418637717845",
+            "text_capture": "search_excerpt"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0004",
+      "kind": "notice",
+      "display_name": "ufotable CINEMA他 各種イベント整理券配布及び整列方法のご案内",
+      "search": {
+        "aliases": [
+          "整理券配布・整列方法案内"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "ufotable CINEMA他 各種イベント整理券配布及び整列方法のご案内",
+          "整理券配布・整列方法案内",
+          "マチ★アソビ",
+          "マチ★アソビvol.30",
+          "ufotable",
+          "CINEMA他各種イベント整理券配布及び整列方法のご案内",
+          "マチ★アソビvol.30でもufotable",
+          "CINEMAでは様々なイベントが行われます",
+          "イベントによっては整理券が必要だったり",
+          "事前に入場券の購入が必要なイベントもございます"
+        ],
+        "normalized_search_terms": [
+          "ufotablecinema他各種イベント整理券配布及び整列方法のご案内",
+          "整理券配布整列方法案内",
+          "マチ★アソビ",
+          "マチ★アソビvol30",
+          "ufotable",
+          "cinema他各種イベント整理券配布及び整列方法のご案内",
+          "マチ★アソビvol30でもufotable",
+          "cinemaでは様々なイベントが行われます",
+          "イベントによっては整理券が必要だったり",
+          "事前に入場券の購入が必要なイベントもございます"
+        ]
+      },
+      "content": "整理券配布・整列方法案内",
+      "organization": "マチ★アソビ",
+      "appearance": {
+        "kind": "notice",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "ufotable CINEMAほか",
+        "venue": "ufotable CINEMAほか",
+        "action": "整理券配布・整列方法案内",
+        "people": [],
+        "notes": "公式Xで案内。ufotable CINEMAではイベントにより整理券や事前入場券購入が必要。運用案内として登録。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2053762943758848047",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2053762943758848047",
+            "created_at_jst": "2026-05-11T18:03:37.519+09:00",
+            "topic": "整理券配布・整列方法案内",
+            "url": "https://x.com/machiasobi/status/2053762943758848047",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0005",
+      "kind": "event",
+      "display_name": "マチ★アソビ前夜サウナ",
+      "search": {
+        "aliases": [
+          "マチ★アソビサウナ"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "マチ★アソビ前夜サウナ",
+          "マチ★アソビサウナ",
+          "前夜サウナ",
+          "マチ★アソビ前夜サウナ開催決定",
+          "通だけが通ってくださっている前日夜のマチアソビサウナ今年もやります",
+          "マチアソビで忙しくなる前に心と体を…"
+        ],
+        "normalized_search_terms": [
+          "マチ★アソビ前夜サウナ",
+          "マチ★アソビサウナ",
+          "前夜サウナ",
+          "マチ★アソビ前夜サウナ開催決定",
+          "通だけが通ってくださっている前日夜のマチアソビサウナ今年もやります",
+          "マチアソビで忙しくなる前に心と体を"
+        ]
+      },
+      "content": "マチ★アソビサウナ",
+      "organization": "",
+      "appearance": {
+        "kind": "event",
+        "date": "2026-05-15",
+        "start_time": "",
+        "end_time": "",
+        "area": "新町川水際公園",
+        "venue": "マチ★アソビサウナ",
+        "action": "前夜サウナ",
+        "people": [],
+        "notes": "公式Xで開催決定。投稿本文は検索抜粋のため詳細時間は追加確認推奨。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054116375816491021",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054116375816491021",
+            "created_at_jst": "2026-05-12T17:28:02.288+09:00",
+            "topic": "マチ★アソビ前夜サウナ",
+            "url": "https://x.com/machiasobi/status/2054116375816491021",
+            "text_capture": "search_excerpt"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0006",
+      "kind": "event",
+      "display_name": "マチ★アソビ 痛車グランプリ",
+      "search": {
+        "aliases": [
+          "痛車グランプリ"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "マチ★アソビ 痛車グランプリ",
+          "痛車グランプリ",
+          "痛車展示 / 投票企画",
+          "痛車グランプリ 告知",
+          "マチ★アソビ",
+          "No.1の痛車を選ぶのは",
+          "あなたの一票",
+          "vol.30に",
+          "様々な痛車が集結する",
+          "が今年も開催決定"
+        ],
+        "normalized_search_terms": [
+          "マチ★アソビ痛車グランプリ",
+          "痛車グランプリ",
+          "痛車展示投票企画",
+          "痛車グランプリ告知",
+          "マチ★アソビ",
+          "no1の痛車を選ぶのは",
+          "あなたの一票",
+          "vol30に",
+          "様々な痛車が集結する",
+          "が今年も開催決定"
+        ]
+      },
+      "content": "痛車グランプリ",
+      "organization": "",
+      "appearance": {
+        "kind": "event",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "",
+        "venue": "",
+        "action": "痛車展示 / 投票企画",
+        "people": [],
+        "notes": "公式Xで告知。「No.1の痛車を選ぶのは、あなたの一票！」として案内。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054124426082607565",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054124426082607565",
+            "created_at_jst": "2026-05-12T18:00:01.621+09:00",
+            "topic": "痛車グランプリ 告知",
+            "url": "https://x.com/machiasobi/status/2054124426082607565",
+            "text_capture": "search_excerpt"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0007",
+      "kind": "event",
+      "display_name": "マチ★アソビ 痛車グランプリ アワード授賞式",
+      "search": {
+        "aliases": [
+          "痛車グランプリ"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "マチ★アソビ 痛車グランプリ アワード授賞式",
+          "痛車グランプリ",
+          "アワード授賞式",
+          "痛車グランプリ アワード授賞式",
+          "マチ★アソビ",
+          "各アワードの授賞式を",
+          "17",
+          "16",
+          "00–16",
+          "30",
+          "徳島こども交通公園にて開催",
+          "マチ★アソビNo.1の痛車が決まる瞬間をお見逃しなく"
+        ],
+        "normalized_search_terms": [
+          "マチ★アソビ痛車グランプリアワード授賞式",
+          "痛車グランプリ",
+          "アワード授賞式",
+          "痛車グランプリアワード授賞式",
+          "マチ★アソビ",
+          "各アワードの授賞式を",
+          "17",
+          "16",
+          "0016",
+          "30",
+          "徳島こども交通公園にて開催",
+          "マチ★アソビno1の痛車が決まる瞬間をお見逃しなく"
+        ]
+      },
+      "content": "痛車グランプリ",
+      "organization": "",
+      "appearance": {
+        "kind": "stage",
+        "date": "2026-05-17",
+        "start_time": "16:00",
+        "end_time": "16:30",
+        "area": "徳島こども交通公園",
+        "venue": "徳島こども交通公園",
+        "action": "アワード授賞式",
+        "people": [],
+        "notes": "公式Xで開催決定。各アワードの授賞式。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054124672204353865",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054124672204353865",
+            "created_at_jst": "2026-05-12T18:01:00.301+09:00",
+            "topic": "痛車グランプリ アワード授賞式",
+            "url": "https://x.com/machiasobi/status/2054124672204353865",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "16:00から徳島こども交通公園の「マチ★アソビ 痛車グランプリ アワード授賞式」ですね。",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0008",
+      "kind": "talk",
+      "display_name": "ボンズ×プロダクション・アイジー「周年って何？」",
+      "search": {
+        "aliases": [
+          "ボンズ×プロダクション・アイジー"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "ボンズ×プロダクション・アイジー「周年って何？」",
+          "ボンズ×プロダクション・アイジー",
+          "ボンズ / Production I.G",
+          "周年をテーマにしたトークステージ",
+          "ボンズ×プロダクション・アイジー 周年って何？",
+          "マチ★アソビvol.30",
+          "ステージ情報解禁",
+          "ボンズ×プロダクション",
+          "アイジー",
+          "周年って何",
+          "開催決定",
+          "ここんとこ",
+          "アニメ放送何周年ってよく聞きませんか",
+          "周年をファンの方がより楽しめるように語ってみようってステージです"
+        ],
+        "normalized_search_terms": [
+          "ボンズプロダクションアイジー周年って何",
+          "ボンズプロダクションアイジー",
+          "ボンズproductionig",
+          "周年をテーマにしたトークステージ",
+          "マチ★アソビvol30",
+          "ステージ情報解禁",
+          "ボンズプロダクション",
+          "アイジー",
+          "周年って何",
+          "開催決定",
+          "ここんとこ",
+          "アニメ放送何周年ってよく聞きませんか",
+          "周年をファンの方がより楽しめるように語ってみようってステージです"
+        ]
+      },
+      "content": "ボンズ×プロダクション・アイジー",
+      "organization": "ボンズ / Production I.G",
+      "appearance": {
+        "kind": "stage",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "",
+        "venue": "",
+        "action": "周年をテーマにしたトークステージ",
+        "people": [],
+        "notes": "公式Xで開催決定。日時・会場は追加確認推奨。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054124923896082571",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054124923896082571",
+            "created_at_jst": "2026-05-12T18:02:00.309+09:00",
+            "topic": "ボンズ×プロダクション・アイジー 周年って何？",
+            "url": "https://x.com/machiasobi/status/2054124923896082571",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0009",
+      "kind": "content",
+      "display_name": "20周年記念 TVアニメ「桜蘭高校ホスト部」1話・13話上映会",
+      "search": {
+        "aliases": [
+          "桜蘭高校ホスト部"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "20周年記念 TVアニメ「桜蘭高校ホスト部」1話・13話上映会",
+          "桜蘭高校ホスト部",
+          "上映会 / トーク",
+          "桜蘭高校ホスト部 上映会",
+          "マチ★アソビvol.30",
+          "ステージ情報解禁",
+          "20周年記念",
+          "TVアニメ",
+          "1話",
+          "13話上映会",
+          "開催決定",
+          "放送から20周年を迎える",
+          "今でも世界中で愛されている作品の第1話とオリジナルの13話を上映",
+          "上映後ちょっと懐かしいトークなどできれば"
+        ],
+        "normalized_search_terms": [
+          "20周年記念tvアニメ桜蘭高校ホスト部1話13話上映会",
+          "桜蘭高校ホスト部",
+          "上映会トーク",
+          "桜蘭高校ホスト部上映会",
+          "マチ★アソビvol30",
+          "ステージ情報解禁",
+          "20周年記念",
+          "tvアニメ",
+          "1話",
+          "13話上映会",
+          "開催決定",
+          "放送から20周年を迎える",
+          "今でも世界中で愛されている作品の第1話とオリジナルの13話を上映",
+          "上映後ちょっと懐かしいトークなどできれば"
+        ]
+      },
+      "content": "桜蘭高校ホスト部",
+      "organization": "",
+      "appearance": {
+        "kind": "screening",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "",
+        "venue": "",
+        "action": "上映会 / トーク",
+        "people": [],
+        "notes": "公式Xで開催決定。第1話とオリジナルの第13話を上映、上映後にトーク予定。日時・会場は追加確認推奨。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054124924319453548",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054124924319453548",
+            "created_at_jst": "2026-05-12T18:02:00.410+09:00",
+            "topic": "桜蘭高校ホスト部 上映会",
+            "url": "https://x.com/machiasobi/status/2054124924319453548",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0010",
+      "kind": "talk",
+      "display_name": "世界はクズで回ってる",
+      "search": {
+        "aliases": [],
+        "aliases_kana": [],
+        "search_terms": [
+          "世界はクズで回ってる",
+          "マネジメント職向けトーク",
+          "マチ★アソビ",
+          "vol.30",
+          "ステージ情報解禁",
+          "開催決定",
+          "クリエイティブな現場でマネジメント職に就いたものの",
+          "うまくいってる気がしない",
+          "違和感がある",
+          "こんな筈じゃなかった方向けに",
+          "正しいマネージャーの姿",
+          "をお話をさせて頂く予定です"
+        ],
+        "normalized_search_terms": [
+          "世界はクズで回ってる",
+          "マネジメント職向けトーク",
+          "マチ★アソビ",
+          "vol30",
+          "ステージ情報解禁",
+          "開催決定",
+          "クリエイティブな現場でマネジメント職に就いたものの",
+          "うまくいってる気がしない",
+          "違和感がある",
+          "こんな筈じゃなかった方向けに",
+          "正しいマネージャーの姿",
+          "をお話をさせて頂く予定です"
+        ]
+      },
+      "content": "世界はクズで回ってる",
+      "organization": "",
+      "appearance": {
+        "kind": "stage",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "",
+        "venue": "",
+        "action": "マネジメント職向けトーク",
+        "people": [],
+        "notes": "公式Xで開催決定。クリエイティブ現場のマネジメント職に向けた「正しいマネージャーの姿」についてのトーク予定。日時・会場は追加確認推奨。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054125175730516359",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054125175730516359",
+            "created_at_jst": "2026-05-12T18:03:00.351+09:00",
+            "topic": "世界はクズで回ってる",
+            "url": "https://x.com/machiasobi/status/2054125175730516359",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0011",
+      "kind": "content",
+      "display_name": "アニメ「鬼滅の刃」シリーズ全編再放送記念 アミコビルスタンディーロード",
+      "search": {
+        "aliases": [
+          "鬼滅の刃"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "アニメ「鬼滅の刃」シリーズ全編再放送記念 アミコビルスタンディーロード",
+          "鬼滅の刃",
+          "スタンディ展示 / フォトスポットロード",
+          "鬼滅の刃 アミコビルスタンディーロード",
+          "マチ★アソビvol.30",
+          "催し情報",
+          "アニメ",
+          "シリーズ全編再放送記念",
+          "アミコビルスタンディーロード",
+          "歴代のBlu-ray&DVDのufotable特典としてお届けしてきた描き下ろしイラストを等身大スタンディにして一挙に終結",
+          "フォトスポットロードとしてお届けいたします",
+          "無限城編に至るまでの道のりを写真に収めてお楽しみください"
+        ],
+        "normalized_search_terms": [
+          "アニメ鬼滅の刃シリーズ全編再放送記念アミコビルスタンディーロード",
+          "鬼滅の刃",
+          "スタンディ展示フォトスポットロード",
+          "鬼滅の刃アミコビルスタンディーロード",
+          "マチ★アソビvol30",
+          "催し情報",
+          "アニメ",
+          "シリーズ全編再放送記念",
+          "アミコビルスタンディーロード",
+          "歴代のbluraydvdのufotable特典としてお届けしてきた描き下ろしイラストを等身大スタンディにして一挙に終結",
+          "フォトスポットロードとしてお届けいたします",
+          "無限城編に至るまでの道のりを写真に収めてお楽しみください"
+        ]
+      },
+      "content": "鬼滅の刃",
+      "organization": "",
+      "appearance": {
+        "kind": "exhibition",
+        "date": "2026-05-16/2026-05-17",
+        "start_time": "",
+        "end_time": "",
+        "area": "アミコビル",
+        "venue": "アミコビル",
+        "action": "スタンディ展示 / フォトスポットロード",
+        "people": [],
+        "notes": "公式Xで催し情報を確認。歴代Blu-ray&DVDのufotable特典描き下ろしイラストを等身大スタンディとして展示。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054125427388756457",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054125427388756457",
+            "created_at_jst": "2026-05-12T18:04:00.351+09:00",
+            "topic": "鬼滅の刃 アミコビルスタンディーロード",
+            "url": "https://x.com/machiasobi/status/2054125427388756457",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "",
+        "booth": ""
+      }
+    },
+    {
+      "id": "machiasobi30_v08_0012",
+      "kind": "content",
+      "display_name": "劇場アニメーション「魔法使いの夜」JR徳島駅一日駅長",
+      "search": {
+        "aliases": [
+          "魔法使いの夜"
+        ],
+        "aliases_kana": [],
+        "search_terms": [
+          "劇場アニメーション「魔法使いの夜」JR徳島駅一日駅長",
+          "魔法使いの夜",
+          "一日駅長 / 出発式 / 駅構内アナウンス",
+          "魔法使いの夜 JR徳島駅一日駅長",
+          "蒼崎青子役キャスト",
+          "マチ★アソビvol.30",
+          "催し情報",
+          "劇場アニメーション",
+          "蒼崎青子役キャストがJR徳島駅一日駅長就任決定",
+          "JR徳島駅にて出発式や駅構内アナウンスを実施します",
+          "日時",
+          "5月17日",
+          "10開始",
+          "場所",
+          "JR徳島駅",
+          "※ご観覧には整理券が必要となります"
+        ],
+        "normalized_search_terms": [
+          "劇場アニメーション魔法使いの夜jr徳島駅一日駅長",
+          "魔法使いの夜",
+          "一日駅長出発式駅構内アナウンス",
+          "魔法使いの夜jr徳島駅一日駅長",
+          "蒼崎青子役キャスト",
+          "マチ★アソビvol30",
+          "催し情報",
+          "劇場アニメーション",
+          "蒼崎青子役キャストがjr徳島駅一日駅長就任決定",
+          "jr徳島駅にて出発式や駅構内アナウンスを実施します",
+          "日時",
+          "5月17日",
+          "10開始",
+          "場所",
+          "jr徳島駅",
+          "※ご観覧には整理券が必要となります"
+        ]
+      },
+      "content": "魔法使いの夜",
+      "organization": "",
+      "appearance": {
+        "kind": "event",
+        "date": "2026-05-17",
+        "start_time": "09:10",
+        "end_time": "",
+        "area": "JR徳島駅",
+        "venue": "JR徳島駅",
+        "action": "一日駅長 / 出発式 / 駅構内アナウンス",
+        "people": [
+          "蒼崎青子役キャスト"
+        ],
+        "notes": "公式Xで催し情報を確認。観覧には整理券が必要。"
+      },
+      "source": {
+        "url": "https://x.com/machiasobi/status/2054131187250323551",
+        "status": "official_social",
+        "official_x_posts": [
+          {
+            "id": "2054131187250323551",
+            "created_at_jst": "2026-05-12T18:26:53.609+09:00",
+            "topic": "魔法使いの夜 JR徳島駅一日駅長",
+            "url": "https://x.com/machiasobi/status/2054131187250323551",
+            "text_capture": "full_or_near_full_visible"
+          }
+        ]
+      },
+      "response_templates": {
+        "stage": "09:10からJR徳島駅の「劇場アニメーション「魔法使いの夜」JR徳島駅一日駅長」ですね。",
         "booth": ""
       }
     }
