@@ -174,7 +174,6 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     <div class="card">
       <table style="width:100%;font-size:13px;border-collapse:collapse">
         <tr><td style="padding:5px 0;color:#888;width:80px">日程</td><td style="padding:5px 0;font-weight:bold">5/16(土)・5/17(日)</td></tr>
-        <tr><td style="padding:5px 0;color:#888">場所</td><td style="padding:5px 0">徳島市内各所</td></tr>
         <tr><td style="padding:5px 0;color:#888">集合</td><td style="padding:5px 0">東公園ボランティアテント</td></tr>
         <tr><td style="padding:5px 0;color:#888">1部</td><td style="padding:5px 0">8:30集合 → 9:00〜18:00</td></tr>
         <tr><td style="padding:5px 0;color:#888">2部</td><td style="padding:5px 0">11:30集合 → 12:00〜21:00</td></tr>
@@ -184,8 +183,9 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     <div class="sec-head">🏕️ テント・本部</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
-        <div>📍 <strong>藍場浜テント</strong> — 藍場浜エリア拠点・迷子・救護</div>
-        <div>📍 <strong>東公園ボランティアテント</strong> — 集合・東公園拠点</div>
+        <div>📍 <strong>藍場浜テント</strong> — 藍場浜エリア拠点・総合案内・救護・落とし物・各種パス発行など</div>
+        <div>📍 <strong>東公園ボランティアテント</strong> — 集合・ボランティア拠点</div>
+        <div>📍 <strong>東公園本部テント</strong> — 東公園拠点・救護・落とし物・各種パス発行など</div>
         <div>📍 <strong>西公園テント</strong> — 西公園エリア拠点</div>
       </div>
     </div>
@@ -199,10 +199,10 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
         <div>🔵 <strong>混雑・列・導線</strong> → 近くの混雑対応部、リーダー</div>
         <div>🔵 <strong>イベントルール・判断</strong> → リーダー・本部</div>
         <div>🔵 <strong>パス・関係者対応</strong> → 必ず混雑対応部へ（いなければ八木・桑野）</div>
-        <div>🔵 <strong>サウナ関連</strong> → サウナスタッフ → 混雑対応部 → 八木・桑野</div>
+        <div>🔵 <strong>サウナ関連</strong> → サウナスタッフ → 八木・桑野</div>
       </div>
       <div class="divider"></div>
-      <div style="font-size:12px;color:#888">判断に迷ったら「確認します」と伝えてリーダーへ</div>
+      <div style="font-size:12px;color:#888">判断に迷ったら「確認します」と伝えてリーダーor八木・桑野へ</div>
     </div>
 
     <div class="sec-head">📋 運営体制</div>
@@ -444,20 +444,18 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
         </optgroup>
         <optgroup label="ステージ">
           <option value="tachiaге">立ち上げ・撤収</option>
-          <option value="kaijoseiridounyuu">会場整理誘導</option>
           <option value="uketsuke">受付（藍場浜 / 東公園 / 西公園）</option>
         </optgroup>
         <optgroup label="巡回・応援">
           <option value="yuugeki">遊撃 / BW（ボードウォーク）</option>
           <option value="chusharinjou">自転車置場〜東新町 / コルネの泉 巡回</option>
           <option value="ufo">ufotable CINEMA 周辺補助</option>
-          <option value="sauna">サウナ企画補助</option>
+          <option value="sauna">サウナ</option>
           <option value="hashi">橋の下美術館ヘルプ</option>
         </optgroup>
         <optgroup label="その他">
           <option value="enquete">アンケート調査</option>
-          <option value="gomi">ごみ収集・美化</option>
-          <option value="parasol">パラソル・ブース補助</option>
+          <option value="gomi">巡回</option>
           <option value="hikitsugi">引継ぎ手順</option>
           <option value="taiki">待機中にできること</option>
         </optgroup>
@@ -470,11 +468,11 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
 
     <!-- DUTY PANELS -->
     <div id="dp-satsukin-aiba" class="duty-panel">
-      <div class="alert alert-red"><strong>藍場浜 撮禁A / 撮禁B</strong><br>AとBの2名1組で交代制</div>
+      <div class="alert alert-red"><strong>藍場浜 撮禁A / 撮禁B</strong><br>AとBの2組で交代制</div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔁 A/B交代制のルール</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は待機・休憩</li><li><strong>撮禁Bの番</strong>：B が担当、A は待機・休憩</li><li>交代タイミングはシフト表またはリーダーの指示に従う</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 撮影禁止対応の手順</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>撮禁札・表示を来場者から見える位置に出す（観覧者の視界をふさがない高さ・位置に注意）</li><li>ステージ正面だけでなく<strong>横・後方・橋の上・対岸・歩道側</strong>も確認する</li><li>スマホ・カメラを構えている人に落ち着いて声をかける</li><li>注意しても続ける場合は<strong>リーダー・八木・桑野へ共有</strong></li><li>30分以上立ち続けることがある — 体調に注意</li></ul></div></div>
+      <div class="acc-body"><ul><li>撮禁札・表示を来場者から見える位置に出す（観覧者の視界をふさがない高さ・位置に注意）</li><li>ステージ正面だけでなく<strong>横・後方</strong>も確認する</li><li>スマホ・カメラを構えている人に落ち着いて声をかける</li><li>注意しても続ける場合は<strong>リーダー・八木・桑野へ共有</strong></li><li>30分以上立ち続けることがある — 体調に注意</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🚫 やってはいけないこと</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li>来場者のスマホ・カメラに触れる</li><li>撮影データの削除を個人判断で求める</li><li>SNS投稿の削除を個人判断で求める</li><li>強い口調で注意する・口論する</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 藍場浜エリア 見るポイント</span><span class="acc-arrow">▼</span></div>
@@ -482,17 +480,17 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     </div>
 
     <div id="dp-satsukin-higashi" class="duty-panel">
-      <div class="alert alert-orange"><strong>東公園 撮禁A / 撮禁B</strong><br>AとBの2名1組で交代制</div>
+      <div class="alert alert-orange"><strong>東公園 撮禁A / 撮禁B</strong><br>AとBの2組で交代制</div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔁 A/B交代制のルール</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は待機・休憩</li><li><strong>撮禁Bの番</strong>：B が担当、A は待機・休憩</li><li>交代タイミングはシフト表またはリーダーの指示に従う</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 撮影禁止対応の手順</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>撮禁札を来場者から見える位置に出す</li><li>ステージ正面だけでなく横・後方・橋の上からの撮影も確認</li><li>スマホ・カメラを構えている人に落ち着いて声をかける</li><li>注意しても続ける場合は<strong>リーダー・八木・桑野へ共有</strong></li></ul></div></div>
+      <div class="acc-body"><ul><li>撮禁札を来場者から見える位置に出す</li><li>ステージ正面だけでなく<strong>横・後方・橋の上・対岸・歩道側</strong>も確認する</li><li>スマホ・カメラを構えている人に落ち着いて声をかける</li><li>注意しても続ける場合は<strong>リーダー・八木・桑野へ共有</strong></li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 東公園エリア 見るポイント</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>ボランティア集合時にテント周辺が混雑していないか</li><li>来場者とスタッフの動線がぶつかっていないか</li><li>担当がわからず困っているスタッフがいないか</li><li>体調不良のスタッフがいないか</li></ul></div></div>
+      <div class="acc-body"><ul><li>ステージ後方・横導線で人が止まっていないか</li><li>通路がふさがっていないか（テント側要注意）</li><li>ステージ上・出演者の撮影が行われていないか</li><li>体調が悪そうな人がいないか</li></ul></div></div>
     </div>
 
     <div id="dp-satsukin-nishi" class="duty-panel">
-      <div class="alert alert-yellow"><strong>西公園 撮禁A / 撮禁B</strong><br>AとBの2名1組で交代制</div>
+      <div class="alert alert-yellow"><strong>西公園 撮禁A / 撮禁B</strong><br>AとBの1組で交代制</div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔁 A/B交代制のルール</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li><strong>撮禁Aの番</strong>：A が札を持って巡回、B は西公園受付テントで待機（受付兼務）</li><li><strong>撮禁Bの番</strong>：B が担当、A は西公園受付テントで待機（受付兼務）</li><li>交代タイミングはシフト表またはリーダーの指示に従う</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 撮影禁止対応の手順</span><span class="acc-arrow">▼</span></div>
@@ -500,29 +498,27 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🏕️ 受付待機中にやること</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li>会場・イベント場所の案内</li><li>落とし物の一次受付</li><li>体調不良・怪我の初動共有</li><li>スタッフやリーダーへの連絡・呼び戻し</li><li>関係者・出展者からの問い合わせの一次受け</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📍 西公園エリア 見るポイント</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>西公園テント周辺の案内・確認に対応</li><li>比較的落ち着いたエリアだが、周辺エリアへの誘導も行う</li></ul></div></div>
+      <div class="acc-body"><ul><li>西公園テント周辺の案内・確認に対応</li><li>石やベンチなどに登って観覧している人がいないか、いた場合は声をかける</li></ul></div></div>
     </div>
 
     <div id="dp-tachiaге" class="duty-panel">
-      <div class="alert alert-blue"><strong>立ち上げ・撤収</strong></div>
+      <div class="alert alert-blue"><strong>立ち上げ・撤収（パラソル・ブース補助含む）</strong></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🔧 立ち上げでやること</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>ステージ周辺の三角コーン・バーの展開</li><li>撮影禁止札・案内表示などの設置</li><li>パラソル各ブースへの看板・配布物の配布</li><li>出展者・ブース担当者への<strong>挨拶（当日の連携づくり）</strong></li><li>ブース位置、導線、問い合わせが起きそうな場所の確認</li><li>ごみ捨て場所、パス受け取り場所、本部テントの案内</li><li>不明点は本部・混雑対応部・八木・桑野へ確認</li></ul></div></div>
+      <div class="acc-body"><ul><li>ステージ周辺の三角コーン・バーの展開</li><li>撮影禁止札・案内表示などの設置</li><li><strong>ゴミ箱の展開</strong></li><li>パラソル各ブースへの看板・配布物の配布</li><li>出展者・ブース担当者への<strong>挨拶（当日の連携づくり）</strong></li><li>ブース位置、導線、問い合わせが起きそうな場所の確認</li><li>ごみ捨て場所、パス受け取り場所、本部テントの案内</li><li>不明点は本部・混雑対応部・八木・桑野へ確認</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📦 撤収でやること</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>三角コーン・バー・案内表示の回収</li><li>撮影禁止札・備品の回収</li><li>パラソル周辺の<strong>忘れ物・ごみ確認</strong></li><li>ブース担当者への終了確認・挨拶</li><li>残置物や破損物の確認</li><li>余った配布物・看板等の回収先確認</li><li>本部への完了報告</li></ul></div></div>
-    </div>
-
-    <div id="dp-kaijoseiridounyuu" class="duty-panel">
-      <div class="alert alert-red"><strong>ステージイベント 会場整理誘導</strong></div>
-      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 主な業務</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>来場者の安全を確保する</li><li>観覧エリア・通路・待機列を整理する</li><li>撮影禁止や観覧ルールを守ってもらう</li><li>終演後の混雑を防ぐ</li></ul></div></div>
-      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>👥 2人1組での行動</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body">片方が来場者対応をしている間、もう片方は周囲の安全確認・通路確保・リーダーへの連絡を担当。2人とも目の前の対応に入り込みすぎない。<br><br><strong>すぐ共有するケース：</strong><ul><li>強い口調で詰められている</li><li>列が伸びて通路をふさぎそう</li><li>撮影禁止への注意に応じてもらえない</li><li>体調不良者・迷子・クレームが発生した</li></ul></div></div>
+      <div class="acc-body"><ul><li>三角コーン・バー・案内表示の回収</li><li>撮影禁止札・備品の回収</li><li><strong>ゴミ箱の撤収</strong></li><li>パラソル周辺の<strong>忘れ物・ごみ確認</strong></li><li>ブース担当者への終了確認・挨拶</li><li>残置物や破損物の確認</li><li>余った配布物・看板等の回収先確認</li><li>本部への完了報告</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>✅ パラソル・ブース対応してよいこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>本部テント、トイレ、ごみ捨て場所の場所案内</li><li>看板・配布物を渡す、置き場所を確認する</li><li>パラソル設営の簡単な補助</li><li>ブース前の滞留への声かけ</li><li>地元の飲食店・休憩場所をわかる範囲で案内</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>❌ パラソル・ブース 確認が必要なこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>パスの発行・受け渡し・再発行</li><li>販売可否・方法・価格・購入制限</li><li>電源・設備・備品の不足</li><li>パラソル破損・風で危ない場合</li><li>出展者同士・来場者とのトラブル</li></ul></div></div>
     </div>
 
     <div id="dp-uketsuke" class="duty-panel">
       <div class="alert alert-blue"><strong>受付（藍場浜 / 東公園 / 西公園）</strong></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 テントで受ける可能性がある対応</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li>会場・イベント場所の案内</li><li>落とし物・迷子・同行者不明の一次受付</li><li>体調不良・怪我の初動共有</li><li>アンケート記念品の案内・受け渡し</li><li>スタッフやリーダーへの連絡・呼び戻し</li><li>関係者・出展者からの問い合わせの一次受け</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📄 フライヤー補充</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>フライヤーの残数が少なくなってきたら、<strong>ufotable CINEMA の倉庫から補充</strong></li><li>取りに行く前に必ず<strong>声をかけてから行く</strong>こと（テント不在を作らない）</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ パス類・関係者対応は単独判断NG</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body">スタッフパス・関係者パス・取材証・出展者証などの問い合わせは、<strong>必ず混雑対応部へエスカレーション</strong>。近くにいない場合は八木・桑野へ。<br><br>使いやすい一言：<br>「パスや関係者受付に関する内容は確認が必要です。少々お待ちください」</div></div>
     </div>
@@ -534,18 +530,18 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>💬 共有例</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><div class="tmpl-box">【遊撃】ポッポ街商店街、ブース前の列が通路中央にはみ出しています。最後尾がわかりにくく、通行と混ざり始めています。列位置の判断と追加スタッフが必要です。</div>
       <br><div class="tmpl-box">【遊撃】藍場浜、終演後の退場者と次イベント待機が交差しそうです。後方通路の確保に入っています。導線判断をお願いします。</div></div></div>
-      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🎒 移動時の持ち物</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>軍手</li><li>ゴミ袋</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🪧 最後尾札の扱い</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body">最後尾札はブースで使用中のものを継続使用。新たに列ができている場合は本部テントに在庫があるかもしれないので、<strong>八木または桑野に確認</strong>すること。</div></div>
+      <div class="acc-body">最後尾札はブースで使用中のものを継続使用。新たに列ができている場合は<strong>本部テントに在庫がある</strong>ので、持っていく。</div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ 安全を最優先に</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body">慌てて走らない。車道・水辺・階段付近での無理な移動をしない。指示が重なった・シフト時間を超えそうな場合は、<strong>必ずリーダー・八木・桑野へ確認</strong>。</div></div>
+      <div class="acc-body">慌てて走らない。車道・水辺・階段付近での無理な移動をしない。指示が重なった・シフト時間を超えそうな場合は、<strong>必ず八木・桑野へ確認</strong>。</div></div>
     </div>
 
     <div id="dp-chusharinjou" class="duty-panel">
       <div class="alert alert-orange"><strong>自転車置場〜東新町 / コルネの泉 巡回</strong></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 主な役割</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li>駐輪場周辺・東新町・コルネの泉周辺を巡回する</li><li>通路や店舗入口をふさぐ滞留がないか確認する</li><li>サイン会エリア等で待機列ができそうな場合、<strong>早めに共有</strong></li><li>最後尾・列名がわかりにくい場合、一時的な声かけを行う</li><li>体調不良者・落とし物・ごみ・危険な滞留がないか確認する</li></ul></div></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🏢 旧みずほ銀行 ufotable内覧会</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">旧みずほ銀行の建物では <strong>ufotable の内覧会</strong> を実施しています。<br>来場者からの問い合わせがあった場合は場所を案内できるようにしておく。詳細な内容・参加可否などは<strong>ufotableスタッフへ確認</strong>。</div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>✅ 対応してよいこと / ❌ 確認が必要なこと</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><strong>対応OK：</strong><ul><li>通路確保のための声かけ</li><li>「何の列か」を確認するための一次案内</li><li>混雑状況・最後尾不明・通行支障の共有</li></ul><strong>要確認：</strong><ul><li>自転車の移動・撤去・駐輪可否</li><li>サイン会の参加可否、整列開始、列打ち切り</li><li>整理券・参加条件・本人確認</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>💬 使いやすい一言</span><span class="acc-arrow">▼</span></div>
@@ -563,11 +559,11 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     </div>
 
     <div id="dp-sauna" class="duty-panel">
-      <div class="alert alert-blue"><strong>サウナ企画補助</strong></div>
+      <div class="alert alert-blue"><strong>サウナ</strong></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>📋 役割</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body">サウナスタッフの指示に従って動く。ボランティアはサウナ運営を代行しない。<br><br><strong>対応OK：</strong><ul><li>サウナスタッフの指示に沿った誘導</li><li>待機場所・通行導線の案内</li><li>足元の水濡れ・段差・荷物確認</li><li>気分が悪そうな人・ふらついている人を確認する</li></ul><br><strong>要確認：</strong><ul><li>受付・予約・利用可否・料金</li><li>更衣場所・荷物置き場</li><li>安全管理上の判断</li></ul></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⚠️ 注意点</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>脱水やのぼせが疑われる人がいたら、<strong>すぐにサウナスタッフ・八木・桑野へ共有</strong></li><li>医療判断はしない</li><li>濡れた床・水辺では走らない</li></ul></div></div>
+      <div class="acc-body"><ul><li>脱水やのぼせが疑われる人がいたら、<strong>すぐにサウナスタッフへ共有</strong></li><li>医療判断はしない</li><li>濡れた床・水辺では走らない</li></ul></div></div>
     </div>
 
     <div id="dp-hashi" class="duty-panel">
@@ -585,28 +581,19 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     </div>
 
     <div id="dp-gomi" class="duty-panel">
-      <div class="alert alert-blue"><strong>ごみ収集・美化</strong></div>
+      <div class="alert alert-blue"><strong>巡回</strong></div>
+      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>👀 巡回時に拾うこと</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><ul><li>「<strong>なんか詰まりそう</strong>」という違和感を拾って共有する</li><li>迷子・体調不良・落とし物・困っている人がいないかを見る</li><li>気づいたことは早めにリーダー・八木・桑野へ共有</li></ul>
+      <div style="margin-top:8px;padding:6px 10px;background:#f0f4ff;border-radius:6px;font-size:12px;color:#555">ちなみに：<strong>旧みずほ銀行</strong>では ufotable の内覧会を実施しています。問い合わせがあった場合の参考に。</div></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🗑️ 分別区分</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><table style="width:100%;font-size:12px;border-collapse:collapse"><tr><th style="text-align:left;padding:4px 0;border-bottom:1px solid #eee">区分</th><th style="text-align:left;padding:4px 0;border-bottom:1px solid #eee">例</th></tr>
-      <tr><td style="padding:4px 0">燃えるごみ</td><td style="padding:4px 0">紙くず、食品容器</td></tr>
-      <tr><td style="padding:4px 0">燃えないごみ</td><td style="padding:4px 0">プラスチック類</td></tr>
-      <tr><td style="padding:4px 0">缶</td><td style="padding:4px 0">アルミ缶・スチール缶</td></tr>
-      <tr><td style="padding:4px 0">瓶</td><td style="padding:4px 0">飲料瓶</td></tr>
-      <tr><td style="padding:4px 0">ペットボトル</td><td style="padding:4px 0">ペットボトル本体</td></tr>
+      <tr><td style="padding:4px 0">燃えるゴミ</td><td style="padding:4px 0">紙くず、食品容器、<strong>プラスチック類</strong></td></tr>
+      <tr><td style="padding:4px 0">燃えないゴミ</td><td style="padding:4px 0">金属・ガラス類など</td></tr>
+      <tr><td style="padding:4px 0">缶・びん・ペットボトル</td><td style="padding:4px 0">アルミ缶・スチール缶・飲料瓶・ペットボトル本体</td></tr>
       <tr><td style="padding:4px 0">割り箸・竹串</td><td style="padding:4px 0">⚠️ 竹串は怪我リスクあり</td></tr>
       </table></div></div>
       <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🎒 移動時の持ち物</span><span class="acc-arrow">▼</span></div>
       <div class="acc-body"><ul><li>軍手</li><li>ゴミ袋</li></ul></div></div>
-      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🪧 最後尾札の扱い</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body">最後尾札はブースで使用中のものを継続使用。新たに列ができている場合は本部テントに在庫があるかもしれないので、<strong>八木または桑野に確認</strong>すること。</div></div>
-    </div>
-
-    <div id="dp-parasol" class="duty-panel">
-      <div class="alert alert-blue"><strong>パラソル・ブース補助</strong></div>
-      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>✅ 対応してよいこと</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>本部テント、トイレ、ごみ捨て場所の場所案内</li><li>看板・配布物を渡す、置き場所を確認する</li><li>パラソル設営の簡単な補助</li><li>ブース前の滞留への声かけ</li><li>地元の飲食店・休憩場所をわかる範囲で案内</li></ul></div></div>
-      <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>❌ 確認が必要なこと</span><span class="acc-arrow">▼</span></div>
-      <div class="acc-body"><ul><li>パスの発行・受け渡し・再発行</li><li>販売可否・方法・価格・購入制限</li><li>電源・設備・備品の不足</li><li>パラソル破損・風で危ない場合</li><li>出展者同士・来場者とのトラブル</li></ul></div></div>
     </div>
 
     <div id="dp-hikitsugi" class="duty-panel">
@@ -793,7 +780,7 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     <div class="card">
       <div style="font-size:13px;line-height:1.9">
         <div>👦 <strong>迷子・同行者不明</strong>：安全な場所へ案内 → 藍場浜/東公園テントへ共有</div>
-        <div>🎒 <strong>落とし物</strong>：拾った場所・時間確認 → テントへ引き継ぎ</div>
+        <div>🎒 <strong>落とし物</strong>：拾った場所・時間確認 → 本部テントへ引き継ぎ</div>
         <div>😠 <strong>クレーム</strong>：話を遮らず聞く、反論せず「確認します」→ リーダー・八木・桑野へ</div>
         <div>❓ <strong>不審物・不審者</strong>：触らない・動かさない・近づかない → 場所と特徴を共有</div>
       </div>
@@ -833,29 +820,6 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
 対応中：撮影停止のお願い / 場所移動のお願い / 確認中と案内
 相談：リーダー対応をお願いします</div>
       <button class="copy-btn" onclick="copyTmpl('tmpl-photo', this)">📋 コピー</button>
-    </div>
-
-    <div class="card">
-      <div class="card-title">👦 迷子・同行者不明報告</div>
-      <div class="tmpl-box" id="tmpl-lost-person">【迷子・同行者不明】
-場所：
-対象者：子ども / 大人 / 不明
-状況：泣いている / 困っている様子 / 探している来場者あり
-特徴（わかる範囲）：服装・年齢・名前等
-対応中：安全な場所で待機 / 確認中と案内
-相談：テントへの誘導・放送対応の判断をお願いします</div>
-      <button class="copy-btn" onclick="copyTmpl('tmpl-lost-person', this)">📋 コピー</button>
-    </div>
-
-    <div class="card">
-      <div class="card-title">🎒 落とし物報告</div>
-      <div class="tmpl-box" id="tmpl-lost-item">【落とし物】
-場所（拾った場所・時間）：
-物品（わかる範囲で）：
-持ち主：あり（いる）/ なし / 不明
-対応中：本人待機 / テントへ案内中 / 預かり中
-相談：テントへの引き渡し確認をお願いします</div>
-      <button class="copy-btn" onclick="copyTmpl('tmpl-lost-item', this)">📋 コピー</button>
     </div>
 
     <div class="card">
