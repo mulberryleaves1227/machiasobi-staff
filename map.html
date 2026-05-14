@@ -3,861 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>マチ★アソビ Vol.30 インタラクティブマップ</title>
+<title>マチ★アソビ Vol.30 会場マップ</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
 
 body {
   background: #1a1a2e;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
   font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-  padding: 16px;
+  padding: 12px;
+  gap: 10px;
 }
 
-h1 {
-  color: #fff;
-  font-size: clamp(14px, 3vw, 20px);
-  margin-bottom: 4px;
-  letter-spacing: 0.05em;
-  text-align: center;
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
-h1 span { color: #f0c040; }
 
 .back-link {
   display: inline-block;
   color: #aaa;
   font-size: 12px;
   text-decoration: none;
-  margin-bottom: 10px;
   padding: 4px 10px;
   border: 1px solid #444;
   border-radius: 20px;
 }
 .back-link:hover { color: #fff; border-color: #888; }
 
-.dev-mode-btn {
-  display: none;
-  margin-bottom: 8px;
-  font-size: 11px;
-  color: #0f0;
-  background: rgba(0,255,0,0.08);
-  border: 1px solid #0f0;
-  border-radius: 4px;
-  padding: 3px 10px;
-  cursor: pointer;
-}
-
-/* ── Overview Map ── */
-.map-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  border: 2px solid #444;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-}
-.map-wrapper.dev-mode { cursor: crosshair; }
-.map-wrapper img { width: 100%; height: auto; display: block; }
-
-/* ── Markers (shared) ── */
-.marker {
-  position: absolute;
-  transform: translate(-50%, -100%);
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.15s ease;
-}
-.marker:hover { transform: translate(-50%, -100%) scale(1.2); z-index: 20; }
-
-.marker-pin {
-  width: 22px;
-  height: 22px;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  border: 2px solid rgba(0,0,0,0.3);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-}
-.marker-label {
-  font-size: 9px;
-  white-space: nowrap;
-  background: rgba(0,0,0,0.75);
+h1 {
   color: #fff;
-  padding: 1px 4px;
-  border-radius: 3px;
-  margin-top: 2px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.marker:hover .marker-label { opacity: 1; }
-
-/* Category colors */
-.cat-stage    .marker-pin { background: #e74c3c; }
-.cat-shop     .marker-pin { background: #3498db; }
-.cat-food     .marker-pin { background: #27ae60; }
-.cat-facility .marker-pin { background: #f39c12; }
-.cat-event    .marker-pin { background: #9b59b6; }
-
-/* Area marker (drill-down) */
-.cat-area .marker-pin {
-  width: 26px;
-  height: 26px;
-  border-radius: 5px;
-  transform: rotate(0deg);
-  background: #f0c040 !important;
-  border: 2px solid rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ── Popup ── */
-.popup-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 400;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-}
-.popup-overlay.active { display: flex; }
-
-.popup {
-  background: #fff;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 360px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  animation: popIn 0.18s ease;
-}
-@keyframes popIn {
-  from { transform: scale(0.85); opacity: 0; }
-  to   { transform: scale(1);    opacity: 1; }
-}
-.popup-header {
-  padding: 14px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: #fff;
-}
-.popup-category { font-size: 10px; opacity: 0.85; margin-bottom: 2px; letter-spacing: 0.08em; }
-.popup-name { font-size: 16px; font-weight: bold; line-height: 1.3; }
-.popup-close {
-  background: rgba(255,255,255,0.25);
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 16px;
-  cursor: pointer;
-  color: #fff;
-  flex-shrink: 0;
-  margin-left: 8px;
-  line-height: 28px;
-  text-align: center;
-}
-.popup-body { padding: 14px 16px; color: #333; font-size: 13px; line-height: 1.65; }
-.popup-body p { margin-bottom: 8px; }
-.popup-body p:last-child { margin-bottom: 0; }
-
-.tt-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: #1a1a2e;
-  color: #f0c040;
-  border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-  text-decoration: none;
-}
-.tt-btn:hover { background: #2c2c50; }
-.tt-btn.sub {
-  margin-top: 6px;
-  background: #3d5166;
-  color: #cde;
-}
-.tt-btn.sub:hover { background: #4e677f; }
-
-.local-map-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: #f0c040;
-  color: #1a1a2e;
-  border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-}
-.local-map-btn:hover { background: #d4a800; }
-
-/* ── Legend ── */
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-  margin-top: 12px;
-  justify-content: center;
-}
-.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #ccc; }
-.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
-.legend-dot.cat-stage    { background: #e74c3c; }
-.legend-dot.cat-shop     { background: #3498db; }
-.legend-dot.cat-food     { background: #27ae60; }
-.legend-dot.cat-facility { background: #f39c12; }
-.legend-dot.cat-event    { background: #9b59b6; }
-.legend-dot.cat-area     { background: #f0c040; border-radius: 3px; }
-
-/* ── Google My Map ── */
-.gmap-section {
-  width: 100%;
-  max-width: 900px;
-  margin-top: 24px;
-}
-.gmap-section h2 {
-  color: #f0c040;
-  font-size: clamp(13px, 2.5vw, 16px);
-  margin-bottom: 8px;
-  text-align: center;
+  font-size: clamp(14px, 3vw, 18px);
   letter-spacing: 0.05em;
 }
-.gmap-section p {
+h1 span { color: #f0c040; }
+
+.hint {
   color: #aaa;
-  font-size: 11px;
-  text-align: center;
-  margin-bottom: 8px;
+  font-size: 12px;
+  padding: 0 2px;
 }
+
 .gmap-wrap {
-  position: relative;
-  width: 100%;
-  padding-bottom: 75%; /* 4:3 */
+  flex: 1 1 auto;
+  min-height: 60vh;
   border: 2px solid #444;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  background: #000;
 }
 .gmap-wrap iframe {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
+  display: block;
 }
 
-/* ── Local Map Modal ── */
-.local-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  z-index: 300;
-  flex-direction: column;
-}
-.local-modal-overlay.active { display: flex; }
-
-.local-modal {
-  background: #1a1a2e;
+.actions {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 600px;
-  width: 100%;
-  margin: 0 auto;
+  gap: 8px;
+  flex-wrap: wrap;
 }
-.local-modal-header {
-  padding: 10px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0d0d1e;
-  border-bottom: 1px solid #333;
-  flex-shrink: 0;
-}
-.local-modal-title { color: #f0c040; font-size: 15px; font-weight: bold; }
-.local-modal-close {
-  background: rgba(255,255,255,0.1);
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 17px;
-  cursor: pointer;
-  color: #fff;
-  line-height: 30px;
+.actions a {
+  flex: 1 1 auto;
   text-align: center;
-}
-
-.floor-tabs {
-  display: flex;
-  gap: 0;
-  flex-shrink: 0;
-  background: #0d0d1e;
-  padding: 8px 16px;
-}
-.floor-tab {
-  padding: 5px 18px;
-  border: 1px solid #555;
-  background: transparent;
-  color: #aaa;
-  cursor: pointer;
+  background: #2a2a4a;
+  color: #fff;
+  text-decoration: none;
   font-size: 13px;
-  font-weight: bold;
-  transition: all 0.15s;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
 }
-.floor-tab:first-child { border-radius: 6px 0 0 6px; }
-.floor-tab:last-child  { border-radius: 0 6px 6px 0; border-left: none; }
-.floor-tab.active { background: #f0c040; color: #1a1a2e; border-color: #f0c040; }
-
-.local-modal-body {
-  overflow-y: auto;
-  flex: 1;
-  -webkit-overflow-scrolling: touch;
-}
-.local-map-wrap {
-  position: relative;
-  width: 100%;
-}
-.local-map-wrap img { width: 100%; height: auto; display: block; }
-
-/* Smaller pins inside local map */
-.local-map-wrap .marker-pin { width: 18px; height: 18px; }
-
-/* ── Dev coord display ── */
-.dev-coord {
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.88);
-  color: #0f0;
-  font-family: monospace;
-  font-size: 12px;
-  padding: 4px 12px;
-  border-radius: 4px;
-  z-index: 9999;
-  pointer-events: none;
-  display: none;
-}
+.actions a:hover { background: #353560; border-color: #888; }
 </style>
 </head>
 <body>
 
-<a class="back-link" href="index.html">← スタッフナビに戻る</a>
-<h1>マチ★アソビ <span>Vol.30</span> インタラクティブマップ</h1>
-
-<button class="dev-mode-btn" id="devToggle" onclick="toggleDev()">🛠 座標クリッカー OFF</button>
-
-<div class="map-wrapper" id="mapWrapper">
-  <img src="M30_ver0510.png" alt="マチアソビVol.30要地図" id="mapImg">
+<div class="top-bar">
+  <a class="back-link" href="index.html">← スタッフナビに戻る</a>
+  <h1>マチ★アソビ <span>Vol.30</span> 会場マップ</h1>
 </div>
 
-<div class="legend">
-  <div class="legend-item"><div class="legend-dot cat-stage"></div>ステージ</div>
-  <div class="legend-item"><div class="legend-dot cat-shop"></div>ショップ</div>
-  <div class="legend-item"><div class="legend-dot cat-facility"></div>施設</div>
-  <div class="legend-item"><div class="legend-dot cat-event"></div>イベント</div>
-  <div class="legend-item"><div class="legend-dot cat-area"></div>詳細マップあり</div>
+<div class="hint">各ピンをタップすると詳細情報が表示されます。経路検索や現在地表示はGoogleマップアプリで開くと便利です。</div>
+
+<div class="gmap-wrap">
+  <iframe
+    src="https://www.google.com/maps/d/embed?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo&ehbc=2E312F&noprof=1"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 
-<!-- Google My Map 埋め込み -->
-<section class="gmap-section">
-  <h2>📍 Googleマップで見る</h2>
-  <p>各ピンをタップすると詳細情報が表示されます</p>
-  <div class="gmap-wrap">
-    <iframe src="https://www.google.com/maps/d/embed?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo&ehbc=2E312F&noprof=1" loading="lazy"></iframe>
-  </div>
-</section>
-
-<!-- スポットポップアップ -->
-<div class="popup-overlay" id="popupOverlay" onclick="onOverlayClick(event)">
-  <div class="popup" id="popup">
-    <div class="popup-header" id="popupHeader">
-      <div>
-        <div class="popup-category" id="popupCategory"></div>
-        <div class="popup-name" id="popupName"></div>
-      </div>
-      <button class="popup-close" onclick="closePopup()">✕</button>
-    </div>
-    <div class="popup-body" id="popupBody"></div>
-  </div>
+<div class="actions">
+  <a href="https://www.google.com/maps/d/viewer?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo" target="_blank" rel="noopener">🗺 Googleマップで開く</a>
+  <a href="index.html">← スタッフナビへ戻る</a>
 </div>
 
-<!-- ローカルマップモーダル -->
-<div class="local-modal-overlay" id="localModalOverlay">
-  <div class="local-modal">
-    <div class="local-modal-header">
-      <span class="local-modal-title" id="localMapTitle"></span>
-      <button class="local-modal-close" onclick="closeLocalMap()">✕</button>
-    </div>
-    <div class="floor-tabs" id="floorTabs" style="display:none"></div>
-    <div class="local-modal-body">
-      <div class="local-map-wrap" id="localMapWrap">
-        <img id="localMapImg" src="" alt="">
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="dev-coord" id="devCoord"></div>
-
-<script>
-// ================================================================
-// タイムテーブル会場インデックス (index.html と対応)
-//   0=藍場浜  1=東公園  2=西公園
-//   3=ufo T1  4=ufo T2  5=ufo 1F  6=アミコ  7=あわぎん
-// ================================================================
-
-// ── 要地図スポット ──
-// x/y: 画像左上(0,0) 右下(100,100) の % 座標
-// ttVenue: タイムテーブルへの深リンク先（index指定）
-// localMap: ローカルマップID（ドリルダウン）
-const spots = {
-
-  /* ===== ステージ ===== */
-  'aiba': {
-    x: 35, y: 28, cat: 'stage',
-    name: '藍場浜公園ステージ',
-    desc: 'メインステージのひとつ。ゴミ集積所・WCあり。',
-    ttVenue: 0,
-  },
-  'higashi': {
-    x: 48, y: 38, cat: 'stage',
-    name: '新町橋東公園ステージ',
-    desc: 'ボードウォーク東側のステージエリア。ボランティアテントもこちら。',
-    ttVenue: 1,
-  },
-  'nishi': {
-    x: 70, y: 38, cat: 'stage',
-    name: '両国橋西公園ステージ',
-    desc: '両国橋西側のステージエリア。WCあり。',
-    ttVenue: 2,
-  },
-  'awaodori': {
-    x: 33, y: 88, cat: 'stage',
-    name: '阿波おどり会館ステージ',
-    desc: '阿波おどり会館ステージ。眉山ロープウェー乗り場も近接。',
-  },
-  'shinmachi-bw': {
-    x: 52, y: 46, cat: 'stage',
-    name: 'しんまちボードウォーク',
-    desc: 'メインイベントエリア。ufotable徳島スタジオ（出展社搬入出拠点）隣接。',
-  },
-
-  /* ===== 施設 ===== */
-  'amico': {
-    x: 42, y: 19, cat: 'facility',
-    name: 'アミコドーム（アミコ2F入口前）',
-    desc: 'アミコ徳島（旧徳島そごう）。コスプレ受付更衣室はポッポ街2F。',
-    ttVenue: 6,
-  },
-  'kodomo': {
-    x: 80, y: 24, cat: 'facility',
-    name: 'こども交通公園',
-    desc: '痛車展示エリア。交通公園ゴミ集積所あり。',
-  },
-
-  /* ===== ショップ ===== */
-  'ufo-cinema': {
-    x: 42, y: 54, cat: 'shop',
-    name: 'ufotable cinema ／ アニメイト徳島',
-    desc: 'ufotable cinema (T1/T2/1F) と アニメイト徳島が近接。東新町商店街内。',
-    ttVenue: 3,
-    ttVenueAlt: { idx: 5, label: 'ufo 1F のタイムテーブル' },
-  },
-  'ufo-cafe': {
-    x: 54, y: 42, cat: 'shop',
-    name: 'ufotable cafe 徳島',
-    desc: 'ufotable直営カフェ。期間中は特別メニュー・グッズ販売あり。',
-  },
-
-  /* ===== イベント ===== */
-  'sauna': {
-    x: 58, y: 34, cat: 'event',
-    name: 'マチ★アソビ サウナ',
-    desc: '新町川水際公園エリアに設置された特設サウナ。',
-  },
-
-  /* ===== ローカルマップエリア ===== */
-  'area-higashishinmachi': {
-    x: 50, y: 60, cat: 'area',
-    name: '東新町商店街',
-    desc: '展示・グッズ販売・商品体験ブースが目白押しのショッピングストリート。ufotable cinema もこのエリア内。',
-    localMap: 'higashishinmachi',
-    contentQuery: '東新町商店街',
-  },
-  'area-poppo': {
-    x: 18, y: 9, cat: 'area',
-    name: 'ポッポ街商店街',
-    desc: 'アニメ・ゲームメーカーが大集合！コスプレ受付更衣室（2F）もこちら。',
-    localMap: 'poppo',
-    contentQuery: 'ポッポ街商店街',
-  },
-};
-
-// ── ローカルマップデータ ──
-// image: 画像ファイル名
-// floors: 定義すればフロアフィルタータブが出る（各 spot に floor プロパティを付ける）
-// spots: 各スポット（x/y は画像 % 座標）
-const localMaps = {
-
-  'higashishinmachi': {
-    title: '東新町商店街MAP',
-    image: 'M30_higashishinmachi.png',
-    spots: {
-      'inf-shop': {
-        x: 20, y: 11, cat: 'shop',
-        name: 'インフィニット 15th オフィシャル物販ブース',
-        desc: '「私を喰べたい、ひとでなし」など。2026年7月放送予定の新作情報も。',
-        contentQuery: 'インフィニット',
-      },
-      'goodsmile': {
-        x: 20, y: 22, cat: 'shop',
-        name: 'グッドスマイルカンパニー',
-        desc: 'フィギュアの最新作や過去作品などを展開。',
-        contentQuery: 'グッドスマイル',
-      },
-      'inf-exhibit': {
-        x: 20, y: 33, cat: 'event',
-        name: '「私を喰べたい、ひとでなし」TVアニメ原画展',
-        desc: '本作の原画を100枚以上展示。複製原画・グッズ販売あり（入場無料）。',
-        contentQuery: '私を喰べたい',
-      },
-      'cospa': {
-        x: 20, y: 45, cat: 'shop',
-        name: 'COSPA inc.',
-        desc: '推しのTシャツ・キャラクターアパレル・アイテムなど各種カテゴリを出展。',
-        contentQuery: 'COSPA',
-      },
-      'kapibara': {
-        x: 20, y: 56, cat: 'shop',
-        name: 'かぴばらしょっぷ',
-        desc: '人気アニメキャラクターグッズ。「おてぃれる」「佐護ライフ」ブースも。',
-        contentQuery: 'かぴばら',
-      },
-      'nijigen': {
-        x: 20, y: 66, cat: 'shop',
-        name: 'ニジゲンノモリ',
-        desc: '人気作品の世界観を楽しめるアトラクション。オリジナルグッズ販売。',
-        contentQuery: 'ニジゲンノモリ',
-      },
-      'ozakka': {
-        x: 20, y: 76, cat: 'shop',
-        name: 'OZaKKa',
-        desc: '推し活・オタ活の「それ！ほしい」を展開。アイテム多数。',
-        contentQuery: 'OZaKKa',
-      },
-      'azlane': {
-        x: 20, y: 86, cat: 'shop',
-        name: 'アズールレーン (YOSTAR)',
-        desc: 'アズールレーン関連グッズ・展示・ミニゲームなど。',
-        contentQuery: 'アズールレーン',
-      },
-      'maborosi-ticket': {
-        x: 76, y: 11, cat: 'event',
-        name: '「魔法使いの夜」ムビチケ先行販売ブース (ANIPLEX)',
-        desc: '2026年公開予定アニメ映画のムビチケ先行販売。',
-        contentQuery: '魔法使いの夜',
-      },
-      'iwamoto': {
-        x: 76, y: 22, cat: 'shop',
-        name: '岩本薬舗 ×「私を喰べたい、ひとでなし」',
-        desc: 'コラボ商品展示・販売。',
-        contentQuery: '岩本薬舗',
-      },
-      'bsntv': {
-        x: 76, y: 33, cat: 'event',
-        name: 'BS日テレ「前橋ウィッチーズ」（5/16のみ）',
-        desc: 'グッズ展示・予約受付あり。',
-        contentQuery: '前橋ウィッチーズ',
-      },
-      'yosumi': {
-        x: 76, y: 44, cat: 'shop',
-        name: 'よすみ編集部',
-        desc: 'ソシャゲから生まれたマンガレーベル「好好手帖」を展開。',
-        contentQuery: 'よすみ',
-      },
-      'mixch': {
-        x: 76, y: 55, cat: 'event',
-        name: 'DONUTS ミクチャ体験＆展示ブース',
-        desc: '人気VTuberの音楽ライブ・トーク等が見放題。体験できます。',
-        contentQuery: 'ミクチャ',
-      },
-      'chitatome': {
-        x: 76, y: 66, cat: 'shop',
-        name: '知多娘。',
-        desc: '愛知県知多地域をPRするご当地アイドルのオリジナルグッズ販売。',
-        contentQuery: '知多娘',
-      },
-      'toybra': {
-        x: 76, y: 78, cat: 'shop',
-        name: 'トイブラ合同ブース',
-        desc: '都市伝説探偵センター「anemoi」・「Summer Pockets REFLECTION BLUE」などを展開。',
-        contentQuery: 'トイブラ',
-      },
-    },
-  },
-
-  'poppo': {
-    title: 'ポッポ街商店街MAP',
-    image: 'M30_poppo.png',
-    spots: {
-      'kimetsu-trial': {
-        x: 22, y: 9, cat: 'event',
-        name: '「鬼滅の刃 ヒノカミ血風譚2」試遊 ＆ 「ビルディバイド・ブライト」体験会',
-        desc: 'アニフレックス運営。ゲームの試遊と体験会。',
-        contentQuery: '鬼滅の刃 ヒノカミ',
-      },
-      'fgo-chopsticks': {
-        x: 22, y: 21, cat: 'event',
-        name: 'FGO箸マチアソビ出張版（本庄・原田・岡崎）',
-        desc: '本庄雷太郎・原田たけひと・岡崎武士のFGO＆TYPE-MOON箸出張版。',
-        contentQuery: 'FGO箸',
-      },
-      'lycee': {
-        x: 22, y: 32, cat: 'shop',
-        name: 'LYCEE OVERTURE',
-        desc: 'りょ著「Lycee Overture Newバーバルソフトウェア2.0」。TCGの即売・トーク等。',
-        contentQuery: 'Lycee',
-      },
-      'hololive': {
-        x: 22, y: 43, cat: 'event',
-        name: 'ホロライブ 特設ゲームブース',
-        desc: 'ホロライブの様々なゲームが体験できる特設ブース（Cover）。',
-        contentQuery: 'ホロライブ',
-      },
-      'bushiroad': {
-        x: 22, y: 55, cat: 'shop',
-        name: 'マチ★アソビ vol.30 ブシロードブース',
-        desc: 'ブシロードのエンタメがマチアソビに登場。グッズ・展示など。',
-        contentQuery: 'ブシロード',
-      },
-      'summer-pockets-feel': {
-        x: 22, y: 67, cat: 'event',
-        name: 'TVアニメ「Summer Pockets」feel.公式ブース',
-        desc: 'Summer Pockets関連イベント。限定グッズ販売等。',
-        contentQuery: 'Summer Pockets',
-      },
-      'kadokawa': {
-        x: 76, y: 9, cat: 'shop',
-        name: 'KADOKAWA GOODS SHOP',
-        desc: '様々なアニメ・漫画グッズを幅広く展開。',
-        contentQuery: 'KADOKAWA',
-      },
-      'cabbage-mado': {
-        x: 76, y: 21, cat: 'shop',
-        name: 'きゃべつそふと ＆ まどそふと',
-        desc: 'きゃべつそふと・まどそふとのCD・限定グッズ等。',
-        contentQuery: 'きゃべつそふと',
-      },
-      'phantom': {
-        x: 76, y: 32, cat: 'event',
-        name: '「Phantom PHANTOM OF INFERNO」射的',
-        desc: '2020年上映原作OVAを記念した射的コーナー。',
-        contentQuery: 'Phantom',
-      },
-      'vr-zone': {
-        x: 76, y: 43, cat: 'event',
-        name: 'VRゲーム体験ゾーン（ExitVR 8）',
-        desc: '仮想現実CVRなど様々なVRゲームを体験できる。',
-        contentQuery: 'VR',
-      },
-      'zundahorizon': {
-        x: 76, y: 55, cat: 'event',
-        name: '「ずんだホライずん」アフレコごっこ',
-        desc: '四国めたんの中の人 田中小雪とのアフレコごっこ in マチアソビ。',
-        contentQuery: 'ずんだホライずん',
-      },
-      'yuzu-soft': {
-        x: 76, y: 66, cat: 'shop',
-        name: 'ゆずソフトショップ出張所',
-        desc: '「天使☆アイノーツ」「ぼーるぺん＝か？」「実妹疑惑」のPOP UPショップ。',
-        contentQuery: 'ゆずソフト',
-      },
-      'cc2-trif': {
-        x: 76, y: 78, cat: 'shop',
-        name: 'CC2×TriFスタジオ×Spiral Stairs 合同ブース',
-        desc: 'サイバーコネクトツー・TriFスタジオ・Spiral Stairs Studio合同出展。',
-        contentQuery: 'サイバーコネクトツー',
-      },
-    },
-  },
-};
-
-// ================================================================
-// カテゴリ設定
-// ================================================================
-const catConfig = {
-  stage:    { color: '#e74c3c', label: 'ステージ' },
-  shop:     { color: '#3498db', label: 'ショップ' },
-  food:     { color: '#27ae60', label: 'フード' },
-  facility: { color: '#f39c12', label: '施設' },
-  event:    { color: '#9b59b6', label: 'イベント' },
-  area:     { color: '#b8922a', label: 'エリア' },
-};
-
-// ================================================================
-// 要地図マーカー生成
-// ================================================================
-function buildOverviewMarkers() {
-  const wrapper = document.getElementById('mapWrapper');
-  Object.entries(spots).forEach(([id, s]) => {
-    const el = document.createElement('div');
-    el.className = `marker cat-${s.cat}`;
-    el.style.cssText = `left:${s.x}%;top:${s.y}%`;
-    el.innerHTML = `<div class="marker-pin"></div><div class="marker-label">${s.name}</div>`;
-    el.addEventListener('click', () => openPopup(id, s));
-    wrapper.appendChild(el);
-  });
-}
-
-// ================================================================
-// ローカルマップマーカー生成
-// ================================================================
-function buildLocalMarkers(mapId) {
-  const wrap = document.getElementById('localMapWrap');
-  wrap.querySelectorAll('.marker').forEach(m => m.remove());
-
-  const lm = localMaps[mapId];
-  Object.entries(lm.spots).forEach(([id, s]) => {
-    const el = document.createElement('div');
-    el.className = `marker cat-${s.cat}`;
-    el.style.cssText = `left:${s.x}%;top:${s.y}%`;
-    el.innerHTML = `<div class="marker-pin"></div><div class="marker-label">${s.name}</div>`;
-    el.addEventListener('click', e => { e.stopPropagation(); openPopup(id, s); });
-    wrap.appendChild(el);
-  });
-}
-
-// ================================================================
-// ポップアップ
-// ================================================================
-function openPopup(id, s) {
-  const cfg = catConfig[s.cat] || catConfig.shop;
-  document.getElementById('popupCategory').textContent = cfg.label;
-  document.getElementById('popupName').textContent = s.name;
-  document.getElementById('popupHeader').style.background = cfg.color;
-
-  let body = `<p>${s.desc}</p>`;
-
-  if (s.ttVenue !== undefined) {
-    body += `<a class="tt-btn" href="index.html?tab=tt&venue=${s.ttVenue}" target="_blank">📅 タイムテーブルを見る</a>`;
-  }
-  if (s.ttVenueAlt) {
-    body += `<a class="tt-btn sub" href="index.html?tab=tt&venue=${s.ttVenueAlt.idx}" target="_blank">📅 ${s.ttVenueAlt.label}</a>`;
-  }
-  if (s.localMap) {
-    body += `<button class="local-map-btn" onclick="openLocalMap('${s.localMap}');closePopup();">🗺 詳細マップを開く</button>`;
-  }
-  if (s.contentQuery) {
-    const q = encodeURIComponent(s.contentQuery);
-    body += `<a class="tt-btn sub" href="contents.html?q=${q}" target="_blank">🎭 関連コンテンツを見る</a>`;
-  }
-
-  document.getElementById('popupBody').innerHTML = body;
-  document.getElementById('popupOverlay').classList.add('active');
-}
-
-function closePopup() {
-  document.getElementById('popupOverlay').classList.remove('active');
-}
-function onOverlayClick(e) {
-  if (e.target === document.getElementById('popupOverlay')) closePopup();
-}
-
-// ================================================================
-// ローカルマップ
-// ================================================================
-let currentLocalMapId = null;
-
-function openLocalMap(mapId) {
-  const lm = localMaps[mapId];
-  currentLocalMapId = mapId;
-
-  document.getElementById('localMapTitle').textContent = lm.title;
-  document.getElementById('localMapImg').src = lm.image;
-  document.getElementById('localMapImg').alt = lm.title;
-
-  document.getElementById('floorTabs').style.display = 'none';
-  buildLocalMarkers(mapId);
-
-  document.getElementById('localModalOverlay').classList.add('active');
-}
-
-function closeLocalMap() {
-  document.getElementById('localModalOverlay').classList.remove('active');
-  currentLocalMapId = null;
-}
-
-// ================================================================
-// Dev mode: 座標クリッカー (?dev=1 で有効)
-// ================================================================
-let devOn = false;
-
-function initDevMode() {
-  if (!new URLSearchParams(location.search).has('dev')) return;
-  document.getElementById('devToggle').style.display = 'inline-block';
-  document.getElementById('devCoord').style.display = 'block';
-
-  // 要地図クリック
-  document.getElementById('mapWrapper').addEventListener('click', function(e) {
-    if (!devOn) return;
-    const rect = this.querySelector('img').getBoundingClientRect();
-    log(e, rect, '要地図');
-  });
-
-  // ローカルマップクリック
-  document.getElementById('localMapWrap').addEventListener('click', function(e) {
-    if (!devOn) return;
-    const rect = this.querySelector('img').getBoundingClientRect();
-    log(e, rect, currentLocalMapId || 'local');
-  });
-}
-
-function log(e, rect, label) {
-  const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-  const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
-  const str = `[${label}] x:${x}  y:${y}`;
-  document.getElementById('devCoord').textContent = str;
-  console.log(`x: ${x}, y: ${y},`);
-  navigator.clipboard?.writeText(`x: ${x}, y: ${y},`);
-}
-
-function toggleDev() {
-  devOn = !devOn;
-  document.getElementById('mapWrapper').classList.toggle('dev-mode', devOn);
-  document.getElementById('devToggle').textContent = devOn ? '🛠 座標クリッカー ON (クリックで座標コピー)' : '🛠 座標クリッカー OFF';
-}
-
-// ================================================================
-// Init
-// ================================================================
-document.addEventListener('DOMContentLoaded', () => {
-  buildOverviewMarkers();
-  initDevMode();
-});
-</script>
 </body>
 </html>
