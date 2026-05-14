@@ -629,6 +629,22 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
 
   <!-- ===== TAB 4: 地図・パラソル ===== -->
   <div id="tab-map" class="tab-content">
+
+    <!-- 商店街詳細MAP（画像を別タブで開く） -->
+    <div class="sec-head">🏪 商店街 詳細MAP</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+      <a href="M30_poppo.png" target="_blank" rel="noopener"
+         style="flex:1 1 140px;display:flex;align-items:center;gap:8px;background:#1a1a2e;color:#fff;text-decoration:none;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:bold">
+        <span style="font-size:18px">🗺️</span><span>ポッポ街 出店MAP</span><span style="margin-left:auto;color:#aaa">↗</span>
+      </a>
+      <a href="M30_higashishinmachi.png" target="_blank" rel="noopener"
+         style="flex:1 1 140px;display:flex;align-items:center;gap:8px;background:#1a1a2e;color:#fff;text-decoration:none;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:bold">
+        <span style="font-size:18px">🗺️</span><span>東新町商店街MAP</span><span style="margin-left:auto;color:#aaa">↗</span>
+      </a>
+    </div>
+
+    <!-- パラソル配置（Ver.20260510 ボードウォーク全体向） -->
+    <div class="sec-head">⛱ ボードウォーク パラソル配置</div>
     <div class="area-toggle">
       <button class="area-btn active" onclick="switchArea('east', this)">東公園側 (25〜49番)</button>
       <button class="area-btn" onclick="switchArea('west', this)">西公園側 (01〜24番)</button>
@@ -639,64 +655,65 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
       <div class="warn-note">ufotable(31・32番)周辺 ─ 1Fカフェ前に滞留を作らないよう重点警戒。32番角の駐車場は個人宅・<strong>立入注意</strong></div>
       <table class="para-table">
         <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
-        <tr><td>25D</td><td>ハヤブサフィルム×パッショーネ</td><td>CUELAMP</td></tr>
-        <tr><td>25C</td><td>ハヤブサフィルム×パッショーネ</td><td>物販+トーク等</td></tr>
-        <tr><td>25</td><td>スタジオコロリド・クロマト</td><td>お渡し会など</td></tr>
-        <tr><td>26</td><td>Production I.G・WIT STUDIO</td><td>お渡し会など</td></tr>
-        <tr><td>27</td><td>Production +h</td><td>お渡し会など</td></tr>
-        <tr><td>28</td><td>EMT</td><td>お渡し会など</td></tr>
+        <tr><td>25D</td><td>パッショーネ×ハヤブサフィルム</td><td>Anime Cafe & Bar CUELAMP(飲食）</td></tr>
+        <tr><td>25C</td><td>パッショーネ×ハヤブサフィルム</td><td>物販+トーク等</td></tr>
+        <tr><td>25</td><td>スタジオコロリド・クロマト</td><td>超かぐや姫</td></tr>
+        <tr><td>26</td><td>Production I.G × WIT STUDIO</td><td>—</td></tr>
+        <tr><td>27</td><td>プロダクション・プラスエイチ</td><td>—</td></tr>
+        <tr><td>28</td><td>きゃらめる</td><td>EMTスクエアード</td></tr>
         <tr><td>29</td><td>コミックス・ウェーブ・フィルム</td><td>—</td></tr>
         <tr><td>30</td><td>CloverWorks</td><td>—</td></tr>
-        <tr><td style="color:#e94560;font-weight:bold">31</td><td>ufotable</td><td style="font-size:11px">サイン会など。1Fカフェ前滞留⚠️</td></tr>
-        <tr><td style="color:#e94560;font-weight:bold">32</td><td>ufotable</td><td style="font-size:11px">角の駐車場は個人宅⚠️立入注意</td></tr>
-        <tr><td>33</td><td>Feel</td><td>—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">31</td><td>ufotable</td><td>—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">32</td><td>ufotable</td><td>—</td></tr>
+        <tr><td>33</td><td>feel.</td><td>—</td></tr>
         <tr><td>34</td><td>小学館集英社プロダクション</td><td>お渡し会など</td></tr>
         <tr><td>35</td><td>オリミナート</td><td>—</td></tr>
-        <tr><td>36</td><td>ナンバーナイン</td><td>—</td></tr>
-        <tr><td>37</td><td>ISARIBI</td><td>—</td></tr>
-        <tr><td>38</td><td>リアルアキバ</td><td>—</td></tr>
+        <tr><td>36</td><td>ナンバーナイン</td><td>神血の救世主</td></tr>
+        <tr><td>37</td><td>ISARIBI</td><td>GATE、魔法少女育成計画</td></tr>
+        <tr><td>38</td><td>リアルアキバ</td><td>Project LEAP!、相良茉優</td></tr>
         <tr><td>39</td><td>ジェンコ</td><td>—</td></tr>
         <tr><td>40</td><td>アニメイト</td><td>—</td></tr>
         <tr><td>41</td><td>博報堂DYMaP</td><td>—</td></tr>
         <tr><td>42</td><td>ドリコム</td><td>—</td></tr>
-        <tr><td>43</td><td>MBS（毎日放送）</td><td>—</td></tr>
-        <tr><td>44</td><td>KADOKAWA</td><td>—</td></tr>
-        <tr><td>45</td><td>AnimeJapan</td><td>—</td></tr>
-        <tr><td>46</td><td>ANIPLEX</td><td>—</td></tr>
-        <tr><td>47</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
+        <tr><td>43</td><td>STORY</td><td>運命の巻戻士</td></tr>
+        <tr><td>44</td><td>MBS（毎日放送）</td><td>—</td></tr>
+        <tr><td>45</td><td>KADOKAWA</td><td>—</td></tr>
+        <tr><td>46</td><td>AnimeJapan</td><td>—</td></tr>
+        <tr><td>47</td><td>ANIPLEX</td><td>—</td></tr>
         <tr><td>48</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
-        <tr><td>49</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>49</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
       </table>
     </div>
 
     <div id="area-west" style="display:none">
       <div class="warn-note">⚠️ ufotable徳島スタジオ（搬入出拠点）隣接。阿波銀行あり。道路での停留・無断駐輪に注意。</div>
+      <div class="warn-note">⚠️ 06〜07番付近はロケット・ベース「SUMMER ROCKET」エリア。動線確保に重点警戒。</div>
       <table class="para-table">
         <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
-        <tr><td>01</td><td>共有パラソル</td><td>—</td></tr>
-        <tr><td>02</td><td>ジリオンモード</td><td>ミニサイン会など</td></tr>
-        <tr><td>03</td><td>つるぎ町</td><td>—</td></tr>
-        <tr><td>04</td><td>A-ICライツ</td><td>お渡し会など</td></tr>
-        <tr><td>05</td><td>ロケット・ベース</td><td>お渡し会など</td></tr>
-        <tr><td>06</td><td>幻影・いろは咲</td><td>サイン会など</td></tr>
-        <tr><td>07</td><td>民安ともえ（Vtuberたみー）</td><td>サイン会など</td></tr>
-        <tr><td>08</td><td>大島はるな</td><td>サイン会など</td></tr>
-        <tr><td>09</td><td>スナックあゆ（藤崎弓乃）</td><td>など</td></tr>
-        <tr><td>10</td><td>白滝製麺（飲食）</td><td>—</td></tr>
-        <tr><td>11</td><td>ufotable</td><td>—</td></tr>
-        <tr><td>12</td><td>飲食パラソル</td><td>—</td></tr>
-        <tr><td>13</td><td>NewType新宿</td><td>サイン会</td></tr>
-        <tr><td>14</td><td>フロントウィングラボ</td><td>サイン会</td></tr>
-        <tr><td>15</td><td>零号室（グリザイアシリーズ）</td><td>など</td></tr>
-        <tr><td>16</td><td>oriminary</td><td>—</td></tr>
-        <tr><td>17</td><td>きゃらめる（きゃらみる）</td><td>お話し会</td></tr>
-        <tr><td>18</td><td>ドリコム</td><td>お話し会</td></tr>
-        <tr><td>19</td><td>GiantStep</td><td>—</td></tr>
-        <tr><td>20</td><td>M-IX</td><td>—</td></tr>
-        <tr><td>21</td><td>Giant Step</td><td>特典会など</td></tr>
-        <tr><td>22</td><td>共有パラソル</td><td>—</td></tr>
-        <tr><td>23</td><td>共有パラソル</td><td>—</td></tr>
-        <tr><td style="color:#e94560;font-weight:bold">24</td><td>スタジオオマウス/ダイス</td><td style="font-size:11px">サイン会・注意するイベントあり⚠️</td></tr>
+        <tr><td>01</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>02</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>03</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>04</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>05</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">06</td><td>ロケット・ベース</td><td>SUMMER ROCKET</td></tr>
+        <tr><td>07</td><td>ジリオンモード</td><td>FullMooN Empress</td></tr>
+        <tr><td>08</td><td>Giant Step</td><td>—</td></tr>
+        <tr><td>09</td><td>シスト</td><td>ジサリス</td></tr>
+        <tr><td>10</td><td>幻影／いろは咲</td><td>幽閉サテライト、少女フラクタル</td></tr>
+        <tr><td>11</td><td>AICライツ</td><td>—</td></tr>
+        <tr><td>12</td><td>フレックスコミックス</td><td>邪神ちゃんドロップキック</td></tr>
+        <tr><td>13</td><td>アンネル</td><td>ほっぺちゃん</td></tr>
+        <tr><td>14</td><td>玲瓏のhydrangea</td><td>—</td></tr>
+        <tr><td>15</td><td>民安ともえ</td><td>Vtuberたみー</td></tr>
+        <tr><td>16</td><td>harappa</td><td>—</td></tr>
+        <tr><td>17</td><td>アナログ</td><td>ハコネクト</td></tr>
+        <tr><td>18</td><td>北広島市（北海道）</td><td>—</td></tr>
+        <tr><td>19</td><td>大島はるな</td><td>—</td></tr>
+        <tr><td>20</td><td>ASIAN WAVE</td><td>綾野ましろ ※日曜のみ</td></tr>
+        <tr><td>21</td><td colspan="2" style="color:#aaa">（飲食スペース）</td></tr>
+        <tr><td>22</td><td>白滝製麺</td><td>飲食</td></tr>
+        <tr><td>23</td><td colspan="2" style="color:#aaa">（飲食スペース）</td></tr>
+        <tr><td>24</td><td>アクアプラス×NewType新宿</td><td>—</td></tr>
       </table>
     </div>
   </div>
@@ -851,7 +868,7 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
     <button class="nav-item" onclick="switchTab('report', this)"><span class="icon">🆘</span>報告</button>
     <button class="nav-item" onclick="switchTab('shift', this)"><span class="icon">📋</span>シフト別</button>
     <button class="nav-item" onclick="switchTab('tt', this)"><span class="icon">📅</span>タイムライン</button>
-    <button class="nav-item" onclick="switchTab('map', this)"><span class="icon">🪭</span>パラソル</button>
+    <button class="nav-item" onclick="switchTab('map', this)"><span class="icon">📍</span>エリア詳細</button>
     <a class="nav-item" href="contents.html"><span class="icon">🎭</span>コンテンツ</a>
     <button class="nav-item" onclick="switchTab('basic', this)"><span class="icon">📖</span>基本知識</button>
   </nav>
@@ -992,7 +1009,7 @@ let searchIndex = [];
 let currentHits = [];
 
 function buildSearchIndex(){
-  const tabNames = {home:'ホーム',tt:'タイムライン',shift:'シフト別',map:'パラソル',basic:'基本知識',report:'報告'};
+  const tabNames = {home:'ホーム',tt:'タイムライン',shift:'シフト別',map:'エリア詳細',basic:'基本知識',report:'報告'};
   const venueNames = ['藍場浜','東公園','西公園','ufo T1','ufo T2','ufo 1F','アミコ','あわぎん'];
   const dayNames = ['5/16(土)','5/17(日)'];
   const idx = [];
