@@ -124,7 +124,7 @@ h1 span { color: #f0c040; }
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.55);
-  z-index: 200;
+  z-index: 400;
   justify-content: center;
   align-items: center;
   padding: 16px;
@@ -230,6 +230,42 @@ h1 span { color: #f0c040; }
 .legend-dot.cat-facility { background: #f39c12; }
 .legend-dot.cat-event    { background: #9b59b6; }
 .legend-dot.cat-area     { background: #f0c040; border-radius: 3px; }
+
+/* ── Google My Map ── */
+.gmap-section {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 24px;
+}
+.gmap-section h2 {
+  color: #f0c040;
+  font-size: clamp(13px, 2.5vw, 16px);
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.gmap-section p {
+  color: #aaa;
+  font-size: 11px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.gmap-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 75%; /* 4:3 */
+  border: 2px solid #444;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.gmap-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
 /* ── Local Map Modal ── */
 .local-modal-overlay {
@@ -346,6 +382,15 @@ h1 span { color: #f0c040; }
   <div class="legend-item"><div class="legend-dot cat-area"></div>詳細マップあり</div>
 </div>
 
+<!-- Google My Map 埋め込み -->
+<section class="gmap-section">
+  <h2>📍 Googleマップで見る</h2>
+  <p>各ピンをタップすると詳細情報が表示されます</p>
+  <div class="gmap-wrap">
+    <iframe src="https://www.google.com/maps/d/embed?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo&ehbc=2E312F&noprof=1" loading="lazy"></iframe>
+  </div>
+</section>
+
 <!-- スポットポップアップ -->
 <div class="popup-overlay" id="popupOverlay" onclick="onOverlayClick(event)">
   <div class="popup" id="popup">
@@ -393,80 +438,82 @@ const spots = {
 
   /* ===== ステージ ===== */
   'aiba': {
-    x: 37, y: 40, cat: 'stage',
+    x: 35, y: 28, cat: 'stage',
     name: '藍場浜公園ステージ',
     desc: 'メインステージのひとつ。ゴミ集積所・WCあり。',
     ttVenue: 0,
   },
   'higashi': {
-    x: 47, y: 50, cat: 'stage',
+    x: 48, y: 38, cat: 'stage',
     name: '新町橋東公園ステージ',
     desc: 'ボードウォーク東側のステージエリア。ボランティアテントもこちら。',
     ttVenue: 1,
   },
   'nishi': {
-    x: 64, y: 44, cat: 'stage',
+    x: 70, y: 38, cat: 'stage',
     name: '両国橋西公園ステージ',
     desc: '両国橋西側のステージエリア。WCあり。',
     ttVenue: 2,
   },
   'awaodori': {
-    x: 48, y: 83, cat: 'stage',
+    x: 33, y: 88, cat: 'stage',
     name: '阿波おどり会館ステージ',
     desc: '阿波おどり会館ステージ。眉山ロープウェー乗り場も近接。',
   },
   'shinmachi-bw': {
-    x: 53, y: 49, cat: 'stage',
+    x: 52, y: 46, cat: 'stage',
     name: 'しんまちボードウォーク',
     desc: 'メインイベントエリア。ufotable徳島スタジオ（出展社搬入出拠点）隣接。',
   },
 
   /* ===== 施設 ===== */
   'amico': {
-    x: 33, y: 22, cat: 'facility',
+    x: 42, y: 19, cat: 'facility',
     name: 'アミコドーム（アミコ2F入口前）',
     desc: 'アミコ徳島（旧徳島そごう）。コスプレ受付更衣室はポッポ街2F。',
     ttVenue: 6,
   },
   'kodomo': {
-    x: 73, y: 26, cat: 'facility',
+    x: 80, y: 24, cat: 'facility',
     name: 'こども交通公園',
     desc: '痛車展示エリア。交通公園ゴミ集積所あり。',
   },
 
   /* ===== ショップ ===== */
   'ufo-cinema': {
-    x: 48, y: 63, cat: 'shop',
+    x: 42, y: 54, cat: 'shop',
     name: 'ufotable cinema ／ アニメイト徳島',
     desc: 'ufotable cinema (T1/T2/1F) と アニメイト徳島が近接。東新町商店街内。',
     ttVenue: 3,
     ttVenueAlt: { idx: 5, label: 'ufo 1F のタイムテーブル' },
   },
   'ufo-cafe': {
-    x: 53, y: 55, cat: 'shop',
+    x: 54, y: 42, cat: 'shop',
     name: 'ufotable cafe 徳島',
     desc: 'ufotable直営カフェ。期間中は特別メニュー・グッズ販売あり。',
   },
 
   /* ===== イベント ===== */
   'sauna': {
-    x: 57, y: 38, cat: 'event',
+    x: 58, y: 34, cat: 'event',
     name: 'マチ★アソビ サウナ',
     desc: '新町川水際公園エリアに設置された特設サウナ。',
   },
 
   /* ===== ローカルマップエリア ===== */
   'area-higashishinmachi': {
-    x: 52, y: 66, cat: 'area',
+    x: 50, y: 60, cat: 'area',
     name: '東新町商店街',
     desc: '展示・グッズ販売・商品体験ブースが目白押しのショッピングストリート。ufotable cinema もこのエリア内。',
     localMap: 'higashishinmachi',
+    contentQuery: '東新町商店街',
   },
   'area-poppo': {
-    x: 27, y: 14, cat: 'area',
+    x: 18, y: 9, cat: 'area',
     name: 'ポッポ街商店街',
     desc: 'アニメ・ゲームメーカーが大集合！コスプレ受付更衣室（2F）もこちら。',
     localMap: 'poppo',
+    contentQuery: 'ポッポ街商店街',
   },
 };
 
@@ -484,76 +531,91 @@ const localMaps = {
         x: 20, y: 11, cat: 'shop',
         name: 'インフィニット 15th オフィシャル物販ブース',
         desc: '「私を喰べたい、ひとでなし」など。2026年7月放送予定の新作情報も。',
+        contentQuery: 'インフィニット',
       },
       'goodsmile': {
         x: 20, y: 22, cat: 'shop',
         name: 'グッドスマイルカンパニー',
         desc: 'フィギュアの最新作や過去作品などを展開。',
+        contentQuery: 'グッドスマイル',
       },
       'inf-exhibit': {
         x: 20, y: 33, cat: 'event',
         name: '「私を喰べたい、ひとでなし」TVアニメ原画展',
         desc: '本作の原画を100枚以上展示。複製原画・グッズ販売あり（入場無料）。',
+        contentQuery: '私を喰べたい',
       },
       'cospa': {
         x: 20, y: 45, cat: 'shop',
         name: 'COSPA inc.',
         desc: '推しのTシャツ・キャラクターアパレル・アイテムなど各種カテゴリを出展。',
+        contentQuery: 'COSPA',
       },
       'kapibara': {
         x: 20, y: 56, cat: 'shop',
         name: 'かぴばらしょっぷ',
         desc: '人気アニメキャラクターグッズ。「おてぃれる」「佐護ライフ」ブースも。',
+        contentQuery: 'かぴばら',
       },
       'nijigen': {
         x: 20, y: 66, cat: 'shop',
         name: 'ニジゲンノモリ',
         desc: '人気作品の世界観を楽しめるアトラクション。オリジナルグッズ販売。',
+        contentQuery: 'ニジゲンノモリ',
       },
       'ozakka': {
         x: 20, y: 76, cat: 'shop',
         name: 'OZaKKa',
         desc: '推し活・オタ活の「それ！ほしい」を展開。アイテム多数。',
+        contentQuery: 'OZaKKa',
       },
       'azlane': {
         x: 20, y: 86, cat: 'shop',
         name: 'アズールレーン (YOSTAR)',
         desc: 'アズールレーン関連グッズ・展示・ミニゲームなど。',
+        contentQuery: 'アズールレーン',
       },
       'maborosi-ticket': {
         x: 76, y: 11, cat: 'event',
         name: '「魔法使いの夜」ムビチケ先行販売ブース (ANIPLEX)',
         desc: '2026年公開予定アニメ映画のムビチケ先行販売。',
+        contentQuery: '魔法使いの夜',
       },
       'iwamoto': {
         x: 76, y: 22, cat: 'shop',
         name: '岩本薬舗 ×「私を喰べたい、ひとでなし」',
         desc: 'コラボ商品展示・販売。',
+        contentQuery: '岩本薬舗',
       },
       'bsntv': {
         x: 76, y: 33, cat: 'event',
         name: 'BS日テレ「前橋ウィッチーズ」（5/16のみ）',
         desc: 'グッズ展示・予約受付あり。',
+        contentQuery: '前橋ウィッチーズ',
       },
       'yosumi': {
         x: 76, y: 44, cat: 'shop',
         name: 'よすみ編集部',
         desc: 'ソシャゲから生まれたマンガレーベル「好好手帖」を展開。',
+        contentQuery: 'よすみ',
       },
       'mixch': {
         x: 76, y: 55, cat: 'event',
         name: 'DONUTS ミクチャ体験＆展示ブース',
         desc: '人気VTuberの音楽ライブ・トーク等が見放題。体験できます。',
+        contentQuery: 'ミクチャ',
       },
       'chitatome': {
         x: 76, y: 66, cat: 'shop',
         name: '知多娘。',
         desc: '愛知県知多地域をPRするご当地アイドルのオリジナルグッズ販売。',
+        contentQuery: '知多娘',
       },
       'toybra': {
         x: 76, y: 78, cat: 'shop',
         name: 'トイブラ合同ブース',
         desc: '都市伝説探偵センター「anemoi」・「Summer Pockets REFLECTION BLUE」などを展開。',
+        contentQuery: 'トイブラ',
       },
     },
   },
@@ -561,72 +623,84 @@ const localMaps = {
   'poppo': {
     title: 'ポッポ街商店街MAP',
     image: 'M30_poppo.png',
-    floors: ['全て', '2F', '1F'],
     spots: {
       'kimetsu-trial': {
-        x: 22, y: 9, cat: 'event', floor: '2F',
+        x: 22, y: 9, cat: 'event',
         name: '「鬼滅の刃 ヒノカミ血風譚2」試遊 ＆ 「ビルディバイド・ブライト」体験会',
         desc: 'アニフレックス運営。ゲームの試遊と体験会。',
+        contentQuery: '鬼滅の刃 ヒノカミ',
       },
       'fgo-chopsticks': {
-        x: 22, y: 21, cat: 'event', floor: '2F',
+        x: 22, y: 21, cat: 'event',
         name: 'FGO箸マチアソビ出張版（本庄・原田・岡崎）',
         desc: '本庄雷太郎・原田たけひと・岡崎武士のFGO＆TYPE-MOON箸出張版。',
+        contentQuery: 'FGO箸',
       },
       'lycee': {
-        x: 22, y: 32, cat: 'shop', floor: '2F',
+        x: 22, y: 32, cat: 'shop',
         name: 'LYCEE OVERTURE',
         desc: 'りょ著「Lycee Overture Newバーバルソフトウェア2.0」。TCGの即売・トーク等。',
+        contentQuery: 'Lycee',
       },
       'hololive': {
-        x: 22, y: 43, cat: 'event', floor: '2F',
+        x: 22, y: 43, cat: 'event',
         name: 'ホロライブ 特設ゲームブース',
         desc: 'ホロライブの様々なゲームが体験できる特設ブース（Cover）。',
+        contentQuery: 'ホロライブ',
       },
       'bushiroad': {
-        x: 22, y: 55, cat: 'shop', floor: '2F',
+        x: 22, y: 55, cat: 'shop',
         name: 'マチ★アソビ vol.30 ブシロードブース',
         desc: 'ブシロードのエンタメがマチアソビに登場。グッズ・展示など。',
+        contentQuery: 'ブシロード',
       },
       'summer-pockets-feel': {
-        x: 22, y: 67, cat: 'event', floor: '2F',
+        x: 22, y: 67, cat: 'event',
         name: 'TVアニメ「Summer Pockets」feel.公式ブース',
         desc: 'Summer Pockets関連イベント。限定グッズ販売等。',
+        contentQuery: 'Summer Pockets',
       },
       'kadokawa': {
-        x: 76, y: 9, cat: 'shop', floor: '1F',
+        x: 76, y: 9, cat: 'shop',
         name: 'KADOKAWA GOODS SHOP',
         desc: '様々なアニメ・漫画グッズを幅広く展開。',
+        contentQuery: 'KADOKAWA',
       },
       'cabbage-mado': {
-        x: 76, y: 21, cat: 'shop', floor: '1F',
+        x: 76, y: 21, cat: 'shop',
         name: 'きゃべつそふと ＆ まどそふと',
         desc: 'きゃべつそふと・まどそふとのCD・限定グッズ等。',
+        contentQuery: 'きゃべつそふと',
       },
       'phantom': {
-        x: 76, y: 32, cat: 'event', floor: '1F',
+        x: 76, y: 32, cat: 'event',
         name: '「Phantom PHANTOM OF INFERNO」射的',
         desc: '2020年上映原作OVAを記念した射的コーナー。',
+        contentQuery: 'Phantom',
       },
       'vr-zone': {
-        x: 76, y: 43, cat: 'event', floor: '1F',
+        x: 76, y: 43, cat: 'event',
         name: 'VRゲーム体験ゾーン（ExitVR 8）',
         desc: '仮想現実CVRなど様々なVRゲームを体験できる。',
+        contentQuery: 'VR',
       },
       'zundahorizon': {
-        x: 76, y: 55, cat: 'event', floor: '1F',
+        x: 76, y: 55, cat: 'event',
         name: '「ずんだホライずん」アフレコごっこ',
         desc: '四国めたんの中の人 田中小雪とのアフレコごっこ in マチアソビ。',
+        contentQuery: 'ずんだホライずん',
       },
       'yuzu-soft': {
-        x: 76, y: 66, cat: 'shop', floor: '1F',
+        x: 76, y: 66, cat: 'shop',
         name: 'ゆずソフトショップ出張所',
         desc: '「天使☆アイノーツ」「ぼーるぺん＝か？」「実妹疑惑」のPOP UPショップ。',
+        contentQuery: 'ゆずソフト',
       },
       'cc2-trif': {
-        x: 76, y: 78, cat: 'shop', floor: '1F',
+        x: 76, y: 78, cat: 'shop',
         name: 'CC2×TriFスタジオ×Spiral Stairs 合同ブース',
         desc: 'サイバーコネクトツー・TriFスタジオ・Spiral Stairs Studio合同出展。',
+        contentQuery: 'サイバーコネクトツー',
       },
     },
   },
@@ -662,21 +736,16 @@ function buildOverviewMarkers() {
 // ================================================================
 // ローカルマップマーカー生成
 // ================================================================
-function buildLocalMarkers(mapId, floorFilter) {
+function buildLocalMarkers(mapId) {
   const wrap = document.getElementById('localMapWrap');
   wrap.querySelectorAll('.marker').forEach(m => m.remove());
 
   const lm = localMaps[mapId];
   Object.entries(lm.spots).forEach(([id, s]) => {
-    if (floorFilter && floorFilter !== '全て' && s.floor && s.floor !== floorFilter) return;
     const el = document.createElement('div');
     el.className = `marker cat-${s.cat}`;
     el.style.cssText = `left:${s.x}%;top:${s.y}%`;
-    const floorBadge = s.floor
-      ? `<span style="font-size:8px;background:#f0c040;color:#1a1a2e;padding:0 3px;border-radius:2px;margin-right:2px;font-weight:bold">${s.floor}</span>`
-      : '';
-    el.dataset.floor = s.floor || '';
-    el.innerHTML = `<div class="marker-pin"></div><div class="marker-label">${floorBadge}${s.name}</div>`;
+    el.innerHTML = `<div class="marker-pin"></div><div class="marker-label">${s.name}</div>`;
     el.addEventListener('click', e => { e.stopPropagation(); openPopup(id, s); });
     wrap.appendChild(el);
   });
@@ -687,7 +756,7 @@ function buildLocalMarkers(mapId, floorFilter) {
 // ================================================================
 function openPopup(id, s) {
   const cfg = catConfig[s.cat] || catConfig.shop;
-  document.getElementById('popupCategory').textContent = cfg.label + (s.floor ? `  [${s.floor}]` : '');
+  document.getElementById('popupCategory').textContent = cfg.label;
   document.getElementById('popupName').textContent = s.name;
   document.getElementById('popupHeader').style.background = cfg.color;
 
@@ -701,6 +770,10 @@ function openPopup(id, s) {
   }
   if (s.localMap) {
     body += `<button class="local-map-btn" onclick="openLocalMap('${s.localMap}');closePopup();">🗺 詳細マップを開く</button>`;
+  }
+  if (s.contentQuery) {
+    const q = encodeURIComponent(s.contentQuery);
+    body += `<a class="tt-btn sub" href="contents.html?q=${q}" target="_blank">🎭 関連コンテンツを見る</a>`;
   }
 
   document.getElementById('popupBody').innerHTML = body;
@@ -727,23 +800,8 @@ function openLocalMap(mapId) {
   document.getElementById('localMapImg').src = lm.image;
   document.getElementById('localMapImg').alt = lm.title;
 
-  // フロアタブ
-  const tabsEl = document.getElementById('floorTabs');
-  tabsEl.innerHTML = '';
-  if (lm.floors) {
-    tabsEl.style.display = 'flex';
-    lm.floors.forEach((f, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'floor-tab' + (i === 0 ? ' active' : '');
-      btn.textContent = f;
-      btn.onclick = () => switchFloor(mapId, f);
-      tabsEl.appendChild(btn);
-    });
-    buildLocalMarkers(mapId, lm.floors[0]);
-  } else {
-    tabsEl.style.display = 'none';
-    buildLocalMarkers(mapId, null);
-  }
+  document.getElementById('floorTabs').style.display = 'none';
+  buildLocalMarkers(mapId);
 
   document.getElementById('localModalOverlay').classList.add('active');
 }
@@ -751,11 +809,6 @@ function openLocalMap(mapId) {
 function closeLocalMap() {
   document.getElementById('localModalOverlay').classList.remove('active');
   currentLocalMapId = null;
-}
-
-function switchFloor(mapId, floor) {
-  document.querySelectorAll('.floor-tab').forEach(t => t.classList.toggle('active', t.textContent === floor));
-  buildLocalMarkers(mapId, floor);
 }
 
 // ================================================================
