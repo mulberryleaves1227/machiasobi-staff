@@ -69,6 +69,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 <div class="search-wrap">
   <input type="search" id="search-input" placeholder="🔍 作品名・出演者・ブース・エリアなど…" autocomplete="off" autofocus>
   <div class="result-count" id="result-count"></div>
+  <div style="font-size:11px;color:#888;padding:2px 4px 4px;line-height:1.5">⚠️ 全ての情報をカバーしていません！案内する際は必ず正しい情報は各コンテンツの公式SNSやHPを確認してもらうよう案内してください。誤りがあることがわかった場合は桑野まで連絡ください。</div>
 </div>
 
 <div class="content-area" id="card-area">
@@ -77,11 +78,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 
 <nav class="bottom-nav">
   <a class="nav-item" href="index.html"><span class="icon">🏠</span>ホーム</a>
-  <a class="nav-item" href="index.html#report"><span class="icon">🆘</span>報告</a>
-  <a class="nav-item" href="index.html#shift"><span class="icon">📋</span>シフト別</a>
-  <a class="nav-item" href="index.html#tt"><span class="icon">📅</span>タイムライン</a>
+  <a class="nav-item" href="index.html?tab=report"><span class="icon">🆘</span>報告</a>
+  <a class="nav-item" href="index.html?tab=shift"><span class="icon">📋</span>シフト別</a>
+  <a class="nav-item" href="index.html?tab=tt"><span class="icon">📅</span>タイムライン</a>
   <a class="nav-item active"><span class="icon">🎭</span>コンテンツ</a>
-  <a class="nav-item" href="index.html#basic"><span class="icon">📖</span>基本知識</a>
+  <a class="nav-item" href="index.html?tab=basic"><span class="icon">📖</span>基本知識</a>
 </nav>
 
 <script>
@@ -93,6 +94,14 @@ const KIND_BADGE = {
   stage: 'badge-stage', talk: 'badge-talk', screening_talk: 'badge-screening_talk',
   screening: 'badge-screening', booth: 'badge-booth', booth_event: 'badge-booth_event', sauna: 'badge-sauna'
 };
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function safeUrl(u) {
+  return (u && /^https?:\/\//.test(u)) ? u : '';
+}
 
 // ── Google Maps リンク ──
 const gmap = (lat, lng) => `https://www.google.com/maps?q=${lat},${lng}`;
@@ -123,16 +132,16 @@ function buildLocHtml(area, venue) {
   const multi = VENUE_MULTI[venue];
   if (multi) {
     const links = multi.map(m =>
-      `<a href="${m.url}" target="_blank" rel="noopener" class="map-link">📍 ${m.label}</a>`
+      `<a href="${m.url}" target="_blank" rel="noopener" class="map-link">📍 ${escHtml(m.label)}</a>`
     ).join('<br>');
     return `<div class="card-row"><span class="card-label">場所</span><span class="card-val">${links}</span></div>`;
   }
   // 通常ケース
   const areaUrl = AREA_MAP[area];
   const areaHtml = areaUrl
-    ? `<a href="${areaUrl}" target="_blank" rel="noopener" class="map-link">📍 ${area}</a>`
-    : (area || '');
-  const venueDetail = (venue && venue !== area) ? `<span class="venue-detail"> / ${venue}</span>` : '';
+    ? `<a href="${areaUrl}" target="_blank" rel="noopener" class="map-link">📍 ${escHtml(area)}</a>`
+    : escHtml(area || '');
+  const venueDetail = (venue && venue !== area) ? `<span class="venue-detail"> / ${escHtml(venue)}</span>` : '';
   const locHtml = areaHtml + venueDetail;
   return locHtml ? `<div class="card-row"><span class="card-label">場所</span><span class="card-val">${locHtml}</span></div>` : '';
 }
@@ -144,7 +153,7 @@ function fmtDate(d) {
     const m = p.match(/\d{4}-(\d{2})-(\d{2})/);
     if (!m) return p;
     const day = ['日', '月', '火', '水', '木', '金', '土'];
-    const dt = new Date(p);
+    const dt = new Date(p + 'T00:00:00+09:00');
     return `${parseInt(m[1])}/${parseInt(m[2])}(${day[dt.getDay()]})`;
   }).join('・');
 }
@@ -163,25 +172,25 @@ function buildCard(r) {
   const dateStr = fmtDate(a.date);
   const timeStr = fmtTime(a.start_time, a.end_time);
   const datetime = [dateStr, timeStr].filter(Boolean).join(' ');
-  const people = (a.people || []).filter(Boolean).join('、');
-  const source = r.source?.url || '';
+  const people = (a.people || []).filter(Boolean).map(escHtml).join('、');
+  const source = safeUrl(r.source?.url || '');
 
   const rows = [];
-  if (datetime) rows.push(`<div class="card-row"><span class="card-label">日時</span><span class="card-val">${datetime}</span></div>`);
+  if (datetime) rows.push(`<div class="card-row"><span class="card-label">日時</span><span class="card-val">${escHtml(datetime)}</span></div>`);
   const locHtml = buildLocHtml(a.area, a.venue);
   if (locHtml) rows.push(locHtml);
-  if (a.action) rows.push(`<div class="card-row"><span class="card-label">内容</span><span class="card-val">${a.action}</span></div>`);
+  if (a.action) rows.push(`<div class="card-row"><span class="card-label">内容</span><span class="card-val">${escHtml(a.action)}</span></div>`);
   if (people) rows.push(`<div class="card-row"><span class="card-label">出演</span><span class="card-val">${people}</span></div>`);
-  if (r.organization) rows.push(`<div class="card-row"><span class="card-label">主催</span><span class="card-val">${r.organization}</span></div>`);
+  if (r.organization) rows.push(`<div class="card-row"><span class="card-label">主催</span><span class="card-val">${escHtml(r.organization)}</span></div>`);
 
-  const noteHtml = a.notes ? `<div class="card-note">⚠️ ${a.notes}</div>` : '';
+  const noteHtml = a.notes ? `<div class="card-note">⚠️ ${escHtml(a.notes)}</div>` : '';
   const linkHtml = source ? `<a class="card-link" href="${source}" target="_blank" rel="noopener">🔗 公式ページ →</a>` : '';
 
   return `
-<div class="con-card kind-${kind}" data-id="${r.id}">
+<div class="con-card kind-${kind}" data-id="${escHtml(String(r.id))}">
   <div class="card-head">
     <span class="kind-badge ${badge}">${label}</span>
-    <span class="card-title">${r.display_name}</span>
+    <span class="card-title">${escHtml(r.display_name)}</span>
   </div>
   <div class="card-body">
     ${rows.join('\n    ')}
@@ -243,8 +252,14 @@ fetch('search_data.json')
     allRecords = data.records || [];
     const input = document.getElementById('search-input');
 
-    // 初期表示：全件
-    render(allRecords);
+    // map.html などからの深リンク: ?q=検索語
+    const initialQuery = new URLSearchParams(location.search).get('q') || '';
+    if (initialQuery) {
+      input.value = initialQuery;
+      render(search(initialQuery));
+    } else {
+      render(allRecords);
+    }
 
     input.addEventListener('input', () => {
       const q = input.value.trim();

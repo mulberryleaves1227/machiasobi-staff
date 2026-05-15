@@ -7,8 +7,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-size:14px;background:#f5f5f5;color:#222;overscroll-behavior:none}
-#app.font-sm{zoom:0.86}
-#app.font-lg{zoom:1.21}
+#app.font-sm{font-size:12px}
+#app.font-lg{font-size:17px}
 .fsize-btn{background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:4px;padding:3px 7px;font-size:11px;cursor:pointer;margin-left:2px;font-weight:bold}
 .fsize-btn.active{background:#e94560}
 /* ── password ── */
@@ -66,6 +66,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 .badge-a{display:inline-block;background:#ff8c00;color:#fff;font-size:10px;padding:1px 5px;border-radius:3px;white-space:nowrap}
 .badge-b{display:inline-block;background:#e6c200;color:#fff;font-size:10px;padding:1px 5px;border-radius:3px;white-space:nowrap}
 .tt-warn{font-size:11px;color:#cc4400;background:#fff4ee;border-radius:6px;padding:6px 8px;margin-top:6px;line-height:1.5}
+.tt-past td{opacity:.35;text-decoration:line-through}
 /* ── duty selector ── */
 .duty-selector{width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-size:14px;background:#fff;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23888'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;margin-bottom:12px}
 .duty-selector:focus{outline:none;border-color:#e94560}
@@ -360,7 +361,7 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
       <div id="d1v1" class="venue-panel" style="display:none">
         <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
         <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/285" target="_blank" rel="noopener">わたたべトークセッション！×苗川采先生ライブドローイング</a></td><td>—</td></tr>
-        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/444" target="_blank" rel="noopener">超かぐや姫！スタッフトークショー ～私は、「かぐや」のここが好き。～</a></td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/444" target="_blank" rel="noopener">超かぐや姫！スタッフトークショー ～私は、「かぐや」のここが好き。～</a></td><td><span class="badge-s">S🔴</span></td></tr>
         <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/199" target="_blank" rel="noopener">TVアニメ「魔都精兵のスレイブ2」放送終了記念 キャスト&スタッフトークショー</a></td><td>—</td></tr>
         <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/219" target="_blank" rel="noopener">TVアニメ「Dr.STONE」〜マチ★アソビ出張版〜</a></td><td>—</td></tr>
         <tr><td>14:00-15:00</td><td>ポンステージ（仮）</td><td>—</td></tr>
@@ -740,6 +741,28 @@ mark.sh{background:#fff176;border-radius:2px;font-style:normal;color:inherit}
       <div class="faq-a">「藍場浜テントまたは東公園テントにご案内します。一緒に参りましょう」→ すぐテントへ誘導してリーダーへ共有</div>
     </div></div>
 
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🎫 スタンプ・壁紙ラリー 設置場所</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="faq-q">アニメスタジオスタンプラリー</div>
+      <div class="faq-a">
+        各スタジオブース（①〜⑰番）に設置。下のマップ（裏面）で場所を確認して案内。<br>
+        <span style="font-size:11px;color:#777">専用台紙（500円）：藍場浜・東公園・西公園 物販テント／ufotableCINEMA　景品受渡し：藍場浜 総合物販テント　10:00〜17:00</span>
+        <a href="https://www.machiasobi.com/_astro/stamp_annai_A5_fix_cs6-02-722x1024_Z1jP0g5.webp" target="_blank" rel="noopener">
+          <img src="https://www.machiasobi.com/_astro/stamp_annai_A5_fix_cs6-02-722x1024_Z1jP0g5.webp" style="width:100%;border-radius:6px;margin-top:6px;display:block" alt="スタンプ設置場所マップ" loading="lazy">
+        </a>
+        <a href="https://www.machiasobi.com/_astro/stamp_annai_A5_fix_cs6-01-722x1024_1fRvTk.webp" target="_blank" rel="noopener">
+          <img src="https://www.machiasobi.com/_astro/stamp_annai_A5_fix_cs6-01-722x1024_1fRvTk.webp" style="width:100%;border-radius:6px;margin-top:6px;display:block" alt="スタンプラリー参加スタジオ一覧" loading="lazy">
+        </a>
+      </div>
+      <div class="faq-q">デジタル壁紙ラリー</div>
+      <div class="faq-a">
+        会場各所にQRコードが設置されています。スマホで読み取ると各作品の壁紙URLへアクセスできます。下のマップで場所を確認して案内。
+        <a href="https://www.machiasobi.com/_astro/m30DW-1-721x1024_1vlV94.webp" target="_blank" rel="noopener">
+          <img src="https://www.machiasobi.com/_astro/m30DW-1-721x1024_1vlV94.webp" style="width:100%;border-radius:6px;margin-top:6px;display:block" alt="デジタル壁紙ラリー設置場所マップ" loading="lazy">
+        </a>
+      </div>
+    </div></div>
+
     <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🆘 困ったときの相談ルート</span><span class="acc-arrow">▼</span></div>
     <div class="acc-body">
       <div class="step-item"><div class="step-num">1</div><div class="step-text">近くの<strong>混雑対応部</strong></div></div>
@@ -880,6 +903,7 @@ document.getElementById('pw-btn').onclick = checkPw;
 document.getElementById('pw-input').onkeydown = e => { if(e.key==='Enter') checkPw(); };
 function checkPw(){
   if(document.getElementById('pw-input').value==='machiasobi30'){
+    sessionStorage.setItem('ma30auth','1');
     document.getElementById('pw-screen').style.display='none';
     document.getElementById('app').style.display='flex';
     initApp();
@@ -888,11 +912,17 @@ function checkPw(){
     document.getElementById('pw-input').value='';
   }
 }
+if(sessionStorage.getItem('ma30auth')==='1'){
+  document.getElementById('pw-screen').style.display='none';
+  document.getElementById('app').style.display='flex';
+  initApp();
+}
 
 // ── Init ──
 function initApp(){
   updateDate();
-  setInterval(updateDate, 60000);
+  updateTTPast();
+  setInterval(()=>{ updateDate(); updateTTPast(); }, 60000);
   loadNews();
 }
 
@@ -944,6 +974,25 @@ function switchDay(d){
   document.getElementById('day-0').style.display = d===0?'':'none';
   document.getElementById('day-1').style.display = d===1?'':'none';
   currentDay = d;
+  updateTTPast();
+}
+function updateTTPast(){
+  const now = new Date();
+  const m = now.getMonth(), date = now.getDate();
+  // 5/16=day0, 5/17=day1, それ以外はグレーアウトなし
+  const todayDay = (m===4 && date===16) ? 0 : (m===4 && date===17) ? 1 : -1;
+  document.querySelectorAll('#tab-tt .tt-table tr').forEach(row => {
+    const td = row.querySelector('td');
+    if (!td) return;
+    const match = td.textContent.match(/(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})/);
+    if (!match) return;
+    const endH = parseInt(match[3]), endMin = parseInt(match[4]);
+    const dayEl = row.closest('[id^="day-"]');
+    const rowDay = dayEl ? parseInt(dayEl.id.replace('day-','')) : -1;
+    const isPast = todayDay === rowDay &&
+      (now.getHours() > endH || (now.getHours() === endH && now.getMinutes() >= endMin));
+    row.classList.toggle('tt-past', isPast);
+  });
 }
 function switchVenue(day, v){
   const tabs = document.querySelectorAll('#vtabs-'+day+' .venue-tab');
@@ -991,17 +1040,7 @@ function copyTmpl(id, btn){
     btn.textContent='コピー失敗';
     setTimeout(()=>{ btn.innerHTML='📋 コピー'; }, 2000);
   };
-  if(navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(text).then(done).catch(fail);
-  } else {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    try{ document.execCommand('copy') ? done() : fail(); }
-    catch(e){ fail(); }
-    document.body.removeChild(ta);
-  }
+  navigator.clipboard.writeText(text).then(done).catch(fail);
 }
 
 // ── Search ──
