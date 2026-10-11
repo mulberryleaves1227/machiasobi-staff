@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>報告｜マチ★アソビ vol.30 スタッフナビ</title>
+<link rel="stylesheet" href="../shared/css/base.css">
+<link rel="stylesheet" href="report.css">
+</head>
+<body data-page="report">
+
+<div id="app">
+  <main class="page">
+    <div class="sec-head">🆘 トラブル初動</div>
+    <div class="card">
+      <div style="font-size:13px;line-height:1.9">
+        <div>👦 <strong>迷子・同行者不明</strong>：安全な場所へ案内 → 藍場浜/東公園テントへ共有</div>
+        <div>🎒 <strong>落とし物</strong>：拾った場所・時間確認 → 本部テントへ引き継ぎ</div>
+        <div>😠 <strong>クレーム</strong>：話を遮らず聞く、反論せず「確認します」→ リーダー・八木・桑野へ</div>
+        <div>❓ <strong>不審物・不審者</strong>：触らない・動かさない・近づかない → 場所と特徴を共有</div>
+      </div>
+    </div>
+
+    <div class="sec-head">📋 報告テンプレート（コピーして使う）</div>
+
+    <div class="card">
+      <div class="card-title">🔴 混雑報告</div>
+      <div class="tmpl-box" id="tmpl-congestion">【混雑】
+場所：
+状況：通路が詰まり始めています / 列が伸びています / 最後尾が不明瞭です
+人数感：
+対応中：声かけ中 / 最後尾案内中 / 通路確保中
+相談：追加スタッフが必要です / 導線変更の判断をお願いします</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-congestion', this)">📋 コピー</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🟠 体調不良・怪我報告</div>
+      <div class="tmpl-box" id="tmpl-medical">【体調不良・怪我】
+場所：
+対象者：大人 / 子ども / 不明
+状況：座り込んでいる / めまい / 吐き気 / 熱中症疑い / 怪我
+同行者：あり / なし / 不明
+対応中：日陰へ案内 / 安全な場所で待機 / 救護待ち
+相談：救護担当の派遣をお願いします</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-medical', this)">📋 コピー</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📷 撮影トラブル報告</div>
+      <div class="tmpl-box" id="tmpl-photo">【撮影トラブル】
+場所：
+内容：撮影禁止エリアで撮影 / 無断撮影の相談 / 通路をふさぐ撮影
+関係者：撮影者 / 被写体 / 周囲の来場者
+対応中：撮影停止のお願い / 場所移動のお願い / 確認中と案内
+相談：リーダー対応をお願いします</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-photo', this)">📋 コピー</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">😠 クレーム・強い申し出報告</div>
+      <div class="tmpl-box" id="tmpl-claim">【クレーム】
+場所：
+内容（聞いた内容の要点）：
+相手の様子：落ち着いている / 強い口調 / 長時間対応中
+対応中：話を聞いている / 確認すると伝えて保留中
+相談：リーダー対応をお願いします / 対応方針を教えてください</div>
+      <button class="copy-btn" onclick="copyTmpl('tmpl-claim', this)">📋 コピー</button>
+    </div>
+  </main>
+</div>
+
+<script src="../shared/js/utils.js"></script>
+<script src="../shared/js/auth.js"></script>
+<script src="../shared/js/layout.js"></script>
+<script src="../shared/js/site-search.js"></script>
+<script src="report.js"></script>
+</body>
+</html>

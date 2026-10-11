@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エリア詳細｜マチ★アソビ vol.30 スタッフナビ</title>
+<link rel="stylesheet" href="../shared/css/base.css">
+<link rel="stylesheet" href="area.css">
+</head>
+<body data-page="area">
+
+<div id="app">
+  <main class="page">
+    <!-- 商店街詳細MAP（画像を別タブで開く） -->
+    <div class="sec-head">🏪 商店街 詳細MAP</div>
+    <div class="map-links">
+      <a class="map-link-btn" href="../assets/maps/M30_poppo.png" target="_blank" rel="noopener">
+        <span class="icon">🗺️</span><span>ポッポ街 出店MAP</span><span class="arrow">↗</span>
+      </a>
+      <a class="map-link-btn" href="../assets/maps/M30_higashishinmachi.png" target="_blank" rel="noopener">
+        <span class="icon">🗺️</span><span>東新町商店街MAP</span><span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <!-- パラソル配置（Ver.20260510 ボードウォーク全体向） -->
+    <div class="sec-head">⛱ ボードウォーク パラソル配置</div>
+    <div class="area-toggle">
+      <button class="area-btn active" onclick="switchArea('east', this)">東公園側 (25〜49番)</button>
+      <button class="area-btn" onclick="switchArea('west', this)">西公園側 (01〜24番)</button>
+    </div>
+
+    <div id="area-east">
+      <div class="warn-note">⚠️ 伊月健診クリニック（駐車場）通抜けNG。ボードウォーク面の営業店舗前での滞留注意。</div>
+      <div class="warn-note">ufotable(31・32番)周辺 ─ 1Fカフェ前に滞留を作らないよう重点警戒。32番角の駐車場は個人宅・<strong>立入注意</strong></div>
+      <table class="para-table">
+        <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
+        <tr><td>25D</td><td>パッショーネ×ハヤブサフィルム</td><td>Anime Cafe & Bar CUELAMP(飲食）</td></tr>
+        <tr><td>25C</td><td>パッショーネ×ハヤブサフィルム</td><td>物販+トーク等</td></tr>
+        <tr><td>25</td><td>スタジオコロリド・クロマト</td><td>超かぐや姫</td></tr>
+        <tr><td>26</td><td>Production I.G × WIT STUDIO</td><td>—</td></tr>
+        <tr><td>27</td><td>プロダクション・プラスエイチ</td><td>—</td></tr>
+        <tr><td>28</td><td>きゃらめる</td><td>EMTスクエアード</td></tr>
+        <tr><td>29</td><td>コミックス・ウェーブ・フィルム</td><td>—</td></tr>
+        <tr><td>30</td><td>CloverWorks</td><td>—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">31</td><td>ufotable</td><td>—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">32</td><td>ufotable</td><td>—</td></tr>
+        <tr><td>33</td><td>feel.</td><td>—</td></tr>
+        <tr><td>34</td><td>小学館集英社プロダクション</td><td>お渡し会など</td></tr>
+        <tr><td>35</td><td>オリミナート</td><td>—</td></tr>
+        <tr><td>36</td><td>ナンバーナイン</td><td>神血の救世主</td></tr>
+        <tr><td>37</td><td>ISARIBI</td><td>GATE、魔法少女育成計画</td></tr>
+        <tr><td>38</td><td>リアルアキバ</td><td>Project LEAP!、相良茉優</td></tr>
+        <tr><td>39</td><td>ジェンコ</td><td>—</td></tr>
+        <tr><td>40</td><td>アニメイト</td><td>—</td></tr>
+        <tr><td>41</td><td>博報堂DYMaP</td><td>—</td></tr>
+        <tr><td>42</td><td>ドリコム</td><td>—</td></tr>
+        <tr><td>43</td><td>STORY</td><td>運命の巻戻士</td></tr>
+        <tr><td>44</td><td>MBS（毎日放送）</td><td>—</td></tr>
+        <tr><td>45</td><td>KADOKAWA</td><td>—</td></tr>
+        <tr><td>46</td><td>AnimeJapan</td><td>—</td></tr>
+        <tr><td>47</td><td>ANIPLEX</td><td>—</td></tr>
+        <tr><td>48</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
+        <tr><td>49</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
+      </table>
+    </div>
+
+    <div id="area-west" style="display:none">
+      <div class="warn-note">⚠️ ufotable徳島スタジオ（搬入出拠点）隣接。阿波銀行あり。道路での停留・無断駐輪に注意。</div>
+      <div class="warn-note">⚠️ 06〜07番付近はロケット・ベース「SUMMER ROCKET」エリア。動線確保に重点警戒。</div>
+      <table class="para-table">
+        <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
+        <tr><td>01</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>02</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>03</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>04</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td>05</td><td colspan="2" style="color:#aaa">—</td></tr>
+        <tr><td style="color:#e94560;font-weight:bold">06</td><td>ロケット・ベース</td><td>SUMMER ROCKET</td></tr>
+        <tr><td>07</td><td>ジリオンモード</td><td>FullMooN Empress</td></tr>
+        <tr><td>08</td><td>Giant Step</td><td>—</td></tr>
+        <tr><td>09</td><td>シスト</td><td>ジサリス</td></tr>
+        <tr><td>10</td><td>幻影／いろは咲</td><td>幽閉サテライト、少女フラクタル</td></tr>
+        <tr><td>11</td><td>AICライツ</td><td>—</td></tr>
+        <tr><td>12</td><td>フレックスコミックス</td><td>邪神ちゃんドロップキック</td></tr>
+        <tr><td>13</td><td>アンネル</td><td>ほっぺちゃん</td></tr>
+        <tr><td>14</td><td>玲瓏のhydrangea</td><td>—</td></tr>
+        <tr><td>15</td><td>民安ともえ</td><td>Vtuberたみー</td></tr>
+        <tr><td>16</td><td>harappa</td><td>—</td></tr>
+        <tr><td>17</td><td>アナログ</td><td>ハコネクト</td></tr>
+        <tr><td>18</td><td>北広島市（北海道）</td><td>—</td></tr>
+        <tr><td>19</td><td>大島はるな</td><td>—</td></tr>
+        <tr><td>20</td><td>ASIAN WAVE</td><td>綾野ましろ ※日曜のみ</td></tr>
+        <tr><td>21</td><td colspan="2" style="color:#aaa">（飲食スペース）</td></tr>
+        <tr><td>22</td><td>白滝製麺</td><td>飲食</td></tr>
+        <tr><td>23</td><td colspan="2" style="color:#aaa">（飲食スペース）</td></tr>
+        <tr><td>24</td><td>アクアプラス×NewType新宿</td><td>—</td></tr>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="../shared/js/utils.js"></script>
+<script src="../shared/js/auth.js"></script>
+<script src="../shared/js/layout.js"></script>
+<script src="../shared/js/site-search.js"></script>
+<script src="area.js"></script>
+</body>
+</html>

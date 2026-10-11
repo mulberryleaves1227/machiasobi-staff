@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タイムライン｜マチ★アソビ vol.30 スタッフナビ</title>
+<link rel="stylesheet" href="../shared/css/base.css">
+<link rel="stylesheet" href="timeline.css">
+</head>
+<body data-page="timeline">
+
+<div id="app">
+  <main class="page">
+    <div class="alert alert-red" style="font-size:12px">⚠️ ステージは<strong>基本すべて撮影禁止</strong>　🔴最警戒 🟠要注意 🟡注意</div>
+    <div class="day-toggle">
+      <button class="day-btn active" onclick="switchDay(0)">5/16（土）</button>
+      <button class="day-btn" onclick="switchDay(1)">5/17（日）</button>
+    </div>
+
+    <!-- DAY 1 -->
+    <div id="day-0">
+      <div class="venue-tabs" id="vtabs-0">
+        <div class="venue-tab active" onclick="switchVenue(0,0)">藍場浜</div>
+        <div class="venue-tab" onclick="switchVenue(0,1)">東公園</div>
+        <div class="venue-tab" onclick="switchVenue(0,2)">西公園</div>
+        <div class="venue-tab" onclick="switchVenue(0,3)">ufo T1</div>
+        <div class="venue-tab" onclick="switchVenue(0,4)">ufo T2</div>
+        <div class="venue-tab" onclick="switchVenue(0,5)">ufo 1F</div>
+        <div class="venue-tab" onclick="switchVenue(0,6)">アミコ</div>
+        <div class="venue-tab" onclick="switchVenue(0,7)">あわぎん</div>
+      </div>
+      <div id="d0v0" class="venue-panel">
+        <div class="tt-warn">⚠️ 16日警戒：12:30 魔法使いの夜開始から鬼滅待機勢と重なる。<strong>12:00時点で最後尾札・待機列を整備すること</strong></div>
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-10:30</td><td>開会式</td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>10:30-11:30</td><td><a href="https://www.machiasobi.com/event/189" target="_blank" rel="noopener">「魔法少女リリカルなのは EXCEEDS Gun Blaze Vengeance」スペシャルステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>11:30-12:30</td><td><a href="https://www.machiasobi.com/event/209" target="_blank" rel="noopener">『メダリスト』スペシャルステージ in マチ★アソビ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:30-13:30</td><td><a href="https://www.machiasobi.com/event/274" target="_blank" rel="noopener">劇場アニメーション「魔法使いの夜」スペシャルステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>13:30-14:15</td><td><a href="https://www.machiasobi.com/event/276" target="_blank" rel="noopener">アニメ「鬼滅の刃」ステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/278" target="_blank" rel="noopener">アニメ「鬼滅の刃」劇伴&amp;挿入歌スペシャルライブ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>16:30-17:30</td><td><a href="https://www.machiasobi.com/event/139" target="_blank" rel="noopener">夢限大みゅーたいぷ「スーパーポジション ～夢限大編～」＠徳島</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/135" target="_blank" rel="noopener">SPECIAL LIVE – スピラ・スピカ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:10-20:00</td><td><a href="https://www.machiasobi.com/event/207" target="_blank" rel="noopener">SPECIAL LIVE – オーイシマサヨシ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v1" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://twitter.com/machiasobi/status/2053037262578037220" target="_blank" rel="noopener">TVアニメ「GATE SEASON2 自衛隊 彼の海にて、斯く戦えり」スペシャルトークステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/465" target="_blank" rel="noopener">帰ってきた！『櫻坂46×ビルディバイド -ブライト-』マチアソビ感謝祭ステージ！</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/329" target="_blank" rel="noopener">アズールレーンスペシャルトーク</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/187" target="_blank" rel="noopener">『運命の巻戻士』SPトークステージ in マチ★アソビ</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/280" target="_blank" rel="noopener">FGOゲストトーク in マチ★アソビvol.30</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/302" target="_blank" rel="noopener">ゲームクリエイタートークライブ</a></td><td>—</td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/288" target="_blank" rel="noopener">和田丈嗣のむっちゃええやん！</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/472" target="_blank" rel="noopener">あるあるCityがマチ★アソビにYATTEKURU</a></td><td>—</td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/160" target="_blank" rel="noopener">Project LEAP! マチ★アソビ SP ステージ</a></td><td>—</td></tr>
+        <tr><td>19:00-20:00</td><td><a href="https://www.machiasobi.com/event/517" target="_blank" rel="noopener">『Summer Pockets』劇場編集版配信記念ステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v2" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/137" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – 二ノ宮ゆい</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/158" target="_blank" rel="noopener">Project LEAP! マチ★アソビ SP ステージ</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/327" target="_blank" rel="noopener">メタストらいぶ in マチ★アソビVol.30</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/156" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – nonoc</a></td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/191" target="_blank" rel="noopener">相良茉優マチ★アソビSPステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/162" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – 前橋ウィッチーズ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/319" target="_blank" rel="noopener">CC2×フロンティアワークス×KaKa Creation×ナンバーナイントーク</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/348" target="_blank" rel="noopener">少女フラクタルLIVE!! inマチアソビ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:00-20:00</td><td><a href="https://www.machiasobi.com/event/346" target="_blank" rel="noopener">幽閉サテライトLIVE!! inマチアソビ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v3" class="venue-panel" style="display:none">
+        <div class="tt-warn">⚠️ キャパ注意。入場動線の混在に警戒</div>
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/512" target="_blank" rel="noopener">feel.×TVアニメ『Summer Pockets』スタッフSPトーク 第2回</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:30-13:30</td><td><a href="https://www.machiasobi.com/event/290" target="_blank" rel="noopener">プリズム輪舞曲 特別上映会＆スタッフトークショー</a></td><td>—</td></tr>
+        <tr><td>14:00-17:00</td><td><a href="https://www.machiasobi.com/event/368" target="_blank" rel="noopener">MAPPA×CloverWorks 上映会＆スタッフトーク</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:30-18:30</td><td><a href="https://www.machiasobi.com/event/213" target="_blank" rel="noopener">TVアニメ『さよならララ』特別試写会＆トークステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>19:00-22:00</td><td><a href="https://www.machiasobi.com/event/470" target="_blank" rel="noopener">劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来 上映会</a></td><td><span class="badge-s">S🔴キャパ満了注意</span></td></tr>
+        <tr><td>22:30-</td><td><a href="https://twitter.com/machiasobi/status/2053037258891022791" target="_blank" rel="noopener">『衛宮さんちの今日のごはん』TAa先生セレクト上映会 in マチ★アソビ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d0v4" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>11:00-12:00</td><td>ダークサモナー・彼女の友達 プロデューサートーク</td></tr>
+        <tr><td>12:30-13:30</td><td>井口雅紀監督トークショー</td></tr>
+        <tr><td>14:00-15:00</td><td>機動戦艦ナデシコ20周年 上映会</td></tr>
+        <tr><td>15:30-16:30</td><td>業界トーク</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/182" target="_blank" rel="noopener">狂気山脈アニメ映画化プロジェクト、今どうなってるの？</a></td></tr>
+        <tr><td>18:30-19:30</td><td><a href="https://www.machiasobi.com/event/292" target="_blank" rel="noopener">ここでしか話せない!? アニメビジネスの変遷トーク</a></td></tr>
+        <tr><td>20:00-21:30</td><td>「マリッジトキシン」セレクション上映会</td></tr>
+        <tr><td>22:00-23:00</td><td><a href="https://www.machiasobi.com/event/148" target="_blank" rel="noopener">業界関係者女子会 vol.17</a></td></tr>
+        </table>
+      </div>
+      <div id="d0v5" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>10:30-11:00</td><td>新たなサブカルの祭典紹介</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.cc2.co.jp/cc2news/?p=21520" target="_blank" rel="noopener">アメリカザリガニ平井×CC2松山洋「スーパーピコピコクラブ」</a><small>（カフェスペース）</small></td></tr>
+        <tr><td>12:00〜</td><td><a href="https://www.machiasobi.com/booth/440/" target="_blank" rel="noopener">harappa合同会社 トーク/ライブドローイング</a><small>（エントランス）</small></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/323" target="_blank" rel="noopener">カワイイ・創作界隈トークショー</a></td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/539" target="_blank" rel="noopener">アニメアーカイブの四方山話</a></td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/317" target="_blank" rel="noopener">TROYCA設定制作トークショー</a></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/519" target="_blank" rel="noopener">ShoProプロデューサーステージ</a></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/272" target="_blank" rel="noopener">漫画家こしのりょう×吉田尚記のマンガの描き方トークライブ！</a></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/321" target="_blank" rel="noopener">Seven Arcs ×「魔法少女リリカルなのは EXCEEDS」スタッフSPトーク</a></td></tr>
+        <tr><td>18:00-19:00</td><td>世界人ガール ミーシガー舞台挨拶</td></tr>
+        </table>
+      </div>
+      <div id="d0v6" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/358" target="_blank" rel="noopener">競技ポーカーLIVE 2026 in マチアソビ</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/195" target="_blank" rel="noopener">「うっちゃり！」ライブ＆トーク</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/333" target="_blank" rel="noopener">KyoKa Live in マチ★アソビ</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/362" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE 皆谷尚美 ～遠いこの街で～</a></td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/201" target="_blank" rel="noopener">「ブレイド&バスタード」トークショー feat.蝸牛くも</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://x.com/machiasobi/status/2052312493922345208" target="_blank" rel="noopener">みんなで踊ろうほっぺちゃんダンス♪スペシャルステージ</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/528" target="_blank" rel="noopener">フレーズギャラリー座談会＆壇上サイン会</a></td><td>—</td></tr>
+        </table>
+      </div>
+      <div id="d0v7" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>14:00-15:00</td><td>マチ★アソビサウナができるまで</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div id="day-1" style="display:none">
+      <div class="venue-tabs" id="vtabs-1">
+        <div class="venue-tab active" onclick="switchVenue(1,0)">藍場浜</div>
+        <div class="venue-tab" onclick="switchVenue(1,1)">東公園</div>
+        <div class="venue-tab" onclick="switchVenue(1,2)">西公園</div>
+        <div class="venue-tab" onclick="switchVenue(1,3)">ufo T1</div>
+        <div class="venue-tab" onclick="switchVenue(1,4)">ufo T2</div>
+        <div class="venue-tab" onclick="switchVenue(1,5)">ufo 1F</div>
+        <div class="venue-tab" onclick="switchVenue(1,6)">アミコ</div>
+        <div class="venue-tab" onclick="switchVenue(1,7)">あわぎん</div>
+      </div>
+      <div id="d1v0" class="venue-panel">
+        <div class="tt-warn">⚠️ 17日警戒：プリキュア→Re:ゼロ→ようこそ実力主義と客層が変わる。視覚的な案内を重視。終演後の退場と閉会式混雑に注意</div>
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/154" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – プリキュアシンガーズ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/221" target="_blank" rel="noopener">TVアニメ「Re:ゼロから始める異世界生活」4th season スペシャルステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/141" target="_blank" rel="noopener">「ようこそ実力至上主義の教室へ 4th Season 2年生編1学期」スペシャルステージ</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>13:30-14:30</td><td><a href="https://www.machiasobi.com/event/152" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – fhána</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/133" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – 栗林みな実</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>16:30-17:30</td><td><a href="https://www.machiasobi.com/event/150" target="_blank" rel="noopener">マチ★アソビ SPECIAL LIVE – FLOW</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>18:00-19:30</td><td><a href="https://www.machiasobi.com/event/164" target="_blank" rel="noopener">『テイルズ オブ』シリーズ30周年記念 マチ★アソビ Premium Stage（※17:30頃から待機列警戒）</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>19:30-</td><td>閉会式</td><td><span class="badge-b">B🟡終演後混雑</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v1" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/285" target="_blank" rel="noopener">わたたべトークセッション！×苗川采先生ライブドローイング</a></td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/444" target="_blank" rel="noopener">超かぐや姫！スタッフトークショー ～私は、「かぐや」のここが好き。～</a></td><td><span class="badge-s">S🔴</span></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/199" target="_blank" rel="noopener">TVアニメ「魔都精兵のスレイブ2」放送終了記念 キャスト&スタッフトークショー</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/219" target="_blank" rel="noopener">TVアニメ「Dr.STONE」〜マチ★アソビ出張版〜</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td>ポンステージ（仮）</td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/325" target="_blank" rel="noopener">『テイルズ オブ』×マチ★アソビ 30th スペシャルトーク</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/523" target="_blank" rel="noopener">『Summer Pockets』放送終了記念ステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/211" target="_blank" rel="noopener">TVアニメ『死亡遊戯で飯を食う。』スペシャルステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v2" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:00</td><td><a href="https://www.machiasobi.com/event/354" target="_blank" rel="noopener">ガールズバンドFullMooN、Empressスペシャルライブ</a></td><td>—</td></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.machiasobi.com/event/335" target="_blank" rel="noopener">KyoKa Live in マチ★アソビ</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/364" target="_blank" rel="noopener">マチ★アソビ×Vtuberたみースペシャル野外ライブ!! 2026</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/360" target="_blank" rel="noopener">大島はるなSPライブ</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/366" target="_blank" rel="noopener">西尾夕香とマチアソビであそぼう！</a></td><td>—</td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/331" target="_blank" rel="noopener">アニメ『アズールレーン びそくぜんしんっ！にっ！！』スペシャルステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/184" target="_blank" rel="noopener">AQUAPLUS presents「Suara」うたわれるもの SPECIAL LIVE</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/144" target="_blank" rel="noopener">HAPPY BIRTHDAY 逢瀬アキラ!!! マチ★アソビSpecial stage!!!</a></td><td>—</td></tr>
+        <tr><td>18:00-19:00</td><td><a href="https://www.machiasobi.com/event/337" target="_blank" rel="noopener">綾野ましろ Special Stage!! I'm home！！マチ★アソビ！</a></td><td>—</td></tr>
+        <tr><td>19:00-20:00</td><td><a href="https://twitter.com/machiasobi/status/2053037261319704929" target="_blank" rel="noopener">玲瓏のHydrangeaスペシャルライブ</a></td><td>—</td></tr>
+        </table>
+      </div>
+      <div id="d1v3" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:00-11:30</td><td><a href="https://www.machiasobi.com/event/298" target="_blank" rel="noopener">【背景美術実演】アニメのコンセプトアートを1時間で描く！？＋SPトーク</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/215" target="_blank" rel="noopener">TVアニメ『死亡遊戯で飯を食う。』セレクション上映会</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>14:00-14:45</td><td><a href="https://www.machiasobi.com/event/282" target="_blank" rel="noopener">TVアニメ『NEEDY GIRL OVERDOSE』マチ★アソビステージ</a></td><td><span class="badge-a">A🟠</span></td></tr>
+        <tr><td>15:30-16:30</td><td><a href="https://www.machiasobi.com/event/300" target="_blank" rel="noopener">コミックス・ウェーブ・フィルムの新たな挑戦</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/294" target="_blank" rel="noopener">「ようこそ実力至上主義の教室へ 4th Season 2年生編1学期」上映会</a></td><td><span class="badge-s">S🔴キャパ注意</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v4" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>10:30-11:30</td><td><a href="https://www.machiasobi.com/event/315" target="_blank" rel="noopener">TROYCA3人まったりトーク</a></td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/313" target="_blank" rel="noopener">TVアニメ「エリスの聖杯」第1話上映会&原作編集・プロデューサートークショー</a></td></tr>
+        <tr><td>13:30-14:30</td><td><a href="https://www.machiasobi.com/event/217" target="_blank" rel="noopener">TVアニメ「緋弾のアリア」セレクト上映会</a></td></tr>
+        <tr><td>15:00-16:15</td><td><a href="https://www.machiasobi.com/event/283" target="_blank" rel="noopener">『楽園追放 心のレゾナンス』テクニカルミーティング</a></td></tr>
+        <tr><td>16:45-17:45</td><td><a href="https://www.machiasobi.com/event/344" target="_blank" rel="noopener">変わるアニメ作りの形とは？〜製作委員会モデル・AI・人材確保の最前線〜</a></td></tr>
+        <tr><td>22:00-23:00</td><td><a href="https://twitter.com/machiasobi/status/2052675876031201632" target="_blank" rel="noopener">業界人ガールミーツガール時事放談</a></td></tr>
+        </table>
+      </div>
+      <div id="d1v5" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://twitter.com/i/status/2042166627832336463" target="_blank" rel="noopener">第2回 株式会社ドリコム 出版・アニメ事業本部 本部説明会 in マチ★アソビ</a></td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/342" target="_blank" rel="noopener">アニメ・ゲーム・マンガの世界展開四方山話 vol.3</a></td></tr>
+        <tr><td>15:00-16:00</td><td>LV999の村人ステージ</td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/530" target="_blank" rel="noopener">THEアニメトーク 第0回 by MBS</a></td></tr>
+        <tr><td>17:00-18:00</td><td>ハコネクト SPトークショー</td></tr>
+        <tr><td>20:00-21:00</td><td><a href="https://www.machiasobi.com/event/146" target="_blank" rel="noopener">マチ★アソビ後夜祭 vol.8</a></td></tr>
+        </table>
+      </div>
+      <div id="d1v6" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th><th>混雑</th></tr>
+        <tr><td>10:30-12:00</td><td><a href="https://www.machiasobi.com/event/551" target="_blank" rel="noopener">スーパーきぐるみファイト！</a></td><td>—</td></tr>
+        <tr><td>12:00-13:00</td><td><a href="https://www.machiasobi.com/event/521" target="_blank" rel="noopener">VISUAL ARTS×ShoProステージ ～ゲーム原作のメディア化～</a></td><td>—</td></tr>
+        <tr><td>13:00-14:00</td><td><a href="https://www.machiasobi.com/event/356" target="_blank" rel="noopener">知多娘。LIVE</a></td><td>—</td></tr>
+        <tr><td>14:00-15:00</td><td><a href="https://www.machiasobi.com/event/350" target="_blank" rel="noopener">井上正大アソビ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        <tr><td>15:00-16:00</td><td><a href="https://www.machiasobi.com/event/340" target="_blank" rel="noopener">綾野ましろの『ゆるっとトークショー&ハイタッチ会！！』</a></td><td>—</td></tr>
+        <tr><td>16:00-17:00</td><td><a href="https://www.machiasobi.com/event/197" target="_blank" rel="noopener">「SUMMER ROCKET in 宇宙少女漂流記」ライブ＆トーク</a></td><td>—</td></tr>
+        <tr><td>17:00-18:00</td><td><a href="https://www.machiasobi.com/event/296" target="_blank" rel="noopener">TVアニメ『黒猫と魔女の教室』スペシャルステージ</a></td><td><span class="badge-b">B🟡</span></td></tr>
+        </table>
+      </div>
+      <div id="d1v7" class="venue-panel" style="display:none">
+        <table class="tt-table"><tr><th>時間</th><th>内容</th></tr>
+        <tr><td>11:00-12:00</td><td><a href="https://www.cc2.co.jp/cc2news/?p=21520" target="_blank" rel="noopener">大喜利対決トゥナイト ～神風動画 VS CC2～</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../shared/js/utils.js"></script>
+<script src="../shared/js/auth.js"></script>
+<script src="../shared/js/layout.js"></script>
+<script src="../shared/js/site-search.js"></script>
+<script src="timeline.js"></script>
+</body>
+</html>
