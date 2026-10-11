@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>コンテンツ検索 | マチ★アソビ vol.30</title>
+<title>コンテンツ検索 | マチ★アソビ vol.31</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-size:14px;background:#f5f5f5;color:#222;overscroll-behavior:none}
 /* ── header ── */
-.header{background:#1a1a2e;color:#fff;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.top-shell{position:sticky;top:0;z-index:100;background:#f5f5f5}
+.header{background:#1a1a2e;color:#fff;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
 .header-title{font-size:14px;font-weight:bold;line-height:1.3}
 .header-sub{font-size:11px;color:#aaa}
 /* ── search bar ── */
-.search-wrap{padding:10px 12px 6px;position:sticky;top:52px;z-index:50;background:#f5f5f5}
-.search-wrap input{width:100%;padding:10px 14px;font-size:15px;border:2px solid #ddd;border-radius:10px;background:#fff;outline:none;-webkit-appearance:none}
+.search-wrap{padding:10px 12px 6px;background:#f5f5f5}
+.search-wrap input{display:block;width:100%;min-width:0;padding:10px 14px;font-size:15px;border:2px solid #ddd;border-radius:10px;background:#fff;outline:none;-webkit-appearance:none}
 .search-wrap input:focus{border-color:#e94560}
 .result-count{font-size:11px;color:#888;padding:0 4px 6px;text-align:right}
+.search-note{font-size:11px;color:#888;padding:2px 16px 8px;line-height:1.5}
 /* ── content area ── */
 .content-area{padding:0 12px 80px}
 /* ── card ── */
@@ -27,6 +29,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 .con-card.kind-screening{border-left-color:#9b59b6}
 .con-card.kind-booth_event{border-left-color:#4a90d9}
 .con-card.kind-sauna{border-left-color:#27ae60}
+.con-card.kind-live{border-left-color:#e94560}
+.con-card.kind-ceremony{border-left-color:#e94560}
+.con-card.kind-exhibit,.con-card.kind-merch,.con-card.kind-sign,.con-card.kind-cafe{border-left-color:#4a90d9}
+.con-card.kind-rally,.con-card.kind-other{border-left-color:#888}
 .card-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
 .kind-badge{font-size:10px;font-weight:bold;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:2px}
 .badge-stage{background:#ffeef1;color:#e94560}
@@ -36,6 +42,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 .badge-screening{background:#f5eeff;color:#9b59b6}
 .badge-booth_event{background:#eef3ff;color:#4a90d9}
 .badge-sauna{background:#eafaf1;color:#27ae60}
+.badge-live{background:#ffeef1;color:#e94560}
+.badge-ceremony{background:#ffeef1;color:#e94560}
+.badge-exhibit,.badge-merch,.badge-sign,.badge-cafe{background:#eef3ff;color:#4a90d9}
+.badge-rally,.badge-other{background:#f0f0f0;color:#666}
 .card-title{font-size:14px;font-weight:bold;color:#1a1a2e;line-height:1.4}
 .card-body{font-size:13px;line-height:1.7;color:#333}
 .card-row{display:flex;gap:6px;margin-bottom:2px}
@@ -52,25 +62,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 .loading-msg{text-align:center;color:#aaa;padding:40px 20px;font-size:14px}
 /* ── bottom nav ── */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;z-index:100;box-shadow:0 -2px 8px rgba(0,0,0,.1)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px;cursor:pointer;color:#888;font-size:10px;gap:2px;min-height:56px;border:none;background:none;text-decoration:none}
+.nav-item{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px;cursor:pointer;color:#888;font-size:10px;line-height:1.2;text-align:center;overflow-wrap:anywhere;gap:2px;min-height:56px;border:none;background:none;text-decoration:none}
 .nav-item.active{color:#e94560}
 .nav-item .icon{font-size:20px}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div>
-    <div class="header-title">マチ★アソビ vol.30</div>
-    <div class="header-sub">コンテンツ・出演者検索</div>
+<div class="top-shell">
+  <header class="header">
+    <div>
+      <div class="header-title">マチ★アソビ vol.31</div>
+      <div class="header-sub">コンテンツ・出演者検索</div>
+    </div>
+  </header>
+  <div class="search-wrap">
+    <input type="search" id="search-input" placeholder="🔍 作品名・出演者・ブース・エリアなど…" autocomplete="off" autofocus>
+    <div class="result-count" id="result-count"></div>
   </div>
-</header>
-
-<div class="search-wrap">
-  <input type="search" id="search-input" placeholder="🔍 作品名・出演者・ブース・エリアなど…" autocomplete="off" autofocus>
-  <div class="result-count" id="result-count"></div>
-  <div style="font-size:11px;color:#888;padding:2px 4px 4px;line-height:1.5">⚠️ 全ての情報をカバーしていません！案内する際は必ず正しい情報は各コンテンツの公式SNSやHPを確認してもらうよう案内してください。誤りがあることがわかった場合は桑野まで連絡ください。</div>
 </div>
+<div class="search-note">⚠️ 全ての情報をカバーしていません！案内する際は必ず正しい情報は各コンテンツの公式SNSやHPを確認してもらうよう案内してください。誤りがあることがわかった場合は桑野まで連絡ください。</div>
 
 <div class="content-area" id="card-area">
   <div class="loading-msg">読み込み中…</div>
@@ -81,6 +92,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
   <a class="nav-item" href="index.html?tab=report"><span class="icon">🆘</span>報告</a>
   <a class="nav-item" href="index.html?tab=shift"><span class="icon">📋</span>シフト別</a>
   <a class="nav-item" href="index.html?tab=tt"><span class="icon">📅</span>タイムライン</a>
+  <a class="nav-item" href="index.html?tab=map"><span class="icon">📍</span>エリア詳細</a>
   <a class="nav-item active"><span class="icon">🎭</span>コンテンツ</a>
   <a class="nav-item" href="index.html?tab=basic"><span class="icon">📖</span>基本知識</a>
 </nav>
@@ -88,11 +100,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku
 <script>
 const KIND_LABELS = {
   stage: 'ステージ', talk: 'トーク', screening_talk: '上映&トーク',
-  screening: '上映会', booth: 'ブース', booth_event: 'ブースイベント', sauna: 'サウナ'
+  screening: '上映会', booth: 'ブース', booth_event: 'ブースイベント', sauna: 'サウナ',
+  live: 'ライブ', ceremony: '式典', exhibit: '展示', merch: '物販', sign: 'サイン会',
+  cafe: 'カフェ', rally: '回遊企画', other: 'その他'
 };
 const KIND_BADGE = {
   stage: 'badge-stage', talk: 'badge-talk', screening_talk: 'badge-screening_talk',
-  screening: 'badge-screening', booth: 'badge-booth', booth_event: 'badge-booth_event', sauna: 'badge-sauna'
+  screening: 'badge-screening', booth: 'badge-booth', booth_event: 'badge-booth_event', sauna: 'badge-sauna',
+  live: 'badge-live', ceremony: 'badge-ceremony', exhibit: 'badge-exhibit', merch: 'badge-merch', sign: 'badge-sign',
+  cafe: 'badge-cafe', rally: 'badge-rally', other: 'badge-other'
 };
 
 function escHtml(s) {
@@ -105,6 +121,7 @@ function safeUrl(u) {
 
 // ── Google Maps リンク ──
 const gmap = (lat, lng) => `https://www.google.com/maps?q=${lat},${lng}`;
+const gsearch = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 
 const AREA_MAP = {
   '藍場浜公園':             gmap(34.0738828, 134.5471712),
@@ -117,6 +134,12 @@ const AREA_MAP = {
   '東新町商店街':           gmap(34.0698461, 134.5481209),
   'ポッポ街商店街':         gmap(34.0748566, 134.5490948),
   'マチ★アソビサウナ（新町川）': gmap(34.0700951, 134.5501114),
+  '新町川水際公園':         gsearch('新町川水際公園 徳島'),
+  '眉山':                   gsearch('眉山ロープウェイ 山頂駅'),
+  '阿波おどり会館':         gsearch('阿波おどり会館'),
+  '交通公園':               gsearch('徳島市交通公園'),
+  '徳島阿波おどり空港':     gsearch('徳島阿波おどり空港'),
+  '旧みずほ銀行徳島支店':   gsearch('旧みずほ銀行徳島支店'),
 };
 
 // 複数拠点の特殊ケース
@@ -174,6 +197,7 @@ function buildCard(r) {
   const datetime = [dateStr, timeStr].filter(Boolean).join(' ');
   const people = (a.people || []).filter(Boolean).map(escHtml).join('、');
   const source = safeUrl(r.source?.url || '');
+  const sourceLabel = r.source?.status === 'unresolved_reference' ? '参考リンク' : '公式ページ';
 
   const rows = [];
   if (datetime) rows.push(`<div class="card-row"><span class="card-label">日時</span><span class="card-val">${escHtml(datetime)}</span></div>`);
@@ -184,7 +208,7 @@ function buildCard(r) {
   if (r.organization) rows.push(`<div class="card-row"><span class="card-label">主催</span><span class="card-val">${escHtml(r.organization)}</span></div>`);
 
   const noteHtml = a.notes ? `<div class="card-note">⚠️ ${escHtml(a.notes)}</div>` : '';
-  const linkHtml = source ? `<a class="card-link" href="${source}" target="_blank" rel="noopener">🔗 公式ページ →</a>` : '';
+  const linkHtml = source ? `<a class="card-link" href="${source}" target="_blank" rel="noopener">🔗 ${sourceLabel} →</a>` : '';
 
   return `
 <div class="con-card kind-${kind}" data-id="${escHtml(String(r.id))}">
@@ -217,10 +241,10 @@ function search(q) {
 
 function sortRecords(records) {
   // kind 優先: ステージ→ブース系→上映系→その他
-  const kindOrder = { stage: 0, booth_event: 1, booth: 2, parasol: 3, talk: 4, photo_session: 5, screening_talk: 6, screening: 7, sauna: 8 };
+  const kindOrder = { ceremony: 0, stage: 0, live: 0, booth_event: 1, sign: 1, booth: 2, merch: 2, exhibit: 2, cafe: 2, parasol: 3, talk: 4, photo_session: 5, screening_talk: 6, screening: 7, sauna: 8, rally: 9, other: 10 };
   return [...records].sort((a, b) => {
-    const ka = kindOrder[a.appearance.kind] ?? 9;
-    const kb = kindOrder[b.appearance.kind] ?? 9;
+    const ka = kindOrder[a.appearance.kind] ?? 11;
+    const kb = kindOrder[b.appearance.kind] ?? 11;
     if (ka !== kb) return ka - kb;
     // 同種別内: 日付→開始時刻
     const da = a.appearance.date?.split('/')[0] || '';
