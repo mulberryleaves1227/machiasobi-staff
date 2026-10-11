@@ -13,5 +13,3 @@ function copyTmpl(id, btn) {
   };
   navigator.clipboard.writeText(text).then(done).catch(fail);
 }
-
-Auth.guard();

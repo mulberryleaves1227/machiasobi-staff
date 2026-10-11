@@ -1,5 +1,6 @@
 // layout.js — 共通ヘッダー / ボトムナビ / 文字サイズ / 時計
 // <body data-page="xxx"> の値でナビのアクティブ状態を決める。
+// リンクは index.html まで明示する（npx serve の cleanUrls:false や file:// でもディレクトリ一覧にならないように）。
 // <body data-header="none"> の場合はヘッダーを描画しない（コンテンツ検索ページなど）。
 
 const NAV_ITEMS = [
@@ -20,8 +21,8 @@ const Layout = (() => {
     header.className = 'header';
     header.innerHTML = `
       <div>
-        <div class="header-title">🎌 マチ★アソビ vol.30</div>
-        <div class="header-sub">2026年5月16日(土)・17日(日) 徳島</div>
+        <div class="header-title">🎌 マチ★アソビ vol.31</div>
+        <div class="header-sub">2026年10月17日(土)・18日(日) 徳島</div>
       </div>
       <div class="header-tools">
         <button id="search-btn" aria-label="検索">🔍</button>
@@ -43,7 +44,7 @@ const Layout = (() => {
     nav.className = 'bottom-nav';
     nav.innerHTML = NAV_ITEMS.map(item => {
       const active = item.page === currentPage;
-      const href = active ? '' : ` href="../${item.page}/"`;
+      const href = active ? '' : ` href="../${item.page}/index.html"`;
       return `<a class="nav-item${active ? ' active' : ''}"${href}><span class="icon">${item.icon}</span>${item.label}</a>`;
     }).join('');
     app.append(nav);

@@ -1,8 +1,4 @@
-/* area.css — エリア詳細（商店街MAP・パラソル配置） */
-.map-links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.map-link-btn{flex:1 1 140px;display:flex;align-items:center;gap:8px;background:#1a1a2e;color:#fff;text-decoration:none;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:bold}
-.map-link-btn .icon{font-size:18px}
-.map-link-btn .arrow{margin-left:auto;color:#aaa}
+/* area.css — エリア詳細（エリア別企画・パラソル配置） */
 .area-toggle{display:flex;gap:6px;margin-bottom:10px}
 .area-btn{flex:1;padding:8px;border:2px solid #ddd;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;background:#fff;color:#888;text-align:center}
 .area-btn.active{border-color:#e94560;color:#e94560;background:#fff0f3}

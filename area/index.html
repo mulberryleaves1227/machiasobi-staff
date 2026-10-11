@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>エリア詳細｜マチ★アソビ vol.30 スタッフナビ</title>
+<title>エリア詳細｜マチ★アソビ vol.31 スタッフナビ</title>
 <link rel="stylesheet" href="../shared/css/base.css">
 <link rel="stylesheet" href="area.css">
 </head>
@@ -11,95 +11,78 @@
 
 <div id="app">
   <main class="page">
-    <!-- 商店街詳細MAP（画像を別タブで開く） -->
-    <div class="sec-head">🏪 商店街 詳細MAP</div>
-    <div class="map-links">
-      <a class="map-link-btn" href="../assets/maps/M30_poppo.png" target="_blank" rel="noopener">
-        <span class="icon">🗺️</span><span>ポッポ街 出店MAP</span><span class="arrow">↗</span>
-      </a>
-      <a class="map-link-btn" href="../assets/maps/M30_higashishinmachi.png" target="_blank" rel="noopener">
-        <span class="icon">🗺️</span><span>東新町商店街MAP</span><span class="arrow">↗</span>
-      </a>
-    </div>
+    <div class="sec-head">🗺️ 東新町周辺MAP（控え室・旧みずほ）</div>
+    <a href="../assets/maps/M31_higashishinmachi_area.png" target="_blank" rel="noopener" style="display:block;margin-bottom:12px">
+      <img src="../assets/maps/M31_higashishinmachi_area.png" alt="東新町周辺MAP（ボランティア控室・ufotable CINEMA・旧みずほ銀行徳島支店）" style="width:100%;border-radius:10px;display:block" loading="lazy">
+    </a>
+    <div class="warn-note">ℹ️ パラソル配置・商店街の出店MAPは確定後に追加します。現地掲示・リーダーの案内を優先してください。</div>
 
-    <!-- パラソル配置（Ver.20260510 ボードウォーク全体向） -->
-    <div class="sec-head">⛱ ボードウォーク パラソル配置</div>
-    <div class="area-toggle">
-      <button class="area-btn active" onclick="switchArea('east', this)">東公園側 (25〜49番)</button>
-      <button class="area-btn" onclick="switchArea('west', this)">西公園側 (01〜24番)</button>
-    </div>
+    <div class="sec-head">📍 エリア別 両日（17日・18日）企画</div>
 
-    <div id="area-east">
-      <div class="warn-note">⚠️ 伊月健診クリニック（駐車場）通抜けNG。ボードウォーク面の営業店舗前での滞留注意。</div>
-      <div class="warn-note">ufotable(31・32番)周辺 ─ 1Fカフェ前に滞留を作らないよう重点警戒。32番角の駐車場は個人宅・<strong>立入注意</strong></div>
-      <table class="para-table">
-        <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
-        <tr><td>25D</td><td>パッショーネ×ハヤブサフィルム</td><td>Anime Cafe & Bar CUELAMP(飲食）</td></tr>
-        <tr><td>25C</td><td>パッショーネ×ハヤブサフィルム</td><td>物販+トーク等</td></tr>
-        <tr><td>25</td><td>スタジオコロリド・クロマト</td><td>超かぐや姫</td></tr>
-        <tr><td>26</td><td>Production I.G × WIT STUDIO</td><td>—</td></tr>
-        <tr><td>27</td><td>プロダクション・プラスエイチ</td><td>—</td></tr>
-        <tr><td>28</td><td>きゃらめる</td><td>EMTスクエアード</td></tr>
-        <tr><td>29</td><td>コミックス・ウェーブ・フィルム</td><td>—</td></tr>
-        <tr><td>30</td><td>CloverWorks</td><td>—</td></tr>
-        <tr><td style="color:#e94560;font-weight:bold">31</td><td>ufotable</td><td>—</td></tr>
-        <tr><td style="color:#e94560;font-weight:bold">32</td><td>ufotable</td><td>—</td></tr>
-        <tr><td>33</td><td>feel.</td><td>—</td></tr>
-        <tr><td>34</td><td>小学館集英社プロダクション</td><td>お渡し会など</td></tr>
-        <tr><td>35</td><td>オリミナート</td><td>—</td></tr>
-        <tr><td>36</td><td>ナンバーナイン</td><td>神血の救世主</td></tr>
-        <tr><td>37</td><td>ISARIBI</td><td>GATE、魔法少女育成計画</td></tr>
-        <tr><td>38</td><td>リアルアキバ</td><td>Project LEAP!、相良茉優</td></tr>
-        <tr><td>39</td><td>ジェンコ</td><td>—</td></tr>
-        <tr><td>40</td><td>アニメイト</td><td>—</td></tr>
-        <tr><td>41</td><td>博報堂DYMaP</td><td>—</td></tr>
-        <tr><td>42</td><td>ドリコム</td><td>—</td></tr>
-        <tr><td>43</td><td>STORY</td><td>運命の巻戻士</td></tr>
-        <tr><td>44</td><td>MBS（毎日放送）</td><td>—</td></tr>
-        <tr><td>45</td><td>KADOKAWA</td><td>—</td></tr>
-        <tr><td>46</td><td>AnimeJapan</td><td>—</td></tr>
-        <tr><td>47</td><td>ANIPLEX</td><td>—</td></tr>
-        <tr><td>48</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
-        <tr><td>49</td><td colspan="2" style="color:#aaa">（使用不可）</td></tr>
-      </table>
-    </div>
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🌳 藍場浜公園（ブース）</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul><li>POP MUSIC STAGE presented by MOGRA</li><li>円谷フィールズホールディングスブース</li><li>アパマンショップ 特別ブース（「LIVE特別席」の問い合わせは本部へ）</li><li>ケロリンファン倶楽部SHOP</li></ul>
+    <div class="warn-note">見るポイント：ステージ後方・横の通り道で人が止まっていないか／終演後の退場と次の待機列がぶつかっていないか。日差しを遮るものが少ない</div></div></div>
 
-    <div id="area-west" style="display:none">
-      <div class="warn-note">⚠️ ufotable徳島スタジオ（搬入出拠点）隣接。阿波銀行あり。道路での停留・無断駐輪に注意。</div>
-      <div class="warn-note">⚠️ 06〜07番付近はロケット・ベース「SUMMER ROCKET」エリア。動線確保に重点警戒。</div>
-      <table class="para-table">
-        <tr><th>番号</th><th>出展者</th><th>備考</th></tr>
-        <tr><td>01</td><td colspan="2" style="color:#aaa">—</td></tr>
-        <tr><td>02</td><td colspan="2" style="color:#aaa">—</td></tr>
-        <tr><td>03</td><td colspan="2" style="color:#aaa">—</td></tr>
-        <tr><td>04</td><td colspan="2" style="color:#aaa">—</td></tr>
-        <tr><td>05</td><td colspan="2" style="color:#aaa">—</td></tr>
-        <tr><td style="color:#e94560;font-weight:bold">06</td><td>ロケット・ベース</td><td>SUMMER ROCKET</td></tr>
-        <tr><td>07</td><td>ジリオンモード</td><td>FullMooN Empress</td></tr>
-        <tr><td>08</td><td>Giant Step</td><td>—</td></tr>
-        <tr><td>09</td><td>シスト</td><td>ジサリス</td></tr>
-        <tr><td>10</td><td>幻影／いろは咲</td><td>幽閉サテライト、少女フラクタル</td></tr>
-        <tr><td>11</td><td>AICライツ</td><td>—</td></tr>
-        <tr><td>12</td><td>フレックスコミックス</td><td>邪神ちゃんドロップキック</td></tr>
-        <tr><td>13</td><td>アンネル</td><td>ほっぺちゃん</td></tr>
-        <tr><td>14</td><td>玲瓏のhydrangea</td><td>—</td></tr>
-        <tr><td>15</td><td>民安ともえ</td><td>Vtuberたみー</td></tr>
-        <tr><td>16</td><td>harappa</td><td>—</td></tr>
-        <tr><td>17</td><td>アナログ</td><td>ハコネクト</td></tr>
-        <tr><td>18</td><td>北広島市（北海道）</td><td>—</td></tr>
-        <tr><td>19</td><td>大島はるな</td><td>—</td></tr>
-        <tr><td>20</td><td>ASIAN WAVE</td><td>綾野ましろ ※日曜のみ</td></tr>
-        <tr><td>21</td><td colspan="2" style="color:#aaa">（飲食スペース）</td></tr>
-        <tr><td>22</td><td>白滝製麺</td><td>飲食</td></tr>
-        <tr><td>23</td><td colspan="2" style="color:#aaa">（飲食スペース）</td></tr>
-        <tr><td>24</td><td>アクアプラス×NewType新宿</td><td>—</td></tr>
-      </table>
-    </div>
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🏬 ポッポ街商店街</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul>
+      <li><span class="badge-s">S🔴</span> <strong>アズレンスペシャルブース</strong>（18日のみ特装版販売＋ホリ先生サイン会の整理券を先着配布。サイン会は東新町16:00で<strong>会場が別</strong>。17日は販売なし）</li>
+      <li><span class="badge-s">S🔴</span> <strong>BanG Dream! STORE出張所＆ギャラリー</strong>（お渡し会・サイン会の条件は未公表）</li>
+      <li><span class="badge-a">A🟠</span> 試遊：Fate/EXTRA Record／MELTY BLOOD: TWI-LUMINA／鬼滅の刃 ヒノカミ血風譚2 Switch 2版／ビルディバイド -ブライト-（過去は最長2時間待ち）</li>
+      <li>feel.公式【展示＆物販ブース】</li><li>きゃべつそふと＆まどそふと</li><li>ゆずソフトショップ</li><li>四国めたんの中の人 田中小雪とVtuberごっこ</li><li>エンターグラム新作タイトルプロモーション</li><li>リセ・オーバーチュアTCG 徳島大会・展示・無料ガチャ</li><li>METEORA GRAVITY 物販・展示・サイン会</li><li>アニメ×ゲームジャム ミニ</li><li>アウリンブース</li><li>大喜利対決トゥナイト大秘宝展</li><li>パルワールド OCG＆ヴァイスシュヴァルツ 出張講習会</li>
+      <li>2階：<strong>コスプレ受付・更衣室・クローク</strong>（コミエス）</li>
+    </ul><div class="warn-note">通路が狭く列が混在しやすい。18日朝は開店前行列に注意</div></div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🏪 東新町商店街</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul>
+      <li><span class="badge-s">S🔴</span> <strong>KADOKAWA GOODS SHOP</strong>（17日10〜17時、18日10〜16時）</li>
+      <li><span class="badge-a">A🟠</span> <strong>サイン会会場（18日）</strong>：14:00〜 小村将さん（運命の巻戻士 クロノ役）／16:00〜 ホリ先生（整理券はポッポ街のアズレンブース）</li>
+      <li>『すだちの魔王城』すだち屋 出張営業</li><li>グッドスマイルカンパニーブース</li><li>マチ★アソビ ショッピングストリート</li>
+    </ul><div class="warn-note">今回特に注意が必要なエリア。<strong>店舗入口をふさがない・通路幅の確保を最優先</strong>。18日14:00〜17:00は通行が詰まりやすい</div></div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🎬 ufotable CINEMA</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">無料イベントでも<strong>ワンデイパス（500円／1日1人1枚・複数購入分の払い戻しなし）</strong>が必要。ワンデイパスはufotable CINEMAなどで購入可。有料・無料の区別、整理券はシネマスタッフ・公式サイトへ。<br>とくしまグルメハントの景品引換場所でもある。</div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🏢 アミコ（2F・4F・5F・ドーム）</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <strong>5F</strong><ul>
+        <li><span class="badge-s">S🔴</span> 鬼滅 竈門炭治郎＆煉獄杏寿郎 リアルWEBSHOPくじ（購入方式未告知）</li>
+        <li><span class="badge-a">A🟠</span> 鬼滅コラボカフェ「結んだ縁」番外編（予約方式未告知）</li>
+        <li><span class="badge-a">A🟠</span> 本庄雷太FGO展／岡崎武士TYPE-MOON展（サイン会あり）</li>
+        <li>銀河特急ミルキー☆サブウェイ 資料展示＆フォトスポット</li><li>インディゲーム『ルナパルス』体験版試遊会</li><li>トムス・エンタテインメントブース</li></ul>
+      <strong>4F</strong><ul>
+        <li><span class="badge-a">A🟠</span> サイバーコネクトツー展（30周年、来場特典・物販あり）</li>
+        <li>神風動画 マチアソビショップ</li><li>SPIRAL STAIRS STUDIO／TriFスタジオ ブース</li><li>こしのマンガくらぶ</li><li>THE KLOCKWORX STORE</li><li>オールワークスメイドアニメーション資料展</li><li>TROYCA複製原画展</li><li>VTuberの"推し"を発見せよ！</li><li>TVアニメ「らんま1/2」特別展示室</li><li>VTuber事務所「すぺしゃりて」イベント＆展示ブース</li><li>最先端!! XRひろば</li></ul>
+      <strong>2F</strong>：献血（献血ルームアミコ 3F）
+      <div class="warn-note">5Fは同じ階に鬼滅カフェ・くじ・FGO/TYPE-MOON展が集中し、エスカレーター・エレベーターが詰まりやすい。ビル内に列を作るスペースがない</div></div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🌊 水際公園</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul>
+      <li><span class="badge-s">S🔴</span> 「アズールレーン」アニメイトカフェ出張版（キッチンカー・<strong>席なし</strong>）</li>
+      <li>マチ★アソビ サウナ -新町川-（9時スタート／2時間制・最終入場18時／有料・事前申込）</li>
+    </ul><div class="warn-note">コスプレエリアの場所表記が食い違い（チラシ：旧みずほ銀行／コミエスサイト：水際公園）。聞かれたらコミエス公式案内を確認してもらう</div></div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>⛰️ 眉山・阿波おどり会館【NEW】</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul>
+      <li><span class="badge-s">S🔴</span> 眉山ロープウェイ「鬼滅の刃」ガイドアナウンス（乗り場は阿波おどり会館。輸送力に上限あり）</li>
+      <li>マチ★アソビ ビザン BASE CAMP（新企画）</li>
+      <li>マチ★アソビ サウナ -眉山-（山頂でも実施）</li>
+      <li>17日：阿波おどり会館で「CRAYON SHINCHAN JAPAN CRAFTS」報告会・日本酒試飲会</li>
+    </ul><div class="warn-note">ロープウェイの延長運転・雨天時の対応は未定 → 推測で案内しない</div></div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🏛️ 旧みずほ銀行徳島支店【NEW】</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul><li>約100年の歴史ある建物でのコスプレエリア</li><li>映画「魔法使いの夜」×ソニーの「魔法陣」お披露目</li></ul>場所は東新町周辺MAP（このタブ上部）で確認。コスプレ関連の判断はコミエスへ。</div></div>
+
+    <div class="acc-item"><div class="acc-head" onclick="toggleAcc(this)"><span>🚗 交通公園・その他</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body"><ul>
+      <li><strong>交通公園</strong>：マチ★アソビ 痛車グランプリ／ごみ集積所（コンテナあり）</li>
+      <li><strong>徳島阿波おどり空港</strong>：アニメジャック！</li>
+      <li><strong>回遊企画</strong>：TYPE-MOON4作品連続ステージ 連動スタンプラリー／デジタル壁紙ラリー／商店街アニメジャック！／とくしまグルメハント</li>
+    </ul></div></div>
   </main>
 </div>
 
 <script src="../shared/js/utils.js"></script>
-<script src="../shared/js/auth.js"></script>
+<script src="../shared/js/accordion.js"></script>
 <script src="../shared/js/layout.js"></script>
 <script src="../shared/js/site-search.js"></script>
 <script src="area.js"></script>

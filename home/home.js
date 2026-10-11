@@ -35,4 +35,4 @@ async function loadNews() {
   }
 }
 
-Auth.guard(loadNews);
+loadNews();

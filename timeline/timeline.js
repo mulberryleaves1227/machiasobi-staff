@@ -1,8 +1,8 @@
 // timeline.js — 日・会場の切り替え、終了済み行のグレーアウト、
 // ?day=D&venue=V&row=R 深リンク（旧 ?tab=tt&venue=V も互換）
 
-// 開催日 (month は 0 始まり): day-0 = 5/16, day-1 = 5/17
-const EVENT_DAYS = [{ month: 4, date: 16 }, { month: 4, date: 17 }];
+// 開催日 (month は 0 始まり): day-0 = 10/17, day-1 = 10/18
+const EVENT_DAYS = [{ month: 9, date: 17 }, { month: 9, date: 18 }];
 
 function switchDay(d) {
   document.querySelectorAll('.day-btn').forEach((b, i) => b.classList.toggle('active', i === d));
@@ -55,4 +55,4 @@ function initTimeline() {
   applyDeepLink();
 }
 
-Auth.guard(initTimeline);
+initTimeline();

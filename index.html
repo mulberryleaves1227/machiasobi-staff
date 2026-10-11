@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>マチ★アソビ vol.30 スタッフナビ</title>
-<noscript><meta http-equiv="refresh" content="0; url=./home/"></noscript>
+<title>マチ★アソビ vol.31 スタッフナビ</title>
+<noscript><meta http-equiv="refresh" content="0; url=./home/index.html"></noscript>
 <script>
 // 旧 index.html?tab=xxx（タブ式SPA時代のURL）を新しいページディレクトリへ転送する
 (function () {
@@ -13,7 +13,7 @@
   var page = TAB_TO_PAGE[params.get('tab')] || 'home';
   params.delete('tab');
   var qs = params.toString();
-  location.replace('./' + page + '/' + (qs ? '?' + qs : ''));
+  location.replace('./' + page + '/index.html' + (qs ? '?' + qs : ''));
 })();
 </script>
 </head>

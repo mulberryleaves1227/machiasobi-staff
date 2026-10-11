@@ -1,8 +1,8 @@
 // site-search.js — スタッフナビ全ページ横断のキーワード検索
 // 各ページの index.html を fetch して索引を作り、結果は該当ページへの深リンクにする:
-//   タイムライン行   → ../timeline/?day=D&venue=V&row=R
-//   シフト別の項目   → ../shift/?duty=ID&acc=N
-//   その他の項目     → ../<page>/?acc=N
+//   タイムライン行   → ../timeline/index.html?day=D&venue=V&row=R
+//   シフト別の項目   → ../shift/index.html?duty=ID&acc=N
+//   その他の項目     → ../<page>/index.html?acc=N
 
 const SiteSearch = (() => {
   const PAGES = [
@@ -41,7 +41,7 @@ const SiteSearch = (() => {
             title: name,
             breadcrumb: `${page.name} › ${dayName} ${venueNames[vi] || ''} › ${time}`,
             body: `${time} ${name} ${crowd}`,
-            url: `../${page.id}/?day=${day}&venue=${vi}&row=${ri}`,
+            url: `../${page.id}/index.html?day=${day}&venue=${vi}&row=${ri}`,
           });
         });
       });
@@ -57,7 +57,7 @@ const SiteSearch = (() => {
       title,
       breadcrumb: [page.name, ...crumbs, title].join(' › '),
       body: bodyEl ? bodyEl.textContent.trim() : '',
-      url: `../${page.id}/?${query}acc=${ai}`,
+      url: `../${page.id}/index.html?${query}acc=${ai}`,
     };
   }
 

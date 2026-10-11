@@ -3,25 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>コンテンツ検索 | マチ★アソビ vol.30</title>
+<title>コンテンツ検索 | マチ★アソビ vol.31</title>
 <link rel="stylesheet" href="../shared/css/base.css">
 <link rel="stylesheet" href="contents.css">
 </head>
 <body data-page="contents" data-header="none">
 
-<div id="app" class="is-ready">
-<header class="header">
-  <div>
-    <div class="header-title">マチ★アソビ vol.30</div>
-    <div class="header-sub">コンテンツ・出演者検索</div>
+<div id="app">
+<div class="top-shell">
+  <header class="header">
+    <div>
+      <div class="header-title">マチ★アソビ vol.31</div>
+      <div class="header-sub">コンテンツ・出演者検索</div>
+    </div>
+  </header>
+  <div class="search-wrap">
+    <input type="search" id="search-input" placeholder="🔍 作品名・出演者・ブース・エリアなど…" autocomplete="off" autofocus>
+    <div class="result-count" id="result-count"></div>
   </div>
-</header>
-
-<div class="search-wrap">
-  <input type="search" id="search-input" placeholder="🔍 作品名・出演者・ブース・エリアなど…" autocomplete="off" autofocus>
-  <div class="result-count" id="result-count"></div>
-  <div class="search-note">⚠️ 全ての情報をカバーしていません！案内する際は必ず正しい情報は各コンテンツの公式SNSやHPを確認してもらうよう案内してください。誤りがあることがわかった場合は桑野まで連絡ください。</div>
 </div>
+<div class="search-note">⚠️ 全ての情報をカバーしていません！案内する際は必ず正しい情報は各コンテンツの公式SNSやHPを確認してもらうよう案内してください。誤りがあることがわかった場合は桑野まで連絡ください。</div>
 
 <div class="content-area" id="card-area">
   <div class="loading-msg">読み込み中…</div>

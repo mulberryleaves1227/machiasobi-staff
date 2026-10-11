@@ -1,4 +1,4 @@
-// area.js — パラソル配置の東/西切り替え
+// area.js — エリア別企画（アコーディオン）とパラソル配置の東/西切り替え
 
 function switchArea(area, btn) {
   document.querySelectorAll('.area-btn').forEach(b => b.classList.remove('active'));
@@ -7,4 +7,4 @@ function switchArea(area, btn) {
   document.getElementById('area-west').style.display = area === 'west' ? '' : 'none';
 }
 
-Auth.guard();
+openAccFromQuery(document.querySelector('.page'));

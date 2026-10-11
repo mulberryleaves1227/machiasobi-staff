@@ -17,4 +17,4 @@ function initShift() {
   if (panel) openAccFromQuery(panel);
 }
 
-Auth.guard(initShift);
+initShift();

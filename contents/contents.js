@@ -2,11 +2,15 @@
 
 const KIND_LABELS = {
   stage: 'ステージ', talk: 'トーク', screening_talk: '上映&トーク',
-  screening: '上映会', booth: 'ブース', booth_event: 'ブースイベント', sauna: 'サウナ'
+  screening: '上映会', booth: 'ブース', booth_event: 'ブースイベント', sauna: 'サウナ',
+  live: 'ライブ', ceremony: '式典', exhibit: '展示', merch: '物販', sign: 'サイン会',
+  cafe: 'カフェ', rally: '回遊企画', other: 'その他'
 };
 const KIND_BADGE = {
   stage: 'badge-stage', talk: 'badge-talk', screening_talk: 'badge-screening_talk',
-  screening: 'badge-screening', booth: 'badge-booth', booth_event: 'badge-booth_event', sauna: 'badge-sauna'
+  screening: 'badge-screening', booth: 'badge-booth', booth_event: 'badge-booth_event', sauna: 'badge-sauna',
+  live: 'badge-live', ceremony: 'badge-ceremony', exhibit: 'badge-exhibit', merch: 'badge-merch', sign: 'badge-sign',
+  cafe: 'badge-cafe', rally: 'badge-rally', other: 'badge-other'
 };
 
 function safeUrl(u) {
@@ -15,6 +19,7 @@ function safeUrl(u) {
 
 // ── Google Maps リンク ──
 const gmap = (lat, lng) => `https://www.google.com/maps?q=${lat},${lng}`;
+const gsearch = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 
 const AREA_MAP = {
   '藍場浜公園':             gmap(34.0738828, 134.5471712),
@@ -27,6 +32,12 @@ const AREA_MAP = {
   '東新町商店街':           gmap(34.0698461, 134.5481209),
   'ポッポ街商店街':         gmap(34.0748566, 134.5490948),
   'マチ★アソビサウナ（新町川）': gmap(34.0700951, 134.5501114),
+  '新町川水際公園':         gsearch('新町川水際公園 徳島'),
+  '眉山':                   gsearch('眉山ロープウェイ 山頂駅'),
+  '阿波おどり会館':         gsearch('阿波おどり会館'),
+  '交通公園':               gsearch('徳島市交通公園'),
+  '徳島阿波おどり空港':     gsearch('徳島阿波おどり空港'),
+  '旧みずほ銀行徳島支店':   gsearch('旧みずほ銀行徳島支店'),
 };
 
 // 複数拠点の特殊ケース
@@ -84,6 +95,7 @@ function buildCard(r) {
   const datetime = [dateStr, timeStr].filter(Boolean).join(' ');
   const people = (a.people || []).filter(Boolean).map(escHtml).join('、');
   const source = safeUrl(r.source?.url || '');
+  const sourceLabel = r.source?.status === 'unresolved_reference' ? '参考リンク' : '公式ページ';
 
   const rows = [];
   if (datetime) rows.push(`<div class="card-row"><span class="card-label">日時</span><span class="card-val">${escHtml(datetime)}</span></div>`);
@@ -94,7 +106,7 @@ function buildCard(r) {
   if (r.organization) rows.push(`<div class="card-row"><span class="card-label">主催</span><span class="card-val">${escHtml(r.organization)}</span></div>`);
 
   const noteHtml = a.notes ? `<div class="card-note">⚠️ ${escHtml(a.notes)}</div>` : '';
-  const linkHtml = source ? `<a class="card-link" href="${source}" target="_blank" rel="noopener">🔗 公式ページ →</a>` : '';
+  const linkHtml = source ? `<a class="card-link" href="${source}" target="_blank" rel="noopener">🔗 ${sourceLabel} →</a>` : '';
 
   return `
 <div class="con-card kind-${kind}" data-id="${escHtml(String(r.id))}">
@@ -127,10 +139,10 @@ function search(q) {
 
 function sortRecords(records) {
   // kind 優先: ステージ→ブース系→上映系→その他
-  const kindOrder = { stage: 0, booth_event: 1, booth: 2, parasol: 3, talk: 4, photo_session: 5, screening_talk: 6, screening: 7, sauna: 8 };
+  const kindOrder = { ceremony: 0, stage: 0, live: 0, booth_event: 1, sign: 1, booth: 2, merch: 2, exhibit: 2, cafe: 2, parasol: 3, talk: 4, photo_session: 5, screening_talk: 6, screening: 7, sauna: 8, rally: 9, other: 10 };
   return [...records].sort((a, b) => {
-    const ka = kindOrder[a.appearance.kind] ?? 9;
-    const kb = kindOrder[b.appearance.kind] ?? 9;
+    const ka = kindOrder[a.appearance.kind] ?? 11;
+    const kb = kindOrder[b.appearance.kind] ?? 11;
     if (ka !== kb) return ka - kb;
     // 同種別内: 日付→開始時刻
     const da = a.appearance.date?.split('/')[0] || '';
