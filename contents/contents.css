@@ -1,0 +1,54 @@
+/* contents.css — コンテンツ・出演者検索 */
+/* ── header + search (sticky) ── */
+.top-shell{position:sticky;top:0;z-index:100;background:#f5f5f5}
+/* ── search bar ── */
+.search-wrap{padding:10px 12px 6px;background:#f5f5f5}
+.search-wrap input{display:block;width:100%;min-width:0;padding:10px 14px;font-size:15px;border:2px solid #ddd;border-radius:10px;background:#fff;outline:none;-webkit-appearance:none}
+.search-wrap input:focus{border-color:#e94560}
+.result-count{font-size:11px;color:#888;padding:0 4px 6px;text-align:right}
+.search-note{font-size:11px;color:#888;padding:2px 16px 8px;line-height:1.5}
+/* ── content area ── */
+.content-area{padding:0 12px 80px}
+/* ── card ── */
+.con-card{background:#fff;border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);border-left:4px solid #ccc}
+.con-card.kind-stage{border-left-color:#e94560}
+.con-card.kind-booth{border-left-color:#4a90d9}
+.con-card.kind-talk{border-left-color:#ff8c00}
+.con-card.kind-screening_talk{border-left-color:#9b59b6}
+.con-card.kind-screening{border-left-color:#9b59b6}
+.con-card.kind-booth_event{border-left-color:#4a90d9}
+.con-card.kind-sauna{border-left-color:#27ae60}
+.con-card.kind-live{border-left-color:#e94560}
+.con-card.kind-ceremony{border-left-color:#e94560}
+.con-card.kind-exhibit,.con-card.kind-merch,.con-card.kind-sign,.con-card.kind-cafe{border-left-color:#4a90d9}
+.con-card.kind-rally,.con-card.kind-other{border-left-color:#888}
+.card-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+.kind-badge{font-size:10px;font-weight:bold;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.badge-stage{background:#ffeef1;color:#e94560}
+.badge-booth{background:#eef3ff;color:#4a90d9}
+.badge-talk{background:#fff4e6;color:#ff8c00}
+.badge-screening_talk{background:#f5eeff;color:#9b59b6}
+.badge-screening{background:#f5eeff;color:#9b59b6}
+.badge-booth_event{background:#eef3ff;color:#4a90d9}
+.badge-sauna{background:#eafaf1;color:#27ae60}
+.badge-live{background:#ffeef1;color:#e94560}
+.badge-ceremony{background:#ffeef1;color:#e94560}
+.badge-exhibit,.badge-merch,.badge-sign,.badge-cafe{background:#eef3ff;color:#4a90d9}
+.badge-rally,.badge-other{background:#f0f0f0;color:#666}
+.card-title{font-size:14px;font-weight:bold;color:#1a1a2e;line-height:1.4}
+.card-body{font-size:13px;line-height:1.7;color:#333}
+.card-row{display:flex;gap:6px;margin-bottom:2px}
+.card-label{color:#888;white-space:nowrap;min-width:3em;flex-shrink:0}
+.card-val{flex:1}
+.card-note{margin-top:6px;font-size:12px;background:#fffbf0;border-left:3px solid #ffd700;padding:5px 8px;border-radius:0 4px 4px 0;color:#666;line-height:1.5}
+.card-link{display:block;margin-top:8px;font-size:12px;color:#4a90d9;text-decoration:none}
+.card-link:hover{text-decoration:underline}
+.map-link{color:#4a90d9;text-decoration:none;font-size:13px}
+.map-link:hover{text-decoration:underline}
+.venue-detail{color:#666}
+/* ── empty / loading ── */
+.empty-msg{text-align:center;color:#aaa;padding:60px 20px;font-size:15px;line-height:2}
+.loading-msg{text-align:center;color:#aaa;padding:40px 20px;font-size:14px}
+.top-shell .header{position:static}
+/* ── bottom nav（main の contents.html に合わせた上書き） ── */
+.nav-item{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px;cursor:pointer;color:#888;font-size:10px;line-height:1.2;text-align:center;overflow-wrap:anywhere;gap:2px;min-height:56px;border:none;background:none;text-decoration:none}

@@ -1,0 +1,10 @@
+/* area.css — エリア詳細（エリア別企画・パラソル配置） */
+.area-toggle{display:flex;gap:6px;margin-bottom:10px}
+.area-btn{flex:1;padding:8px;border:2px solid #ddd;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;background:#fff;color:#888;text-align:center}
+.area-btn.active{border-color:#e94560;color:#e94560;background:#fff0f3}
+.para-table{width:100%;border-collapse:collapse;font-size:12px}
+.para-table th{background:#f0f0f0;padding:6px 8px;text-align:left;font-size:11px;color:#555}
+.para-table td{padding:6px 8px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.para-table tr:last-child td{border-bottom:none}
+.para-warn{font-size:11px;font-style:italic;color:#888}
+.warn-note{background:#fff8e1;border-left:3px solid #ffc107;padding:6px 10px;border-radius:0 6px 6px 0;font-size:12px;margin-bottom:8px;line-height:1.5}

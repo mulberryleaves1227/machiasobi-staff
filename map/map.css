@@ -1,0 +1,69 @@
+/* map.css — 会場マップ（Googleマイマップ埋め込み） */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  padding: 12px;
+  gap: 10px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+h1 {
+  color: #fff;
+  font-size: clamp(14px, 3vw, 18px);
+  letter-spacing: 0.05em;
+}
+h1 span { color: #f0c040; }
+
+.hint {
+  color: #aaa;
+  font-size: 12px;
+  padding: 0 2px;
+}
+
+.gmap-wrap {
+  flex: 1 1 auto;
+  min-height: 60vh;
+  border: 2px solid #444;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  background: #000;
+}
+.gmap-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.actions a {
+  flex: 1 1 auto;
+  text-align: center;
+  background: #2a2a4a;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+.actions a:hover { background: #353560; border-color: #888; }
