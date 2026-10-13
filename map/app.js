@@ -24,6 +24,7 @@ createApp({
       locating: false, // 現在地を表示中か
       selected: null,  // 詳細を出している場所
       choices: [],     // 候補として並べている場所
+      timelineVenues: {}, // ピン名 → タイムテーブルのタブ名
     };
   },
 
@@ -43,6 +44,14 @@ createApp({
     this.loadEvent();
   },
 
+  computed: {
+    // 選んだ場所のタイムテーブルのリンクを返す関数
+    timelineUrl() {
+      const venue = this.selected && this.timelineVenues[this.selected.name];
+      return venue ? `../timeline/index.html?venue=${encodeURIComponent(venue)}` : '';
+    },
+  },
+
   methods: {
     // 開催回を読み込んでピンを表示する関数
     async loadEvent() {
@@ -51,6 +60,7 @@ createApp({
         if (!ev) return;
         this.eventLabel = ev.label;
         this.mymapUrl = MYMAP_VIEWER + encodeURIComponent(ev.mymap_id);
+        this.timelineVenues = ev.timeline_venues || {};
         document.title = `マチ★アソビ ${ev.label} 会場マップ`;
         await venueMap.showFeatures(await fetchMyMap(ev.mymap_id));
       } catch (err) {

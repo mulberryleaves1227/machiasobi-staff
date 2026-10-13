@@ -2,6 +2,7 @@
 export default {
   props: {
     place: { type: Object, required: true },
+    timelineUrl: { type: String, default: '' },
   },
 
   computed: {
@@ -24,5 +25,6 @@ export default {
         <template v-else>{{ part.text }}</template>
       </template>
     </p>
+    <a v-if="timelineUrl" class="pop-timeline" :href="timelineUrl">📅 タイムテーブル</a>
   `,
 };

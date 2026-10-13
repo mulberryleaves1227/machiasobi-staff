@@ -5,7 +5,18 @@
       "label": "Vol.31",
       "show_from": "2026-09-01",
       "show_until": "2026-10-31",
-      "mymap_id": "1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo"
+      "mymap_id": "1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo",
+      "timeline_venues": {
+        "藍場浜公園": "藍場浜",
+        "藍場浜公園エリア": "藍場浜",
+        "新町橋東公園": "東公園",
+        "新町橋東公園 エリア": "東公園",
+        "両国橋西公園": "西公園",
+        "両国橋西公園 エリア": "西公園",
+        "ufotable CINEMA": "ufo T1",
+        "アミコドーム": "アミコ",
+        "阿波おどり会館": "阿波おどり会館"
+      }
     }
   ]
 }

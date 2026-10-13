@@ -123,3 +123,13 @@ h1 span { color: #f0c040; }
 .locate-btn.active { background: #1a73e8; color: #fff; }
 /* 同じ操作は .locate-btn から行うので、MapLibre 標準の ◎ ボタンは隠す（青い点の表示には必要なのでコントロール自体は残す） */
 .maplibregl-ctrl-group:has(.maplibregl-ctrl-geolocate) { display: none; }
+.maplibregl-popup-content a.pop-timeline {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
