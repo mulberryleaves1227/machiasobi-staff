@@ -6,13 +6,3 @@ services:
     volumes:
       - ./:/usr/share/nginx/html:ro
       - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-
-  # スマホ確認用の一時HTTPS URL（Cloudflare Quick Tunnel、アカウント不要）
-  # 起動: docker compose --profile tunnel up -d   URL: docker compose logs tunnel
-  # 止めるとURLも無効になる
-  tunnel:
-    image: cloudflare/cloudflared:2026.9.1
-    profiles: ["tunnel"]
-    command: tunnel --no-autoupdate --url http://web:80
-    depends_on:
-      - web
