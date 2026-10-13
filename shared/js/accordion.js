@@ -1,4 +1,4 @@
-// accordion.js — アコーディオン開閉と、検索結果からの ?acc=N 深リンク
+// accordion.js — アコーディオン開閉と、?acc=N（番号か見出しの一部）の深リンク
 
 function toggleAcc(head) {
   head.nextElementSibling.classList.toggle('open');
@@ -12,10 +12,13 @@ function openAcc(item) {
   setTimeout(() => head.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
 }
 
-// scope 内の N 番目のアコーディオンを開く（N は ?acc=N）
+// ?acc= で指定されたアコーディオンを開く関数（番号か、見出しに含まれる文字で指定）
 function openAccFromQuery(scope) {
-  const n = queryInt('acc');
-  if (n === null) return;
-  const item = (scope || document).querySelectorAll('.acc-item')[n];
+  const param = queryParam('acc');
+  if (param === null) return;
+  const items = [...(scope || document).querySelectorAll('.acc-item')];
+  const item = /^\d+$/.test(param)
+    ? items[parseInt(param, 10)]
+    : items.find(it => it.querySelector('.acc-head').textContent.includes(param));
   if (item) openAcc(item);
 }
