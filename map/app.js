@@ -33,6 +33,9 @@ createApp({
 
   // 画面ができたら地図を作り、現在地が使えるか確認し、開催回のピンを読み込む
   async mounted() {
+    // mounted の時点ではまだ v-cloak で画面が隠れていて地図の枠の大きさが 0 なので、
+    // 表示されるのを待ってから地図を作る（先に作ると 400×300 の初期サイズで固まる）
+    await this.$nextTick();
     venueMap = createVenueMap(this.$refs.map, {
       onLocateStart: () => { this.locating = true; this.toast = '現在地を取得しています…'; },
       onLocateEnd: () => { this.locating = false; },
