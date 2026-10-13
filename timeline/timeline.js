@@ -1,5 +1,5 @@
 // timeline.js — 日・会場の切り替え、終了済み行のグレーアウト、
-// ?day=D&venue=V&row=R 深リンク（旧 ?tab=tt&venue=V も互換）
+// ?day=D&venue=V&row=R 深リンク（V は番号かタブ名。旧 ?tab=tt&venue=V も互換）
 
 // 開催日 (month は 0 始まり): day-0 = 10/17, day-1 = 10/18
 const EVENT_DAYS = [{ month: 9, date: 17 }, { month: 9, date: 18 }];
@@ -34,9 +34,25 @@ function updateTTPast() {
   });
 }
 
+// 今日が何日目か返す関数（開催日でなければ null）
+function todayDayIndex() {
+  const now = new Date();
+  const i = EVENT_DAYS.findIndex(d => d.month === now.getMonth() && d.date === now.getDate());
+  return i === -1 ? null : i;
+}
+
+// ?venue= の番号かタブ名から会場の番号を返す関数
+function venueIndex(day, param) {
+  if (param === null) return null;
+  if (/^\d+$/.test(param)) return parseInt(param, 10);
+  const tabs = [...document.querySelectorAll('#vtabs-' + day + ' .venue-tab')];
+  const i = tabs.findIndex(t => t.textContent.trim() === param);
+  return i === -1 ? null : i;
+}
+
 function applyDeepLink() {
-  const day = queryInt('day') ?? 0;
-  const venue = queryInt('venue');
+  const day = queryInt('day') ?? todayDayIndex() ?? 0;
+  const venue = venueIndex(day, queryParam('venue'));
   const row = queryInt('row');
   if (!document.getElementById('day-' + day)) return;
   switchDay(day);
