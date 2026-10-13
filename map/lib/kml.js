@@ -1,26 +1,23 @@
-// kml.js — マイマップの KML を取得して GeoJSON に変換する
-// マイマップを「リンクを知っている人は閲覧可」にしていれば、公開KMLをブラウザから直接読める
-
 const MYMAP_KML = 'https://www.google.com/maps/d/kml?forcekml=1&mid=';
 
-// マイマップIDからKMLを取得し、GeoJSON にして返す
+// マイマップの KML を取得して GeoJSON にする関数
 export async function fetchMyMap(mymapId) {
   const xml = await fetch(MYMAP_KML + encodeURIComponent(mymapId)).then(r => r.text());
   return kmlToGeoJSON(xml);
 }
 
-// KMLの座標文字列 "経度,緯度,高度 経度,緯度,高度 …" を [[経度, 緯度], …] の配列に変換する
+// 座標の文字列を [[経度, 緯度], …] にする関数
 function parseCoords(text) {
   return text.trim().split(/\s+/).map(c => c.split(',').slice(0, 2).map(Number));
 }
 
-// 要素の中から指定タグを最初に1つ探し、その文字列を返す（なければ空文字）
+// 指定タグの文字列を取り出す関数
 function childText(el, tag) {
   const c = el.getElementsByTagName(tag)[0];
   return c ? c.textContent.trim() : '';
 }
 
-// Placemark 1件の形（Point / LineString / Polygon）を GeoJSON の geometry にする。対応外なら null
+// Placemark の形を GeoJSON の geometry にする関数
 function toGeometry(pm) {
   const point = pm.getElementsByTagName('Point')[0];
   const line = pm.getElementsByTagName('LineString')[0];
@@ -34,8 +31,7 @@ function toGeometry(pm) {
   return null;
 }
 
-// マイマップのKML文字列を、地図に載せられる GeoJSON に変換する
-// 各ピン・エリアに 番号(fid)・名前・説明・フォルダ名・色 を持たせる
+// KML を GeoJSON に変換する関数
 export function kmlToGeoJSON(xml) {
   const doc = new DOMParser().parseFromString(xml, 'text/xml');
   const features = [];
@@ -43,7 +39,7 @@ export function kmlToGeoJSON(xml) {
     const geometry = toGeometry(pm);
     if (!geometry) continue;
 
-    // マイマップの styleUrl は "#icon-1502-E65100-..." の形で色を含んでいる
+    // styleUrl（"#icon-1502-E65100-..."）から色を取り出す
     const color = (childText(pm, 'styleUrl').match(/[0-9A-F]{6}/) || ['E65100'])[0];
     const folder = pm.parentNode.tagName === 'Folder' ? childText(pm.parentNode, 'name') : '';
     features.push({

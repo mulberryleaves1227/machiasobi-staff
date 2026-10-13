@@ -1,9 +1,4 @@
-// locate-button.js — 地図右下の「📍 現在地を取得」ボタン
-// props:
-//   locating  現在地を表示中か（表示中は青いボタンで「表示中」にする）
-// emits:
-//   toggle  ボタンが押された（表示の開始／終了の切り替えは親が行う）
-
+// 現在地ボタンのコンポーネント
 export default {
   props: {
     locating: { type: Boolean, default: false },

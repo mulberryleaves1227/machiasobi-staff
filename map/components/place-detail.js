@@ -1,15 +1,11 @@
-// place-detail.js — ポップアップに出す、ピン・エリア1件の詳細
-// props:
-//   place  表示する場所 { name, description, folder, ... }（venue-map.js の place）
-
+// ポップアップに場所の詳細を出すコンポーネント
 export default {
   props: {
     place: { type: Object, required: true },
   },
 
   computed: {
-    // 説明文を「普通の文字」と「URL」の部品に分ける（URL は短いリンクで表示するため）
-    // マイマップの説明に入っている <br> は改行に直す
+    // 説明文を文字とURLに分ける関数
     descriptionParts() {
       const text = (this.place.description || '').replace(/<br\s*\/?>/gi, '\n');
       return text.split(/(https?:\/\/[^\s<]+)/).filter(Boolean).map(s => ({

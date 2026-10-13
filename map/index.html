@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>マチ★アソビ 会場マップ</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css">
-<link rel="stylesheet" href="map.css?v=20261014f">
+<link rel="stylesheet" href="map.css?v=20261014g">
 </head>
 <body>
 
@@ -22,7 +22,7 @@
     <locate-button :locating="locating" @toggle="toggleLocate"></locate-button>
   </div>
 
-  <!-- ポップアップの中身。popupBody は地図のポップアップの中へ移して表示する（ここでは隠しておく） -->
+  <!-- ポップアップの中身（地図のポップアップへ移して表示する） -->
   <div hidden>
     <div ref="popupBody">
       <place-choices v-if="choices.length" :places="choices" @select="select"></place-choices>
@@ -37,6 +37,6 @@
 
 <script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
 <script src="../shared/js/utils.js"></script>
-<script type="module" src="app.js?v=20261014f"></script>
+<script type="module" src="app.js?v=20261014g"></script>
 </body>
 </html>
