@@ -221,7 +221,7 @@ function geoErrorMessage(code) {
 function setLocateActive(on) {
   const btn = document.getElementById('locateBtn');
   btn.classList.toggle('active', on);
-  btn.textContent = on ? '📍 現在地を追従中' : '📍 現在地';
+  btn.textContent = on ? '📍 現在地を表示中' : '📍 現在地を取得';
 }
 
 // 地図の上に一時的なお知らせを出す（タップで閉じる）
