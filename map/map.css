@@ -1,4 +1,4 @@
-/* map.css — 会場マップ（MapLibre + マイマップのKML） */
+/* map.css — 会場マップ（Vue + MapLibre + マイマップのKML） */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
@@ -20,6 +20,10 @@ body {
   gap: 10px;
   flex-wrap: wrap;
 }
+
+/* #app は Vue の取り付け先。レイアウト上は存在しないものとして body の flex をそのまま効かせる */
+#app { display: contents; }
+#app[v-cloak] { display: none; }
 
 h1 {
   color: #fff;
@@ -44,7 +48,7 @@ h1 span { color: #f0c040; }
   background: #000;
 }
 .gmap-wrap { display: flex; position: relative; }
-#map { flex: 1 1 auto; }
+.map { flex: 1 1 auto; }
 
 .maplibregl-popup-content {
   color: #222;
@@ -99,7 +103,6 @@ h1 span { color: #f0c040; }
   border-radius: 8px;
   cursor: pointer;
 }
-.toast[hidden] { display: none; }
 .locate-btn {
   position: absolute;
   right: 10px;

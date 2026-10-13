@@ -5,28 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>マチ★アソビ 会場マップ</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css">
-<link rel="stylesheet" href="map.css?v=20261014c">
+<link rel="stylesheet" href="map.css?v=20261014d">
 </head>
 <body>
 
-<div class="top-bar">
-  <h1>マチ★アソビ <span id="eventLabel"></span> 会場マップ</h1>
-</div>
+<div id="app" v-cloak>
+  <div class="top-bar">
+    <h1>マチ★アソビ <span>{{ eventLabel }}</span> 会場マップ</h1>
+  </div>
 
-<div class="hint">ピンをタップすると詳細が出ます。右下の「📍 現在地を取得」で自分の位置を表示します。</div>
+  <div class="hint">ピンをタップすると詳細が出ます。右下の「📍 現在地を取得」で自分の位置を表示します。</div>
 
-<div class="gmap-wrap">
-  <div id="map"></div>
-  <div id="toast" class="toast" hidden></div>
-  <button id="locateBtn" class="locate-btn" type="button">📍 現在地を取得</button>
-</div>
+  <div class="gmap-wrap">
+    <div ref="map" class="map"></div>
+    <div v-if="toast" class="toast" @click="toast = ''">{{ toast }}</div>
+    <button class="locate-btn" :class="{ active: locating }" type="button" @click="toggleLocate">{{ locateLabel }}</button>
+  </div>
 
-<div class="actions">
-  <a id="gmapLink" href="#" target="_blank" rel="noopener">🗺 Googleマップで開く</a>
+  <div class="actions">
+    <a :href="mymapUrl" target="_blank" rel="noopener">🗺 Googleマップで開く</a>
+  </div>
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
 <script src="../shared/js/utils.js"></script>
-<script src="map.js?v=20261014c"></script>
+<script type="module" src="app.js?v=20261014d"></script>
 </body>
 </html>
