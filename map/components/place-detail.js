@@ -3,6 +3,8 @@ export default {
   props: {
     place: { type: Object, required: true },
     timelineUrl: { type: String, default: '' },
+    areaUrl: { type: String, default: '' },
+    linkTarget: { type: String, default: '_self' },
   },
 
   computed: {
@@ -25,6 +27,9 @@ export default {
         <template v-else>{{ part.text }}</template>
       </template>
     </p>
-    <a v-if="timelineUrl" class="pop-timeline" :href="timelineUrl">📅 タイムテーブル</a>
+    <div v-if="timelineUrl || areaUrl" class="pop-links">
+      <a v-if="timelineUrl" :href="timelineUrl" :target="linkTarget">📅 タイムテーブル</a>
+      <a v-if="areaUrl" :href="areaUrl" :target="linkTarget">📍 エリア詳細</a>
+    </div>
   `,
 };

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>マチ★アソビ 会場マップ</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css">
-<link rel="stylesheet" href="map.css?v=20261014h">
+<link rel="stylesheet" href="map.css?v=20261014i">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
   <div hidden>
     <div ref="popupBody">
       <place-choices v-if="choices.length" :places="choices" @select="select"></place-choices>
-      <place-detail v-else-if="selected" :place="selected" :timeline-url="timelineUrl"></place-detail>
+      <place-detail v-else-if="selected" :place="selected" :timeline-url="timelineUrl" :area-url="areaUrl" :link-target="linkTarget"></place-detail>
     </div>
   </div>
 
@@ -37,6 +37,6 @@
 
 <script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
 <script src="../shared/js/utils.js"></script>
-<script type="module" src="app.js?v=20261014h"></script>
+<script type="module" src="app.js?v=20261014i"></script>
 </body>
 </html>

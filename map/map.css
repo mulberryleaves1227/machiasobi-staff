@@ -123,13 +123,19 @@ h1 span { color: #f0c040; }
 .locate-btn.active { background: #1a73e8; color: #fff; }
 /* 同じ操作は .locate-btn から行うので、MapLibre 標準の ◎ ボタンは隠す（青い点の表示には必要なのでコントロール自体は残す） */
 .maplibregl-ctrl-group:has(.maplibregl-ctrl-geolocate) { display: none; }
-.maplibregl-popup-content a.pop-timeline {
-  display: block;
-  margin-top: 6px;
-  padding: 8px 10px;
+.pop-links { display: flex; gap: 6px; margin-top: 6px; }
+.maplibregl-popup-content .pop-links a {
+  flex: 1;
+  padding: 8px 6px;
   border-radius: 6px;
   background: #1a1a2e;
   color: #fff;
   text-align: center;
   text-decoration: none;
+  white-space: nowrap;
 }
+
+/* 埋め込み表示（?embed=1）では地図だけを出す */
+body.embed { padding: 0; }
+body.embed .top-bar, body.embed .hint, body.embed .actions { display: none; }
+body.embed .gmap-wrap { min-height: 0; border: 0; border-radius: 0; box-shadow: none; }

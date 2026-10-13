@@ -9,6 +9,9 @@ import LocateButton from './components/locate-button.js';
 import MapToast from './components/map-toast.js';
 
 const MYMAP_VIEWER = 'https://www.google.com/maps/d/viewer?mid=';
+// ?embed=1 のときは他のページに埋め込まれている
+const EMBED = queryParam('embed') === '1';
+if (EMBED) document.body.classList.add('embed');
 
 // 地図は Vue の data に入れると壊れるのでここで持つ
 let venueMap = null;
@@ -25,6 +28,8 @@ createApp({
       selected: null,  // 詳細を出している場所
       choices: [],     // 候補として並べている場所
       timelineVenues: {}, // ピン名 → タイムテーブルのタブ名
+      areaSections: {},   // ピン名 → エリア詳細の見出し
+      linkTarget: EMBED ? '_top' : '_self', // 埋め込み時はページごと移動する
     };
   },
 
@@ -50,6 +55,12 @@ createApp({
       const venue = this.selected && this.timelineVenues[this.selected.name];
       return venue ? `../timeline/index.html?venue=${encodeURIComponent(venue)}` : '';
     },
+
+    // 選んだ場所のエリア詳細のリンクを返す関数
+    areaUrl() {
+      const section = this.selected && this.areaSections[this.selected.name];
+      return section ? `../area/index.html?acc=${encodeURIComponent(section)}` : '';
+    },
   },
 
   methods: {
@@ -61,6 +72,7 @@ createApp({
         this.eventLabel = ev.label;
         this.mymapUrl = MYMAP_VIEWER + encodeURIComponent(ev.mymap_id);
         this.timelineVenues = ev.timeline_venues || {};
+        this.areaSections = ev.area_sections || {};
         document.title = `マチ★アソビ ${ev.label} 会場マップ`;
         await venueMap.showFeatures(await fetchMyMap(ev.mymap_id));
       } catch (err) {
