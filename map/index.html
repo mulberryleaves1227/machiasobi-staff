@@ -3,27 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>マチ★アソビ Vol.31 会場マップ</title>
-<link rel="stylesheet" href="map.css">
+<title>マチ★アソビ 会場マップ</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="map.css?v=20261014b">
 </head>
 <body>
 
 <div class="top-bar">
-  <h1>マチ★アソビ <span>Vol.31</span> 会場マップ</h1>
+  <h1>マチ★アソビ <span id="eventLabel"></span> 会場マップ</h1>
 </div>
 
-<div class="hint">各ピンをタップすると詳細情報が表示されます。経路検索や現在地表示はGoogleマップアプリで開くと便利です。</div>
+<div class="hint">ピンをタップすると詳細が出ます。右下の「📍 現在地」で自分の位置を表示します。</div>
 
 <div class="gmap-wrap">
-  <iframe
-    src="https://www.google.com/maps/d/embed?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo&ehbc=2E312F&noprof=1"
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div id="map"></div>
+  <div id="toast" class="toast" hidden></div>
+  <button id="locateBtn" class="locate-btn" type="button">📍 現在地</button>
 </div>
 
 <div class="actions">
-  <a href="https://www.google.com/maps/d/viewer?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo" target="_blank" rel="noopener">🗺 Googleマップで開く</a>
+  <a id="gmapLink" href="#" target="_blank" rel="noopener">🗺 Googleマップで開く</a>
 </div>
 
+<script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
+<script src="../shared/js/utils.js"></script>
+<script src="map.js?v=20261014b"></script>
 </body>
 </html>
