@@ -1,4 +1,4 @@
-/* map.css — 会場マップ（Googleマイマップ埋め込み） */
+/* map.css — 会場マップ（Vue + MapLibre + マイマップのKML） */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
@@ -20,6 +20,10 @@ body {
   gap: 10px;
   flex-wrap: wrap;
 }
+
+/* #app は Vue の取り付け先。レイアウト上は存在しないものとして body の flex をそのまま効かせる */
+#app { display: contents; }
+#app[v-cloak] { display: none; }
 
 h1 {
   color: #fff;
@@ -43,27 +47,95 @@ h1 span { color: #f0c040; }
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   background: #000;
 }
-.gmap-wrap iframe {
+.gmap-wrap { display: flex; position: relative; }
+.map { flex: 1 1 auto; }
+
+.maplibregl-popup-content {
+  color: #222;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 28px 8px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}
+.maplibregl-popup-content h3 { font-size: 14px; }
+.maplibregl-popup-content p { white-space: pre-wrap; margin-top: 2px; color: #444; }
+.maplibregl-popup-content a { color: #0b6bcb; font-weight: bold; }
+.maplibregl-popup-close-button { width: 28px; height: 28px; font-size: 18px; }
+.pop-folder { font-size: 10px; color: #888; }
+.pop-choices { list-style: none; margin-top: 4px; }
+.pop-choices li + li { border-top: 1px solid #eee; }
+.pop-choices button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
-  height: 100%;
+  min-height: 36px;
+  padding: 4px 2px;
   border: 0;
-  display: block;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: #222;
+  text-align: left;
+  cursor: pointer;
+}
+.pop-choices button:active { background: #f2f2f2; }
+.pop-choices .dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  box-shadow: 0 0 0 1px #ccc;
+}
+.toast {
+  position: absolute;
+  left: 8px;
+  right: 56px;
+  top: 8px;
+  z-index: 2;
+  background: rgba(30, 30, 50, 0.92);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.locate-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 36px;
+  z-index: 2;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 22px;
+  background: #fff;
+  color: #1a1a2e;
+  font: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+.locate-btn.active { background: #1a73e8; color: #fff; }
+/* 同じ操作は .locate-btn から行うので、MapLibre 標準の ◎ ボタンは隠す（青い点の表示には必要なのでコントロール自体は残す） */
+.maplibregl-ctrl-group:has(.maplibregl-ctrl-geolocate) { display: none; }
+.pop-links { display: flex; gap: 6px; margin-top: 6px; }
+.maplibregl-popup-content .pop-links a {
+  flex: 1;
+  padding: 8px 6px;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.actions a {
-  flex: 1 1 auto;
-  text-align: center;
-  background: #2a2a4a;
-  color: #fff;
-  text-decoration: none;
-  font-size: 13px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #444;
-}
-.actions a:hover { background: #353560; border-color: #888; }
+/* 埋め込み表示（?embed=1）では地図だけを出す */
+body.embed { padding: 0; }
+body.embed .top-bar, body.embed .hint, body.embed .actions { display: none; }
+body.embed .gmap-wrap { min-height: 0; border: 0; border-radius: 0; box-shadow: none; }
