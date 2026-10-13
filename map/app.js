@@ -1,6 +1,9 @@
 // app.js — 会場マップ画面（Vue）
-// 画面の状態（見出し・お知らせ・現在地ボタン）だけをここで持つ。
-// 地図の中身は lib/venue-map.js、ピンのデータは lib/kml.js、開催回の選び方は lib/event-select.js。
+// 画面の状態（見出し・お知らせ・現在地・選んでいる場所）をここで持ち、表示は components/ に任せる。
+//   地図の中身        lib/venue-map.js
+//   ピンのデータ      lib/kml.js
+//   開催回の選び方    lib/event-select.js
+//   位置情報の案内文  lib/geo-message.js
 // 開催回の登録は data/map_events.json に1件追加するだけ。
 
 import { createApp } from 'https://unpkg.com/vue@3.5.43/dist/vue.esm-browser.prod.js';
@@ -8,6 +11,10 @@ import { loadCurrentEvent } from './lib/event-select.js';
 import { fetchMyMap } from './lib/kml.js';
 import { geoErrorMessage, geoUnavailableMessage } from './lib/geo-message.js';
 import { createVenueMap } from './lib/venue-map.js';
+import PlaceDetail from './components/place-detail.js';
+import PlaceChoices from './components/place-choices.js';
+import LocateButton from './components/locate-button.js';
+import MapToast from './components/map-toast.js';
 
 const MYMAP_VIEWER = 'https://www.google.com/maps/d/viewer?mid=';
 
@@ -15,20 +22,17 @@ const MYMAP_VIEWER = 'https://www.google.com/maps/d/viewer?mid=';
 let venueMap = null;
 
 createApp({
+  components: { PlaceDetail, PlaceChoices, LocateButton, MapToast },
+
   data() {
     return {
       eventLabel: '',  // 見出しの「Vol.31」部分
       mymapUrl: '#',   // 「Googleマップで開く」のリンク先
       toast: '',       // 地図の上に出すお知らせ（空なら出さない）
       locating: false, // 現在地を表示中か
+      selected: null,  // ポップアップで詳細を出している場所
+      choices: [],     // ポップアップで候補として並べている場所（重なったピン）
     };
-  },
-
-  computed: {
-    // 現在地ボタンの文言
-    locateLabel() {
-      return this.locating ? '📍 現在地を表示中' : '📍 現在地を取得';
-    },
   },
 
   // 画面ができたら地図を作り、現在地が使えるか確認し、開催回のピンを読み込む
@@ -37,6 +41,8 @@ createApp({
     // 表示されるのを待ってから地図を作る（先に作ると 400×300 の初期サイズで固まる）
     await this.$nextTick();
     venueMap = createVenueMap(this.$refs.map, {
+      onTap: places => this.onTap(places),
+      onPopupClose: () => { this.selected = null; this.choices = []; },
       onLocateStart: () => { this.locating = true; this.toast = '現在地を取得しています…'; },
       onLocateEnd: () => { this.locating = false; },
       onLocated: () => { this.toast = ''; },
@@ -59,6 +65,40 @@ createApp({
       } catch (err) {
         console.error('会場マップの読み込みに失敗', err);
       }
+    },
+
+    // 地図をタップしたとき
+    // ピンが複数 → 候補を表示 / ピンが1つ → 詳細を表示 / ピンがなくエリア → エリアの詳細 / 何もない → 閉じる
+    onTap({ pins, area }) {
+      if (pins.length > 1) this.showChoices(pins);
+      else if (pins.length === 1) this.select(pins[0]);
+      else if (area) this.select(area);
+      else this.closePopup();
+    },
+
+    // 場所を1つ選び、強調してポップアップで詳細を出す
+    async select(place) {
+      this.choices = [];
+      this.selected = place;
+      venueMap.highlight([place.fid]);
+      await this.$nextTick(); // ポップアップの中身（PlaceDetail）が描かれるのを待つ
+      venueMap.openPopup(place.lngLat, this.$refs.popupBody);
+    },
+
+    // 重なったピンを候補としてポップアップに並べる（一番近いピンの位置に出す）
+    async showChoices(places) {
+      this.selected = null;
+      this.choices = places;
+      venueMap.highlight(places.map(p => p.fid));
+      await this.$nextTick(); // ポップアップの中身（PlaceChoices）が描かれるのを待つ
+      venueMap.openPopup(places[0].lngLat, this.$refs.popupBody);
+    },
+
+    // ポップアップを閉じて、選択を解除する
+    closePopup() {
+      this.selected = null;
+      this.choices = [];
+      venueMap.closePopup();
     },
 
     // 「📍 現在地を取得」ボタン：現在地の表示を開始する（表示中ならやめる）

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>マチ★アソビ 会場マップ</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css">
-<link rel="stylesheet" href="map.css?v=20261014e">
+<link rel="stylesheet" href="map.css?v=20261014f">
 </head>
 <body>
 
@@ -18,8 +18,16 @@
 
   <div class="gmap-wrap">
     <div ref="map" class="map"></div>
-    <div v-if="toast" class="toast" @click="toast = ''">{{ toast }}</div>
-    <button class="locate-btn" :class="{ active: locating }" type="button" @click="toggleLocate">{{ locateLabel }}</button>
+    <map-toast :message="toast" @close="toast = ''"></map-toast>
+    <locate-button :locating="locating" @toggle="toggleLocate"></locate-button>
+  </div>
+
+  <!-- ポップアップの中身。popupBody は地図のポップアップの中へ移して表示する（ここでは隠しておく） -->
+  <div hidden>
+    <div ref="popupBody">
+      <place-choices v-if="choices.length" :places="choices" @select="select"></place-choices>
+      <place-detail v-else-if="selected" :place="selected"></place-detail>
+    </div>
   </div>
 
   <div class="actions">
@@ -29,6 +37,6 @@
 
 <script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
 <script src="../shared/js/utils.js"></script>
-<script type="module" src="app.js?v=20261014e"></script>
+<script type="module" src="app.js?v=20261014f"></script>
 </body>
 </html>
