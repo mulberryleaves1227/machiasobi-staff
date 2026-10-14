@@ -3,27 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>マチ★アソビ Vol.31 会場マップ</title>
-<link rel="stylesheet" href="map.css">
+<title>マチ★アソビ 会場マップ</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css">
+<link rel="stylesheet" href="map.css?v=20261014i">
 </head>
 <body>
 
-<div class="top-bar">
-  <h1>マチ★アソビ <span>Vol.31</span> 会場マップ</h1>
+<div id="app" v-cloak>
+  <div class="top-bar">
+    <h1>マチ★アソビ <span>{{ eventLabel }}</span> 会場マップ</h1>
+  </div>
+
+  <div class="hint">ピンをタップすると詳細が出ます。右下の「📍 現在地を取得」で自分の位置を表示します。</div>
+
+  <div class="gmap-wrap">
+    <div ref="map" class="map"></div>
+    <map-toast :message="toast" @close="toast = ''"></map-toast>
+    <locate-button :locating="locating" @toggle="toggleLocate"></locate-button>
+  </div>
+
+  <!-- ポップアップの中身（地図のポップアップへ移して表示する） -->
+  <div hidden>
+    <div ref="popupBody">
+      <place-choices v-if="choices.length" :places="choices" @select="select"></place-choices>
+      <place-detail v-else-if="selected" :place="selected" :timeline-url="timelineUrl" :area-url="areaUrl" :link-target="linkTarget"></place-detail>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a :href="mymapUrl" target="_blank" rel="noopener">🗺 Googleマップで開く</a>
+  </div>
 </div>
 
-<div class="hint">各ピンをタップすると詳細情報が表示されます。経路検索や現在地表示はGoogleマップアプリで開くと便利です。</div>
-
-<div class="gmap-wrap">
-  <iframe
-    src="https://www.google.com/maps/d/embed?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo&ehbc=2E312F&noprof=1"
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-
-<div class="actions">
-  <a href="https://www.google.com/maps/d/viewer?mid=1ZN6Xmjdtu_K1j517AU-3MwgH8JpbQfo" target="_blank" rel="noopener">🗺 Googleマップで開く</a>
-</div>
-
+<script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
+<script src="../shared/js/utils.js"></script>
+<script type="module" src="app.js?v=20261014i"></script>
 </body>
 </html>
