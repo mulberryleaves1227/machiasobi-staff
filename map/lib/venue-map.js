@@ -150,7 +150,8 @@ function highlight(map, fids) {
   // 選ばれたピンなら chosen、それ以外は other にする式
   const byChoice = (chosen, other) => (fids.length ? ['case', isChosen, chosen, other] : chosen);
 
-  map.setFilter('event-selected', isChosen);
+  // 黄色い輪はピンだけに付ける（エリアだと角ごとに輪が出る）
+  map.setFilter('event-selected', ['all', ['==', ['geometry-type'], 'Point'], isChosen]);
   map.setPaintProperty('event-pin', 'circle-opacity', byChoice(1, 0.35));
   map.setPaintProperty('event-pin', 'circle-stroke-opacity', byChoice(1, 0.35));
   map.setPaintProperty('event-label', 'text-opacity', byChoice(1, 0.25));
@@ -177,6 +178,7 @@ function placesAt(map, e) {
     return (p.x - x) ** 2 + (p.y - y) ** 2;
   };
   const pins = map.queryRenderedFeatures(box, { layers: ['event-pin'] })
+    .filter(f => !f.properties.passive)
     .filter(f => !seen.has(f.properties.fid) && seen.add(f.properties.fid))
     .sort((a, b) => dist(a) - dist(b))
     .map(f => toPlace(f, f.geometry.coordinates));
