@@ -30,6 +30,7 @@ createApp({
       choices: [],     // 候補として並べている場所
       timelineVenues: {}, // ピン名 → タイムテーブルのタブ名
       areaSections: {},   // ピン名 → エリア詳細の見出し
+      shopAreas: {},      // ピン名 → 出展MAPのタブ
       linkTarget: EMBED ? '_top' : '_self', // 埋め込み時はページごと移動する
     };
   },
@@ -62,6 +63,12 @@ createApp({
       const section = this.selected && this.areaSections[this.selected.name];
       return section ? `../area/index.html?acc=${encodeURIComponent(section)}` : '';
     },
+
+    // 選んだ場所の出展MAPのリンクを返す関数
+    shopUrl() {
+      const area = this.selected && this.shopAreas[this.selected.name];
+      return area ? `../shop/index.html#${encodeURIComponent(area)}` : '';
+    },
   },
 
   methods: {
@@ -74,6 +81,7 @@ createApp({
         this.mymapUrl = MYMAP_VIEWER + encodeURIComponent(ev.mymap_id);
         this.timelineVenues = ev.timeline_venues || {};
         this.areaSections = ev.area_sections || {};
+        this.shopAreas = ev.shop_areas || {};
         document.title = `マチ★アソビ ${ev.label} 会場マップ`;
         await venueMap.showFeatures(applyPlaceOverrides(await fetchMyMap(ev.mymap_id), ev.place_overrides));
       } catch (err) {
