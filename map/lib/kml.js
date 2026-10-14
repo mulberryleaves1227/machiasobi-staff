@@ -47,7 +47,8 @@ export function kmlToGeoJSON(xml) {
       geometry,
       properties: {
         fid: features.length,
-        name: childText(pm, 'name'),
+        // 名前の途中の改行・連続した空白は1つの空白にする（対応表の名前と合わせるため）
+        name: childText(pm, 'name').replace(/\s+/g, ' '),
         description: childText(pm, 'description'),
         folder,
         color: '#' + color,

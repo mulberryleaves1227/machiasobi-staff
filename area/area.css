@@ -7,6 +7,7 @@
 .para-table td{padding:6px 8px;border-bottom:1px solid #f0f0f0;vertical-align:top}
 .para-table tr:last-child td{border-bottom:none}
 .para-warn{font-size:11px;font-style:italic;color:#888}
+.shop-link{display:block;margin-bottom:8px;font-size:12px;font-weight:bold;color:#e94560;text-decoration:none}
 .warn-note{background:#fff8e1;border-left:3px solid #ffc107;padding:6px 10px;border-radius:0 6px 6px 0;font-size:12px;margin-bottom:8px;line-height:1.5}
 .venue-map{display:block;width:100%;height:60vh;min-height:320px;border:0;border-radius:10px;margin-bottom:6px;background:#eee}
 .venue-map-open{display:block;text-align:right;font-size:12px;margin-bottom:12px}

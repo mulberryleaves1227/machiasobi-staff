@@ -1,6 +1,7 @@
 import { createApp } from 'https://unpkg.com/vue@3.5.43/dist/vue.esm-browser.prod.js';
 import { loadCurrentEvent } from './lib/event-select.js';
 import { fetchMyMap } from './lib/kml.js';
+import { applyAreaGroups } from './lib/area-groups.js';
 import { geoErrorMessage, geoUnavailableMessage } from './lib/geo-message.js';
 import { createVenueMap } from './lib/venue-map.js';
 import PlaceDetail from './components/place-detail.js';
@@ -29,6 +30,7 @@ createApp({
       choices: [],     // 候補として並べている場所
       timelineVenues: {}, // ピン名 → タイムテーブルのタブ名
       areaSections: {},   // ピン名 → エリア詳細の見出し
+      areaGroups: [],     // エリアと代表ピンのまとまり（出展MAPのタブ付き）
       linkTarget: EMBED ? '_top' : '_self', // 埋め込み時はページごと移動する
     };
   },
@@ -52,18 +54,36 @@ createApp({
   computed: {
     // 選んだ場所のタイムテーブルのリンクを返す関数
     timelineUrl() {
-      const venue = this.selected && this.timelineVenues[this.selected.name];
+      const venue = this.lookup(this.timelineVenues);
       return venue ? `../timeline/index.html?venue=${encodeURIComponent(venue)}` : '';
     },
 
     // 選んだ場所のエリア詳細のリンクを返す関数
     areaUrl() {
-      const section = this.selected && this.areaSections[this.selected.name];
+      const section = this.lookup(this.areaSections);
       return section ? `../area/index.html?acc=${encodeURIComponent(section)}` : '';
+    },
+
+    // 選んだ場所の出展MAPのリンクを返す関数
+    shopUrl() {
+      const group = this.selectedGroup;
+      return group && group.shop ? `../shop/index.html#${encodeURIComponent(group.shop)}` : '';
+    },
+
+    // 選んだエリアのまとまりを返す関数
+    selectedGroup() {
+      return this.selected && this.areaGroups.find(g => g.area === this.selected.name);
     },
   },
 
   methods: {
+    // 選んだ場所の名前（まとめたエリアなら代表ピンの名前も）で対応表を引く関数
+    lookup(table) {
+      if (!this.selected) return '';
+      const names = [this.selected.name, ...(this.selectedGroup ? this.selectedGroup.pins : [])];
+      return names.map(n => table[n]).find(Boolean) || '';
+    },
+
     // 開催回を読み込んでピンを表示する関数
     async loadEvent() {
       try {
@@ -73,8 +93,10 @@ createApp({
         this.mymapUrl = MYMAP_VIEWER + encodeURIComponent(ev.mymap_id);
         this.timelineVenues = ev.timeline_venues || {};
         this.areaSections = ev.area_sections || {};
+        this.areaGroups = ev.area_groups || [];
         document.title = `マチ★アソビ ${ev.label} 会場マップ`;
-        await venueMap.showFeatures(await fetchMyMap(ev.mymap_id));
+        const geojson = await fetchMyMap(ev.mymap_id);
+        await venueMap.showFeatures(applyAreaGroups(geojson, this.areaGroups));
       } catch (err) {
         console.error('会場マップの読み込みに失敗', err);
       }
