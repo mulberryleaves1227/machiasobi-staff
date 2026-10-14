@@ -77,11 +77,18 @@ function select(k, scroll){
   if(scroll && card) card.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
+// 戻るボタンに出すページ名（ディレクトリ名 → 名前）
+const BACK_LABELS = { map: '会場マップ', area: 'エリア詳細', home: 'ホーム', timeline: 'タイムテーブル' };
+
 // サイト内から来たときは前のページに戻し、それ以外はホームへ行かせる関数
 function setupBack(){
-  const fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
-  if (!fromSite || history.length < 2) return;
-  document.getElementById('back').addEventListener('click', e => { e.preventDefault(); history.back(); });
+  const ref = document.referrer ? new URL(document.referrer) : null;
+  if (!ref || ref.origin !== location.origin || history.length < 2) return;
+  const back = document.getElementById('back');
+  // 埋め込みの地図から来たときは、埋め込み先のページに戻るので名前は出さない
+  const page = ref.searchParams.get('embed') === '1' ? '' : ref.pathname.split('/').slice(-2)[0];
+  back.textContent = '‹ ' + (BACK_LABELS[page] || '戻る');
+  back.addEventListener('click', e => { e.preventDefault(); history.back(); });
 }
 
 // 出展データを読み込んで画面を作る関数
