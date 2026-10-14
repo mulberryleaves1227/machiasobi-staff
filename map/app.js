@@ -1,7 +1,6 @@
 import { createApp } from 'https://unpkg.com/vue@3.5.43/dist/vue.esm-browser.prod.js';
 import { loadCurrentEvent } from './lib/event-select.js';
 import { fetchMyMap } from './lib/kml.js';
-import { applyPlaceOverrides } from './lib/place-overrides.js';
 import { geoErrorMessage, geoUnavailableMessage } from './lib/geo-message.js';
 import { createVenueMap } from './lib/venue-map.js';
 import PlaceDetail from './components/place-detail.js';
@@ -83,7 +82,7 @@ createApp({
         this.areaSections = ev.area_sections || {};
         this.shopAreas = ev.shop_areas || {};
         document.title = `マチ★アソビ ${ev.label} 会場マップ`;
-        await venueMap.showFeatures(applyPlaceOverrides(await fetchMyMap(ev.mymap_id), ev.place_overrides));
+        await venueMap.showFeatures(await fetchMyMap(ev.mymap_id));
       } catch (err) {
         console.error('会場マップの読み込みに失敗', err);
       }
