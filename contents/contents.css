@@ -22,6 +22,7 @@
 .con-card.kind-ceremony{border-left-color:#e94560}
 .con-card.kind-exhibit,.con-card.kind-merch,.con-card.kind-sign,.con-card.kind-cafe{border-left-color:#4a90d9}
 .con-card.kind-rally,.con-card.kind-other{border-left-color:#888}
+.con-card.kind-parasol{border-left-color:#2aa3a8}
 .card-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
 .kind-badge{font-size:10px;font-weight:bold;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:2px}
 .badge-stage{background:#ffeef1;color:#e94560}
@@ -35,12 +36,16 @@
 .badge-ceremony{background:#ffeef1;color:#e94560}
 .badge-exhibit,.badge-merch,.badge-sign,.badge-cafe{background:#eef3ff;color:#4a90d9}
 .badge-rally,.badge-other{background:#f0f0f0;color:#666}
+.badge-parasol{background:#e3f4f3;color:#1d7d81}
+.bw-link{display:block;margin-top:8px;font-size:12px;color:#1d7d81;font-weight:bold;text-decoration:none}
 .card-title{font-size:14px;font-weight:bold;color:#1a1a2e;line-height:1.4}
 .card-body{font-size:13px;line-height:1.7;color:#333}
 .card-row{display:flex;gap:6px;margin-bottom:2px}
 .card-label{color:#888;white-space:nowrap;min-width:3em;flex-shrink:0}
 .card-val{flex:1}
 .card-note{margin-top:6px;font-size:12px;background:#fffbf0;border-left:3px solid #ffd700;padding:5px 8px;border-radius:0 4px 4px 0;color:#666;line-height:1.5}
+.card-tips{margin-top:6px;font-size:12px;background:#eef7ff;border-left:3px solid #4a90d9;padding:5px 8px;border-radius:0 4px 4px 0;color:#444;line-height:1.5}
+.card-tips ul{margin:2px 0 0 1.2em}
 .card-link{display:block;margin-top:8px;font-size:12px;color:#4a90d9;text-decoration:none}
 .card-link:hover{text-decoration:underline}
 .map-link{color:#4a90d9;text-decoration:none;font-size:13px}

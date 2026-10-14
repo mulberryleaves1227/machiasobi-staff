@@ -4,13 +4,13 @@ const KIND_LABELS = {
   stage: 'ステージ', talk: 'トーク', screening_talk: '上映&トーク',
   screening: '上映会', booth: 'ブース', booth_event: 'ブースイベント', sauna: 'サウナ',
   live: 'ライブ', ceremony: '式典', exhibit: '展示', merch: '物販', sign: 'サイン会',
-  cafe: 'カフェ', rally: '回遊企画', other: 'その他'
+  cafe: 'カフェ', rally: '回遊企画', parasol: 'パラソル', other: 'その他'
 };
 const KIND_BADGE = {
   stage: 'badge-stage', talk: 'badge-talk', screening_talk: 'badge-screening_talk',
   screening: 'badge-screening', booth: 'badge-booth', booth_event: 'badge-booth_event', sauna: 'badge-sauna',
   live: 'badge-live', ceremony: 'badge-ceremony', exhibit: 'badge-exhibit', merch: 'badge-merch', sign: 'badge-sign',
-  cafe: 'badge-cafe', rally: 'badge-rally', other: 'badge-other'
+  cafe: 'badge-cafe', rally: 'badge-rally', parasol: 'badge-parasol', other: 'badge-other'
 };
 
 function safeUrl(u) {
@@ -105,8 +105,13 @@ function buildCard(r) {
   if (people) rows.push(`<div class="card-row"><span class="card-label">出演</span><span class="card-val">${people}</span></div>`);
   if (r.organization) rows.push(`<div class="card-row"><span class="card-label">主催</span><span class="card-val">${escHtml(r.organization)}</span></div>`);
 
-  const noteHtml = a.notes ? `<div class="card-note">⚠️ ${escHtml(a.notes)}</div>` : '';
+  const si = r.staff_info || {};
+  if (si.nicknames?.length) rows.push(`<div class="card-row"><span class="card-label">愛称</span><span class="card-val">${si.nicknames.map(escHtml).join('<br>')}</span></div>`);
+  const tipsHtml = si.tips?.length ? `<div class="card-tips">💡 現場メモ<ul>${si.tips.map(t => `<li>${escHtml(t)}</li>`).join('')}</ul></div>` : '';
+  const noteHtml = (a.notes ? `<div class="card-note">⚠️ ${escHtml(a.notes)}</div>` : '') + tipsHtml;
   const linkHtml = source ? `<a class="card-link" href="${source}" target="_blank" rel="noopener">🔗 ${sourceLabel} →</a>` : '';
+  const bwNo = r._bw || BW_BY_RECORD[r.id];
+  const bwHtml = bwNo ? `<a class="bw-link" href="../area/index.html?bw=${encodeURIComponent(bwNo)}">🗺 ボードウォーク地図でパラソル${escHtml(bwNo)}を見る →</a>` : '';
 
   return `
 <div class="con-card kind-${kind}" data-id="${escHtml(String(r.id))}">
@@ -117,12 +122,38 @@ function buildCard(r) {
   <div class="card-body">
     ${rows.join('\n    ')}
     ${noteHtml}
+    ${bwHtml}
     ${linkHtml}
   </div>
 </div>`;
 }
 
 let allRecords = [];
+// ボードウォークのパラソル（boardwalk_booths.json）: 検索カード化＋関連企画からの地図リンク
+const BW_BY_RECORD = {};
+
+function toHira(s) {
+  return String(s || '').replace(/[\u30a1-\u30f6]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+}
+
+function bwToRecords(data) {
+  return data.areas.flatMap(a => a.booths).filter(b => !b.na).map(b => {
+    (b.related_records || []).forEach(id => { BW_BY_RECORD[id] = b.no; });
+    const terms = [b.name, b.sub, b.official_name, b.organization, ...(b.aliases || []), ...(b.tags || []), b.desc,
+      'パラソル' + b.no, 'しんまちボードウォーク', 'ボードウォーク'].filter(Boolean);
+    const firstDesc = (b.desc || '').split('\n')[0];
+    return {
+      id: 'bw-' + b.no, _bw: b.no, kind: 'parasol',
+      display_name: `パラソル${b.no} ${b.name}` + (b.sub && !b.tbd ? `（${b.sub}）` : ''),
+      organization: b.organization && b.organization !== b.name ? b.organization : '',
+      search: { search_terms: terms, normalized_search_terms: terms.map(toHira) },
+      appearance: { kind: 'parasol', area: 'しんまちボードウォーク', venue: `パラソル${b.no}`,
+        action: firstDesc.length > 90 ? firstDesc.slice(0, 90) + '…' : firstDesc,
+        notes: (b.tags || []).filter(t => t !== '飲食').join('・') },
+      source: { url: b.url, status: 'official_individual' }
+    };
+  });
+}
 
 function normalizeQuery(q) {
   return q.toLowerCase().replace(/[　\s]+/g, '').replace(/[！-～]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0));
@@ -168,10 +199,12 @@ function render(records) {
 }
 
 // Load data
-fetch('../data/search_data.json')
-  .then(r => r.json())
-  .then(data => {
-    allRecords = data.records || [];
+Promise.all([
+  fetch('../data/search_data.json').then(r => r.json()),
+  fetch('../data/boardwalk_booths.json').then(r => r.json()).catch(() => null)
+])
+  .then(([data, bw]) => {
+    allRecords = (data.records || []).concat(bw ? bwToRecords(bw) : []);
     const input = document.getElementById('search-input');
 
     // 他ページからの深リンク: ?q=検索語
