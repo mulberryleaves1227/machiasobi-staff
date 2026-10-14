@@ -57,10 +57,10 @@ function applyDeepLink() {
   if (!document.getElementById('day-' + day)) return;
   switchDay(day);
   if (venue === null) return;
-  switchVenue(day, venue);
-  if (row === null) return;
   const panel = document.querySelectorAll('#day-' + day + ' .venue-panel')[venue];
   if (!panel) return;
+  switchVenue(day, venue);
+  if (row === null) return;
   const tr = [...panel.querySelectorAll('tr')].filter(r => r.querySelectorAll('td').length >= 2)[row];
   if (tr) flashScroll(tr);
 }
