@@ -77,6 +77,13 @@ function select(k, scroll){
   if(scroll && card) card.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
+// サイト内から来たときは前のページに戻し、それ以外はホームへ行かせる関数
+function setupBack(){
+  const fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
+  if (!fromSite || history.length < 2) return;
+  document.getElementById('back').addEventListener('click', e => { e.preventDefault(); history.back(); });
+}
+
 // 出展データを読み込んで画面を作る関数
 async function initShop(){
   AREAS = (await fetch('../data/shop_booths.json').then(r => r.json())).areas;
@@ -89,4 +96,5 @@ async function initShop(){
   render();
 }
 
+setupBack();
 initShop();
