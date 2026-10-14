@@ -4,6 +4,7 @@ export default {
     place: { type: Object, required: true },
     timelineUrl: { type: String, default: '' },
     areaUrl: { type: String, default: '' },
+    shopUrl: { type: String, default: '' },
     linkTarget: { type: String, default: '_self' },
   },
 
@@ -27,9 +28,10 @@ export default {
         <template v-else>{{ part.text }}</template>
       </template>
     </p>
-    <div v-if="timelineUrl || areaUrl" class="pop-links">
+    <div v-if="timelineUrl || areaUrl || shopUrl" class="pop-links">
       <a v-if="timelineUrl" :href="timelineUrl" :target="linkTarget">📅 タイムテーブル</a>
       <a v-if="areaUrl" :href="areaUrl" :target="linkTarget">📍 エリア詳細</a>
+      <a v-if="shopUrl" :href="shopUrl" :target="linkTarget">🛍 出展MAP</a>
     </div>
   `,
 };
