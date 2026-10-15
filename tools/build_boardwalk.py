@@ -130,10 +130,38 @@ NAME = 17      # ブース名
 SUB = 11.5     # 補足
 TAG = 11.5
 
+NAME_MAX = 175  # これより長いブース名は2列に折り返して、地図の縦をつめる
+NAME2 = 15     # 2列に折り返した名前に補足もつくときの文字サイズ
+BREAK_AFTER = set("・×&＆ ")
+
+def name_lines(b):
+    """ブース名を1列または2列（右の列から読む）に分ける"""
+    if b.get("name_lines"):
+        return b["name_lines"]  # データで折り返し位置を指定したとき
+    name, up = b["name"], b.get("up", False)
+    if vtext_height(name, NAME, 700, up) <= NAME_MAX:
+        return [name]
+    best = None
+    for i in range(1, len(name)):
+        if is_ascii_run_char(name[i - 1]) and is_ascii_run_char(name[i]) and " " not in name[i - 1:i + 1]:
+            continue  # 英単語の途中では切らない
+        a, c = name[:i].rstrip(), name[i:].lstrip()
+        if not a or not c:
+            continue
+        cost = max(vtext_height(a, NAME, 700, up), vtext_height(c, NAME, 700, up))
+        if name[i - 1] not in BREAK_AFTER and name[i] != " ":
+            cost += NAME * 1.5  # 区切り（・× など）で切れるほうを優先
+        if best is None or cost < best[0]:
+            best = (cost, [a, c])
+    return best[1]
+
+def name_size(b):
+    return NAME2 if len(name_lines(b)) > 1 and b.get("sub") else NAME
+
 def booth_label_height(b):
     if not b.get("name"):
         return 0
-    h = vtext_height(b["name"], NAME, 700, b.get("up", False))
+    h = max(vtext_height(ln, name_size(b), 700, b.get("up", False)) for ln in name_lines(b))
     if b.get("sub"):
         sub = b["sub"] if b.get("tbd") else f'（{b["sub"]}）'
         h = max(h, 6 + vtext_height(sub, SUB, 600))
@@ -213,13 +241,18 @@ def render_area(area, top):
         if b.get("name"):
             name_fill = C["gray"] if b.get("na") else C["ink"]
             name_w = 400 if b.get("na") else 700
+            lines, ns = name_lines(b), name_size(b)
+            # 名前の各列の中心x（右から読む）と補足の中心x
             if b.get("sub"):
-                sub = b["sub"] if b.get("tbd") else f'（{b["sub"]}）'
-                inner.append(vtext(b["name"], cx + 6.5, name_top, NAME, name_w, name_fill, b.get("up", False))[0])
-                inner.append(vtext(sub, cx - 9.5, name_top + 6, SUB, 800 if b.get("tbd") else 600,
-                                   C["pink"] if b.get("tbd") else "#555")[0])
+                xs, sub_x = ([cx + 13, cx - 3], cx - 16) if len(lines) > 1 else ([cx + 6.5], cx - 9.5)
             else:
-                inner.append(vtext(b["name"], cx, name_top, NAME, name_w, name_fill, b.get("up", False))[0])
+                xs, sub_x = ([cx + 9.5, cx - 9.5] if len(lines) > 1 else [cx]), None
+            for ln, lx in zip(lines, xs):
+                inner.append(vtext(ln, lx, name_top, ns, name_w, name_fill, b.get("up", False))[0])
+            if sub_x is not None:
+                sub = b["sub"] if b.get("tbd") else f'（{b["sub"]}）'
+                inner.append(vtext(sub, sub_x, name_top + 6, SUB, 800 if b.get("tbd") else 600,
+                                   C["pink"] if b.get("tbd") else "#555")[0])
         if b.get("na"):
             inner.append(f'<circle cx="{cx:.1f}" cy="{num_cy:.1f}" r="19" fill="#eee" stroke="{C["gray"]}" stroke-width="2" stroke-dasharray="4 3"/>')
             inner.append(htext(cx, num_cy + 6, label, 17, 800, "#999", "middle"))
