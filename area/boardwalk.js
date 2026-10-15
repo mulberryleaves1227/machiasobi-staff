@@ -69,7 +69,16 @@ function initBoardwalk(scroller, svg){
   }).catch(() => { input.placeholder = '検索データを読み込めませんでした'; input.disabled = true; });
 
   // 深リンク（コンテンツ検索などから）: ?bw=26
-  const bw = queryParam('bw');
+  // 手入力の ?bw=2 や ?bw=25c も、地図上の番号（02・25C）に合わせる
+  function resolveNo(raw){
+    const n = norm(raw).replace(/^ぱらそる/, '');
+    const m = n.match(/^(\d{1,2})([a-d]?)$/);
+    const key = m ? m[1].padStart(2, '0') + m[2] : n;
+    const g = [...svg.querySelectorAll('.bw-booth')].find(g => norm(g.dataset.no) === key);
+    return g ? g.dataset.no : raw;
+  }
+  const bwRaw = queryParam('bw');
+  const bw = bwRaw && resolveNo(bwRaw);
   if (bw) {
     mark(new Set([bw]));
     // 上の会場マップの読み込みで位置がずれるので、load 後にもう一度合わせる

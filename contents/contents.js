@@ -140,7 +140,7 @@ function bwToRecords(data) {
   return data.areas.flatMap(a => a.booths).filter(b => !b.na).map(b => {
     (b.related_records || []).forEach(id => { BW_BY_RECORD[id] = b.no; });
     const terms = [b.name, b.sub, b.official_name, b.organization, ...(b.aliases || []), ...(b.tags || []), b.desc,
-      'パラソル' + b.no, 'しんまちボードウォーク', 'ボードウォーク'].filter(Boolean);
+      'パラソル' + b.no, 'パラソル' + b.no.replace(/^0/, ''), 'しんまちボードウォーク', 'ボードウォーク'].filter(Boolean);
     const firstDesc = (b.desc || '').split('\n')[0];
     return {
       id: 'bw-' + b.no, _bw: b.no, kind: 'parasol',
