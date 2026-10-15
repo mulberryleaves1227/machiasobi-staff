@@ -11,3 +11,20 @@
 .warn-note{background:#fff8e1;border-left:3px solid #ffc107;padding:6px 10px;border-radius:0 6px 6px 0;font-size:12px;margin-bottom:8px;line-height:1.5}
 .venue-map{display:block;width:100%;height:60vh;min-height:320px;border:0;border-radius:10px;margin-bottom:6px;background:#eee}
 .venue-map-open{display:block;text-align:right;font-size:12px;margin-bottom:12px}
+/* ── ボードウォークMAP（SVG・逆引き） ── */
+.bw-tools{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.bw-tools input{flex:1;min-width:0;padding:9px 12px;font-size:15px;border:2px solid #ddd;border-radius:10px;background:#fff;outline:none;-webkit-appearance:none}
+.bw-tools input:focus{border-color:#e94560}
+.bw-zoom{display:flex;border:1px solid #ddd;border-radius:8px;overflow:hidden;flex-shrink:0}
+.bw-zoom button{border:none;background:#fff;padding:8px 9px;font-size:12px;color:#555;cursor:pointer}
+.bw-zoom button.active{background:#1a1a2e;color:#fff}
+.bw-results{display:flex;flex-direction:column;gap:4px;margin-bottom:6px}
+.bw-res{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #eee;border-radius:8px;padding:6px 8px;font-size:13px;cursor:pointer}
+.bw-res.active{border-color:#f59e0b;background:#fffbea}
+.bw-res .no{flex-shrink:0;min-width:34px;height:24px;border-radius:12px;background:#1f3c88;color:#fff;font-weight:bold;font-size:12px;display:flex;align-items:center;justify-content:center}
+.bw-res .nm{flex:1;min-width:0;line-height:1.35}
+.bw-res .nm small{color:#888}
+.bw-res a{flex-shrink:0;font-size:12px;color:#4a90d9;text-decoration:none}
+.bw-res-empty{font-size:12px;color:#999;padding:4px 2px}
+.bw-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;border-radius:10px;background:#f7f5f0;margin-bottom:6px}
+.bw-scroll svg{display:block;width:var(--bw-w,100%);height:auto}

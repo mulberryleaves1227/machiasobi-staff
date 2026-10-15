@@ -15,7 +15,15 @@
     <iframe class="venue-map" src="../map/index.html?embed=1" title="会場マップ" allow="geolocation" loading="lazy"></iframe>
     <a class="venue-map-open" href="../map/index.html">全画面で開く ↗</a>
 
-    <div class="warn-note">ℹ️ パラソル配置は確定後に追加します。商店街・アミコの出展は各エリアの「出展MAP」へ。現地掲示・リーダーの案内を優先してください。</div>
+    <div class="sec-head" id="bw-sec">🎪 しんまちボードウォーク 出展配置MAP</div>
+    <div class="bw-tools">
+      <input type="search" id="bw-q" placeholder="🔍 ブース・作品名で探す（例：かぐや姫）" autocomplete="off">
+      <div class="bw-zoom" id="bw-zoom"><button data-z="fit">全体</button><button data-z="1100">拡大</button><button data-z="1600">最大</button></div>
+    </div>
+    <div class="bw-results" id="bw-results"></div>
+    <div class="bw-scroll" id="bw-scroll"></div>
+    <div class="warn-note" style="margin-bottom:12px">パラソルをタップすると公式ページが開きます。サイン会など・合体スペース（点線）・駐車場/カフェ前の滞留に注意。</div>
+    <div class="warn-note">ℹ️ 商店街・アミコの出展は各エリアの「出展MAP」へ。現地掲示・リーダーの案内を優先してください。</div>
 
     <div class="sec-head">📍 エリア別 両日（17日・18日）企画</div>
 
@@ -86,5 +94,6 @@
 <script src="../shared/js/layout.js"></script>
 <script src="../shared/js/site-search.js"></script>
 <script src="area.js"></script>
+<script src="boardwalk.js"></script>
 </body>
 </html>
