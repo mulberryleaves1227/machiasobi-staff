@@ -373,7 +373,7 @@ def build_svg(data):
         s.append(body)
         y = bottom + 34
     y += -16
-    s.append(htext(W - PAD_X, y, f'Ver.{meta["version"]}　{meta["credit"]}', 13, 600, "#666", "end"))
+    s.append(htext(W - PAD_X, y, meta["credit"], 13, 600, "#666", "end"))
     H = int(y + 22)
     style = (f'svg.bw-svg{{font-family:{FONT_FAMILY}}}'
              '.bw-hl{fill:#fff3b0;stroke:#f59e0b;stroke-width:3;opacity:0;transition:opacity .2s}'
